@@ -1,0 +1,48 @@
+import funkin.play.character.MultiSparrowCharacter;
+import flixel.FlxG;
+import flixel.util.FlxTimer;
+import funkin.play.PlayState;
+import funkin.play.PauseSubState;
+import funkin.graphics.FunkinSprite;
+import funkin.play.character.SparrowCharacter;
+import funkin.play.character.CharacterType;
+import funkin.play.GameOverSubState;
+import StringTools;
+
+class PumpOpponentCharacter extends MultiSparrowCharacter
+{
+	function new()
+	{
+		super('pump-opponent');
+	}
+
+	function onCreate(event:ScriptEvent)
+	{
+		super.onCreate(event);
+	}
+
+	function onNoteHit(event:HitNoteScriptEvent)
+	{
+		// Override the hit note animation.
+
+		if (!event.note.noteData.getMustHitNote() && characterType != CharacterType.BF)
+		{
+			switch (event.note.kind)
+			{
+				case "Cheer":
+					holdTimer = 0;
+					this.playAnimation('cheer', false);
+				case "cheer":
+					holdTimer = 0;
+					this.playAnimation('cheer', false);
+				default:
+					holdTimer = 0;
+					this.playSingAnimation(event.note.noteData.getDirection(), false);
+			}
+		}
+	}
+
+	function playAnimation(name:String, restart:Bool, ignoreOther:Bool) {
+		super.playAnimation(name, restart, ignoreOther);
+	}
+}

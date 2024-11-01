@@ -1,0 +1,39 @@
+{
+  "version": "2.2.4",
+  "songName": "Lit Up (Spooky Mix)",
+  "artist": "LimeIsHere",
+  "charter": "LimeIsHere",
+  "modArt": "swagsalt, Denoohay, givemethesalt",
+  "playData": {
+    "difficulties": ["easy", "normal", "hard"],
+    "characters": {
+      "player": "spooky-playable",
+      "girlfriend": "moloch",
+      "opponent": "darnell",
+      "instrumental": "spooky"
+    },
+    "stage": "phillyStreetsSpooky",
+    "noteStyle": "funkin",
+    "ratings": { "easy": 9, "normal": 10, "hard": 11 },
+    "album": "spookymix1",
+    "previewStart": 0,
+    "previewEnd": 15000
+  },
+  "generatedBy": "Friday Night Funkin' - v0.3.0 (polish/charting-music-bg:27a4ed4) PROTOTYPE",
+  "timeFormat": "ms",
+  "timeChanges": [
+    {
+      "t": 0,
+      "b": 0,
+      "bpm": 176,
+      "n": 4,
+      "d": 4,
+      "bt": [
+        4,
+        4,
+        4,
+        4
+      ]
+    }
+  ]
+}

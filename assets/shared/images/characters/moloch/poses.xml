@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="poses.png">
+	<!-- Created with Adobe Animate version 24.0.3.19 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="moloch down0000" x="2" y="2" width="1012" height="750" frameX="0" frameY="-7" frameWidth="1012" frameHeight="758"/>
+	<SubTexture name="moloch down0001" x="2" y="2" width="1012" height="750" frameX="0" frameY="-7" frameWidth="1012" frameHeight="758"/>
+	<SubTexture name="moloch down0002" x="1016" y="2" width="1005" height="758" frameX="-2" frameY="0" frameWidth="1012" frameHeight="758"/>
+	<SubTexture name="moloch down0003" x="1016" y="2" width="1005" height="758" frameX="-2" frameY="0" frameWidth="1012" frameHeight="758"/>
+	<SubTexture name="moloch down0004" x="2023" y="2" width="1004" height="758" frameX="-3" frameY="0" frameWidth="1012" frameHeight="758"/>
+	<SubTexture name="moloch down0005" x="2023" y="2" width="1004" height="758" frameX="-3" frameY="0" frameWidth="1012" frameHeight="758"/>
+	<SubTexture name="moloch down0006" x="3029" y="2" width="1004" height="758" frameX="-3" frameY="0" frameWidth="1012" frameHeight="758"/>
+	<SubTexture name="moloch down0007" x="3029" y="2" width="1004" height="758" frameX="-3" frameY="0" frameWidth="1012" frameHeight="758"/>
+	<SubTexture name="moloch down0008" x="4035" y="2" width="1004" height="758" frameX="-3" frameY="0" frameWidth="1012" frameHeight="758"/>
+	<SubTexture name="moloch down0009" x="4035" y="2" width="1004" height="758" frameX="-3" frameY="0" frameWidth="1012" frameHeight="758"/>
+	<SubTexture name="moloch left0000" x="5041" y="2" width="964" height="789" frameX="0" frameY="0" frameWidth="965" frameHeight="790"/>
+	<SubTexture name="moloch left0001" x="5041" y="2" width="964" height="789" frameX="0" frameY="0" frameWidth="965" frameHeight="790"/>
+	<SubTexture name="moloch left0002" x="6007" y="2" width="963" height="787" frameX="-2" frameY="-3" frameWidth="965" frameHeight="790"/>
+	<SubTexture name="moloch left0003" x="6007" y="2" width="963" height="787" frameX="-2" frameY="-3" frameWidth="965" frameHeight="790"/>
+	<SubTexture name="moloch left0004" x="6972" y="2" width="962" height="787" frameX="-3" frameY="-3" frameWidth="965" frameHeight="790"/>
+	<SubTexture name="moloch left0005" x="6972" y="2" width="962" height="787" frameX="-3" frameY="-3" frameWidth="965" frameHeight="790"/>
+	<SubTexture name="moloch left0006" x="2" y="793" width="962" height="787" frameX="-3" frameY="-3" frameWidth="965" frameHeight="790"/>
+	<SubTexture name="moloch left0007" x="2" y="793" width="962" height="787" frameX="-3" frameY="-3" frameWidth="965" frameHeight="790"/>
+	<SubTexture name="moloch left0008" x="966" y="793" width="962" height="787" frameX="-3" frameY="-3" frameWidth="965" frameHeight="790"/>
+	<SubTexture name="moloch left0009" x="966" y="793" width="962" height="787" frameX="-3" frameY="-3" frameWidth="965" frameHeight="790"/>
+	<SubTexture name="moloch right0000" x="1930" y="793" width="1173" height="832" frameX="0" frameY="-5" frameWidth="1173" frameHeight="838"/>
+	<SubTexture name="moloch right0001" x="1930" y="793" width="1173" height="832" frameX="0" frameY="-5" frameWidth="1173" frameHeight="838"/>
+	<SubTexture name="moloch right0002" x="3105" y="793" width="1164" height="838" frameX="-2" frameY="0" frameWidth="1173" frameHeight="838"/>
+	<SubTexture name="moloch right0003" x="3105" y="793" width="1164" height="838" frameX="-2" frameY="0" frameWidth="1173" frameHeight="838"/>
+	<SubTexture name="moloch right0004" x="4271" y="793" width="1163" height="838" frameX="-3" frameY="0" frameWidth="1173" frameHeight="838"/>
+	<SubTexture name="moloch right0005" x="4271" y="793" width="1163" height="838" frameX="-3" frameY="0" frameWidth="1173" frameHeight="838"/>
+	<SubTexture name="moloch right0006" x="5436" y="793" width="1163" height="838" frameX="-3" frameY="0" frameWidth="1173" frameHeight="838"/>
+	<SubTexture name="moloch right0007" x="5436" y="793" width="1163" height="838" frameX="-3" frameY="0" frameWidth="1173" frameHeight="838"/>
+	<SubTexture name="moloch right0008" x="6601" y="793" width="1163" height="838" frameX="-3" frameY="0" frameWidth="1173" frameHeight="838"/>
+	<SubTexture name="moloch right0009" x="6601" y="793" width="1163" height="838" frameX="-3" frameY="0" frameWidth="1173" frameHeight="838"/>
+	<SubTexture name="moloch up0000" x="2" y="1633" width="1144" height="1081" frameX="-9" frameY="0" frameWidth="1169" frameHeight="1082"/>
+	<SubTexture name="moloch up0001" x="2" y="1633" width="1144" height="1081" frameX="-9" frameY="0" frameWidth="1169" frameHeight="1082"/>
+	<SubTexture name="moloch up0002" x="1148" y="1633" width="1169" height="1062" frameX="0" frameY="-20" frameWidth="1169" frameHeight="1082"/>
+	<SubTexture name="moloch up0003" x="1148" y="1633" width="1169" height="1062" frameX="0" frameY="-20" frameWidth="1169" frameHeight="1082"/>
+	<SubTexture name="moloch up0004" x="2319" y="1633" width="1169" height="1062" frameX="0" frameY="-20" frameWidth="1169" frameHeight="1082"/>
+	<SubTexture name="moloch up0005" x="2319" y="1633" width="1169" height="1062" frameX="0" frameY="-20" frameWidth="1169" frameHeight="1082"/>
+	<SubTexture name="moloch up0006" x="3490" y="1633" width="1169" height="1062" frameX="0" frameY="-20" frameWidth="1169" frameHeight="1082"/>
+	<SubTexture name="moloch up0007" x="3490" y="1633" width="1169" height="1062" frameX="0" frameY="-20" frameWidth="1169" frameHeight="1082"/>
+	<SubTexture name="moloch up0008" x="4661" y="1633" width="1169" height="1062" frameX="0" frameY="-20" frameWidth="1169" frameHeight="1082"/>
+	<SubTexture name="moloch up0009" x="4661" y="1633" width="1169" height="1062" frameX="0" frameY="-20" frameWidth="1169" frameHeight="1082"/>
+</TextureAtlas>

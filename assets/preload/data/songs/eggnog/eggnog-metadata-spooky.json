@@ -1,0 +1,25 @@
+{
+  "version": "2.2.4",
+  "timeFormat": "ms",
+  "artist": "Clarky_Dev",
+  "charter": "Clarky_Dev",
+  "modArt": "LeGooey, Denoohay, givemethesalt",
+  "playData": {
+    "stage": "mallXmasSpooky",
+    "characters": {
+      "player": "spooky-christmas",
+      "girlfriend": "moloch-christmas",
+      "opponent": "parents-christmas",
+      "instrumental": "spooky"
+    },
+    "ratings": { "easy": 7, "normal": 8, "hard": 9 },
+    "difficulties": ["easy", "normal", "hard"],
+    "noteStyle": "funkin",
+    "album": "spookymix1",
+    "previewStart": 0,
+    "previewEnd": 15000
+  },
+  "songName": "Eggnog (Spooky Mix)",
+  "timeChanges": [{ "d": 4, "n": 4, "t": -1, "bt": [4, 4, 4, 4], "bpm": 150 }],
+  "generatedBy": "Chart Editor Import (FNF Legacy)"
+}

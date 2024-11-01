@@ -1,0 +1,17 @@
+{
+  "name": "stickers-set-1",
+  "artist": "givemethesalt",
+  "stickers": {
+    "spooky": ["spookySticker1", "spookySticker2", "spookySticker3", "spookySticker4"],
+    "moloch": ["molochSticker1", "molochSticker2", "spookySticker1"],
+    "lila": ["lilaSticker1", "lilaSticker2", "molochSticker1"],
+    "kevin": ["kevinSticker1", "spookySticker3", "spookySticker4"],
+    "eyes": ["eyesSticker1", "spookySticker2", "lilaSticker2"],
+    "happyfella": ["happyfellaSticker1", "happyfellaSticker2"],
+    "bob": ["bobSticker1", "happyfellaSticker2", "molochSticker2"],
+    "oogabooga": ["oogaboogaSticker1", "happyfellaSticker1", "spookySticker3"]
+  },
+  "stickerPacks": {
+    "all": ["spooky", "moloch", "lila", "kevin", "eyes", "happyfella", "bob", "oogabooga"]
+  }
+}

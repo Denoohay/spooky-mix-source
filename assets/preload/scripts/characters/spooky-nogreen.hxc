@@ -1,0 +1,77 @@
+import funkin.play.character.MultiSparrowCharacter;
+import flixel.FlxG;
+import flixel.util.FlxTimer;
+import funkin.play.PlayState;
+import funkin.play.PauseSubState;
+import funkin.graphics.FunkinSprite;
+import funkin.play.character.SparrowCharacter;
+import funkin.play.character.CharacterType;
+import funkin.play.GameOverSubState;
+import StringTools;
+
+class SpookyNoGreenCharacter extends MultiSparrowCharacter
+{
+	function new()
+	{
+		super('spooky-nogreen');
+	}
+
+	function onCreate(event:ScriptEvent)
+	{
+		super.onCreate(event);
+		
+		GameOverSubState.musicSuffix = '-spooky';
+		GameOverSubState.blueBallSuffix = '-spooky';
+
+		PauseSubState.musicSuffix = '-spooky';
+	}
+
+	function onNoteHit(event:HitNoteScriptEvent)
+	{
+		// Override the hit note animation.
+
+		if (event.note.noteData.getMustHitNote() && characterType == CharacterType.BF)
+		{
+			switch (event.note.kind)
+			{
+				case "Cheer":
+					holdTimer = 0;
+					this.playAnimation('cheer', false);
+				case "cheer":
+					holdTimer = 0;
+					this.playAnimation('cheer', false);
+				default:
+					holdTimer = 0;
+					this.playSingAnimation(event.note.noteData.getDirection(), false);
+			}
+		}
+	}
+
+	function playAnimation(name:String, restart:Bool, ignoreOther:Bool) {
+		super.playAnimation(name, restart, ignoreOther);
+	}
+
+	override function onGameOver(event:ScriptEvent):Void {
+		super.onGameOver(event);
+	}
+
+	override function onSongRetry(event:ScriptEvent):Void {
+		super.onSongRetry(event);
+
+		// Don't let these pile up.
+
+		// Reset to standard death animation.
+		GameOverSubState.musicSuffix = '-spooky';
+		GameOverSubState.blueBallSuffix = '-spooky';
+
+		PauseSubState.musicSuffix = '-spooky';
+
+		this.visible = true;
+	}
+	
+	public override function getDeathCameraOffsets():Array<Float> {
+		var result = super.getDeathCameraOffsets();
+
+		return [result[0] - 40, result[1] + 120];
+	}
+}

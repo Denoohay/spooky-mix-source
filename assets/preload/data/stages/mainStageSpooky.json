@@ -1,0 +1,183 @@
+{
+  "props": [
+    {
+      "danceEvery": 0,
+      "zIndex": 0,
+      "position": [729, -170],
+      "scale": [1, 1],
+      "animType": "sparrow",
+      "name": "backDark",
+      "isPixel": false,
+      "assetPath": "spooky/backDark",
+      "scroll": [1, 1],
+      "alpha": 1,
+      "animations": []
+    },
+    {
+      "danceEvery": 0,
+      "zIndex": 10,
+      "position": [967, -103],
+      "scale": [1, 1],
+      "animType": "sparrow",
+      "name": "brightLightSmall",
+      "isPixel": false,
+      "assetPath": "spooky/brightLightSmall",
+      "scroll": [1.2, 1.2],
+      "alpha": 1,
+      "animations": []
+    },
+    {
+      "name": "crowd",
+      "assetPath": "spooky/crowd",
+      "position": [560, 290],
+      "scale": [1, 1],
+      "scroll": [0.8, 0.8],
+      "danceEvery": 0,
+      "zIndex": 5,
+      "startingAnimation": "idle",
+      "animations": [
+        {
+          "name": "idle",
+          "prefix": "Symbol 2 instance 1",
+          "frameRate": 12,
+          "looped": true,
+          "flipX": false,
+          "flipY": false
+        }
+      ]
+    },
+    {
+      "danceEvery": 0,
+      "zIndex": 20,
+      "position": [-603, -187],
+      "scale": [1, 1],
+      "animType": "sparrow",
+      "name": "bg",
+      "isPixel": false,
+      "assetPath": "spooky/bg",
+      "scroll": [1, 1],
+      "alpha": 1,
+      "animations": []
+    },
+    {
+      "danceEvery": 0,
+      "zIndex": 6000,
+      "position": [334, -173],
+      "scale": [1, 1],
+      "animType": "sparrow",
+      "name": "orangeLight",
+      "isPixel": false,
+      "assetPath": "spooky/orangeLight",
+      "scroll": [1, 1],
+      "alpha": 1,
+      "animations": []
+    },
+    {
+      "danceEvery": 0,
+      "zIndex": 5900,
+      "position": [-2645, -198],
+      "scale": [1, 1],
+      "animType": "sparrow",
+      "name": "sideDarkLight",
+      "isPixel": false,
+      "assetPath": "spooky/sideDarkLight",
+      "scroll": [1, 1],
+      "alpha": 1,
+      "animations": []
+    },
+    {
+      "danceEvery": 0,
+      "zIndex": 5800,
+      "position": [-2206, -202],
+      "scale": [1, 1],
+      "animType": "sparrow",
+      "name": "mainDarkLight",
+      "isPixel": false,
+      "assetPath": "spooky/mainDarkLight",
+      "scroll": [1, 1],
+      "alpha": 1,
+      "animations": []
+    },
+    {
+      "danceEvery": 0,
+      "zIndex": 30,
+      "position": [-361, 205],
+      "scale": [1, 1],
+      "animType": "sparrow",
+      "name": "server",
+      "isPixel": false,
+      "assetPath": "spooky/server",
+      "scroll": [1, 1],
+      "alpha": 1,
+      "animations": []
+    },
+    {
+      "danceEvery": 0,
+      "zIndex": 4000,
+      "position": [-601, -147],
+      "scale": [1, 1],
+      "animType": "sparrow",
+      "name": "lights",
+      "isPixel": false,
+      "assetPath": "spooky/lights",
+      "scroll": [1.2, 1.2],
+      "alpha": 1,
+      "animations": []
+    },
+    {
+      "danceEvery": 0,
+      "zIndex": 40,
+      "position": [-171, 242],
+      "scale": [1, 1],
+      "animType": "sparrow",
+      "name": "lightgreen",
+      "isPixel": false,
+      "assetPath": "spooky/lightgreen",
+      "scroll": [1, 1],
+      "alpha": 1,
+      "animations": []
+    },
+    {
+      "danceEvery": 0,
+      "zIndex": 40,
+      "position": [-101, 560],
+      "scale": [1, 1],
+      "animType": "sparrow",
+      "name": "lightred",
+      "isPixel": false,
+      "assetPath": "spooky/lightred",
+      "scroll": [1, 1],
+      "alpha": 1,
+      "animations": []
+    },
+    {
+      "danceEvery": 0,
+      "zIndex": 4500,
+      "position": [804, -117],
+      "scale": [1, 1],
+      "animType": "sparrow",
+      "name": "lightAbove",
+      "isPixel": false,
+      "assetPath": "spooky/lightAbove",
+      "scroll": [1, 1],
+      "alpha": 1,
+      "animations": []
+    }
+  ],
+  "cameraZoom": 0.85,
+  "version": "1.0.0",
+  "characters": {
+    "bf": {
+      "zIndex": 300,
+      "position": [977.5, 865],
+      "cameraOffsets": [-170, -140]
+    },
+    "dad": {
+      "zIndex": 200,
+      "position": [-50, 890],
+      "cameraOffsets": [360, -130]
+    },
+    "gf": { "zIndex": 100, "cameraOffsets": [0, 0], "position": [501.5, 825] }
+  },
+  "name": "Main Stage [Spooky]"
+}

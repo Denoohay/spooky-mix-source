@@ -1,0 +1,84 @@
+{
+  "version": "1.0.0",
+  "name": "Skid (Playable) (Dark)",
+  "assetPath": "characters/Skid_Playable-dark",
+  "renderType": "multisparrow",
+  "offsets": [40, 0],
+  "flipX": true,
+  "healthIcon": {
+    "id": "spooky"
+  },
+  "singTime": 8.0,
+  "animations": [
+    {
+      "name": "idle",
+      "prefix": "skidIdle",
+      "frameRate": 24,
+      "offsets": [0, 0]
+    },
+    {
+      "name": "singLEFT",
+      "prefix": "skidLeft",
+      "offsets": [33, -1]
+    },
+    {
+      "name": "singLEFTmiss",
+      "prefix": "skidMISSleft",
+      "offsets": [27, 19]
+    },
+    {
+      "name": "singDOWN",
+      "prefix": "skidDown",
+      "offsets": [23, -31]
+    },
+    {
+      "name": "singDOWNmiss",
+      "prefix": "skidMISSdown",
+      "offsets": [163, -40]
+    },
+    {
+      "name": "singUP",
+      "prefix": "skidUp",
+      "offsets": [17, 63]
+    },
+    {
+      "name": "singUPmiss",
+      "prefix": "skidMISSup",
+      "offsets": [21, 58]
+    },
+    {
+      "name": "singRIGHT",
+      "prefix": "skidRight",
+      "offsets": [-66, -18]
+    },
+    {
+      "name": "singRIGHTmiss",
+      "prefix": "skidMISSright",
+      "offsets": [-68, 6]
+    },
+    {
+      "name": "cheer",
+      "prefix": "skidCheer",
+      "offsets": [-55, -18]
+    },
+    {
+      "name": "firstDeath",
+      "prefix": "spooky kids die",
+      "assetPath": "characters/Skid_Playable_DEATH",
+      "offsets": [1014, 334]
+    },
+    {
+      "name": "deathLoop",
+      "prefix": "spooky kids dead loop",
+      "assetPath": "characters/Skid_Playable_DEATH",
+      "looped": true,
+      "offsets": [1014, 249]
+    },
+    {
+      "name": "deathConfirm",
+      "prefix": "spooky kids restart",
+      "assetPath": "characters/Skid_Playable_DEATH",
+      "offsets": [1114, 138]
+    }
+  ]
+}

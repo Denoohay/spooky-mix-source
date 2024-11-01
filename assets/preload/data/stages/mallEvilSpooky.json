@@ -1,0 +1,67 @@
+{
+  "version": "1.0.0",
+  "name": "Christmas Mall (Naughty) [Spooky]",
+  "cameraZoom": 0.8,
+  "props": [
+    {
+      "name": "solid",
+      "assetPath": "#65000C",
+      "position": [-500, -1000],
+      "scale": [2400, 2000],
+      "scroll": [0.2, 0.2]
+    },
+    {
+      "name": "bg",
+      "assetPath": "christmas/spooky/monster/evilBG",
+      "position": [-400, -500],
+      "scale": [0.8, 0.8],
+      "scroll": [0.2, 0.2],
+      "zIndex": 10
+    },
+    {
+      "name": "evilTree",
+      "assetPath": "christmas/spooky/monster/evilTree",
+      "position": [330, -300],
+      "scale": [1, 1],
+      "scroll": [0.3, 0.3],
+      "zIndex": 15
+    },
+    {
+      "name": "evilSnow",
+      "assetPath": "christmas/spooky/monster/evilSnow",
+      "position": [-900, 700],
+      "scale": [1.2, 1.2],
+      "scroll": [1, 1],
+      "zIndex": 20
+    },
+    {
+      "name": "snowGlow",
+      "assetPath": "christmas/spooky/monster/lowerGlow",
+      "position": [-1040, 200],
+      "scale": [1, 1],
+      "scroll": [1, 1],
+      "zIndex": 19
+    },
+    {
+      "name": "topGlow",
+      "assetPath": "christmas/spooky/monster/topGlow",
+      "position": [-540, -725],
+      "scale": [1, 1],
+      "scroll": [0.2, 0.2],
+      "zIndex": 400
+    }
+  ],
+  "characters": {
+    "bf": {
+      "zIndex": 300,
+      "position": [1000, 871],
+      "cameraOffsets": [-300, -200]
+    },
+    "gf": { "zIndex": 100, "position": [700, 854], "cameraOffsets": [0, 0] },
+    "dad": {
+      "zIndex": 200,
+      "position": [100, 869],
+      "cameraOffsets": [200, -100]
+    }
+  }
+}

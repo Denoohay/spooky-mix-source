@@ -1,0 +1,45 @@
+{
+  "version": "1.0.0",
+  "name": "Skid (Opponent)",
+  "assetPath": "characters/Skid_Opponent",
+  "renderType": "multisparrow",
+  "offsets": [40, 20],
+  "flipX": true,
+  "healthIcon": {
+    "id": "blank"
+  },
+  "singTime": 8.0,
+  "animations": [
+    {
+      "name": "idle",
+      "prefix": "skidIdle",
+      "frameRate": 24,
+      "offsets": [0, 0]
+    },
+    {
+      "name": "singLEFT",
+      "prefix": "skidRight",
+      "offsets": [82, -17]
+    },
+    {
+      "name": "singDOWN",
+      "prefix": "skidDown",
+      "offsets": [-5, -35]
+    },
+    {
+      "name": "singUP",
+      "prefix": "skidUp",
+      "offsets": [-2, 61]
+    },
+    {
+      "name": "singRIGHT",
+      "prefix": "skidLeft",
+      "offsets": [-9, 2]
+    },
+    {
+      "name": "cheer",
+      "prefix": "skidCheer",
+      "offsets": [79, -19]
+    }
+  ]
+}

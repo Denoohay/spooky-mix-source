@@ -1,0 +1,38 @@
+{
+  "version": "2.2.4",
+  "timeFormat": "ms",
+  "artist": "eden_essence",
+  "charter": "RubyyyButCool",
+  "modArt": "Denoohay, givemethesalt",
+  "playData": {
+    "album": "spookymix1",
+    "stage": "mainStageSpooky",
+    "characters": {
+      "player": "spooky-playable",
+      "girlfriend": "moloch",
+      "opponent": "dad",
+      "instrumental": "spooky"
+    },
+    "altInstrumentals": [],
+    "ratings": { "easy": 2, "normal": 3, "hard": 4 },
+    "difficulties": ["easy", "normal", "hard"],
+    "noteStyle": "funkin"
+  },
+  "songName": "Fresh (Spooky Mix)",
+  "timeChanges": [
+    {
+      "t": 0,
+      "b": 0,
+      "bpm": 120,
+      "n": 4,
+      "d": 4,
+      "bt": [
+        4,
+        4,
+        4,
+        4
+      ]
+    }
+  ],
+  "generatedBy": "Chart Editor Import (FNF Legacy)"
+}

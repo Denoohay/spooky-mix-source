@@ -1,0 +1,41 @@
+{
+  "version": "2.2.4",
+  "songName": "Ugh (Spooky Mix)",
+  "artist": "RubyyyButCool",
+  "charter": "RubyyyButCool",
+  "modArt": "Denoohay, givemethesalt",
+  "divisions": 96,
+  "playData": {
+    "difficulties": ["easy", "normal", "hard"],
+    "characters": {
+      "player": "spooky-playable",
+      "girlfriend": "moloch",
+      "opponent": "tankman",
+      "instrumental": "spooky"
+    },
+    "altInstrumentals": [],
+    "stage": "tankmanBattlefield",
+    "noteStyle": "funkin",
+    "ratings": { "easy": 7, "normal": 8, "hard": 9 },
+    "album": "spookymix1",
+    "previewStart": 0,
+    "previewEnd": 15000
+  },
+  "generatedBy": "Friday Night Funkin' - v0.4.1 (rewrite/master:47b7aa7) PROTOTYPE",
+  "timeFormat": "ms",
+  "timeChanges": [
+    {
+      "t": 0,
+      "b": 0,
+      "bpm": 160,
+      "n": 4,
+      "d": 4,
+      "bt": [
+        4,
+        4,
+        4,
+        4
+      ]
+    }
+  ]
+}

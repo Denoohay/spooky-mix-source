@@ -1,0 +1,40 @@
+{
+  "version": "2.2.4",
+  "songName": "Spookeez (Spooky Mix)",
+  "artist": "KrakenPower",
+  "charter": "LimeIsHere",
+  "modArt": "Denoohay",
+  "playData": {
+    "difficulties": ["easy", "normal", "hard"],
+    "characters": {
+      "player": "skid-playable-dark",
+      "girlfriend": "moloch-dark",
+      "opponent": "pump-opponent-dark",
+      "instrumental": "spooky"
+    },
+    "altInstrumentals": [],
+    "stage": "skidsAtticWeek2",
+    "noteStyle": "funkin",
+    "ratings": { "easy": 3, "normal": 4, "hard": 5 },
+    "album": "spookymix1",
+    "previewStart": 0,
+    "previewEnd": 15000
+  },
+  "generatedBy": "Friday Night Funkin' - v0.3.3 (rewrite/master:bc783a2) PROTOTYPE",
+  "timeFormat": "ms",
+  "timeChanges": [
+    {
+      "t": 0,
+      "b": 0,
+      "bpm": 151,
+      "n": 4,
+      "d": 4,
+      "bt": [
+        4,
+        4,
+        4,
+        4
+      ]
+    }
+  ]
+}

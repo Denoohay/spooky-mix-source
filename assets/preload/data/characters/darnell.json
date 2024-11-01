@@ -1,0 +1,34 @@
+{
+  "version": "1.0.0",
+  "name": "Darnell",
+  "assetPath": "characters/frankenchud",
+  "singTime": 8.0,
+  "offsets": [0, 0],
+  "animations": [
+    {
+      "name": "idle",
+      "prefix": "darnellIdle",
+      "offsets": [0, 0]
+    },
+    {
+      "name": "singLEFT",
+      "prefix": "darnellLeft",
+      "offsets": [0, 0]
+    },
+    {
+      "name": "singDOWN",
+      "prefix": "darnellDown",
+      "offsets": [0, 0]
+    },
+    {
+      "name": "singUP",
+      "prefix": "darnellUp",
+      "offsets": [0, 0]
+    },
+    {
+      "name": "singRIGHT",
+      "prefix": "darnellRight",
+      "offsets": [0, 0]
+    }
+  ]
+}

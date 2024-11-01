@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="bottomBopSpooky.png">
+<SubTexture name="bottomBop0000" x="0" y="0" width="2578" height="625" frameX="-2" frameY="-250" frameWidth="2700" frameHeight="900" />
+<SubTexture name="bottomBop0001" x="0" y="625" width="2577" height="626" frameX="-3" frameY="-249" frameWidth="2700" frameHeight="900" />
+<SubTexture name="bottomBop0002" x="0" y="1251" width="2574" height="627" frameX="-4" frameY="-248" frameWidth="2700" frameHeight="900" />
+<SubTexture name="bottomBop0003" x="0" y="1878" width="2574" height="628" frameX="-4" frameY="-247" frameWidth="2700" frameHeight="900" />
+<SubTexture name="bottomBop0004" x="0" y="2506" width="2571" height="629" frameX="-5" frameY="-246" frameWidth="2700" frameHeight="900" />
+</TextureAtlas>

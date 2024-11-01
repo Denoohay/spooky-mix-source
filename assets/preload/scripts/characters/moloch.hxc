@@ -1,0 +1,20 @@
+import funkin.play.character.MultiSparrowCharacter;
+import flixel.FlxG;
+import flixel.util.FlxTimer;
+import funkin.play.PlayState;
+import funkin.play.PauseSubState;
+import funkin.graphics.FunkinSprite;
+import funkin.play.character.SparrowCharacter;
+import funkin.play.character.CharacterType;
+import funkin.play.character.CharacterDataParser;
+import funkin.play.GameOverSubState;
+import StringTools;
+
+class MolochCharacter extends MultiSparrowCharacter
+{
+	function new()
+	{
+		super('moloch');
+	}
+
+}

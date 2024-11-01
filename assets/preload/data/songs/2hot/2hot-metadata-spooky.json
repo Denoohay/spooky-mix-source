@@ -1,0 +1,39 @@
+{
+  "version": "2.2.4",
+  "timeFormat": "ms",
+  "artist": "LimeIsHere",
+  "charter": "LimeIsHere",
+  "modArt": "swagsalt, Denoohay, givemethesalt",
+  "playData": {
+    "stage": "phillyStreetsSpooky",
+    "characters": {
+      "player": "spooky-playable",
+      "girlfriend": "moloch",
+      "opponent": "darnell",
+      "instrumental": "spooky"
+    },
+    "ratings": { "easy": 12, "normal": 13, "hard": 14 },
+    "difficulties": ["easy", "normal", "hard"],
+    "noteStyle": "funkin",
+    "album": "spookymix1",
+    "previewStart": 0,
+    "previewEnd": 15000
+  },
+  "songName": "2hot (Spooky Mix)",
+  "timeChanges": [
+    {
+      "t": 0,
+      "b": 0,
+      "bpm": 182,
+      "n": 4,
+      "d": 4,
+      "bt": [
+        4,
+        4,
+        4,
+        4
+      ]
+    }
+  ],
+  "generatedBy": "Chart Editor Import (FNF Legacy)"
+}

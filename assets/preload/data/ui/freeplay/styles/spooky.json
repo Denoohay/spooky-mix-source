@@ -1,0 +1,9 @@
+{
+  "version": "1.0.0",
+  "bgAsset": "freeplay/freeplayBGdadSpooky",
+  "selectorAsset": "freeplay/freeplaySelector/freeplaySelector_spooky",
+  "numbersAsset": "digital_numbers_spooky",
+  "capsuleAsset": "freeplay/freeplayCapsule/capsule/freeplayCapsule_spooky",
+  "capsuleTextColors": ["#00CC0D", "#00CC0D"],
+  "startDelay": 1.15
+}

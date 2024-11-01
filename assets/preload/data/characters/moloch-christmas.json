@@ -1,0 +1,42 @@
+{
+  "version": "1.0.0",
+  "name": "Moloch (Christmas)",
+  "assetPath": "characters/moloch/molochChristmas",
+  "startingAnimation": "danceRight",
+  "offsets": [50, 30],
+  "cameraOffsets": [0, 0],
+  "healthIcon": {
+    "id": "moloch"
+  },
+  "renderType": "multisparrow",
+  "singTime": 8.0,
+  "animations": [
+    {
+      "name": "danceLeft",
+      "prefix": "moloch idle",
+      "frameIndices": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+      "offsets": [0, 0]
+    },
+    {
+      "name": "danceRight",
+      "prefix": "moloch idle",
+      "frameIndices": [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29],
+      "offsets": [0, 0]
+    },
+    {
+      "name": "combo50",
+      "prefix": "moloch combo",
+	  "offsets": [89, 202]
+    },
+    {
+      "name": "combo200",
+      "prefix": "moloch combo",
+      "offsets": [89, 202]
+    },
+    {
+      "name": "drop10",
+      "prefix": "moloch miss",
+      "offsets": [-3, -14]
+    }
+  ]
+}

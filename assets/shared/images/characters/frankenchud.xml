@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="frankenchud.png">
+<SubTexture name="darnellDown0000" x="1732" y="1544" width="430" height="423" frameX="-49" frameY="-121" frameWidth="493" frameHeight="562" />
+<SubTexture name="darnellDown0001" x="1732" y="1544" width="430" height="423" frameX="-49" frameY="-121" frameWidth="493" frameHeight="562" />
+<SubTexture name="darnellDown0002" x="436" y="1544" width="432" height="430" frameX="-53" frameY="-115" frameWidth="493" frameHeight="562" />
+<SubTexture name="darnellDown0003" x="436" y="1544" width="432" height="430" frameX="-53" frameY="-115" frameWidth="493" frameHeight="562" />
+<SubTexture name="darnellDown0004" x="868" y="1544" width="432" height="430" frameX="-53" frameY="-115" frameWidth="493" frameHeight="562" />
+<SubTexture name="darnellDown0005" x="868" y="1544" width="432" height="430" frameX="-53" frameY="-115" frameWidth="493" frameHeight="562" />
+<SubTexture name="darnellDown0006" x="1300" y="1544" width="432" height="430" frameX="-53" frameY="-115" frameWidth="493" frameHeight="562" />
+<SubTexture name="darnellDown0007" x="1300" y="1544" width="432" height="430" frameX="-53" frameY="-115" frameWidth="493" frameHeight="562" />
+<SubTexture name="darnellIdle0000" x="1424" y="490" width="397" height="474" frameX="-46" frameY="-88" frameWidth="493" frameHeight="562" />
+<SubTexture name="darnellIdle0001" x="1424" y="490" width="397" height="474" frameX="-46" frameY="-88" frameWidth="493" frameHeight="562" />
+<SubTexture name="darnellIdle0002" x="1260" y="1054" width="413" height="473" frameX="-51" frameY="-89" frameWidth="493" frameHeight="562" />
+<SubTexture name="darnellIdle0003" x="1260" y="1054" width="413" height="473" frameX="-51" frameY="-89" frameWidth="493" frameHeight="562" />
+<SubTexture name="darnellIdle0004" x="846" y="1054" width="414" height="485" frameX="-50" frameY="-78" frameWidth="493" frameHeight="562" />
+<SubTexture name="darnellIdle0005" x="846" y="1054" width="414" height="485" frameX="-50" frameY="-78" frameWidth="493" frameHeight="562" />
+<SubTexture name="darnellIdle0006" x="1424" y="0" width="410" height="490" frameX="-49" frameY="-73" frameWidth="493" frameHeight="562" />
+<SubTexture name="darnellIdle0007" x="1424" y="0" width="410" height="490" frameX="-49" frameY="-73" frameWidth="493" frameHeight="562" />
+<SubTexture name="darnellIdle0008" x="0" y="1054" width="411" height="490" frameX="-46" frameY="-73" frameWidth="493" frameHeight="562" />
+<SubTexture name="darnellIdle0009" x="0" y="1054" width="411" height="490" frameX="-46" frameY="-73" frameWidth="493" frameHeight="562" />
+<SubTexture name="darnellLeft0000" x="0" y="1544" width="436" height="467" frameX="-3" frameY="-96" frameWidth="493" frameHeight="562" />
+<SubTexture name="darnellLeft0001" x="0" y="1544" width="436" height="467" frameX="-3" frameY="-96" frameWidth="493" frameHeight="562" />
+<SubTexture name="darnellLeft0002" x="1834" y="0" width="436" height="473" frameX="-11" frameY="-90" frameWidth="493" frameHeight="562" />
+<SubTexture name="darnellLeft0003" x="1834" y="0" width="436" height="473" frameX="-11" frameY="-90" frameWidth="493" frameHeight="562" />
+<SubTexture name="darnellLeft0004" x="1834" y="473" width="436" height="473" frameX="-11" frameY="-90" frameWidth="493" frameHeight="562" />
+<SubTexture name="darnellLeft0005" x="1834" y="473" width="436" height="473" frameX="-11" frameY="-90" frameWidth="493" frameHeight="562" />
+<SubTexture name="darnellLeft0006" x="1834" y="946" width="436" height="473" frameX="-11" frameY="-90" frameWidth="493" frameHeight="562" />
+<SubTexture name="darnellLeft0007" x="1834" y="946" width="436" height="473" frameX="-11" frameY="-90" frameWidth="493" frameHeight="562" />
+<SubTexture name="darnellRight0000" x="411" y="1054" width="435" height="489" frameX="-57" frameY="-73" frameWidth="493" frameHeight="562" />
+<SubTexture name="darnellRight0001" x="411" y="1054" width="435" height="489" frameX="-57" frameY="-73" frameWidth="493" frameHeight="562" />
+<SubTexture name="darnellRight0002" x="0" y="560" width="444" height="494" frameX="-51" frameY="-68" frameWidth="493" frameHeight="562" />
+<SubTexture name="darnellRight0003" x="0" y="560" width="444" height="494" frameX="-51" frameY="-68" frameWidth="493" frameHeight="562" />
+<SubTexture name="darnellRight0004" x="444" y="560" width="444" height="494" frameX="-51" frameY="-68" frameWidth="493" frameHeight="562" />
+<SubTexture name="darnellRight0005" x="444" y="560" width="444" height="494" frameX="-51" frameY="-68" frameWidth="493" frameHeight="562" />
+<SubTexture name="darnellRight0006" x="888" y="560" width="444" height="494" frameX="-51" frameY="-68" frameWidth="493" frameHeight="562" />
+<SubTexture name="darnellRight0007" x="888" y="560" width="444" height="494" frameX="-51" frameY="-68" frameWidth="493" frameHeight="562" />
+<SubTexture name="darnellUp0000" x="0" y="0" width="356" height="560" frameX="-73" frameY="-4" frameWidth="493" frameHeight="562" />
+<SubTexture name="darnellUp0001" x="0" y="0" width="356" height="560" frameX="-73" frameY="-4" frameWidth="493" frameHeight="562" />
+<SubTexture name="darnellUp0002" x="356" y="0" width="356" height="549" frameX="-75" frameY="-15" frameWidth="493" frameHeight="562" />
+<SubTexture name="darnellUp0003" x="356" y="0" width="356" height="549" frameX="-75" frameY="-15" frameWidth="493" frameHeight="562" />
+<SubTexture name="darnellUp0004" x="712" y="0" width="356" height="549" frameX="-75" frameY="-15" frameWidth="493" frameHeight="562" />
+<SubTexture name="darnellUp0005" x="712" y="0" width="356" height="549" frameX="-75" frameY="-15" frameWidth="493" frameHeight="562" />
+<SubTexture name="darnellUp0006" x="1068" y="0" width="356" height="549" frameX="-75" frameY="-15" frameWidth="493" frameHeight="562" />
+<SubTexture name="darnellUp0007" x="1068" y="0" width="356" height="549" frameX="-75" frameY="-15" frameWidth="493" frameHeight="562" />
+</TextureAtlas>

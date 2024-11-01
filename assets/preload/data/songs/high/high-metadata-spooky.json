@@ -1,0 +1,25 @@
+{
+  "version": "2.2.4",
+  "songName": "High (Spooky Mix)",
+  "artist": "SacredSky",
+  "charter": "SacredSky",
+  "modArt": "Denoohay, givemethesalt",
+  "timeFormat": "ms",
+  "timeChanges": [{ "t": 0, "bpm": 125, "n": 4, "d": 4, "bt": [4, 4, 4, 4] }],
+  "playData": {
+    "difficulties": ["easy", "normal", "hard"],
+    "ratings": { "easy": 3, "normal": 4, "hard": 5 },
+    "characters": {
+      "player": "spooky-playable",
+      "girlfriend": "moloch",
+      "opponent": "mom-car",
+      "instrumental": "spooky"
+    },
+    "stage": "limoRideErect",
+    "noteStyle": "funkin",
+    "album": "spookymix1",
+    "previewStart": 0,
+    "previewEnd": 15000
+  },
+  "generatedBy": "Denoohay (by hand)"
+}

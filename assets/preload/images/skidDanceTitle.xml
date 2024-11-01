@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="skidDanceTitle.png">
+	<!-- Created with Adobe Animate version 24.0.3.19 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="skidDance instance 10000" x="2" y="2" width="278" height="280" frameX="-6" frameY="0" frameWidth="284" frameHeight="280"/>
+	<SubTexture name="skidDance instance 10001" x="2" y="2" width="278" height="280" frameX="-6" frameY="0" frameWidth="284" frameHeight="280"/>
+	<SubTexture name="skidDance instance 10002" x="282" y="2" width="267" height="277" frameX="-12" frameY="-3" frameWidth="284" frameHeight="280"/>
+	<SubTexture name="skidDance instance 10003" x="282" y="2" width="267" height="277" frameX="-12" frameY="-3" frameWidth="284" frameHeight="280"/>
+	<SubTexture name="skidDance instance 10004" x="551" y="2" width="215" height="222" frameX="-31" frameY="-50" frameWidth="284" frameHeight="280"/>
+	<SubTexture name="skidDance instance 10005" x="551" y="2" width="215" height="222" frameX="-31" frameY="-50" frameWidth="284" frameHeight="280"/>
+	<SubTexture name="skidDance instance 10006" x="768" y="2" width="209" height="229" frameX="-33" frameY="-43" frameWidth="284" frameHeight="280"/>
+	<SubTexture name="skidDance instance 10007" x="768" y="2" width="209" height="229" frameX="-33" frameY="-43" frameWidth="284" frameHeight="280"/>
+	<SubTexture name="skidDance instance 10008" x="2" y="284" width="278" height="280" frameX="0" frameY="0" frameWidth="284" frameHeight="280"/>
+	<SubTexture name="skidDance instance 10009" x="2" y="284" width="278" height="280" frameX="0" frameY="0" frameWidth="284" frameHeight="280"/>
+	<SubTexture name="skidDance instance 10010" x="282" y="284" width="267" height="277" frameX="-5" frameY="-3" frameWidth="284" frameHeight="280"/>
+	<SubTexture name="skidDance instance 10011" x="282" y="284" width="267" height="277" frameX="-5" frameY="-3" frameWidth="284" frameHeight="280"/>
+	<SubTexture name="skidDance instance 10012" x="551" y="284" width="217" height="222" frameX="-31" frameY="-50" frameWidth="284" frameHeight="280"/>
+	<SubTexture name="skidDance instance 10013" x="551" y="284" width="217" height="222" frameX="-31" frameY="-50" frameWidth="284" frameHeight="280"/>
+	<SubTexture name="skidDance instance 10014" x="770" y="284" width="211" height="229" frameX="-33" frameY="-43" frameWidth="284" frameHeight="280"/>
+	<SubTexture name="skidDance instance 10015" x="770" y="284" width="211" height="229" frameX="-33" frameY="-43" frameWidth="284" frameHeight="280"/>
+</TextureAtlas>

@@ -1,0 +1,256 @@
+{
+  "version": "1.0.0",
+  "name": "Spooky",
+  "ownedChars": [
+    "spooky",
+    "spooky-playable",
+    "spooky-nogreen",
+    "spooky-christmas",
+    "spooky-dark",
+    "skid-playable",
+    "pump-playable",
+    "skid-playable-dark",
+    "pump-playable-dark"
+  ],
+  "showUnownedChars": false,
+  "unlocked": true,
+  "freeplayStyle": "spooky",
+  "freeplayDJ": {
+    "assetPath": "freeplay/freeplay-spooky",
+    "text1": "IT'S A SPOOKY MONTH",
+    "text2": "IT'S A SPOOKY MONTH",
+    "text3": "IT'S A SPOOKY MONTH",
+    "fistPump": {
+      "introStartFrame": 0,
+      "introEndFrame": 4,
+
+      "loopStartFrame": 4,
+      "loopEndFrame": -1,
+
+      "introBadStartFrame": 0,
+      "introBadEndFrame": 0,
+
+      "loopBadStartFrame": 0,
+      "loopBadEndFrame": -1
+    },
+    "charSelect": {
+      "transitionDelay": 0.45
+    },
+    "animations": [
+      {
+        "name": "intro",
+        "prefix": "Spooky dj intro",
+        "offsets": [631.7, 362.6]
+      },
+      {
+        "name": "idle",
+        "prefix": "Spooky DJ",
+        "offsets": [625, 360]
+      },
+      {
+        "name": "idleEasterEgg",
+        "prefix": "Spooky DJ",
+        "offsets": [625, 360]
+      },
+      {
+        "name": "confirm",
+        "prefix": "Spooky DJ confirm",
+        "offsets": [625, 360]
+      },
+      {
+        "name": "fistPump",
+        "prefix": "Spooky DJ fist pump",
+        "offsets": [625, 360]
+      },
+      {
+        "name": "loss",
+        "prefix": "Spooky DJ loss reaction 1",
+        "offsets": [625, 360]
+      },
+      {
+        "name": "charSelect",
+        "prefix": "Spooky DJ to CS",
+        "offsets": [625, 360]
+      }
+    ]
+  },
+  "charSelect": {
+    "position": 5,
+    "gf": {
+      "assetPath": "charSelect/molochChill",
+      "animInfoPath": "charSelect/molochAnimInfo",
+      "visualizer": false
+    }
+  },
+  "results": {
+    "music": {
+      "PERFECT_GOLD": "resultsNORMAL-spooky",
+      "PERFECT": "resultsNORMAL-spooky",
+      "EXCELLENT": "resultsNORMAL-spooky",
+      "GREAT": "resultsNORMAL-spooky",
+      "GOOD": "resultsNORMAL-spooky",
+      "SHIT": "resultsSHIT-spooky"
+    },
+    "perfectGold": [
+      {
+        "renderType": "animateatlas",
+        "assetPath": "shared:resultScreen/results-spooky/resultsGOOD/goodKevin",
+        "zIndex": 500,
+        "scale": 1,
+        "offsets": [520.8, 402.15],
+        "loopFrame": 71
+      },
+      {
+        "renderType": "animateatlas",
+        "assetPath": "shared:resultScreen/results-spooky/resultsGOOD/goodSkid",
+        "zIndex": 500,
+        "scale": 1,
+        "offsets": [520.8, 402.15],
+        "loopFrame": 64
+      },
+      {
+        "renderType": "animateatlas",
+        "assetPath": "shared:resultScreen/results-spooky/resultsGOOD/goodPump",
+        "zIndex": 500,
+        "scale": 1,
+        "offsets": [520.8, 402.15],
+        "loopFrame": 64
+      }
+    ],
+    "perfect": [
+      {
+        "renderType": "animateatlas",
+        "assetPath": "shared:resultScreen/results-spooky/resultsGOOD/goodKevin",
+        "zIndex": 500,
+        "scale": 1,
+        "offsets": [520.8, 402.15],
+        "loopFrame": 71
+      },
+      {
+        "renderType": "animateatlas",
+        "assetPath": "shared:resultScreen/results-spooky/resultsGOOD/goodSkid",
+        "zIndex": 500,
+        "scale": 1,
+        "offsets": [520.8, 402.15],
+        "loopFrame": 64
+      },
+      {
+        "renderType": "animateatlas",
+        "assetPath": "shared:resultScreen/results-spooky/resultsGOOD/goodPump",
+        "zIndex": 500,
+        "scale": 1,
+        "offsets": [520.8, 402.15],
+        "loopFrame": 64
+      }
+    ],
+    "excellent": [
+      {
+        "renderType": "animateatlas",
+        "assetPath": "shared:resultScreen/results-spooky/resultsGOOD/goodKevin",
+        "zIndex": 500,
+        "scale": 1,
+        "offsets": [520.8, 402.15],
+        "loopFrame": 71
+      },
+      {
+        "renderType": "animateatlas",
+        "assetPath": "shared:resultScreen/results-spooky/resultsGOOD/goodSkid",
+        "zIndex": 500,
+        "scale": 1,
+        "offsets": [520.8, 402.15],
+        "loopFrame": 64
+      },
+      {
+        "renderType": "animateatlas",
+        "assetPath": "shared:resultScreen/results-spooky/resultsGOOD/goodPump",
+        "zIndex": 500,
+        "scale": 1,
+        "offsets": [520.8, 402.15],
+        "loopFrame": 64
+      }
+    ],
+    "great": [
+      {
+        "renderType": "animateatlas",
+        "assetPath": "shared:resultScreen/results-spooky/resultsGOOD/goodKevin",
+        "zIndex": 500,
+        "scale": 1,
+        "offsets": [520.8, 402.15],
+        "loopFrame": 71
+      },
+      {
+        "renderType": "animateatlas",
+        "assetPath": "shared:resultScreen/results-spooky/resultsGOOD/goodSkid",
+        "zIndex": 500,
+        "scale": 1,
+        "offsets": [520.8, 402.15],
+        "loopFrame": 64
+      },
+      {
+        "renderType": "animateatlas",
+        "assetPath": "shared:resultScreen/results-spooky/resultsGOOD/goodPump",
+        "zIndex": 500,
+        "scale": 1,
+        "offsets": [520.8, 402.15],
+        "loopFrame": 64
+      }
+    ],
+    "good": [
+      {
+        "renderType": "animateatlas",
+        "assetPath": "shared:resultScreen/results-spooky/resultsGOOD/goodKevin",
+        "zIndex": 500,
+        "scale": 1,
+        "offsets": [520.8, 402.15],
+        "loopFrame": 71
+      },
+      {
+        "renderType": "animateatlas",
+        "assetPath": "shared:resultScreen/results-spooky/resultsGOOD/goodSkid",
+        "zIndex": 500,
+        "scale": 1,
+        "offsets": [520.8, 402.15],
+        "loopFrame": 64
+      },
+      {
+        "renderType": "animateatlas",
+        "assetPath": "shared:resultScreen/results-spooky/resultsGOOD/goodPump",
+        "zIndex": 500,
+        "scale": 1,
+        "offsets": [520.8, 402.15],
+        "loopFrame": 64
+      }
+    ],
+    "loss": [
+      {
+        "renderType": "animateatlas",
+        "assetPath": "shared:resultScreen/results-spooky/resultsSHIT/lossSkid",
+        "scale": 1,
+        "zIndex": 500,
+        "offsets": [1097.6, 328],
+
+        "loopFrame": 16
+      },
+      {
+        "renderType": "animateatlas",
+        "assetPath": "shared:resultScreen/results-spooky/resultsSHIT/lossPump",
+        "scale": 1,
+        "delay": 0.0833,
+        "zIndex": 500,
+        "offsets": [1097.6, 328],
+
+        "loopFrame": 18
+      },
+      {
+        "renderType": "animateatlas",
+        "assetPath": "shared:resultScreen/results-spooky/resultsSHIT/lossBucket",
+        "scale": 1,
+        "delay": 0.4167,
+        "zIndex": 500,
+        "offsets": [1097.6, 328],
+
+        "loopFrame": 28
+      }
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "version": "1.0.0",
+  "name": "None",
+  "assetPath": "blank",
+  "singTime": 8.0,
+  "offsets": [-100,-500],
+  "healthIcon": {
+    "id": "blank"
+  },
+  "animations": [
+    {
+      "name": "idle",
+      "prefix": "idle",
+      "offsets": [0, 0]
+    }
+  ]
+}

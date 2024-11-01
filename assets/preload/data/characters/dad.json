@@ -1,0 +1,33 @@
+{
+  "version": "1.0.0",
+  "name": "Daddy Dearest",
+  "assetPath": "characters/scarydaddy",
+  "singTime": 8.0,
+  "animations": [
+    {
+      "name": "idle",
+      "prefix": "dad idle",
+      "offsets": [0, 0]
+    },
+    {
+      "name": "singLEFT",
+      "prefix": "left",
+      "offsets": [120, -31]
+    },
+    {
+      "name": "singDOWN",
+      "prefix": "down",
+      "offsets": [185, -187]
+    },
+    {
+      "name": "singUP",
+      "prefix": "up",
+      "offsets": [58, 10]
+    },
+    {
+      "name": "singRIGHT",
+      "prefix": "right",
+      "offsets": [22, -73]
+    }
+  ]
+}

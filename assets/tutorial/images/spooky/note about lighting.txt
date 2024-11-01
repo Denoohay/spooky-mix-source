@@ -1,0 +1,3 @@
+"darken.png" and "glow.png" were supposed to have the "Overlay" blend mode and be layered over the characters. That blend
+mode is not supported currently in fnf so I had to make a work around by adding "lightGlow.png" and including
+"darken.png" and "glow.png" in the background image.

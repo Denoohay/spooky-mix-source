@@ -1,0 +1,45 @@
+{
+  "version": "1.0.0",
+  "name": "Pump (Opponent) (Dark)",
+  "assetPath": "characters/Pump_Opponent-dark",
+  "renderType": "multisparrow",
+  "offsets": [40, 20],
+  "flipX": true,
+  "healthIcon": {
+    "id": "blank"
+  },
+  "singTime": 8.0,
+  "animations": [
+    {
+      "name": "idle",
+      "prefix": "pumpIdle",
+      "frameRate": 24,
+      "offsets": [0, 0]
+    },
+    {
+      "name": "singLEFT",
+      "prefix": "pumpLeft",
+      "offsets": [27, -27]
+    },
+    {
+      "name": "singDOWN",
+      "prefix": "pumpDown",
+      "offsets": [17, -84]
+    },
+    {
+      "name": "singUP",
+      "prefix": "pumpUp",
+      "offsets": [11, 31]
+    },
+    {
+      "name": "singRIGHT",
+      "prefix": "pumpRight",
+      "offsets": [-28, -28]
+    },
+    {
+      "name": "cheer",
+      "prefix": "pumpCheer",
+      "offsets": [58, -42]
+    }
+  ]
+}

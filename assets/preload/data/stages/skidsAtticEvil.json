@@ -1,0 +1,36 @@
+{
+  "props": [
+    {
+      "name": "bgRed",
+      "assetPath": "spooky/bgRed",
+      "zIndex": -100,
+      "position": [0, 0],
+      "scale": [1, 1],
+      "scroll": [1, 1]
+    },
+    {
+      "name": "glow",
+      "assetPath": "spooky/bgRedGlow",
+      "zIndex": 300,
+      "position": [698, 188],
+      "scale": [1, 1],
+      "scroll": [1, 1]
+    }
+  ],
+  "cameraZoom": 0.7,
+  "version": "1.0.0",
+  "characters": {
+    "bf": {
+      "zIndex": 200,
+      "position": [2130, 1850],
+      "cameraOffsets": [-300, -150]
+    },
+    "gf": { "zIndex": 100, "position": [1611, 1740], "cameraOffsets": [50, -40] },
+    "dad": {
+      "zIndex": 200,
+      "position": [1320, 1750],
+      "cameraOffsets": [220, -100]
+    }
+  },
+  "name": "Skid's Attic [Week 2] (Scary)"
+}

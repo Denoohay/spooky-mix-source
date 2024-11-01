@@ -1,0 +1,68 @@
+{
+  "version": "1.0.0",
+  "name": "Monster",
+  "assetPath": "characters/monster",
+  "offsets": [-70, 60],
+  "animations": [
+    {
+      "name": "idle",
+      "prefix": "monsteridle",
+      "offsets": [0, 0]
+    },
+    {
+      "name": "idle-hold",
+      "prefix": "monsteridle",
+      "looped": true,
+      "frameIndices": [12, 13, 14, 15, 16, 17],
+      "offsets": [0, 0]
+    },
+    {
+      "name": "singLEFT",
+      "prefix": "monsterleft",
+      "offsets": [49, -12]
+    },
+    {
+      "name": "singLEFT-hold",
+      "prefix": "monsterleft",
+      "looped": true,
+      "frameIndices": [12, 13, 14, 15, 16, 17],
+      "offsets": [49, -12]
+    },
+    {
+      "name": "singDOWN",
+      "prefix": "monsterdown",
+      "offsets": [4, -193]
+    },
+    {
+      "name": "singDOWN-hold",
+      "prefix": "monsterdown",
+      "looped": true,
+      "frameIndices": [12, 13, 14, 15, 16, 17],
+      "offsets": [4, -193]
+    },
+    {
+      "name": "singUP",
+      "prefix": "monsterup",
+      "offsets": [19, 136]
+    },
+    {
+      "name": "singUP-hold",
+      "prefix": "monsterup",
+      "looped": true,
+      "frameIndices": [12, 13, 14, 15, 16, 17],
+      "offsets": [19, 136]
+    },
+    {
+      "name": "singRIGHT",
+      "prefix": "monsterright",
+      "offsets": [-144, -62]
+    },
+    {
+      "name": "singRIGHT-hold",
+      "prefix": "monsterright",
+      "looped": true,
+      "frameIndices": [12, 13, 14, 15, 16, 17],
+      "offsets": [-144, -62]
+    }
+  ]
+}

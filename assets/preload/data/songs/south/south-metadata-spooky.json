@@ -1,0 +1,40 @@
+{
+  "version": "2.2.4",
+  "timeFormat": "ms",
+  "artist": "Y_F_MUS",
+  "charter": "RubyyyButCool",
+  "modArt": "Denoohay",
+  "playData": {
+    "stage": "skidsAtticWeek2",
+    "characters": {
+      "player": "pump-playable-dark",
+      "girlfriend": "moloch-dark",
+      "opponent": "skid-opponent-dark",
+      "instrumental": "spooky"
+    },
+    "altInstrumentals": [],
+    "ratings": { "easy": 5, "normal": 6, "hard": 7 },
+    "difficulties": ["easy", "normal", "hard"],
+    "noteStyle": "funkin",
+    "album": "spookymix1",
+    "previewStart": 0,
+    "previewEnd": 15000
+  },
+  "songName": "South (Spooky Mix)",
+  "generatedBy": "Friday Night Funkin' - v0.3.3 (rewrite/master:bc783a2) PROTOTYPE",
+  "timeChanges": [
+    {
+      "t": 0,
+      "b": 0,
+      "bpm": 165,
+      "n": 4,
+      "d": 4,
+      "bt": [
+        4,
+        4,
+        4,
+        4
+      ]
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+import flixel.tweens.FlxEase;
+import funkin.graphics.FunkinSprite;
+import flixel.tweens.FlxTween;
+import funkin.play.cutscene.dialogue.DialogueBox;
+import funkin.play.PlayState;
+import funkin.play.PlayStatePlaylist;
+import funkin.play.song.Song;
+import flixel.FlxG;
+import flixel.FlxSprite;
+import flixel.util.FlxTimer;
+import funkin.save.Save;
+
+import funkin.effects.RetroCameraFade;
+
+class TutorialSong extends Song {
+  var hasPlayedCutscene:Bool;
+
+	public function new() {
+		super('tutorial');
+	}
+
+	public override function isSongNew(currentDifficulty:String):Bool{
+    if(currentDifficulty == 'easy-spooky' || currentDifficulty == 'normal-spooky' || currentDifficulty == 'hard-spooky'){
+		  if (Save.instance.hasBeatenSong(this.id, ['easy-spooky', 'normal-spooky', 'hard-spooky']) == false) return true;
+		}
+		if (currentDifficulty == 'erect' || currentDifficulty == 'nightmare') {
+			if (Save.instance.hasBeatenSong(this.id, ['erect', 'nightmare']) == false) return true;
+		}
+
+    return false;
+	}
+
+	public override function isSongNew(currentDifficulty:String):Bool{
+		if(currentDifficulty == 'easy-spooky' || currentDifficulty == 'normal-spooky' || currentDifficulty == 'hard-spooky'){
+		  if (Save.instance.hasBeatenSong(this.id, ['easy-spooky', 'normal-spooky', 'hard-spooky']) == false) return true;
+		}
+    return false;
+	}
+
+  public override function listAltInstrumentalIds(difficultyId:String, variationId:String):Array<String> {
+    if (difficultyId == 'easy' || difficultyId == 'normal' || difficultyId == 'hard') {
+      var hasBeatenSpookyMix = Save.instance.hasBeatenSong(this.id, ['easy-spooky', 'normal-spooky', 'hard-spooky']);
+
+      switch (variationId) {
+        case 'spooky':
+          // return hasBeatenSpookyMix ? [''] : [];
+          // No Spooky mix on BF instrumental, sorry!
+          return [];
+        default:
+          return hasBeatenSpookyMix ? ['spooky'] : [];
+      }
+    }
+  }
+}

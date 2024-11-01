@@ -1,0 +1,25 @@
+{
+  "version": "2.2.4",
+  "timeFormat": "ms",
+  "artist": "LeGooey",
+  "charter": "LeGooey",
+  "modArt": "LeGooey, Denoohay, givemethesalt",
+  "playData": {
+    "stage": "mallXmasSpooky",
+    "characters": {
+      "player": "spooky-christmas",
+      "girlfriend": "moloch-christmas",
+      "opponent": "parents-christmas",
+      "instrumental": "spooky"
+    },
+    "difficulties": ["easy", "normal", "hard"],
+    "noteStyle": "funkin",
+    "ratings": { "easy": 5, "normal": 6, "hard": 7 },
+    "album": "spookymix1",
+    "previewStart": 0,
+    "previewEnd": 15000
+  },
+  "songName": "Cocoa (Spooky Mix)",
+  "timeChanges": [{ "d": 4, "n": 4, "t": -1, "bt": [4, 4, 4, 4], "bpm": 100 }],
+  "generatedBy": "Chart Editor Import (FNF Legacy)"
+}

@@ -1,0 +1,39 @@
+{
+  "version": "2.2.4",
+  "songName": "M.I.L.F (Spooky Mix)",
+  "artist": "QuasarXP",
+  "charter": "LimeIsHere",
+  "modArt": "Denoohay, givemethesalt",
+  "playData": {
+    "difficulties": ["easy", "normal", "hard"],
+    "characters": {
+      "player": "spooky-playable",
+      "girlfriend": "moloch",
+      "opponent": "mom-car",
+      "instrumental": "spooky"
+    },
+    "stage": "limoRideErect",
+    "noteStyle": "funkin",
+    "ratings": { "easy": 4, "normal": 5, "hard": 6 },
+    "album": "spookymix1",
+    "previewStart": 0,
+    "previewEnd": 15000
+  },
+  "generatedBy": "EliteMasterEric (by hand)",
+  "timeFormat": "ms",
+  "timeChanges": [
+    {
+      "t": 0,
+      "b": 0,
+      "bpm": 180,
+      "n": 4,
+      "d": 4,
+      "bt": [
+        4,
+        4,
+        4,
+        4
+      ]
+    }
+  ]
+}

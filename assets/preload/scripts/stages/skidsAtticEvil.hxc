@@ -1,0 +1,68 @@
+import flixel.FlxG;
+import flixel.FlxSprite;
+import flixel.addons.display.FlxRuntimeShader;
+import flixel.sound.FlxSound;
+import funkin.Conductor;
+import funkin.modding.base.ScriptedFlxRuntimeShader;
+import funkin.graphics.shaders.AdjustColorShader;
+import funkin.play.PlayState;
+import funkin.play.stage.Stage;
+import funkin.graphics.adobeanimate.FlxAtlasSprite;
+import funkin.modding.base.ScriptedFlxAtlasSprite;
+
+class SkidsAtticEvilStage extends Stage
+{
+	function new()
+	{
+		super('skidsAtticEvil');
+	}
+
+  var colorShaderBf:AdjustColorShader;
+  var colorShaderDad:AdjustColorShader;
+
+	public override function onCountdownStart(event:CountdownScriptEvent):Void {
+		super.onCountdownStart(event);
+	}
+
+	function buildStage()
+	{
+		super.buildStage();
+
+    colorShaderBf = new AdjustColorShader();
+    colorShaderDad = new AdjustColorShader();
+
+    colorShaderBf.brightness = -39;
+    colorShaderBf.contrast = -1;
+	colorShaderBf.saturation = -2;
+    colorShaderBf.hue = -40;
+
+    colorShaderDad.brightness = -31;
+    colorShaderDad.contrast = -16;
+	colorShaderDad.saturation = 0;
+    colorShaderDad.hue = -28;
+
+    getNamedProp('glow').blend = 0;
+
+	}
+
+	function onUpdate(event:UpdateScriptEvent):Void
+	{
+		super.onUpdate(event);
+
+    if(PlayState.instance.currentStage.getBoyfriend() != null && PlayState.instance.currentStage.getBoyfriend().shader == null){
+      PlayState.instance.currentStage.getBoyfriend().shader = colorShaderBf;
+			PlayState.instance.currentStage.getDad().shader = colorShaderDad;
+    }
+
+	}
+
+	function onBeatHit(event:SongTimeScriptEvent):Void
+	{
+		super.onBeatHit(event);
+	}
+
+  function onStepHit(event:SongTimeScriptEvent):Void
+	{
+		super.onStepHit(event);
+	}
+}

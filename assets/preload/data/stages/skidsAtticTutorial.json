@@ -1,0 +1,43 @@
+{
+  "props": [
+    {
+      "name": "solid",
+      "assetPath": "#120620",
+      "position": [-6500, -2000],
+      "scale": [2000, 2000],
+      "scroll": [0.2, 0.2]
+    },
+    {
+      "name": "background",
+      "assetPath": "spooky/theactualbackground",
+      "zIndex": 100,
+      "position": [-6000, -1000],
+      "scale": [1, 1],
+      "scroll": [1, 1]
+    },
+    {
+      "name": "glow",
+      "assetPath": "spooky/lightGlow",
+      "zIndex": 400,
+      "position": [-5455, -560],
+      "scale": [1, 1],
+      "scroll": [1, 1]
+    }
+  ],
+  "cameraZoom": 0.7,
+  "version": "1.0.0",
+  "characters": {
+    "bf": {
+      "zIndex": 200,
+      "position": [-3690, 400],
+      "cameraOffsets": [-300, -150]
+    },
+    "gf": { "zIndex": 100, "position": [-4700, 380], "cameraOffsets": [550, 0] },
+    "dad": {
+      "zIndex": 200,
+      "position": [-4700, 380],
+      "cameraOffsets": [120, -60]
+    }
+  },
+  "name": "Skid's Attic [Tutorial]"
+}

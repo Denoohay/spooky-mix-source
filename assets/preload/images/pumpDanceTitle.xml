@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="pumpDanceTitle.png">
+	<!-- Created with Adobe Animate version 24.0.3.19 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="pumpDance instance 10000" x="2" y="2" width="325" height="293" frameX="-23" frameY="0" frameWidth="348" frameHeight="293"/>
+	<SubTexture name="pumpDance instance 10001" x="2" y="2" width="325" height="293" frameX="-23" frameY="0" frameWidth="348" frameHeight="293"/>
+	<SubTexture name="pumpDance instance 10002" x="329" y="2" width="320" height="287" frameX="-26" frameY="-6" frameWidth="348" frameHeight="293"/>
+	<SubTexture name="pumpDance instance 10003" x="329" y="2" width="320" height="287" frameX="-26" frameY="-6" frameWidth="348" frameHeight="293"/>
+	<SubTexture name="pumpDance instance 10004" x="651" y="2" width="232" height="210" frameX="-50" frameY="-80" frameWidth="348" frameHeight="293"/>
+	<SubTexture name="pumpDance instance 10005" x="651" y="2" width="232" height="210" frameX="-50" frameY="-80" frameWidth="348" frameHeight="293"/>
+	<SubTexture name="pumpDance instance 10006" x="2" y="297" width="229" height="216" frameX="-52" frameY="-74" frameWidth="348" frameHeight="293"/>
+	<SubTexture name="pumpDance instance 10007" x="2" y="297" width="229" height="216" frameX="-52" frameY="-74" frameWidth="348" frameHeight="293"/>
+	<SubTexture name="pumpDance instance 10008" x="233" y="297" width="326" height="293" frameX="0" frameY="0" frameWidth="348" frameHeight="293"/>
+	<SubTexture name="pumpDance instance 10009" x="233" y="297" width="326" height="293" frameX="0" frameY="0" frameWidth="348" frameHeight="293"/>
+	<SubTexture name="pumpDance instance 10010" x="561" y="297" width="319" height="287" frameX="-3" frameY="-6" frameWidth="348" frameHeight="293"/>
+	<SubTexture name="pumpDance instance 10011" x="561" y="297" width="319" height="287" frameX="-3" frameY="-6" frameWidth="348" frameHeight="293"/>
+	<SubTexture name="pumpDance instance 10012" x="651" y="2" width="232" height="210" frameX="-50" frameY="-80" frameWidth="348" frameHeight="293"/>
+	<SubTexture name="pumpDance instance 10013" x="651" y="2" width="232" height="210" frameX="-50" frameY="-80" frameWidth="348" frameHeight="293"/>
+	<SubTexture name="pumpDance instance 10014" x="2" y="297" width="229" height="216" frameX="-52" frameY="-74" frameWidth="348" frameHeight="293"/>
+	<SubTexture name="pumpDance instance 10015" x="2" y="297" width="229" height="216" frameX="-52" frameY="-74" frameWidth="348" frameHeight="293"/>
+</TextureAtlas>

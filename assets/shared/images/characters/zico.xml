@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="zico.png">
+	<!-- Created with Adobe Animate version 24.0.5.40 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="zico down0000" x="25" y="25" width="389" height="392" frameX="0" frameY="-2" frameWidth="389" frameHeight="394"/>
+	<SubTexture name="zico down0001" x="25" y="25" width="389" height="392" frameX="0" frameY="-2" frameWidth="389" frameHeight="394"/>
+	<SubTexture name="zico down0002" x="439" y="25" width="387" height="394" frameX="-2" frameY="0" frameWidth="389" frameHeight="394"/>
+	<SubTexture name="zico down0003" x="439" y="25" width="387" height="394" frameX="-2" frameY="0" frameWidth="389" frameHeight="394"/>
+	<SubTexture name="zico down0004" x="439" y="25" width="387" height="394" frameX="-2" frameY="0" frameWidth="389" frameHeight="394"/>
+	<SubTexture name="zico down0005" x="439" y="25" width="387" height="394" frameX="-2" frameY="0" frameWidth="389" frameHeight="394"/>
+	<SubTexture name="zico down0006" x="439" y="25" width="387" height="394" frameX="-2" frameY="0" frameWidth="389" frameHeight="394"/>
+	<SubTexture name="zico down0007" x="439" y="25" width="387" height="394" frameX="-2" frameY="0" frameWidth="389" frameHeight="394"/>
+	<SubTexture name="zico down0008" x="439" y="25" width="387" height="394" frameX="-2" frameY="0" frameWidth="389" frameHeight="394"/>
+	<SubTexture name="zico down0009" x="439" y="25" width="387" height="394" frameX="-2" frameY="0" frameWidth="389" frameHeight="394"/>
+	<SubTexture name="zico down0010" x="439" y="25" width="387" height="394" frameX="-2" frameY="0" frameWidth="389" frameHeight="394"/>
+	<SubTexture name="zico idle0000" x="851" y="25" width="403" height="464" frameX="0" frameY="-7" frameWidth="403" frameHeight="471"/>
+	<SubTexture name="zico idle0001" x="851" y="25" width="403" height="464" frameX="0" frameY="-7" frameWidth="403" frameHeight="471"/>
+	<SubTexture name="zico idle0002" x="1279" y="25" width="400" height="469" frameX="0" frameY="-1" frameWidth="403" frameHeight="471"/>
+	<SubTexture name="zico idle0003" x="25" y="519" width="400" height="469" frameX="0" frameY="-1" frameWidth="403" frameHeight="471"/>
+	<SubTexture name="zico idle0004" x="450" y="519" width="393" height="470" frameX="-5" frameY="0" frameWidth="403" frameHeight="471"/>
+	<SubTexture name="zico idle0005" x="868" y="519" width="389" height="470" frameX="-9" frameY="0" frameWidth="403" frameHeight="471"/>
+	<SubTexture name="zico idle0006" x="1282" y="519" width="388" height="470" frameX="-9" frameY="0" frameWidth="403" frameHeight="471"/>
+	<SubTexture name="zico idle0007" x="25" y="1014" width="386" height="470" frameX="-11" frameY="0" frameWidth="403" frameHeight="471"/>
+	<SubTexture name="zico idle0008" x="436" y="1014" width="386" height="470" frameX="-11" frameY="-1" frameWidth="403" frameHeight="471"/>
+	<SubTexture name="zico idle0009" x="436" y="1014" width="386" height="470" frameX="-11" frameY="-1" frameWidth="403" frameHeight="471"/>
+	<SubTexture name="zico idle0010" x="436" y="1014" width="386" height="470" frameX="-11" frameY="-1" frameWidth="403" frameHeight="471"/>
+	<SubTexture name="zico idle0011" x="436" y="1014" width="386" height="470" frameX="-11" frameY="-1" frameWidth="403" frameHeight="471"/>
+	<SubTexture name="zico idle0012" x="436" y="1014" width="386" height="470" frameX="-11" frameY="-1" frameWidth="403" frameHeight="471"/>
+	<SubTexture name="zico idle0013" x="436" y="1014" width="386" height="470" frameX="-11" frameY="-1" frameWidth="403" frameHeight="471"/>
+	<SubTexture name="zico left0000" x="847" y="1014" width="412" height="487" frameX="0" frameY="0" frameWidth="414" frameHeight="487"/>
+	<SubTexture name="zico left0001" x="847" y="1014" width="412" height="487" frameX="0" frameY="0" frameWidth="414" frameHeight="487"/>
+	<SubTexture name="zico left0002" x="1284" y="1014" width="401" height="483" frameX="-13" frameY="-4" frameWidth="414" frameHeight="487"/>
+	<SubTexture name="zico left0003" x="1284" y="1014" width="401" height="483" frameX="-13" frameY="-4" frameWidth="414" frameHeight="487"/>
+	<SubTexture name="zico left0004" x="1284" y="1014" width="401" height="483" frameX="-13" frameY="-4" frameWidth="414" frameHeight="487"/>
+	<SubTexture name="zico left0005" x="1284" y="1014" width="401" height="483" frameX="-13" frameY="-4" frameWidth="414" frameHeight="487"/>
+	<SubTexture name="zico left0006" x="1284" y="1014" width="401" height="483" frameX="-13" frameY="-4" frameWidth="414" frameHeight="487"/>
+	<SubTexture name="zico left0007" x="1284" y="1014" width="401" height="483" frameX="-13" frameY="-4" frameWidth="414" frameHeight="487"/>
+	<SubTexture name="zico left0008" x="1284" y="1014" width="401" height="483" frameX="-13" frameY="-4" frameWidth="414" frameHeight="487"/>
+	<SubTexture name="zico left0009" x="1284" y="1014" width="401" height="483" frameX="-13" frameY="-4" frameWidth="414" frameHeight="487"/>
+	<SubTexture name="zico left0010" x="1284" y="1014" width="401" height="483" frameX="-13" frameY="-4" frameWidth="414" frameHeight="487"/>
+	<SubTexture name="zico right0000" x="25" y="1526" width="366" height="473" frameX="-1" frameY="-1" frameWidth="367" frameHeight="474"/>
+	<SubTexture name="zico right0001" x="25" y="1526" width="366" height="473" frameX="-1" frameY="-1" frameWidth="367" frameHeight="474"/>
+	<SubTexture name="zico right0002" x="416" y="1526" width="360" height="474" frameX="0" frameY="0" frameWidth="367" frameHeight="474"/>
+	<SubTexture name="zico right0003" x="416" y="1526" width="360" height="474" frameX="0" frameY="0" frameWidth="367" frameHeight="474"/>
+	<SubTexture name="zico up0000" x="801" y="1526" width="371" height="488" frameX="0" frameY="0" frameWidth="371" frameHeight="489"/>
+	<SubTexture name="zico up0001" x="801" y="1526" width="371" height="488" frameX="0" frameY="0" frameWidth="371" frameHeight="489"/>
+	<SubTexture name="zico up0002" x="1197" y="1526" width="370" height="483" frameX="-1" frameY="-6" frameWidth="371" frameHeight="489"/>
+	<SubTexture name="zico up0003" x="1197" y="1526" width="370" height="483" frameX="-1" frameY="-6" frameWidth="371" frameHeight="489"/>
+	<SubTexture name="zico up0004" x="1197" y="1526" width="370" height="483" frameX="-1" frameY="-6" frameWidth="371" frameHeight="489"/>
+	<SubTexture name="zico up0005" x="1197" y="1526" width="370" height="483" frameX="-1" frameY="-6" frameWidth="371" frameHeight="489"/>
+	<SubTexture name="zico up0006" x="1197" y="1526" width="370" height="483" frameX="-1" frameY="-6" frameWidth="371" frameHeight="489"/>
+	<SubTexture name="zico up0007" x="1197" y="1526" width="370" height="483" frameX="-1" frameY="-6" frameWidth="371" frameHeight="489"/>
+	<SubTexture name="zico up0008" x="1197" y="1526" width="370" height="483" frameX="-1" frameY="-6" frameWidth="371" frameHeight="489"/>
+	<SubTexture name="zico up0009" x="1197" y="1526" width="370" height="483" frameX="-1" frameY="-6" frameWidth="371" frameHeight="489"/>
+	<SubTexture name="zico up0010" x="1197" y="1526" width="370" height="483" frameX="-1" frameY="-6" frameWidth="371" frameHeight="489"/>
+</TextureAtlas>

@@ -1,0 +1,33 @@
+{
+  "version": "1.0.0",
+  "name": "Pico",
+  "assetPath": "characters/zico",
+  "flipX": false,
+  "animations": [
+    {
+      "name": "idle",
+      "prefix": "zico idle",
+      "offsets": [0, 0]
+    },
+    {
+      "name": "singRIGHT",
+      "prefix": "zico right",
+      "offsets": [-71, 3]
+    },
+    {
+      "name": "singDOWN",
+      "prefix": "zico down",
+      "offsets": [1, -71]
+    },
+    {
+      "name": "singUP",
+      "prefix": "zico up",
+      "offsets": [-29, 25]
+    },
+    {
+      "name": "singLEFT",
+      "prefix": "zico left",
+      "offsets": [22, 16]
+    }
+  ]
+}

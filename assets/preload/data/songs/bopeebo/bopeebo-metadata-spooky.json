@@ -1,0 +1,25 @@
+{
+  "version": "2.2.4",
+  "songName": "Bopeebo (Spooky Mix)",
+  "artist": "ChuckySkullHead",
+  "charter": "ChuckySkullHead",
+  "modArt": "Denoohay, givemethesalt",
+  "timeFormat": "ms",
+  "timeChanges": [{ "t": 0, "bpm": 100, "n": 4, "d": 4, "bt": [4, 4, 4, 4] }],
+  "playData": {
+    "difficulties": ["easy", "normal", "hard"],
+    "ratings": { "easy": 1, "normal": 2, "hard": 3 },
+    "characters": {
+      "player": "spooky-playable",
+      "girlfriend": "moloch",
+      "opponent": "dad",
+      "instrumental": "spooky"
+    },
+    "stage": "mainStageSpooky",
+    "noteStyle": "funkin",
+    "album": "spookymix1",
+    "previewStart": 0,
+    "previewEnd": 15000
+  },
+  "generatedBy": "Denoohay (by hand)"
+}

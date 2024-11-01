@@ -1,0 +1,84 @@
+{
+  "version": "1.0.0",
+  "name": "Pump (Playable)",
+  "assetPath": "characters/Pump_Playable",
+  "renderType": "multisparrow",
+  "offsets": [40, 0],
+  "flipX": true,
+  "healthIcon": {
+    "id": "spooky-flipped"
+  },
+  "singTime": 8.0,
+  "animations": [
+    {
+      "name": "idle",
+      "prefix": "pumpIdle",
+      "frameRate": 24,
+      "offsets": [0, 0]
+    },
+    {
+      "name": "singLEFT",
+      "prefix": "pumpLeft",
+      "offsets": [105, -27]
+    },
+    {
+      "name": "singLEFTmiss",
+      "prefix": "pumpMISSleft",
+      "offsets": [104, -20]
+    },
+    {
+      "name": "singDOWN",
+      "prefix": "pumpDown",
+      "offsets": [17, -84]
+    },
+    {
+      "name": "singDOWNmiss",
+      "prefix": "pumpMISSdown",
+      "offsets": [8, -80]
+    },
+    {
+      "name": "singUP",
+      "prefix": "pumpUp",
+      "offsets": [26, 31]
+    },
+    {
+      "name": "singUPmiss",
+      "prefix": "pumpMISSup",
+      "offsets": [29, 30]
+    },
+    {
+      "name": "singRIGHT",
+      "prefix": "pumpRight",
+      "offsets": [-30, -28]
+    },
+    {
+      "name": "singRIGHTmiss",
+      "prefix": "pumpMISSright",
+      "offsets": [-21, -7]
+    },
+    {
+      "name": "cheer",
+      "prefix": "pumpCheer",
+      "offsets": [40, -38]
+    },
+    {
+      "name": "firstDeath",
+      "prefix": "spooky kids die",
+      "assetPath": "characters/Pump_Playable_DEATH",
+      "offsets": [1014, 334]
+    },
+    {
+      "name": "deathLoop",
+      "prefix": "spooky kids dead loop",
+      "assetPath": "characters/Pump_Playable_DEATH",
+      "looped": true,
+      "offsets": [1014, 249]
+    },
+    {
+      "name": "deathConfirm",
+      "prefix": "spooky kids restart",
+      "assetPath": "characters/Pump_Playable_DEATH",
+      "offsets": [1114, 138]
+    }
+  ]
+}

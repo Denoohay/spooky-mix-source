@@ -1,0 +1,1 @@
+the candle flame movement doesn't export for his miss pose when i export as spritesheet. idk why, it's just stupid i guess.

@@ -1,0 +1,130 @@
+{
+  "version": "2.2.4",
+  "songName": "Monster (Spooky Mix)",
+  "artist": "RubyyyButCool",
+  "charter": "RubyyyButCool",
+  "modArt": "Denoohay, givemethesalt",
+  "playData": {
+    "difficulties": ["easy", "normal", "hard"],
+    "characters": {
+      "player": "spooky-playable",
+      "girlfriend": "none",
+      "opponent": "monster",
+      "instrumental": "spooky"
+    },
+    "stage": "skidsAtticEvil",
+    "noteStyle": "funkin",
+    "ratings": { "easy": 3, "normal": 4, "hard": 5 },
+    "album": "spookymix1",
+    "previewStart": 0,
+    "previewEnd": 15000
+  },
+  "generatedBy": "Friday Night Funkin' - v0.5.1",
+  "timeFormat": "ms",
+  "timeChanges": [
+    {
+      "t": 0,
+      "b": 0,
+      "bpm": 95,
+      "n": 4,
+      "d": 4,
+      "bt": [
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "t": 59368.4210526316,
+      "b": 94,
+      "bpm": 100,
+      "n": 4,
+      "d": 4,
+      "bt": [
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "t": 61768.4210526316,
+      "b": 98,
+      "bpm": 105,
+      "n": 4,
+      "d": 4,
+      "bt": [
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "t": 98339.8496240602,
+      "b": 162,
+      "bpm": 108,
+      "n": 4,
+      "d": 4,
+      "bt": [
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "t": 99450.9607351713,
+      "b": 164,
+      "bpm": 95,
+      "n": 4,
+      "d": 4,
+      "bt": [
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "t": 134819.381787803,
+      "b": 220,
+      "bpm": 132,
+      "n": 4,
+      "d": 4,
+      "bt": [
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "t": 149364.836333257,
+      "b": 252,
+      "bpm": 119,
+      "n": 4,
+      "d": 4,
+      "bt": [
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "t": 151381.643055947,
+      "b": 256,
+      "bpm": 120,
+      "n": 4,
+      "d": 4,
+      "bt": [
+        4,
+        4,
+        4,
+        4
+      ]
+    }
+  ]
+}

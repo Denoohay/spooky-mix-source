@@ -1,0 +1,99 @@
+{
+  "version": "1.0.0",
+  "name": "Spooky Kids",
+  "assetPath": "characters/SpookyKids_Playable-nogreen",
+  "renderType": "multisparrow",
+  "offsets": [0, 0],
+  "flipX": true,
+  "healthIcon": {
+    "id": "spooky"
+  },
+  "singTime": 8.0,
+  "startingAnimation": "danceRight",
+  "animations": [
+    {
+      "name": "danceLeft",
+      "prefix": "spooky dance idle",
+      "frameIndices": [0, 1, 2, 3, 4, 5, 6, 7],
+      "frameRate": 24,
+      "offsets": [0, 0]
+    },
+    {
+      "name": "danceRight",
+      "prefix": "spooky dance idle",
+      "frameIndices": [8, 9, 10, 11, 12, 13, 14, 15],
+      "frameRate": 24,
+      "offsets": [0, 0]
+    },
+    {
+      "name": "singLEFT",
+      "prefix": "note sing left0",
+      "offsets": [73, -12]
+    },
+    {
+      "name": "singLEFTmiss",
+      "prefix": "note sing leftMISS",
+      "offsets": [73, -12]
+    },
+    {
+      "name": "singDOWN",
+      "prefix": "spooky DOWN note0",
+      "offsets": [23, -141]
+    },
+    {
+      "name": "singDOWNmiss",
+      "prefix": "spooky DOWN noteMISS",
+      "offsets": [229, -142]
+    },
+    {
+      "name": "singUP",
+      "prefix": "spooky UP NOTE0",
+      "offsets": [-60, 27]
+    },
+    {
+      "name": "singUPmiss",
+      "prefix": "spooky UP NOTEMISS",
+      "offsets": [1, 63]
+    },
+    {
+      "name": "singRIGHT",
+      "prefix": "spooky sing right",
+      "offsets": [-52, -16]
+    },
+    {
+      "name": "singRIGHTmiss-hold",
+      "prefix": "note sing rightMISS",
+      "frameIndices": [16, 17, 18, 19, 20, 21],
+      "offsets": [-10, -15]
+    },
+    {
+      "name": "singRIGHTmiss",
+      "prefix": "note sing rightMISS",
+      "offsets": [-10, -15]
+    },
+    {
+      "name": "cheer",
+      "prefix": "spooky kids cheer",
+      "offsets": [140, 24]
+    },
+    {
+      "name": "firstDeath",
+      "prefix": "spooky kids die",
+      "assetPath": "characters/SpookyKids_Playable_DEATH",
+      "offsets": [335, 41]
+    },
+    {
+      "name": "deathLoop",
+      "prefix": "spooky kids dead loop",
+      "assetPath": "characters/SpookyKids_Playable_DEATH",
+      "looped": true,
+      "offsets": [335, -135]
+    },
+    {
+      "name": "deathConfirm",
+      "prefix": "spooky kids restart",
+      "assetPath": "characters/SpookyKids_Playable_DEATH",
+      "offsets": [338, -105]
+    }
+  ]
+}

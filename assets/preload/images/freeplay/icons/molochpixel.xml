@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="molochpixel.png">
+	<!-- Created with Adobe Animate version 24.0.3.19 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="idle0001" x="63" y="59" width="59" height="55"/>
+	<SubTexture name="confirm0001" x="2" y="2" width="59" height="55"/>
+	<SubTexture name="confirm0002" x="2" y="2" width="59" height="55"/>
+	<SubTexture name="confirm0003" x="63" y="2" width="59" height="55"/>
+	<SubTexture name="confirm0004" x="63" y="2" width="59" height="55"/>
+	<SubTexture name="confirm-hold0001" x="2" y="59" width="59" height="55"/>
+</TextureAtlas>
