@@ -16,32 +16,18 @@ body:
       label: Platform
       description: Which platform are you playing on?
       options:
-        - Newgrounds (Web/HTML5)
-        - Itch.io (Web/HTML5)
-        - Itch.io (Downloadable Build) - Windows
-        - Itch.io (Downloadable Build) - MacOS
-        - Itch.io (Downloadable Build) - Linux
+        - Gamebanana (Downloadable Build) - Windows
+        - Gamejolt (Downloadable Build) - Windows
+        - Google Drive (Downloadable Build) - Windows
         - Compiled from GitHub Source Code
     validations:
       required: true
-
-  - type: dropdown
-    attributes:
-      label: Browser
-      description: (Web/HTML5 users only) Which browser are you playing on?
-      options:
-        - Google Chrome
-        - Microsoft Edge
-        - Firefox
-        - Opera
-        - Safari
-        - Other (Specify in Description field)
 
   - type: input
     attributes:
       label: Version
       description: Which version are you playing on? The game version is in the bottom left corner of the main menu. 
-      placeholder: ex. 0.5.0
+      placeholder: ex. 1.0.0
     validations:
       required: true
   
