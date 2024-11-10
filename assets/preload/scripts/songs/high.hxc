@@ -28,22 +28,19 @@ class HighSong extends Song {
 
     return false;
 	}
+    
+  public override function listAltInstrumentalIds(difficultyId:String, variationId:String):Array<String>
+  {
+		var targetDifficulty:Null<SongDifficulty> = getDifficulty(difficultyId, variationId);
+		if (targetDifficulty == null) return [];
 
-  public override function listAltInstrumentalIds(difficultyId:String, variationId:String):Array<String> {
-    if (difficultyId == 'easy' || difficultyId == 'normal' || difficultyId == 'hard') {
-
-      var hasBeatenPicoMix = Save.instance.hasBeatenSong(this.id, ['easy-pico', 'normal-pico', 'hard-pico']);
-
-      switch (variationId) {
-        case 'pico':
-          // return hasBeatenPicoMix ? [''] : [];
-          // No Pico mix on BF instrumental, sorry!
-          return [];
-        default:
-          return hasBeatenPicoMix ? ['pico'] : [];
-      }
-    }
-
-    return [];
+		if (Save.instance.hasBeatenSong(this.id, ['easy-spooky', 'normal-spooky', 'hard-spooky']) == true)
+		{
+			return targetDifficulty.characters.altInstrumentals;
+		}
+		else
+		{
+			return [];
+		}
   }
 }

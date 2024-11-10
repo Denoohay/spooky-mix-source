@@ -13,7 +13,8 @@
       "player": "spooky-playable",
       "girlfriend": "moloch",
       "opponent": "mom-car",
-      "instrumental": "spooky"
+      "instrumental": "spooky",
+      "altInstrumentals": ["erect", ""]
     },
     "stage": "limoRideErect",
     "noteStyle": "funkin",

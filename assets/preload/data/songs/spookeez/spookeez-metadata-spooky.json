@@ -10,9 +10,9 @@
       "player": "skid-playable-dark",
       "girlfriend": "moloch-dark",
       "opponent": "pump-opponent-dark",
-      "instrumental": "spooky"
+      "instrumental": "spooky",
+      "altInstrumentals": ["pico", ""]
     },
-    "altInstrumentals": [],
     "stage": "skidsAtticWeek2",
     "noteStyle": "funkin",
     "ratings": { "easy": 3, "normal": 4, "hard": 5 },

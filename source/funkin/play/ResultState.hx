@@ -64,6 +64,8 @@ class ResultState extends MusicBeatSubState
   final highscoreNew:FlxSprite;
   final score:ResultScore;
 
+  var theMusicVolume:Int = 1;
+
   var canPress:Bool = true;
   
   var theTargetSong:Null<Song>;
@@ -396,6 +398,8 @@ class ResultState extends MusicBeatSubState
     score.zIndex = 1200;
     add(score);
 
+    FreeplayState.switchToMonsterSong = '';
+
     for (ind => rating in ratingGrp.members)
     {
       rating.visible = false;
@@ -417,29 +421,27 @@ class ResultState extends MusicBeatSubState
     // }
 
     new FlxTimer().start(rank.getMusicDelay(), _ -> {
-      var introMusic:String = Paths.music(getMusicPath(playerCharacter, rank) + '/' + getMusicPath(playerCharacter, rank) + '-intro');
-      if (Assets.exists(introMusic))
-      {
-        // Play the intro music.
-        introMusicAudio = FunkinSound.load(introMusic, 1.0, false, true, true, () -> {
-          introMusicAudio = null;
-          FunkinSound.playMusic(getMusicPath(playerCharacter, rank),
-            {
-              startingVolume: 1.0,
-              overrideExisting: true,
-              restartTrack: true
+        var introMusic:String = Paths.music(getMusicPath(playerCharacter, rank) + '/' + getMusicPath(playerCharacter, rank) + '-intro');
+        if (Assets.exists(introMusic) && FreeplayState.switchToMonsterSong == "")
+        {
+            // Play the intro music.
+            introMusicAudio = FunkinSound.load(introMusic, theMusicVolume, false, true, true, () ->{
+                introMusicAudio = null;
+                FunkinSound.playMusic(getMusicPath(playerCharacter, rank),{
+                startingVolume: theMusicVolume,
+                overrideExisting: true,
+                restartTrack: true
+                });
             });
-        });
-      }
-      else
-      {
-        FunkinSound.playMusic(getMusicPath(playerCharacter, rank),
-          {
-            startingVolume: 1.0,
+        }
+        else
+        {
+            FunkinSound.playMusic(getMusicPath(playerCharacter, rank),{
+            startingVolume: theMusicVolume,
             overrideExisting: true,
             restartTrack: true
-          });
-      }
+            });
+        }
     });
 
     rankBg.makeSolidColor(FlxG.width, FlxG.height, 0xFF000000);
@@ -488,7 +490,10 @@ class ResultState extends MusicBeatSubState
           {
             trace('$clearPercentLerp and ${clearPercentCounter.curNumber}');
             clearPercentLerp = clearPercentCounter.curNumber;
-            FunkinSound.playOnce(Paths.sound('scrollMenu'));
+            if (FreeplayState.switchToMonsterSong == '')
+            {
+                FunkinSound.playOnce(Paths.sound('scrollMenu'));
+            }
           }
         },
         onComplete: _ -> {
@@ -685,6 +690,16 @@ class ResultState extends MusicBeatSubState
 
   override function update(elapsed:Float):Void
   {
+    if (FreeplayState.switchToMonsterSong != '')
+    {
+        theMusicVolume = 0;
+        //introMusicAudio.volume = theMusicVolume;
+    }
+    else
+    {
+        theMusicVolume = 1;
+    }
+
     // if(FlxG.keys.justPressed.R){
     //   FlxG.switchState(() -> new funkin.play.ResultState(
     //   {
@@ -857,10 +872,11 @@ class ResultState extends MusicBeatSubState
       }
       else if (params.songId.toLowerCase() == 'south' && !Save.instance.monsterTranitionsSeen.contains("monster"))
       {
+         FlxG.camera.flash(FlxColor.WHITE, 1);
          targetState = new funkin.ui.freeplay.FreeplayState();
          Save.instance.addMonsterTranitionsSeen('monster');
          Save.instance.addMonsterSongsUnlocked('monster');
-         MainMenuState.FreeplayCurSelectedSAVED = MainMenuState.FreeplayCurSelectedSAVED + 1;
+         MainMenuState.FreeplayCurSelectedSAVED = 7;
 
          trace(params.songId);
 
@@ -872,7 +888,15 @@ class ResultState extends MusicBeatSubState
          targetState = new funkin.ui.freeplay.FreeplayState();
          Save.instance.addMonsterTranitionsSeen('winter-horrorland');
          Save.instance.addMonsterSongsUnlocked('winter-horrorland');
-         MainMenuState.FreeplayCurSelectedSAVED = MainMenuState.FreeplayCurSelectedSAVED + 1;
+
+         if (Save.instance.monsterTranitionsSeen.contains("monster"))
+         {
+            MainMenuState.FreeplayCurSelectedSAVED = 14;
+         }
+         else
+         {
+            MainMenuState.FreeplayCurSelectedSAVED = 13;
+         }
 
          trace(params.songId);
 

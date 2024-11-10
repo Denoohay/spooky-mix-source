@@ -70,6 +70,24 @@ class MainStageSpookyStage extends Stage
 
 	}
 
+	override function onGameOver(event:ScriptEvent):Void {
+		super.onGameOver(event);
+
+		colorShaderBf.hue = 0;
+		colorShaderBf.saturation = 0;
+		colorShaderBf.contrast = 0;
+		colorShaderBf.brightness = 0;
+	}
+
+	override function onSongRetry(event:ScriptEvent):Void {
+		super.onSongRetry(event);
+		
+		colorShaderBf.brightness = -31;
+		colorShaderBf.contrast = 4;
+		colorShaderBf.saturation = 0;
+		colorShaderBf.hue = -12;
+	}
+
 	function onBeatHit(event:SongTimeScriptEvent):Void
 	{
 		super.onBeatHit(event);

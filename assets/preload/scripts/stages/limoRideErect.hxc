@@ -176,6 +176,30 @@ class LimoRideErectStage extends Stage
 
 	}
 
+	override function onGameOver(event:ScriptEvent):Void {
+		super.onGameOver(event);
+
+		colorShader.hue = 0;
+		colorShader.saturation = 0;
+		colorShader.contrast = 0;
+		colorShader.brightness = 0;
+	}
+
+	/**
+	 * Make sure the fast car is reset when the song restarts.
+	 */
+	function onSongRetry(event:ScriptEvent) {
+		super.onSongRetry(event);
+		resetFastCar();
+		shootingStarBeat = 0;
+		shootingStarOffset = 2;
+				
+		colorShader.hue = -30;
+		colorShader.saturation = -20;
+		colorShader.contrast = 0;
+		colorShader.brightness = -30;
+	}
+
 	function onBeatHit(event:SongTimeScriptEvent)
 	{
 		// When overriding onBeatHit, make sure to call super.onBeatHit,
@@ -237,16 +261,6 @@ class LimoRideErectStage extends Stage
 		results.push(Paths.sound('carPass1'));
 
 		return results;
-	}
-
-	/**
-	 * Make sure the fast car is reset when the song restarts.
-	 */
-	function onSongRetry(event:ScriptEvent) {
-		super.onSongRetry(event);
-		resetFastCar();
-		shootingStarBeat = 0;
-		shootingStarOffset = 2;
 	}
 
 	/**

@@ -168,8 +168,8 @@ class GameOverSubState extends MusicBeatSubState
 
     // Assign a camera follow point to the boyfriend's position.
     cameraFollowPoint = new FlxObject(PlayState.instance.cameraFollowPoint.x, PlayState.instance.cameraFollowPoint.y, 1, 1);
-    cameraFollowPoint.x = getMidPointOld(boyfriend).x;
-    cameraFollowPoint.y = getMidPointOld(boyfriend).y;
+    cameraFollowPoint.x = PlayState.instance.theMidPointX;
+    cameraFollowPoint.y = PlayState.instance.theMidPointY;
     var offsets:Array<Float> = boyfriend.getDeathCameraOffsets();
     cameraFollowPoint.x += offsets[0];
     cameraFollowPoint.y += offsets[1];
@@ -189,11 +189,6 @@ class GameOverSubState extends MusicBeatSubState
    * Luckily, we don't use getGraphicMidpoint() much in the code, so it's fine being in GameoverSubState here.
    * @return FlxPoint
    */
-  function getMidPointOld(spr:FlxSprite, ?point:FlxPoint):FlxPoint
-  {
-    if (point == null) point = FlxPoint.get();
-    return point.set(spr.x + spr.frameWidth * 0.5 * spr.scale.x, spr.y + spr.frameHeight * 0.5 * spr.scale.y);
-  }
 
   /**
    * Forcibly reset the camera zoom level to that of the current stage.

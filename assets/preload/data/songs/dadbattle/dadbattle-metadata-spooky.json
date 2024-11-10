@@ -13,7 +13,8 @@
       "player": "spooky-playable",
       "girlfriend": "moloch",
       "opponent": "dad",
-      "instrumental": "spooky"
+      "instrumental": "spooky",
+      "altInstrumentals": ["pico", ""]
     },
     "stage": "mainStageSpooky",
     "noteStyle": "funkin",

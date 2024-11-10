@@ -10,11 +10,12 @@
       "player": "spooky-playable",
       "girlfriend": "moloch",
       "opponent": "mom-car",
-      "instrumental": "spooky"
+      "instrumental": "spooky",
+      "altInstrumentals": [""]
     },
     "stage": "limoRideErect",
     "noteStyle": "funkin",
-    "ratings": { "easy": 4, "normal": 5, "hard": 6 },
+    "ratings": { "easy": 3, "normal": 5, "hard": 6 },
     "album": "spookymix1",
     "previewStart": 0,
     "previewEnd": 15000

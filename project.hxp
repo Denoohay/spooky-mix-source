@@ -64,7 +64,7 @@ class Project extends HXProject {
 	 * The company name for the game.
 	 * This appears in metadata in places I think.
 	 */
-	static final COMPANY:String = "The Funkin' Crew";
+	static final COMPANY:String = "Spooky Mix Team";
 
   /**
    * Path to the Haxe script run before building the game.

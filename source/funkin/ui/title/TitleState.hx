@@ -186,9 +186,21 @@ class TitleState extends MusicBeatState
 
     FlxG.mouse.visible = false;
 
-    if (initialized) skipIntro();
+    if (initialized)
+    {
+        skipIntro();
+    }
     else
-      initialized = true;
+    {
+        if (FlxG.save.data.hasChangedVolume != true)
+        {
+            FlxG.sound.soundTrayEnabled = false;
+            FlxG.sound.changeVolume(10);
+            FlxG.sound.soundTrayEnabled = true;
+            trace("hopefully the game won't be silent now");
+        }
+        initialized = true;
+    }
   }
 
   /**

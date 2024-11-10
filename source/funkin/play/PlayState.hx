@@ -251,10 +251,10 @@ class PlayState extends MusicBeatSubState
    */
   public var scrollSpeedTweens:Array<FlxTween> = [];
 
-  /**
-   * An FlxTween that changes the additive speed to the desired amount.
-   */
   public var fadeInTween:FlxTween;
+
+  public var theMidPointX:Float = 0;
+  public var theMidPointY:Float = 0;
 
   /**
    * The camera follow point from the last stage.
@@ -464,6 +464,7 @@ class PlayState extends MusicBeatSubState
 
   //Subtitle text lol
   public var subtitleText:FlxText;
+  public var subtitleTextOVER:FlxText;
 
   /**
    * RENDER OBJECTS
@@ -796,6 +797,13 @@ class PlayState extends MusicBeatSubState
     coverscreenW.cameras = [camCover];
 	add(coverscreenW);
 
+	subtitleTextOVER = new FlxText(0, 540, FlxG.width, "");
+	subtitleTextOVER.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+	subtitleTextOVER.borderSize = 1.25;
+    subtitleTextOVER.zIndex = 3000;
+    subtitleTextOVER.cameras = [camCover];
+	add(subtitleTextOVER);
+
 	subtitleText = new FlxText(0, 540, FlxG.width, "");
 	subtitleText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 	subtitleText.borderSize = 1.25;
@@ -889,6 +897,8 @@ class PlayState extends MusicBeatSubState
     // Handle restarting the song when needed (player death or pressing Retry)
     if (needsReset)
     {
+      if (fadeInTween != null) fadeInTween.active = true;
+
       if (!assertChartExists()) return;
 
       prevScrollTargets = [];
@@ -1037,6 +1047,8 @@ class PlayState extends MusicBeatSubState
             boyfriendPos = currentStage.getBoyfriend().getScreenPosition();
           }
 
+          if (fadeInTween != null) fadeInTween.active = false;
+
           var pauseSubState:FlxSubState = new PauseSubState({mode: isChartingMode ? Charting : Standard});
 
           FlxTransitionableState.skipNextTransIn = true;
@@ -1087,7 +1099,7 @@ class PlayState extends MusicBeatSubState
     if (!isInCutscene && !disableKeys)
     {
       // RESET = Quick Game Over Screen
-      if (controls.RESET)
+      if (controls.RESET && coverscreen.alpha == 0 && camHUD.alpha == 1)
       {
         health = Constants.HEALTH_MIN;
         trace('RESET = True');
@@ -1514,6 +1526,25 @@ class PlayState extends MusicBeatSubState
         }
             
     }
+
+	if ((currentSong?.id ?? '').toLowerCase() == 'bopeebo')
+	{
+		switch (Conductor.instance.currentStep)
+		{
+            case 30:
+                playerStrumline.x = playerStrumline.x + 50;
+
+            case 60:
+				FlxTween.tween(playerStrumline, {x: playerStrumline.x + 50}, 3, {ease: FlxEase.quadInOut});
+
+            case 90:
+				FlxTween.tween(playerStrumline, {"scale.x": 0.5, "scale.y": 0.5 }, 3, {ease: FlxEase.quadInOut});
+
+            case 130:
+				playerStrumline.scale.set(0.5, 0.5);
+
+        }
+    }
     */
 
 	if ((currentSong?.id ?? '').toLowerCase() == 'south')
@@ -1590,7 +1621,6 @@ class PlayState extends MusicBeatSubState
                 fadeInTween.cancel();
                 fadeInTween = FlxTween.tween(coverscreen, {alpha: 1}, 0);
                 fadeInTween.cancel();
-                subtitleText.text = "";
 	            coverscreen.alpha = 1;
                 camHUD.alpha = 0;
             case 1:
@@ -1953,7 +1983,10 @@ class PlayState extends MusicBeatSubState
       if (boyfriend != null)
       {
         currentStage.addCharacter(boyfriend, BF);
-
+        
+        theMidPointX = (boyfriend.x + boyfriend.frameWidth * 0.5 * boyfriend.scale.x);
+        theMidPointY = (boyfriend.y + boyfriend.frameHeight * 0.5 * boyfriend.scale.y);
+    
         #if FEATURE_DEBUG_FUNCTIONS
         FlxG.console.registerObject('bf', boyfriend);
         #end
@@ -2767,58 +2800,61 @@ class PlayState extends MusicBeatSubState
      */
   function onNoteMiss(note:NoteSprite, playSound:Bool = false, healthChange:Float):Void
   {
-    // If we are here, we already CALLED the onNoteMiss script hook!
-
-    if (!isPracticeMode)
+    if (coverscreen.alpha == 0 && camHUD.alpha == 1)
     {
-      // messy copy paste rn lol
-      var pressArray:Array<Bool> = [
-        controls.NOTE_LEFT_P,
-        controls.NOTE_DOWN_P,
-        controls.NOTE_UP_P,
-        controls.NOTE_RIGHT_P
-      ];
+        // If we are here, we already CALLED the onNoteMiss script hook!
 
-      var indices:Array<Int> = [];
-      for (i in 0...pressArray.length)
-      {
-        if (pressArray[i]) indices.push(i);
-      }
-      if (indices.length > 0)
-      {
-        for (i in 0...indices.length)
+        if (!isPracticeMode)
         {
-          inputSpitter.push(
-            {
-              t: Std.int(Conductor.instance.songPosition),
-              d: indices[i],
-              l: 20
-            });
-        }
-      }
-      else
-      {
-        inputSpitter.push(
+          // messy copy paste rn lol
+          var pressArray:Array<Bool> = [
+            controls.NOTE_LEFT_P,
+            controls.NOTE_DOWN_P,
+            controls.NOTE_UP_P,
+            controls.NOTE_RIGHT_P
+          ];
+
+          var indices:Array<Int> = [];
+          for (i in 0...pressArray.length)
           {
-            t: Std.int(Conductor.instance.songPosition),
-            d: -1,
-            l: 20
-          });
-      }
-    }
-    vocals.playerVolume = 0;
-
-    if (Highscore.tallies.combo != 0) if (Highscore.tallies.combo >= 10) comboPopUps.displayCombo(0);
-
-    applyScore(-10, 'miss', healthChange, true);
-
-    if (playSound)
-    {
+            if (pressArray[i]) indices.push(i);
+          }
+          if (indices.length > 0)
+          {
+            for (i in 0...indices.length)
+            {
+              inputSpitter.push(
+                {
+                  t: Std.int(Conductor.instance.songPosition),
+                  d: indices[i],
+                  l: 20
+                });
+            }
+          }
+          else
+          {
+            inputSpitter.push(
+              {
+                t: Std.int(Conductor.instance.songPosition),
+                d: -1,
+                l: 20
+              });
+          }
+        }
         vocals.playerVolume = 0;
-        
-        if (Preferences.missNoteSounds)
+
+        if (Highscore.tallies.combo != 0) if (Highscore.tallies.combo >= 10) comboPopUps.displayCombo(0);
+
+        applyScore(-10, 'miss', healthChange, true);
+
+        if (playSound)
         {
-            FunkinSound.playOnce(Paths.soundRandom('missnote', 1, 3), FlxG.random.float(0.5, 0.6));
+            vocals.playerVolume = 0;
+        
+            if (Preferences.missNoteSounds)
+            {
+                FunkinSound.playOnce(Paths.soundRandom('missnote', 1, 3), FlxG.random.float(0.5, 0.6));
+            }
         }
     }
   }
@@ -2833,51 +2869,54 @@ class PlayState extends MusicBeatSubState
      */
   function ghostNoteMiss(direction:NoteDirection, hasPossibleNotes:Bool = true):Void
   {
-    var event:GhostMissNoteScriptEvent = new GhostMissNoteScriptEvent(direction, // Direction missed in.
-      hasPossibleNotes, // Whether there was a note you could have hit.
-      - 1 * Constants.HEALTH_MISS_PENALTY, // How much health to add (negative).
-      - 10 // Amount of score to add (negative).
-    );
-    dispatchEvent(event);
-
-    // Calling event.cancelEvent() skips animations and penalties. Neat!
-    if (event.eventCanceled) return;
-
-    health += event.healthChange;
-    songScore += event.scoreChange;
-
-    if (!isPracticeMode)
+    if (coverscreen.alpha == 0 && camHUD.alpha == 1)
     {
-      var pressArray:Array<Bool> = [
-        controls.NOTE_LEFT_P,
-        controls.NOTE_DOWN_P,
-        controls.NOTE_UP_P,
-        controls.NOTE_RIGHT_P
-      ];
+        var event:GhostMissNoteScriptEvent = new GhostMissNoteScriptEvent(direction, // Direction missed in.
+          hasPossibleNotes, // Whether there was a note you could have hit.
+          - 1 * Constants.HEALTH_MISS_PENALTY, // How much health to add (negative).
+          - 10 // Amount of score to add (negative).
+        );
+        dispatchEvent(event);
 
-      var indices:Array<Int> = [];
-      for (i in 0...pressArray.length)
-      {
-        if (pressArray[i]) indices.push(i);
-      }
-      for (i in 0...indices.length)
-      {
-        inputSpitter.push(
-          {
-            t: Std.int(Conductor.instance.songPosition),
-            d: indices[i],
-            l: 20
-          });
-      }
-    }
+        // Calling event.cancelEvent() skips animations and penalties. Neat!
+        if (event.eventCanceled) return;
 
-    if (event.playSound)
-    {
-        vocals.playerVolume = 0;
+        health += event.healthChange;
+        songScore += event.scoreChange;
 
-        if (Preferences.missNoteSounds)
+        if (!isPracticeMode)
         {
-            FunkinSound.playOnce(Paths.soundRandom('missnote', 1, 3), FlxG.random.float(0.1, 0.2));
+          var pressArray:Array<Bool> = [
+            controls.NOTE_LEFT_P,
+            controls.NOTE_DOWN_P,
+            controls.NOTE_UP_P,
+            controls.NOTE_RIGHT_P
+          ];
+
+          var indices:Array<Int> = [];
+          for (i in 0...pressArray.length)
+          {
+            if (pressArray[i]) indices.push(i);
+          }
+          for (i in 0...indices.length)
+          {
+            inputSpitter.push(
+              {
+                t: Std.int(Conductor.instance.songPosition),
+                d: indices[i],
+                l: 20
+              });
+          }
+        }
+
+        if (event.playSound)
+        {
+            vocals.playerVolume = 0;
+
+            if (Preferences.missNoteSounds)
+            {
+                FunkinSound.playOnce(Paths.soundRandom('missnote', 1, 3), FlxG.random.float(0.1, 0.2));
+            }
         }
     }
   }
@@ -2925,6 +2964,19 @@ class PlayState extends MusicBeatSubState
     // 1: End the song immediately.
     if (FlxG.keys.justPressed.ONE) endSong(true);
 
+    if (FlxG.keys.justPressed.TWO)
+    {
+        Highscore.tallies.totalNotes = 101;
+        Highscore.tallies.sick = 100;
+        Highscore.tallies.good = 1;
+        Highscore.tallies.bad = 0;
+        Highscore.tallies.shit = 0;
+        Highscore.tallies.missed = 0;
+        songScore = 100000;
+
+        endSong(true);
+    }
+
     // H: Hide the HUD.
     if (FlxG.keys.justPressed.H) camHUD.visible = !camHUD.visible;
 
@@ -2936,7 +2988,7 @@ class PlayState extends MusicBeatSubState
     #end
 
     // 9: Toggle the old icon.
-    if (FlxG.keys.justPressed.NINE) iconP1.toggleOldIcon();
+    //if (FlxG.keys.justPressed.NINE) iconP1.toggleOldIcon();
 
     #if FEATURE_DEBUG_FUNCTIONS
     // PAGEUP: Skip forward two sections.
@@ -2998,7 +3050,7 @@ class PlayState extends MusicBeatSubState
     }
     if (combo == null) combo = Highscore.tallies.combo;
 
-    if (!isPracticeMode)
+    if (!isPracticeMode && coverscreen.alpha == 0 && camHUD.alpha == 1)
     {
       // TODO: Input splitter uses old input system, make it pull from the precise input queue directly.
       var pressArray:Array<Bool> = [

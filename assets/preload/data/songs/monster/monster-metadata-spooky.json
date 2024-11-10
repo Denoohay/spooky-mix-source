@@ -10,7 +10,8 @@
       "player": "spooky-playable",
       "girlfriend": "none",
       "opponent": "monster",
-      "instrumental": "spooky"
+      "instrumental": "spooky",
+      "altInstrumentals": [""]
     },
     "stage": "skidsAtticEvil",
     "noteStyle": "funkin",

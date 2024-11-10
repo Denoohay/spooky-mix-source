@@ -10,8 +10,22 @@
       "offsets": [0, 0]
     },
     {
+      "name": "idle-hold",
+      "prefix": "dad idle",
+      "frameIndices": [11, 12, 13, 14],
+      "looped": true,
+      "offsets": [0, 0]
+    },
+    {
       "name": "singLEFT",
       "prefix": "left",
+      "offsets": [120, -31]
+    },
+    {
+      "name": "singLEFT-hold",
+      "prefix": "left",
+      "frameIndices": [11, 12, 13, 14],
+      "looped": true,
       "offsets": [120, -31]
     },
     {
@@ -20,13 +34,34 @@
       "offsets": [185, -187]
     },
     {
+      "name": "singDOWN-hold",
+      "prefix": "down",
+      "frameIndices": [12, 13, 14, 15],
+      "looped": true,
+      "offsets": [185, -187]
+    },
+    {
       "name": "singUP",
       "prefix": "up",
       "offsets": [58, 10]
     },
     {
+      "name": "singUP-hold",
+      "prefix": "up",
+      "frameIndices": [12, 13, 14, 15],
+      "looped": true,
+      "offsets": [58, 10]
+    },
+    {
       "name": "singRIGHT",
       "prefix": "right",
+      "offsets": [22, -73]
+    },
+    {
+      "name": "singRIGHT-hold",
+      "prefix": "right",
+      "frameIndices": [11, 12, 13, 14],
+      "looped": true,
       "offsets": [22, -73]
     }
   ]

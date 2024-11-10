@@ -1,6 +1,7 @@
 package funkin.util.plugins;
 
 import flixel.FlxBasic;
+import funkin.save.Save;
 
 /**
  * Handles volume control in a way that is compatible with alternate control schemes.
@@ -26,9 +27,21 @@ class VolumePlugin extends FlxBasic
     if (!isHaxeUIFocused)
     {
       // Rebindable volume keys.
-      if (PlayerSettings.player1.controls.VOLUME_MUTE) FlxG.sound.toggleMuted();
-      else if (PlayerSettings.player1.controls.VOLUME_UP) FlxG.sound.changeVolume(0.1);
-      else if (PlayerSettings.player1.controls.VOLUME_DOWN) FlxG.sound.changeVolume(-0.1);
+      if (PlayerSettings.player1.controls.VOLUME_MUTE)
+      {
+            FlxG.sound.toggleMuted();
+            FlxG.save.data.hasChangedVolume = true;
+      }
+      else if (PlayerSettings.player1.controls.VOLUME_UP)
+      {
+            FlxG.sound.changeVolume(0.1);
+            FlxG.save.data.hasChangedVolume = true;
+      }
+      else if (PlayerSettings.player1.controls.VOLUME_DOWN)
+      {
+            FlxG.sound.changeVolume(-0.1);
+            FlxG.save.data.hasChangedVolume = true;
+      }
     }
   }
 }

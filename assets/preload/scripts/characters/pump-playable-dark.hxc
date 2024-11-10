@@ -98,6 +98,6 @@ class PumpPlayableDarkCharacter extends MultiSparrowCharacter
 	public override function getDeathCameraOffsets():Array<Float> {
 		var result = super.getDeathCameraOffsets();
 
-		return [result[0] - 380, result[1]];
+		return [result[0] - 420, result[1]];
 	}
 }

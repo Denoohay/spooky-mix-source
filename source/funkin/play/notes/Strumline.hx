@@ -688,7 +688,10 @@ class Strumline extends FlxSpriteGroup
 
   public function playPress(direction:NoteDirection):Void
   {
-    getByDirection(direction).playPress();
+    if (PlayState.instance.camHUD.alpha == 1)
+    {
+        getByDirection(direction).playPress();
+    }
   }
 
   public function playConfirm(direction:NoteDirection):Void

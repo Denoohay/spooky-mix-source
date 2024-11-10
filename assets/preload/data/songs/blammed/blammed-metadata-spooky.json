@@ -11,10 +11,11 @@
         "player": "spooky-playable",
         "girlfriend": "moloch",
         "opponent": "pico",
-        "instrumental": "spooky"
+        "instrumental": "spooky",
+        "altInstrumentals": ["pico", ""]
     },
     "difficulties": ["easy", "normal", "hard"],
-    "ratings": { "easy": 11, "normal": 12, "hard": 13 },
+    "ratings": { "easy": 7, "normal": 11, "hard": 13 },
     "noteStyle": "funkin"
   },
   "songName": "Blammed (Spooky Mix)",

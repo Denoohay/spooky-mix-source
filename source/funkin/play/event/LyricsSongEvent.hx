@@ -10,6 +10,7 @@ import funkin.data.song.SongData.SongEventData;
 import funkin.play.event.SongEvent;
 import funkin.data.event.SongEventSchema;
 import funkin.data.event.SongEventSchema.SongEventFieldType;
+import flixel.util.FlxColor;
 
 /**
  *
@@ -19,7 +20,8 @@ import funkin.data.event.SongEventSchema.SongEventFieldType;
  * {
  *   'e': 'Lyrics',
  *   'v': {
- *    'lyric': 0.0,
+ *    'layering': 0,
+ *    'lyric': "",
  *   }
  * }
  * ```
@@ -34,6 +36,8 @@ import funkin.data.event.SongEventSchema.SongEventFieldType;
  */
 class LyricsSongEvent extends SongEvent
 {
+  //Subtitle text lol
+
   public function new()
   {
     super('Lyrics');
@@ -46,8 +50,21 @@ class LyricsSongEvent extends SongEvent
 
     var lyric:Null<String> = data.getString('lyric');
     if (lyric == null) lyric = "";
+    
+    var layering:Null<Int> = data.getInt('layering');
+    if (layering == null) layering = 0;
 
-    PlayState.instance.subtitleText.text = Constants.DEFAULT_LYRIC + lyric;
+    if (layering == 1)
+    {
+        PlayState.instance.subtitleTextOVER.text = Constants.DEFAULT_LYRIC + lyric;
+        PlayState.instance.subtitleText.text = "";
+    }
+    else
+    {
+        PlayState.instance.subtitleText.text = Constants.DEFAULT_LYRIC + lyric;
+        PlayState.instance.subtitleTextOVER.text = "";
+    }
+
   }
 
   public override function getTitle():String
@@ -63,6 +80,7 @@ class LyricsSongEvent extends SongEvent
   /**
    * ```
    * {
+   *   'layering': ENUM, // Layering
    *   'lyric': STRING, // Lyric
    * }
    * ```
@@ -71,6 +89,13 @@ class LyricsSongEvent extends SongEvent
   public override function getEventSchema():SongEventSchema
   {
     return new SongEventSchema([
+      {
+        name: "layering",
+        title: "Layering",
+        defaultValue: 0,
+        type: SongEventFieldType.ENUM,
+        keys: ["Under UI (Default)" => 0, "Above Everything" => 1]
+      },
       {
         name: 'lyric',
         title: 'Lyric',

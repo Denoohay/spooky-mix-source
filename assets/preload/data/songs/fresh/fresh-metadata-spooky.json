@@ -11,7 +11,8 @@
       "player": "spooky-playable",
       "girlfriend": "moloch",
       "opponent": "dad",
-      "instrumental": "spooky"
+      "instrumental": "spooky",
+      "altInstrumentals": ["pico", ""]
     },
     "altInstrumentals": [],
     "ratings": { "easy": 2, "normal": 3, "hard": 4 },

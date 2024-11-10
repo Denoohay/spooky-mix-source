@@ -10,11 +10,12 @@
       "player": "spooky-christmas",
       "girlfriend": "moloch-christmas",
       "opponent": "parents-christmas",
-      "instrumental": "spooky"
+      "instrumental": "spooky",
+      "altInstrumentals": [""]
     },
     "difficulties": ["easy", "normal", "hard"],
     "noteStyle": "funkin",
-    "ratings": { "easy": 5, "normal": 6, "hard": 7 },
+    "ratings": { "easy": 2, "normal": 6, "hard": 7 },
     "album": "spookymix1",
     "previewStart": 0,
     "previewEnd": 15000

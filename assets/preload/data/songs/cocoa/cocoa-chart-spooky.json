@@ -18,6 +18,17 @@
 }
     },
     {
+      "t": 0,
+      "e": "FocusCamera",
+      "v": {
+	"duration": 4,
+	"x": 0,
+	"y": 0,
+	"char": 1,
+	"ease": "CLASSIC"
+}
+    },
+    {
       "t": 600,
       "e": "FocusCamera",
       "v": {
@@ -42,6 +53,23 @@
 	"duration": 2,
 	"zoom": 1.05,
 	"mode": "stage"
+}
+    },
+    {
+      "t": 2550,
+      "e": "FadeInOut",
+      "v": {
+	"object": 0,
+	"seconds": 0,
+	"inout": 1
+}
+    },
+    {
+      "t": 3000,
+      "e": "Lyrics",
+      "v": {
+	"layering": 1,
+	"lyric": ""
 }
     },
     {
@@ -715,27 +743,6 @@
 }
     },
     {
-      "t": 105450,
-      "e": "ZoomCamera",
-      "v": {
-	"ease": "smoothStepInOut",
-	"duration": 7,
-	"zoom": 1.05,
-	"mode": "stage"
-}
-    },
-    {
-      "t": 105600,
-      "e": "FocusCamera",
-      "v": {
-	"x": 0,
-	"duration": 4,
-	"y": 0,
-	"char": 0,
-	"ease": "CLASSIC"
-}
-    },
-    {
       "t": 105750,
       "e": "SetCameraBop",
       "v": {
@@ -744,33 +751,37 @@
 }
     },
     {
+      "t": 106800,
+      "e": "FadeInOut",
+      "v": {
+	"seconds": 0.5,
+	"object": 0,
+	"inout": 0
+}
+    },
+    {
       "t": 107850,
-      "e": "ZoomCamera",
+      "e": "songVolume",
       "v": {
-	"ease": "smoothStepInOut",
-	"duration": 3,
-	"zoom": 1.15,
-	"mode": "stage"
+	"volume": 1,
+	"track": 0
 }
     },
     {
-      "t": 109200,
-      "e": "ZoomCamera",
+      "t": 108000,
+      "e": "Lyrics",
       "v": {
-	"ease": "smoothStepInOut",
-	"duration": 3,
-	"zoom": 1.2,
-	"mode": "stage"
+	"lyric": "IT'S THE SPOOKY BEFORE CHRISTMAS!!",
+	"layering": 1
 }
     },
     {
-      "t": 110400,
-      "e": "ZoomCamera",
+      "t": 109800,
+      "e": "FadeInOut",
       "v": {
-	"ease": "smoothStepInOut",
-	"duration": 32,
-	"zoom": 1,
-	"mode": "stage"
+	"seconds": 2,
+	"object": 2,
+	"inout": 1
 }
     }
   ],
@@ -2719,41 +2730,6 @@
         "t": 105600,
         "d": 3,
         "l": 750,
-        "k": "normal",
-        "p": [        ]
-      },
-      {
-        "t": 108000,
-        "d": 1,
-        "l": 0,
-        "k": "normal",
-        "p": [        ]
-      },
-      {
-        "t": 108600,
-        "d": 0,
-        "l": 0,
-        "k": "normal",
-        "p": [        ]
-      },
-      {
-        "t": 108750,
-        "d": 1,
-        "l": 0,
-        "k": "normal",
-        "p": [        ]
-      },
-      {
-        "t": 109200,
-        "d": 2,
-        "l": 300,
-        "k": "normal",
-        "p": [        ]
-      },
-      {
-        "t": 109650,
-        "d": 0,
-        "l": 150,
         "k": "normal",
         "p": [        ]
       }
@@ -6151,62 +6127,6 @@
         "t": 105600,
         "d": 3,
         "l": 750,
-        "k": "normal",
-        "p": [        ]
-      },
-      {
-        "t": 108000,
-        "d": 1,
-        "l": 0,
-        "k": "normal",
-        "p": [        ]
-      },
-      {
-        "t": 108225,
-        "d": 2,
-        "l": 0,
-        "k": "normal",
-        "p": [        ]
-      },
-      {
-        "t": 108525,
-        "d": 3,
-        "l": 0,
-        "k": "normal",
-        "p": [        ]
-      },
-      {
-        "t": 108600,
-        "d": 0,
-        "l": 0,
-        "k": "normal",
-        "p": [        ]
-      },
-      {
-        "t": 108750,
-        "d": 1,
-        "l": 0,
-        "k": "normal",
-        "p": [        ]
-      },
-      {
-        "t": 108825,
-        "d": 3,
-        "l": 150,
-        "k": "normal",
-        "p": [        ]
-      },
-      {
-        "t": 109200,
-        "d": 2,
-        "l": 300,
-        "k": "normal",
-        "p": [        ]
-      },
-      {
-        "t": 109650,
-        "d": 0,
-        "l": 150,
         "k": "normal",
         "p": [        ]
       }
@@ -9744,64 +9664,8 @@
         "l": 750,
         "k": "normal",
         "p": [        ]
-      },
-      {
-        "t": 108000,
-        "d": 1,
-        "l": 0,
-        "k": "normal",
-        "p": [        ]
-      },
-      {
-        "t": 108225,
-        "d": 2,
-        "l": 0,
-        "k": "normal",
-        "p": [        ]
-      },
-      {
-        "t": 108525,
-        "d": 3,
-        "l": 0,
-        "k": "normal",
-        "p": [        ]
-      },
-      {
-        "t": 108600,
-        "d": 0,
-        "l": 0,
-        "k": "normal",
-        "p": [        ]
-      },
-      {
-        "t": 108750,
-        "d": 1,
-        "l": 0,
-        "k": "normal",
-        "p": [        ]
-      },
-      {
-        "t": 108825,
-        "d": 3,
-        "l": 150,
-        "k": "normal",
-        "p": [        ]
-      },
-      {
-        "t": 109200,
-        "d": 2,
-        "l": 300,
-        "k": "normal",
-        "p": [        ]
-      },
-      {
-        "t": 109650,
-        "d": 0,
-        "l": 150,
-        "k": "normal",
-        "p": [        ]
       }
     ]
   },
-  "generatedBy": "Friday Night Funkin' - v0.5.3"
+  "generatedBy": "Friday Night Funkin' - v0.5.1"
 }

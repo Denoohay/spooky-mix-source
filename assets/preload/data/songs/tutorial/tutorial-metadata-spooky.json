@@ -5,7 +5,7 @@
   "charter": "LimeIsHere",
   "modArt": "Denoohay, givemethesalt",
   "playData": {
-    "ratings": { "easy": 8, "normal": 9, "hard": 10 },
+    "ratings": { "easy": 6, "normal": 8, "hard": 10 },
     "stage": "skidsAtticTutorial",
     "characters": {
         "player": "spooky-nogreen",

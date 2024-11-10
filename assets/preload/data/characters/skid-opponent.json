@@ -19,17 +19,17 @@
     {
       "name": "singLEFT",
       "prefix": "skidRight",
-      "offsets": [82, -17]
+      "offsets": [55, -17]
     },
     {
       "name": "singDOWN",
       "prefix": "skidDown",
-      "offsets": [-5, -35]
+      "offsets": [-5, -41]
     },
     {
       "name": "singUP",
       "prefix": "skidUp",
-      "offsets": [-2, 61]
+      "offsets": [-12, 42]
     },
     {
       "name": "singRIGHT",

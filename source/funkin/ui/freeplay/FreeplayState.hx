@@ -1492,7 +1492,7 @@ class FreeplayState extends MusicBeatSubState
     {
       generateSongList(currentFilter, true);
       rememberedSongId = grpCapsules.members[curSelected]?.songData?.songId ?? rememberedSongId;
-      changeSelection(MainMenuState.FreeplayCurSelectedSAVED);
+      changeSelection(MainMenuState.FreeplayCurSelectedSAVED, false);
       changeDiff(0);
       stupidPooper = true;
     }
@@ -1706,7 +1706,7 @@ class FreeplayState extends MusicBeatSubState
         {
           touchY = touch.screenY;
 
-          if (dyTouch != 0) dyTouch < 0 ? changeSelection(1) : changeSelection(-1);
+          if (dyTouch != 0) dyTouch < 0 ? changeSelection(1, true) : changeSelection(-1, true);
         }
       }
       else
@@ -1735,14 +1735,12 @@ class FreeplayState extends MusicBeatSubState
 
           if (controls.UI_UP)
           {
-            changeSelection(-1);
-            FunkinSound.playOnce(Paths.sound('scrollMenu'), 0.4);
+            changeSelection(-1, true);
             MainMenuState.FreeplayCurSelectedSAVED = curSelected;
           }
           else
           {
-            changeSelection(1);
-            FunkinSound.playOnce(Paths.sound('scrollMenu'), 0.4);
+            changeSelection(1, true);
             MainMenuState.FreeplayCurSelectedSAVED = curSelected;
           }
         }
@@ -1755,14 +1753,12 @@ class FreeplayState extends MusicBeatSubState
       {
         if (controls.UI_UP)
         {
-          changeSelection(-1);
-          FunkinSound.playOnce(Paths.sound('scrollMenu'), 0.4);
+          changeSelection(-1, true);
           MainMenuState.FreeplayCurSelectedSAVED = curSelected;
         }
         else
         {
-          changeSelection(1);
-          FunkinSound.playOnce(Paths.sound('scrollMenu'), 0.4);
+          changeSelection(1, true);
           MainMenuState.FreeplayCurSelectedSAVED = curSelected;
         }
       }
@@ -1780,20 +1776,20 @@ class FreeplayState extends MusicBeatSubState
     if (FlxG.mouse.wheel != 0)
     {
       if (dj != null) dj.resetAFKTimer();
-      changeSelection(-Math.round(FlxG.mouse.wheel));
+      changeSelection(-Math.round(FlxG.mouse.wheel), true);
       MainMenuState.FreeplayCurSelectedSAVED = curSelected;
     }
     #else
     if (FlxG.mouse.wheel < 0)
     {
       if (dj != null) dj.resetAFKTimer();
-      changeSelection(-Math.round(FlxG.mouse.wheel / 8));
+      changeSelection(-Math.round(FlxG.mouse.wheel / 8), true);
       MainMenuState.FreeplayCurSelectedSAVED = curSelected;
     }
     else if (FlxG.mouse.wheel > 0)
     {
       if (dj != null) dj.resetAFKTimer();
-      changeSelection(-Math.round(FlxG.mouse.wheel / 8));
+      changeSelection(-Math.round(FlxG.mouse.wheel / 8), true);
       MainMenuState.FreeplayCurSelectedSAVED = curSelected;
     }
     #end
@@ -2064,7 +2060,7 @@ class FreeplayState extends MusicBeatSubState
 
     // Seeing if I can do an animation...
     curSelected = grpCapsules.members.indexOf(targetSong);
-    changeSelection(0); // Trigger an update.
+    changeSelection(0, false); // Trigger an update.
 
     MainMenuState.FreeplayCurSelectedSAVED = curSelected;
 
@@ -2238,11 +2234,13 @@ class FreeplayState extends MusicBeatSubState
     }
   }
 
-  function changeSelection(change:Int = 0):Void
+  function changeSelection(change:Int = 0, playSound:Bool = false):Void
   {
     var prevSelected:Int = curSelected;
 
     curSelected += change;
+
+    if (!prepForNewRank && curSelected != prevSelected && playSound == true) FunkinSound.playOnce(Paths.sound('scrollMenu'), 0.4);
 
     if (curSelected < 0) curSelected = grpCapsules.countLiving() - 1;
     if (curSelected >= grpCapsules.countLiving()) curSelected = 0;
@@ -2280,8 +2278,8 @@ class FreeplayState extends MusicBeatSubState
 
       if (index < curSelected) capsule.targetPos.y -= 100; // another 100 for good measure
     }
-
-    if (grpCapsules.countLiving() > 0 && !prepForNewRank)
+    
+    if ((grpCapsules.countLiving() > 0 && !prepForNewRank) || !busy)
     {
       playCurSongPreview(daSongCapsule);
       grpCapsules.members[curSelected].selected = true;

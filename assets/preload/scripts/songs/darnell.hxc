@@ -302,4 +302,19 @@ class DarnellSong extends Song {
 			cutsceneConductor.update(cutsceneMusic.time);
 		}
 	}
+    
+  public override function listAltInstrumentalIds(difficultyId:String, variationId:String):Array<String>
+  {
+		var targetDifficulty:Null<SongDifficulty> = getDifficulty(difficultyId, variationId);
+		if (targetDifficulty == null) return [];
+
+		if (Save.instance.hasBeatenSong(this.id, ['easy-spooky', 'normal-spooky', 'hard-spooky']) == true)
+		{
+			return targetDifficulty.characters.altInstrumentals;
+		}
+		else
+		{
+			return [];
+		}
+  }
 }

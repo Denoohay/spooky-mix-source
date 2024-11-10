@@ -14,8 +14,6 @@
 		<button allowFocus="false" styleName="playbarButton" tooltip="Skip to End" id="playbarEnd" text=">|" />
 	</hbox>
 	<hbox horizontalAlign="right">
-		<label id="currentTimeLabel" verticalAlign="center" text="Time: 0" styleName="playbarStatus" />
-		<rule direction="vertical" height="80%" />
 		<label id="playbarDifficulty" verticalAlign="center" text="NORMAL" styleName="playbarStatus" tooltip="Left Click/Ctrl+Left Arrow to Decrease Difficulty\nRight Click/Ctrl+Right Arrow to Increase Difficulty\nCtrl+Click to open Difficulty Window" />
 		<rule direction="vertical" height="80%" />
 		<label id="playbarBPM" verticalAlign="center" text="BPM: 120" styleName="playbarStatus" tooltip="Left Click to Increase BPM\nRight Click to Decrease BPM\nCtrl+Click to open Metadata Window" />

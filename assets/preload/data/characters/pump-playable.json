@@ -59,7 +59,7 @@
     {
       "name": "cheer",
       "prefix": "pumpCheer",
-      "offsets": [40, -38]
+      "offsets": [64, -4]
     },
     {
       "name": "firstDeath",

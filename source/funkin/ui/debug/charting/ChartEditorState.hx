@@ -1940,11 +1940,6 @@ class ChartEditorState extends UIState // UIState derives from MusicBeatState
   var currentStepLabel:Label;
 
   /**
-   * Shows the current time, I only made this so I could get the positions for hard coded events lol.
-   */
-  var currentTimeLabel:Label;
-
-  /**
    * The label by the playbar telling the note snap.
    */
   var playbarNoteSnap:Label;
@@ -5185,7 +5180,6 @@ class ChartEditorState extends UIState // UIState derives from MusicBeatState
     playbarBPM.text = 'BPM: ${(Conductor.instance.bpm ?? 0.0)}';
 
     currentStepLabel.text = "Step: " + Conductor.instance.currentStep;
-    currentTimeLabel.text = "Time: " + Conductor.instance.currentMeasure;
   }
 
   function handlePlayhead():Void

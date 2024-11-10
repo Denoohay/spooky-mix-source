@@ -56,6 +56,24 @@ class MallEvilSpookyStage extends Stage
 
 	}
 
+	override function onGameOver(event:ScriptEvent):Void {
+		super.onGameOver(event);
+
+		colorShaderBf.hue = 0;
+		colorShaderBf.saturation = 0;
+		colorShaderBf.contrast = 0;
+		colorShaderBf.brightness = 0;
+	}
+
+	override function onSongRetry(event:ScriptEvent):Void {
+		super.onSongRetry(event);
+		
+		colorShaderBf.brightness = -48;
+		colorShaderBf.contrast = 28;
+		colorShaderBf.saturation = -18;
+		colorShaderBf.hue = -29;
+	}
+
 	function onBeatHit(event:SongTimeScriptEvent):Void
 	{
 		super.onBeatHit(event);

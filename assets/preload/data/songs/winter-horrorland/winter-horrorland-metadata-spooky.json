@@ -10,7 +10,8 @@
       "player": "spooky-christmas",
       "girlfriend": "none",
       "opponent": "monster-christmas",
-      "instrumental": "spooky"
+      "instrumental": "spooky",
+      "altInstrumentals": [""]
     },
     "stage": "mallEvilSpooky",
     "noteStyle": "funkin",

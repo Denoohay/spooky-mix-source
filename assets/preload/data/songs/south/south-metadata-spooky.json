@@ -10,9 +10,9 @@
       "player": "pump-playable-dark",
       "girlfriend": "moloch-dark",
       "opponent": "skid-opponent-dark",
-      "instrumental": "spooky"
+      "instrumental": "spooky",
+      "altInstrumentals": ["pico", ""]
     },
-    "altInstrumentals": [],
     "ratings": { "easy": 5, "normal": 6, "hard": 7 },
     "difficulties": ["easy", "normal", "hard"],
     "noteStyle": "funkin",

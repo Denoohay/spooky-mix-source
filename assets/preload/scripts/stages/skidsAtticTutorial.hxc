@@ -56,6 +56,24 @@ class SkidsAtticTutorialStage extends Stage
 
 	}
 
+	override function onGameOver(event:ScriptEvent):Void {
+		super.onGameOver(event);
+
+		colorShaderBf.hue = 0;
+		colorShaderBf.saturation = 0;
+		colorShaderBf.contrast = 0;
+		colorShaderBf.brightness = 0;
+	}
+
+	override function onSongRetry(event:ScriptEvent):Void {
+		super.onSongRetry(event);
+		
+		colorShaderBf.brightness = -59;
+		colorShaderBf.contrast = 1;
+		colorShaderBf.saturation = -39;
+		colorShaderBf.hue = -41;
+	}
+
 	function onBeatHit(event:SongTimeScriptEvent):Void
 	{
 		super.onBeatHit(event);

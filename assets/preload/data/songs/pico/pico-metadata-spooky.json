@@ -11,10 +11,11 @@
         "player": "spooky-playable",
         "girlfriend": "moloch",
         "opponent": "pico",
-        "instrumental": "spooky"
+        "instrumental": "spooky",
+        "altInstrumentals": ["pico", ""]
     },
     "difficulties": ["easy", "normal", "hard"],
-    "ratings": { "easy": 8, "normal": 9, "hard": 10 },
+    "ratings": { "easy": 3, "normal": 6, "hard": 8 },
     "noteStyle": "funkin"
   },
   "songName": "Pico (Spooky Mix)",

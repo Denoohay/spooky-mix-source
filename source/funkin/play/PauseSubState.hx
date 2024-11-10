@@ -1,5 +1,6 @@
 package funkin.play;
 
+import funkin.save.Save;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -295,7 +296,19 @@ class PauseSubState extends MusicBeatSubState
     metadataSong.setFormat(Paths.font('vcr.ttf'), 32, FlxColor.WHITE, FlxTextAlign.RIGHT);
     if (PlayState.instance?.currentChart != null)
     {
-      metadataSong.text = '${PlayState.instance.currentChart.songName}';
+      //this is all stupid coding but it works for showing ??? when you first play monster's songs
+      if (Save.instance.hasBeatenSong('monster', ['easy-spooky', 'normal-spooky', 'hard-spooky']) == false && PlayState.instance.currentChart.songName == 'Monster (Spooky Mix)' && (PlayState.instance.coverscreen.alpha != 0 && PlayState.instance.songScore == 0))
+      {
+        metadataSong.text = '???';
+      }
+      else if (Save.instance.hasBeatenSong('winter-horrorland', ['easy-spooky', 'normal-spooky', 'hard-spooky']) == false && PlayState.instance.currentChart.songName == 'Winter Horrorland (Spooky Mix)' && (PlayState.instance.coverscreen.alpha != 0 && PlayState.instance.songScore == 0))
+      {
+        metadataSong.text = '???';
+      }
+      else
+      {
+        metadataSong.text = '${PlayState.instance.currentChart.songName}';
+      }
     }
     metadataSong.scrollFactor.set(0, 0);
     metadata.add(metadataSong);
@@ -588,6 +601,8 @@ class PauseSubState extends MusicBeatSubState
    */
   static function resume(state:PauseSubState):Void
   {
+    if (PlayState.instance.fadeInTween != null) PlayState.instance.fadeInTween.active = true;
+
     // Resume a paused video if it exists.
     VideoCutscene.resumeVideo();
 

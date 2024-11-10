@@ -10,9 +10,10 @@
       "player": "spooky-playable",
       "girlfriend": "moloch",
       "opponent": "darnell",
-      "instrumental": "spooky"
+      "instrumental": "spooky",
+      "altInstrumentals": [""]
     },
-    "ratings": { "easy": 12, "normal": 13, "hard": 14 },
+    "ratings": { "easy": 9, "normal": 11, "hard": 14 },
     "difficulties": ["easy", "normal", "hard"],
     "noteStyle": "funkin",
     "album": "spookymix1",

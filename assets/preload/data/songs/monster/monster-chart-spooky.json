@@ -8,9 +8,20 @@
   "events": [
     {
       "t": 0,
-      "e": "DarkenScreen",
+      "e": "FadeInOut",
       "v": {
-	"alpha": 1
+	"inout": 0,
+	"seconds": 0,
+	"object": 0
+}
+    },
+    {
+      "t": 0,
+      "e": "FadeInOut",
+      "v": {
+	"inout": 1,
+	"seconds": 0,
+	"object": 1
 }
     },
     {
@@ -53,8 +64,9 @@
     },
     {
       "t": 10105.2631578947,
-      "e": "FadeIn",
+      "e": "FadeInOut",
       "v": {
+	"inout": 1,
 	"seconds": 7,
 	"object": 0
 }
@@ -93,17 +105,20 @@
     },
     {
       "t": 19105.2631578947,
-      "e": "FadeIn",
+      "e": "FadeInOut",
       "v": {
+	"inout": 0,
 	"object": 1,
 	"seconds": 1
 }
     },
     {
       "t": 19263.1578947368,
-      "e": "DarkenScreen",
+      "e": "FadeInOut",
       "v": {
-	"alpha": 0
+	"inout": 1,
+	"object": 0,
+	"seconds": 0
 }
     },
     {
@@ -1549,9 +1564,11 @@
     },
     {
       "t": 193397.05,
-      "e": "DarkenScreen",
+      "e": "FadeInOut",
       "v": {
-	"alpha": 1
+	"inout": 0,
+	"seconds": 0,
+	"object": 0
 }
     },
     {

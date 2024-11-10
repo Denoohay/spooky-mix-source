@@ -19,47 +19,47 @@
     {
       "name": "singLEFT",
       "prefix": "skidLeft",
-      "offsets": [33, -1]
+      "offsets": [31, 1]
     },
     {
       "name": "singLEFTmiss",
       "prefix": "skidMISSleft",
-      "offsets": [27, 19]
+      "offsets": [31, 20]
     },
     {
       "name": "singDOWN",
       "prefix": "skidDown",
-      "offsets": [23, -31]
+      "offsets": [23, -40]
     },
     {
       "name": "singDOWNmiss",
       "prefix": "skidMISSdown",
-      "offsets": [163, -40]
+      "offsets": [163, -56]
     },
     {
       "name": "singUP",
       "prefix": "skidUp",
-      "offsets": [17, 63]
+      "offsets": [0, 42]
     },
     {
       "name": "singUPmiss",
       "prefix": "skidMISSup",
-      "offsets": [21, 58]
+      "offsets": [17, 49]
     },
     {
       "name": "singRIGHT",
       "prefix": "skidRight",
-      "offsets": [-66, -18]
+      "offsets": [-67, -16]
     },
     {
       "name": "singRIGHTmiss",
       "prefix": "skidMISSright",
-      "offsets": [-68, 6]
+      "offsets": [-67, 4]
     },
     {
       "name": "cheer",
       "prefix": "skidCheer",
-      "offsets": [-55, -18]
+      "offsets": [-56, -19]
     },
     {
       "name": "firstDeath",

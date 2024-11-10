@@ -48,7 +48,7 @@
       "name": "singRIGHT",
       "prefix": "moloch right",
       "assetPath": "characters/moloch/poses",
-      "offsets": [0, 2]
+      "offsets": [0, -10]
     },
     {
       "name": "singUP",

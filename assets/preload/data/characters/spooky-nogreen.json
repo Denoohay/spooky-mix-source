@@ -64,6 +64,7 @@
       "name": "singRIGHTmiss-hold",
       "prefix": "note sing rightMISS",
       "frameIndices": [16, 17, 18, 19, 20, 21],
+      "looped": true,
       "offsets": [-10, -15]
     },
     {

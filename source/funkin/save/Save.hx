@@ -20,12 +20,8 @@ class Save
   public static final SAVE_DATA_VERSION:thx.semver.Version = "2.0.4";
   public static final SAVE_DATA_VERSION_RULE:thx.semver.VersionRule = "2.0.x";
 
-  // We load this version's saves from a new save path, to maintain SOME level of backwards compatibility.
   static final SAVE_PATH:String = 'FNFSpookyMix';
   static final SAVE_NAME:String = 'Funkin';
-
-  static final SAVE_PATH_LEGACY:String = 'ninjamuffin99';
-  static final SAVE_NAME_LEGACY:String = 'funkin';
 
   public static var instance(get, never):Save;
   static var _instance:Null<Save> = null;
@@ -891,22 +887,9 @@ class Save
 
     if (FlxG.save.isEmpty())
     {
-      trace('[SAVE] Save data is empty, checking for legacy save data...');
-      var legacySaveData = fetchLegacySaveData();
-      if (legacySaveData != null)
-      {
-        trace('[SAVE] Found legacy save data, converting...');
-        var gameSave = SaveDataMigrator.migrateFromLegacy(legacySaveData);
-        FlxG.save.mergeData(gameSave.data, true);
-        return gameSave;
-      }
-      else
-      {
-        trace('[SAVE] No legacy save data found.');
-        var gameSave = new Save();
-        FlxG.save.mergeData(gameSave.data, true);
-        return gameSave;
-      }
+       var gameSave = new Save();
+       FlxG.save.mergeData(gameSave.data, true);
+       return gameSave;
     }
     else
     {
@@ -998,24 +981,6 @@ class Save
       }
     }
     return -1;
-  }
-
-  static function fetchLegacySaveData():Null<RawSaveData_v1_0_0>
-  {
-    trace("[SAVE] Checking for legacy save data...");
-    var legacySave:FlxSave = new FlxSave();
-    legacySave.bind(SAVE_NAME_LEGACY, SAVE_PATH_LEGACY);
-    if (legacySave.isEmpty())
-    {
-      trace("[SAVE] No legacy save data found.");
-      return null;
-    }
-    else
-    {
-      trace("[SAVE] Legacy save data found.");
-      trace(legacySave.data);
-      return cast legacySave.data;
-    }
   }
 
   /**

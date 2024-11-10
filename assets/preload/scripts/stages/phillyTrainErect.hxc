@@ -389,6 +389,24 @@ class PhillyTrainErectStage extends Stage
 		}
 	}
 
+	override function onGameOver(event:ScriptEvent):Void {
+		super.onGameOver(event);
+
+		colorShader.hue = 0;
+		colorShader.saturation = 0;
+		colorShader.contrast = 0;
+		colorShader.brightness = 0;
+	}
+
+	override function onSongRetry(event:ScriptEvent):Void {
+		super.onSongRetry(event);
+		
+		colorShader.hue = -26;
+		colorShader.saturation = -16;
+		colorShader.contrast = 0;
+		colorShader.brightness = -5;
+	}
+
 	function onBeatHit(event:SongTimeScriptEvent):Void
 	{
 		super.onBeatHit(event);

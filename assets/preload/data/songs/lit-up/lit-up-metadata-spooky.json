@@ -10,11 +10,12 @@
       "player": "spooky-playable",
       "girlfriend": "moloch",
       "opponent": "darnell",
-      "instrumental": "spooky"
+      "instrumental": "spooky",
+      "altInstrumentals": [""]
     },
     "stage": "phillyStreetsSpooky",
     "noteStyle": "funkin",
-    "ratings": { "easy": 9, "normal": 10, "hard": 11 },
+    "ratings": { "easy": 8, "normal": 9, "hard": 11 },
     "album": "spookymix1",
     "previewStart": 0,
     "previewEnd": 15000
