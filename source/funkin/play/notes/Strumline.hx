@@ -13,6 +13,7 @@ import funkin.play.notes.NoteSplash;
 import funkin.play.notes.NoteSprite;
 import funkin.play.notes.SustainTrail;
 import funkin.data.song.SongData.SongNoteData;
+import funkin.ui.debug.latency.LatencyState;
 import funkin.ui.options.PreferencesMenu;
 import funkin.util.SortUtil;
 import funkin.modding.events.ScriptEvent;
@@ -688,7 +689,11 @@ class Strumline extends FlxSpriteGroup
 
   public function playPress(direction:NoteDirection):Void
   {
-    if (PlayState.instance.camHUD.alpha == 1)
+    if (LatencyState.inLatencyState == true)
+    {
+        getByDirection(direction).playPress();
+    }
+    else if (PlayState.instance.camHUD.alpha == 1)
     {
         getByDirection(direction).playPress();
     }

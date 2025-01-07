@@ -56,6 +56,7 @@ import funkin.play.scoring.Scoring;
 import funkin.play.song.Song;
 import funkin.play.stage.Stage;
 import funkin.save.Save;
+import funkin.ui.debug.latency.LatencyState;
 import funkin.ui.debug.charting.ChartEditorState;
 import funkin.ui.debug.stage.StageOffsetSubState;
 import funkin.ui.mainmenu.MainMenuState;
@@ -250,8 +251,6 @@ class PlayState extends MusicBeatSubState
    * An FlxTween that changes the additive speed to the desired amount.
    */
   public var scrollSpeedTweens:Array<FlxTween> = [];
-
-  public var fadeInTween:FlxTween;
 
   public var theMidPointX:Float = 0;
   public var theMidPointY:Float = 0;
@@ -457,14 +456,6 @@ class PlayState extends MusicBeatSubState
   var discordRPCAlbum:String = '';
   var discordRPCIcon:String = '';
   #end
-  
-  //uhhh black and white rectangles that cover the whole screen
-  public var coverscreen:FlxSprite;
-  public var coverscreenW:FlxSprite;
-
-  //Subtitle text lol
-  public var subtitleText:FlxText;
-  public var subtitleTextOVER:FlxText;
 
   /**
    * RENDER OBJECTS
@@ -510,11 +501,6 @@ class PlayState extends MusicBeatSubState
    * The camera which contains, and controls visibility of, the user interface elements.
    */
   public var camHUD:FlxCamera;
-
-  /**
-   * The camera which contains, and controls visibility of, the user interface elements.
-   */
-  public var camCover:FlxCamera;
 
   /**
    * The camera which contains, and controls visibility of, the stage and characters.
@@ -653,6 +639,8 @@ class PlayState extends MusicBeatSubState
    */
   public override function create():Void
   {
+    LatencyState.inLatencyState = false;
+
     if (instance != null)
     {
       // TODO: Do something in this case? IDK.
@@ -778,39 +766,6 @@ class PlayState extends MusicBeatSubState
     FlxG.console.registerObject('playState', this);
     #end
 
-    coverscreen = new FlxSprite(-100, -100).makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.BLACK);
-    coverscreen.zIndex = 1100;
-    if ((currentSong?.id ?? '').toLowerCase() == 'monster' || (currentSong?.id ?? '').toLowerCase() == 'winter-horrorland' )
-    {
-	    coverscreen.alpha = 1;
-    }
-    else
-    {
-	    coverscreen.alpha = 0;
-    }
-    coverscreen.cameras = [camCover];
-	add(coverscreen);
-
-	coverscreenW = new FlxSprite(-100, -100).makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.WHITE);
-    coverscreenW.zIndex = 1100;
-	coverscreenW.alpha = 0;
-    coverscreenW.cameras = [camCover];
-	add(coverscreenW);
-
-	subtitleTextOVER = new FlxText(0, 540, FlxG.width, "");
-	subtitleTextOVER.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-	subtitleTextOVER.borderSize = 1.25;
-    subtitleTextOVER.zIndex = 3000;
-    subtitleTextOVER.cameras = [camCover];
-	add(subtitleTextOVER);
-
-	subtitleText = new FlxText(0, 540, FlxG.width, "");
-	subtitleText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-	subtitleText.borderSize = 1.25;
-    subtitleText.zIndex = 850;
-    subtitleText.cameras = [camHUD];
-	add(subtitleText);
-
     initialized = true;
 
     // This step ensures z-indexes are applied properly,
@@ -897,8 +852,6 @@ class PlayState extends MusicBeatSubState
     // Handle restarting the song when needed (player death or pressing Retry)
     if (needsReset)
     {
-      if (fadeInTween != null) fadeInTween.active = true;
-
       if (!assertChartExists()) return;
 
       prevScrollTargets = [];
@@ -1047,8 +1000,6 @@ class PlayState extends MusicBeatSubState
             boyfriendPos = currentStage.getBoyfriend().getScreenPosition();
           }
 
-          if (fadeInTween != null) fadeInTween.active = false;
-
           var pauseSubState:FlxSubState = new PauseSubState({mode: isChartingMode ? Charting : Standard});
 
           FlxTransitionableState.skipNextTransIn = true;
@@ -1099,7 +1050,7 @@ class PlayState extends MusicBeatSubState
     if (!isInCutscene && !disableKeys)
     {
       // RESET = Quick Game Over Screen
-      if (controls.RESET && coverscreen.alpha == 0 && camHUD.alpha == 1)
+      if (controls.RESET && camHUD.alpha == 1)
       {
         health = Constants.HEALTH_MIN;
         trace('RESET = True');
@@ -1506,27 +1457,6 @@ class PlayState extends MusicBeatSubState
     //PUT THE HARDCODED IN MID-SONG EVENTS Events events DOWN HERE
 	
     /*
-	if ((currentSong?.id ?? '').toLowerCase() == 'test')
-	{
-		switch (Conductor.instance.currentStep)
-		{
-            case 0:
-                coverscreenW.alpha = 1;
-                coverscreen.alpha = 1;
-            case 12:
-				FlxTween.tween(coverscreenW, {alpha: 0}, 1, {ease: FlxEase.quadInOut});
-            case 20:
-				FlxTween.tween(coverscreen, {alpha: 0}, 1, {ease: FlxEase.quadInOut});
-            case 50:
-                subtitleText.text = "poop poop sigma test";
-            case 60:
-                subtitleText.text = "test 2 lol";
-            case 65:
-                subtitleText.text = "";
-        }
-            
-    }
-
 	if ((currentSong?.id ?? '').toLowerCase() == 'bopeebo')
 	{
 		switch (Conductor.instance.currentStep)
@@ -1568,11 +1498,6 @@ class PlayState extends MusicBeatSubState
             case 0:
                 FreeplayState.switchToMonsterSong = '';
                 Save.instance.addMonsterTranitionsSeen('monster');
-                coverscreen.alpha = 1;
-                fadeInTween.cancel();
-                fadeInTween = FlxTween.tween(coverscreen, {alpha: 1}, 0);
-                fadeInTween.cancel();
-                coverscreen.alpha = 1;
                 camHUD.alpha = 0;
             case 2:
                 FreeplayState.switchToMonsterSong = '';
@@ -1591,8 +1516,6 @@ class PlayState extends MusicBeatSubState
                 camHUD.alpha = 1;
             case 156:
                 camHUD.alpha = 1;
-            case 196:
-	            coverscreen.alpha = 0;
         }
             
     }
@@ -1618,10 +1541,6 @@ class PlayState extends MusicBeatSubState
             case 0:
                 FreeplayState.switchToMonsterSong = '';
                 Save.instance.addMonsterTranitionsSeen('winter-horrorland');
-                fadeInTween.cancel();
-                fadeInTween = FlxTween.tween(coverscreen, {alpha: 1}, 0);
-                fadeInTween.cancel();
-	            coverscreen.alpha = 1;
                 camHUD.alpha = 0;
             case 1:
                 FreeplayState.switchToMonsterSong = '';
@@ -1632,11 +1551,8 @@ class PlayState extends MusicBeatSubState
             case 3:
                 FreeplayState.switchToMonsterSong = '';
                 camHUD.alpha = 0;
-            case 160:
-	            coverscreen.alpha = 0;
             case 227:
                 camHUD.alpha = 1;
-	            coverscreen.alpha = 0;
         }
             
     }
@@ -1777,14 +1693,11 @@ class PlayState extends MusicBeatSubState
     camGame.bgColor = BACKGROUND_COLOR; // Show a pink background behind the stage.
     camHUD = new FlxCamera();
     camHUD.bgColor.alpha = 0; // Show the game scene behind the camera.
-    camCover = new FlxCamera();
-    camCover.bgColor.alpha = 0; // Show the game scene behind the camera.
     camCutscene = new FlxCamera();
     camCutscene.bgColor.alpha = 0; // Show the game scene behind the camera.
 
     FlxG.cameras.reset(camGame);
     FlxG.cameras.add(camHUD, false);
-    FlxG.cameras.add(camCover, false);
     FlxG.cameras.add(camCutscene, false);
 
     // Configure camera follow point.
@@ -2800,7 +2713,7 @@ class PlayState extends MusicBeatSubState
      */
   function onNoteMiss(note:NoteSprite, playSound:Bool = false, healthChange:Float):Void
   {
-    if (coverscreen.alpha == 0 && camHUD.alpha == 1)
+    if (camHUD.alpha == 1)
     {
         // If we are here, we already CALLED the onNoteMiss script hook!
 
@@ -2869,7 +2782,7 @@ class PlayState extends MusicBeatSubState
      */
   function ghostNoteMiss(direction:NoteDirection, hasPossibleNotes:Bool = true):Void
   {
-    if (coverscreen.alpha == 0 && camHUD.alpha == 1)
+    if (camHUD.alpha == 1)
     {
         var event:GhostMissNoteScriptEvent = new GhostMissNoteScriptEvent(direction, // Direction missed in.
           hasPossibleNotes, // Whether there was a note you could have hit.
@@ -2988,7 +2901,7 @@ class PlayState extends MusicBeatSubState
     #end
 
     // 9: Toggle the old icon.
-    //if (FlxG.keys.justPressed.NINE) iconP1.toggleOldIcon();
+    if (FlxG.keys.justPressed.NINE) iconP1.toggleOldIcon();
 
     #if FEATURE_DEBUG_FUNCTIONS
     // PAGEUP: Skip forward two sections.
@@ -3050,7 +2963,7 @@ class PlayState extends MusicBeatSubState
     }
     if (combo == null) combo = Highscore.tallies.combo;
 
-    if (!isPracticeMode && coverscreen.alpha == 0 && camHUD.alpha == 1)
+    if (!isPracticeMode && camHUD.alpha == 1)
     {
       // TODO: Input splitter uses old input system, make it pull from the precise input queue directly.
       var pressArray:Array<Bool> = [

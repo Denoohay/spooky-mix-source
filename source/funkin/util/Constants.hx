@@ -238,12 +238,6 @@ class Constants
    */
   public static final DEFAULT_BOP_INTENSITY:Float = 1.015;
 
-  public static final DEFAULT_COVERSCREEN_ALPHA:Float = 0;
-
-  public static final DEFAULT_LYRIC:String = "";
-
-  public static final DEFAULT_FADEIN_SECONDS:Float = 0;
-
   /**
    * The default rate for camera zooms (in beats per zoom).
    */

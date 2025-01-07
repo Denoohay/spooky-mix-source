@@ -1,3 +1,4 @@
+
 package funkin.ui.debug.latency;
 
 import funkin.data.notestyle.NoteStyleRegistry;
@@ -46,6 +47,8 @@ class LatencyState extends MusicBeatSubState
 
   var stateCamera:FlxCamera;
 
+  public static var inLatencyState:Bool = true;
+
   /**
    * A local conductor instance for this testing class, in-case we are in a PlayState
    * because I'm too lazy to set the old variables for conductor stuff !
@@ -60,6 +63,8 @@ class LatencyState extends MusicBeatSubState
   override function create()
   {
     super.create();
+
+    inLatencyState = true;
 
     prevPersistentDraw = FlxG.state.persistentDraw;
     prevPersistentUpdate = FlxG.state.persistentUpdate;
@@ -199,7 +204,11 @@ class LatencyState extends MusicBeatSubState
     PreciseInputManager.instance.onInputPressed.remove(preciseInputPressed);
     PreciseInputManager.instance.onInputReleased.remove(preciseInputReleased);
 
-    FlxG.sound.music.volume = previousVolume;
+    if (FlxG.sound.music != null)
+    {
+      FlxG.sound.music.volume = previousVolume;
+    }
+
     swagSong.stop();
     FlxG.sound.list.remove(swagSong);
 
@@ -319,6 +328,7 @@ class LatencyState extends MusicBeatSubState
     {
       // close();
       cleanup();
+      inLatencyState = false;
       FlxG.switchState(() -> new MainMenuState());
     }
 

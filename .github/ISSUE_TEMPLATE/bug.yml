@@ -10,15 +10,26 @@ body:
       options:
         - label: I have properly named my issue
         - label: I have checked the Issues/Discussions pages to see if my issue has already been reported
-
+        
   - type: dropdown
     attributes:
       label: Platform
-      description: Which platform are you playing on?
+      description: Are you playing on the Executable Build or V-Slice Mod Pack?
       options:
-        - Gamebanana (Downloadable Build) - Windows
-        - Gamejolt (Downloadable Build) - Windows
-        - Google Drive (Downloadable Build) - Windows
+        - Executable Build
+        - V-Slice Mod Pack
+    validations:
+      required: true
+
+  - type: dropdown
+    attributes:
+      label: Download Source
+      description: Where did you download the mod from?
+      options:
+        - Gamebanana
+        - Game Jolt
+        - Google Drive
+        - Github Release Assets
         - Compiled from GitHub Source Code
     validations:
       required: true

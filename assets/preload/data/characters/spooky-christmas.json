@@ -78,5 +78,8 @@
       "assetPath": "characters/SpookyKids_Christmas_DEATH",
       "offsets": [-67, -305]
     }
-  ]
+  ],
+  "death": {
+    "cameraOffsets": [65, 100]
+  }
 }

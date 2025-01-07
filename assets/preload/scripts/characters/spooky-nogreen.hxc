@@ -68,10 +68,4 @@ class SpookyNoGreenCharacter extends MultiSparrowCharacter
 
 		this.visible = true;
 	}
-	
-	public override function getDeathCameraOffsets():Array<Float> {
-		var result = super.getDeathCameraOffsets();
-
-		return [result[0] - 40, result[1] + 120];
-	}
 }

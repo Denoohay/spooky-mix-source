@@ -401,7 +401,7 @@ class TitleState extends MusicBeatState
             case 4:
               deleteCoolText();
             case 5:
-              createCoolText(['(Not) in association', 'with']);
+              createCoolText(['in association', 'with']);
             case 7:
               addMoreText('newgrounds');
               if (ngSpr != null) ngSpr.visible = true;

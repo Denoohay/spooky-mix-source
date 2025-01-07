@@ -68,10 +68,4 @@ class SpookyChristmasCharacter extends MultiSparrowCharacter
 
 		this.visible = true;
 	}
-	
-	public override function getDeathCameraOffsets():Array<Float> {
-		var result = super.getDeathCameraOffsets();
-
-		return [result[0] + 65, result[1] + 100];
-	}
 }

@@ -248,12 +248,6 @@ class Countdown
     var offsets = noteStyle.getCountdownSpriteOffsets(index);
     countdownSprite.x += offsets[0];
     countdownSprite.y += offsets[1];
-
-
-    if (PlayState.instance.coverscreenW.alpha != 0)
-        countdownSprite.alpha = 1 - PlayState.instance.coverscreenW.alpha;
-    else if (PlayState.instance.coverscreen.alpha != 0)
-        countdownSprite.alpha = 1 - PlayState.instance.coverscreen.alpha;
   }
 
   /**

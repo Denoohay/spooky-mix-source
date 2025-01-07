@@ -75,9 +75,6 @@ class PixelatedIcon extends FlxFilteredSprite
     {
       case 'parents-christmas':
         this.origin.x = 140;
-      case 'moloch':
-        this.origin.x = 110;
-        this.origin.y = this.origin.y + 10;
       default:
         this.origin.x = 100;
     }
@@ -86,17 +83,9 @@ class PixelatedIcon extends FlxFilteredSprite
     {
       this.active = true;
 
-      switch (char)
-      {   
-      case 'moloch':
-          this.animation.addByPrefix('idle', 'idle0', 20, true);
-          this.animation.addByPrefix('confirm', 'confirm0', 20, false);
-          this.animation.addByPrefix('confirm-hold', 'confirm-hold0', 20, true);
-      default:
-          this.animation.addByPrefix('idle', 'idle0', 10, true);
-          this.animation.addByPrefix('confirm', 'confirm0', 10, false);
-          this.animation.addByPrefix('confirm-hold', 'confirm-hold0', 10, true);
-      }
+      this.animation.addByPrefix('idle', 'idle0', 10, true);
+      this.animation.addByPrefix('confirm', 'confirm0', 10, false);
+      this.animation.addByPrefix('confirm-hold', 'confirm-hold0', 10, true);
 
       this.animation.finishCallback = function(name:String):Void {
         trace('Finish pixel animation: ${name}');

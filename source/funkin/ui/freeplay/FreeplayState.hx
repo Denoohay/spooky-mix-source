@@ -799,7 +799,6 @@ class FreeplayState extends MusicBeatSubState
     {
         FlxG.sound.music.volume = 0;
         FlxG.sound.music.stop();
-	    //coverscreen.alpha = 1;
         funnyCam.alpha = 0;
         rankCamera.alpha = 0;
         busy = true;
@@ -2339,20 +2338,12 @@ class FreeplayState extends MusicBeatSubState
 
       if (previewSongId == 'tutorial')
       {
-          FunkinSound.playMusic(previewSongId,
+          FunkinSound.playMusic('tutorialInstPreview',
             {
               startingVolume: 0.0,
               overrideExisting: true,
               restartTrack: false,
-              mapTimeChanges: false, // The music metadata is not alongside the audio file so this won't work.
-              pathsFunction: INST,
-              suffix: instSuffix,
-              partialParams:
-                {
-                  loadPartial: true,
-                  start: 0,
-                  end: 0.065
-                },
+              mapTimeChanges: false,
               onLoad: function() {
                 if (switchToMonsterSong != '')
                 {

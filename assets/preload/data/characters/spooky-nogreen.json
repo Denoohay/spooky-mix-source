@@ -96,5 +96,8 @@
       "assetPath": "characters/SpookyKids_Playable_DEATH",
       "offsets": [338, -105]
     }
-  ]
+  ],
+  "death": {
+    "cameraOffsets": [-40, 120]
+  }
 }

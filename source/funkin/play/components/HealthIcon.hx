@@ -151,16 +151,32 @@ class HealthIcon extends FunkinSprite
    */
   public function toggleOldIcon():Void
   {
-    if (characterId == 'bf-old')
+    if (isPixel == false)
     {
-      isPixel = PlayState.instance.currentStage.getBoyfriend().isPixel;
-      PlayState.instance.currentStage.getBoyfriend().initHealthIcon(false);
-    }
-    else
-    {
-      characterId = 'bf-old';
-      isPixel = false;
-      loadCharacter(characterId);
+        if (characterId.startsWith('spooky-flipped'))
+        {
+            if (characterId == 'spooky-flipped-old')
+            {
+              PlayState.instance.currentStage.getBoyfriend().initHealthIcon(false);
+            }
+            else
+            {
+              characterId = 'spooky-flipped-old';
+              loadCharacter(characterId);
+            }
+        }
+        else
+        {
+            if (characterId == 'spooky-old')
+            {
+              PlayState.instance.currentStage.getBoyfriend().initHealthIcon(false);
+            }
+            else
+            {
+              characterId = 'spooky-old';
+              loadCharacter(characterId);
+            }
+        }
     }
 
     lerpIconSize(true);

@@ -297,11 +297,11 @@ class PauseSubState extends MusicBeatSubState
     if (PlayState.instance?.currentChart != null)
     {
       //this is all stupid coding but it works for showing ??? when you first play monster's songs
-      if (Save.instance.hasBeatenSong('monster', ['easy-spooky', 'normal-spooky', 'hard-spooky']) == false && PlayState.instance.currentChart.songName == 'Monster (Spooky Mix)' && (PlayState.instance.coverscreen.alpha != 0 && PlayState.instance.songScore == 0))
+      if (Save.instance.hasBeatenSong('monster', ['easy-spooky', 'normal-spooky', 'hard-spooky']) == false && PlayState.instance.currentChart.songName == 'Monster (Spooky Mix)' && (PlayState.instance.camHUD.alpha != 1 && PlayState.instance.songScore == 0))
       {
         metadataSong.text = '???';
       }
-      else if (Save.instance.hasBeatenSong('winter-horrorland', ['easy-spooky', 'normal-spooky', 'hard-spooky']) == false && PlayState.instance.currentChart.songName == 'Winter Horrorland (Spooky Mix)' && (PlayState.instance.coverscreen.alpha != 0 && PlayState.instance.songScore == 0))
+      else if (Save.instance.hasBeatenSong('winter-horrorland', ['easy-spooky', 'normal-spooky', 'hard-spooky']) == false && PlayState.instance.currentChart.songName == 'Winter Horrorland (Spooky Mix)' && (PlayState.instance.camHUD.alpha != 1 && PlayState.instance.songScore == 0))
       {
         metadataSong.text = '???';
       }
@@ -326,7 +326,7 @@ class PauseSubState extends MusicBeatSubState
     metadataModArt.setFormat(Paths.font('vcr.ttf'), 32, FlxColor.WHITE, FlxTextAlign.RIGHT);
     if (PlayState.instance?.currentChart != null)
     {
-      metadataModArt.text = 'Mod Artist: ${PlayState.instance.currentChart.modArt}';
+      metadataModArt.text = 'Artwork: ${PlayState.instance.currentChart.modArt}';
     }
     metadataModArt.scrollFactor.set(0, 0);
     metadata.add(metadataModArt);
@@ -601,8 +601,6 @@ class PauseSubState extends MusicBeatSubState
    */
   static function resume(state:PauseSubState):Void
   {
-    if (PlayState.instance.fadeInTween != null) PlayState.instance.fadeInTween.active = true;
-
     // Resume a paused video if it exists.
     VideoCutscene.resumeVideo();
 

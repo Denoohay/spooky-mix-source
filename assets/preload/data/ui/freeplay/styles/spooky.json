@@ -5,5 +5,5 @@
   "numbersAsset": "digital_numbers_spooky",
   "capsuleAsset": "freeplay/freeplayCapsule/capsule/freeplayCapsule_spooky",
   "capsuleTextColors": ["#00CC0D", "#00CC0D"],
-  "startDelay": 1.15
+  "startDelay": 1.16
 }

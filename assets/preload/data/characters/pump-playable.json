@@ -80,5 +80,8 @@
       "assetPath": "characters/Pump_Playable_DEATH",
       "offsets": [1114, 138]
     }
-  ]
+  ],
+  "death": {
+    "cameraOffsets": [-420, 0]
+  }
 }

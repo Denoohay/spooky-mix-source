@@ -481,18 +481,17 @@ enum abstract ScoringRank(String)
     switch (abstract)
     {
       case PERFECT_GOLD | PERFECT:
-        // return 2.5;
-        return 95 / 24;
+        return 0;
       case EXCELLENT:
-        return 95 / 24;
+        return 0;
       case GREAT:
-        return 95 / 24;
+        return 0;
       case GOOD:
-        return 95 / 24;
+        return 0;
       case SHIT:
         return 2 / 24;
       default:
-        return 3.5;
+        return 0;
     }
   }
 
