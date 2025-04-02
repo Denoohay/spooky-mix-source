@@ -2,6 +2,9 @@ import flixel.FlxG;
 import flixel.math.FlxAngle;
 import funkin.play.PlayState;
 import funkin.play.stage.Stage;
+import funkin.modding.base.ScriptedFlxRuntimeShader;
+import funkin.graphics.shaders.AdjustColorShader;
+import flixel.addons.display.FlxRuntimeShader;
 
 class TankmanBattlefieldStage extends Stage
 {
@@ -10,62 +13,49 @@ class TankmanBattlefieldStage extends Stage
 		super('tankmanBattlefield');
 	}
 
+	var colorShader:AdjustColorShader;
+
 	function onCreate(event:ScriptEvent):Void
 	{
 			super.onCreate(event);
+	}
+	
+	function onUpdate(event:UpdateScriptEvent):Void
+	{
+		if(PlayState.instance.currentStage.getBoyfriend() != null && PlayState.instance.currentStage.getBoyfriend().shader == null)
+		{
+			colorShader = new AdjustColorShader();
+			PlayState.instance.currentStage.getBoyfriend().shader = colorShader;
+			PlayState.instance.currentStage.getGirlfriend().shader = colorShader;
+			PlayState.instance.currentStage.getDad().shader = colorShader;
+			
+			colorShader.brightness = -45;
+			colorShader.saturation = -20;
+			colorShader.contrast = -20;
+			colorShader.hue = -35;
+		}
 	}
 
 	override function buildStage()
 	{
 		super.buildStage();
-
-		// Give the clouds a random position, and a velocity to make them move.
-		var clouds = getNamedProp('clouds');
-		clouds.active = true;
-		clouds.x = FlxG.random.int(-700, -100);
-		clouds.y = FlxG.random.int(-20, 20);
-		clouds.velocity.x = FlxG.random.float(5, 15);
-
-		tankAngle = FlxG.random.int(-90, 45);
-		tankSpeed = FlxG.random.float(5, 7);
 	}
 
-	function onUpdate(event:UpdateScriptEvent):Void
-	{
-		super.onUpdate(event);
-		moveTank(event.elapsed);
+	override function onGameOver(event:ScriptEvent):Void {
+		super.onGameOver(event);
+
+		colorShader.hue = 0;
+		colorShader.saturation = 0;
+		colorShader.contrast = 0;
+		colorShader.brightness = 0;
 	}
 
-	var tankMoving:Bool = false;
-	var tankAngle:Float = FlxG.random.int(-90, 45);
-	var tankSpeed:Float = FlxG.random.float(5, 7);
-	var tankX:Float = 400;
-
-	function onBeatHit(event:SongTimeScriptEvent):Void
-	{
-		super.onBeatHit(event);
-	}
-
-	function moveTank(elapsed:Float):Void
-	{
-		var daAngleOffset:Float = 1;
-		tankAngle += elapsed * tankSpeed;
-
-		var tankRolling = getNamedProp('tankRolling');
-		tankRolling.angle = tankAngle - 90 + 15;
-		tankRolling.x = tankX + Math.cos(FlxAngle.asRadians((tankAngle * daAngleOffset) + 180)) * 1500;
-		tankRolling.y = 1300 + Math.sin(FlxAngle.asRadians((tankAngle * daAngleOffset) + 180)) * 1100;
-	}
-
-	function onSongRetry(event:ScriptEvent)
-	{
+	override function onSongRetry(event:ScriptEvent):Void {
 		super.onSongRetry(event);
-
-		// resets the clouds!
-		var clouds = getNamedProp('clouds');
-		clouds.active = true;
-		clouds.x = FlxG.random.int(-700, -100);
-		clouds.y = FlxG.random.int(-20, 20);
-		clouds.velocity.x = FlxG.random.float(5, 15);
+		
+		colorShader.hue = -26;
+		colorShader.saturation = -16;
+		colorShader.contrast = 0;
+		colorShader.brightness = -5;
 	}
 }

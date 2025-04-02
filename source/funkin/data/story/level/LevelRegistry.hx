@@ -102,7 +102,8 @@ class LevelRegistry extends BaseRegistry<Level, LevelData>
       "week5",
       "week6",
       "week7",
-      "weekend1"
+      "weekend1",
+      "fool"
     ];
   }
 

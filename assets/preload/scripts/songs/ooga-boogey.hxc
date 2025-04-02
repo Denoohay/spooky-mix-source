@@ -1,0 +1,38 @@
+import flixel.tweens.FlxEase;
+import funkin.graphics.FunkinSprite;
+import flixel.tweens.FlxTween;
+import funkin.play.cutscene.dialogue.DialogueBox;
+import funkin.play.PlayState;
+import funkin.play.PlayStatePlaylist;
+import funkin.play.song.Song;
+import flixel.FlxG;
+import flixel.FlxSprite;
+import flixel.util.FlxTimer;
+import funkin.save.Save;
+import funkin.effects.RetroCameraFade;
+import funkin.play.PlayStatePlaylist;
+import funkin.graphics.adobeanimate.FlxAtlasSprite;
+import funkin.modding.base.ScriptedFlxAtlasSprite;
+import flixel.sound.FlxSound;
+import funkin.audio.FunkinSound;
+
+class OogaBoogeySong extends Song {
+
+	var hasPlayedEndCutscene:Bool = false;
+	var endCutsceneSound:FunkinSound;
+
+	public function new() {
+		super('ooga-boogey');
+
+		hasPlayedEndCutscene = false;
+	}
+
+	public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool
+    {
+		  return !Save.instance.hasBeatenSong(this.id, null, '');
+	}
+	
+	public function listDifficulties(variationId:String, variationIds:Array<String>, showLocked:Bool):Array<String> {
+		return [];
+	}
+}

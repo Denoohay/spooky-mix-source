@@ -11,7 +11,7 @@
       "girlfriend": "moloch-christmas",
       "opponent": "parents-christmas",
       "instrumental": "spooky",
-      "altInstrumentals": [""]
+      "altInstrumentals": ["pico", ""]
     },
     "difficulties": ["easy", "normal", "hard"],
     "noteStyle": "funkin",

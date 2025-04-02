@@ -1,0 +1,53 @@
+import funkin.ui.story.Level;
+import funkin.save.Save;
+import flixel.FlxSprite;
+
+class FoolLevel extends Level
+{
+	function new()
+	{
+		super('fool');
+	}
+
+  override function isUnlocked():Bool {
+    return true;
+  }
+
+  override function getSongDisplayNames(difficultyId:String):Array<String>
+  {
+    if (Save.instance.hasBeatenSong('ooga-boogey', ['easy'], '') || Save.instance.hasBeatenSong('ooga-boogey', ['normal'], '') || Save.instance.hasBeatenSong('ooga-boogey', ['hard'], ''))
+    {
+      return ["Ooga Boogey"];
+    }
+    else
+    {
+      return ["???"];
+    }
+  }
+  
+  override function getTitle():String
+  {
+    if (Save.instance.hasBeatenSong('ooga-boogey', ['easy'], '') || Save.instance.hasBeatenSong('ooga-boogey', ['normal'], '') || Save.instance.hasBeatenSong('ooga-boogey', ['hard'], ''))
+    {
+        return "YOU FOOL";
+    }
+    else
+    {
+        return _data.name;
+    }
+  }
+
+  override function buildTitleGraphic():FlxSprite
+  {
+    var result:FlxSprite = new FlxSprite().loadGraphic(Paths.image(_data.titleAsset));
+
+    if (Save.instance.hasBeatenSong('ooga-boogey', ['easy'], '') || Save.instance.hasBeatenSong('ooga-boogey', ['normal'], '') || Save.instance.hasBeatenSong('ooga-boogey', ['hard'], ''))
+    {
+        result.loadGraphic(Paths.image('storymenu/titles/fool2'));
+    }
+    else
+    {
+        return result;
+    }
+  }
+}

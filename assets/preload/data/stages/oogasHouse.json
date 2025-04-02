@@ -1,0 +1,124 @@
+{
+  "props": [
+    {
+      "danceEvery": 0,
+      "zIndex": 10,
+      "position": [-1200, -450],
+      "scale": [1, 1],
+      "animType": "sparrow",
+      "name": "backgroundArt",
+      "isPixel": false,
+      "assetPath": "spookyStages/fool/wallandstuff",
+      "scroll": [1, 1],
+      "animations": []
+    },
+    {
+      "danceEvery": 0,
+      "zIndex": 500,
+      "position": [-1972, -1044],
+      "scale": [1, 1],
+      "animType": "sparrow",
+      "name": "topBlack",
+      "isPixel": false,
+      "assetPath": "spookyStages/fool/topbotblur",
+      "scroll": [1, 1],
+      "animations": []
+    },
+    {
+      "danceEvery": 0,
+      "zIndex": 500,
+      "position": [-1972, 680],
+      "scale": [1, 1],
+      "animType": "sparrow",
+      "name": "bottomBlack",
+      "isPixel": false,
+      "flipY": true,
+      "assetPath": "spookyStages/fool/topbotblur",
+      "scroll": [1, 1],
+      "animations": []
+    },
+    {
+      "danceEvery": 0,
+      "zIndex": 500,
+      "position": [-1800, -800],
+      "scale": [1, 1],
+      "animType": "sparrow",
+      "name": "leftBlack",
+      "isPixel": false,
+      "assetPath": "spookyStages/fool/sideblur",
+      "scroll": [1, 1],
+      "animations": []
+    },
+    {
+      "danceEvery": 0,
+      "zIndex": 500,
+      "position": [1800, -800],
+      "scale": [1, 1],
+      "animType": "sparrow",
+      "name": "rightBlack",
+      "isPixel": false,
+      "flipX": true,
+      "assetPath": "spookyStages/fool/sideblur",
+      "scroll": [1, 1],
+      "animations": []
+    },
+    {
+      "danceEvery": 0,
+      "zIndex": 500,
+      "position": [-1972, 470],
+      "scale": [1, 1],
+      "animType": "sparrow",
+      "name": "bottomBlue",
+      "isPixel": false,
+      "flipY": true,
+      "assetPath": "spookyStages/fool/topbotblur",
+      "scroll": [1, 1],
+      "animations": []
+    },
+    {
+      "danceEvery": 0,
+      "zIndex": 500,
+      "position": [-1200, -800],
+      "scale": [1, 1],
+      "animType": "sparrow",
+      "name": "leftBlue",
+      "isPixel": false,
+      "assetPath": "spookyStages/fool/sideblur",
+      "scroll": [1, 1],
+      "animations": []
+    },
+    {
+      "danceEvery": 0,
+      "zIndex": 500,
+      "position": [1200, -800],
+      "scale": [1, 1],
+      "animType": "sparrow",
+      "name": "rightBlue",
+      "isPixel": false,
+      "flipX": true,
+      "assetPath": "spookyStages/fool/sideblur",
+      "scroll": [1, 1],
+      "animations": []
+    }
+  ],
+  "cameraZoom": 0.6,
+  "version": "1.0.0",
+  "characters": {
+    "bf": {
+      "zIndex": 200,
+      "position": [1100, 885],
+      "cameraOffsets": [-100, -100]
+    },
+    "dad": {
+      "zIndex": 300,
+      "position": [335, 885],
+      "cameraOffsets": [0, -30]
+    },
+    "gf": {
+      "zIndex": 100,
+      "cameraOffsets": [0, 0],
+      "position": [751, 787]
+    }
+  },
+  "name": "Ooga's House"
+}

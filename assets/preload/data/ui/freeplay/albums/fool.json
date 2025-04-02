@@ -1,0 +1,7 @@
+{
+  "version": "1.0.0",
+  "name": "April Fools",
+  "artists": ["alewito"],
+  "albumArtAsset": "freeplay/albumRoll/fool",
+  "albumTitleAsset": "freeplay/albumRoll/fool-text"
+}

@@ -2,6 +2,7 @@
   "version": "1.0.0",
   "name": "RED SNOW",
   "titleAsset": "storymenu/titles/week5",
+  "visible": false,
   "props": [
     {
       "assetPath": "storymenu/props/parents-xmas",

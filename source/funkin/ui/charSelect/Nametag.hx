@@ -47,14 +47,7 @@ class Nametag extends FlxSprite
       loadGraphic(Paths.image('charSelect/' + path + "Nametag"));
       updateHitbox();
 
-      if (str == 'spooky')
-      {
-        scale.x = scale.y = 1;
-      }
-      else
-      {
-        scale.x = scale.y = 0.77;
-      }
+      scale.x = scale.y = 0.77;
 
       updatePosition();
       shaderEffect(true);

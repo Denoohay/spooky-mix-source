@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="ooga-boogapixel.png">
+<SubTexture name="confirm0000" x="0" y="0" width="44" height="37" frameX="-4" frameY="-7" frameWidth="50" frameHeight="50" />
+<SubTexture name="confirm0001" x="0" y="37" width="47" height="34" frameX="-2" frameY="-8" frameWidth="50" frameHeight="50" />
+<SubTexture name="confirm0002" x="0" y="71" width="40" height="44" frameX="-6" frameY="-2" frameWidth="50" frameHeight="50" />
+<SubTexture name="confirm0003" x="0" y="115" width="44" height="42" frameX="-4" frameY="-3" frameWidth="50" frameHeight="50" />
+<SubTexture name="idle0000" x="0" y="0" width="44" height="37" frameX="-4" frameY="-7" frameWidth="50" frameHeight="50" />
+<SubTexture name="confirm-hold0000" x="0" y="115" width="44" height="42" frameX="-4" frameY="-3" frameWidth="50" frameHeight="50" />
+</TextureAtlas>

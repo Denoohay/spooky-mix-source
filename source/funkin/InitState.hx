@@ -330,6 +330,9 @@ class InitState extends FlxState
       case 'darnell' | 'lit-up' | '2hot' | 'blazin':
         Paths.setCurrentLevel('weekend1');
         PlayStatePlaylist.campaignId = 'weekend1';
+      case 'ooga-boogey':
+        Paths.setCurrentLevel('fool');
+        PlayStatePlaylist.campaignId = 'fool';
     }
 
     LoadingState.loadPlayState(

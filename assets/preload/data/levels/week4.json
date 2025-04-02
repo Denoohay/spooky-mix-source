@@ -2,6 +2,7 @@
   "version": "1.0.0",
   "name": "MOMMY MUST MURDER",
   "titleAsset": "storymenu/titles/week4",
+  "visible": false,
   "props": [
     {
       "assetPath": "storymenu/props/mom",

@@ -2,6 +2,7 @@
   "version": "1.0.0",
   "name": "DADDY DEAREST",
   "titleAsset": "storymenu/titles/week1",
+  "visible": false,
   "props": [
     {
       "assetPath": "storymenu/props/dad",

@@ -2,6 +2,7 @@
   "version": "1.0.0",
   "name": "PICO",
   "titleAsset": "storymenu/titles/week3",
+  "visible": false,
   "props": [
     {
       "assetPath": "storymenu/props/pico",

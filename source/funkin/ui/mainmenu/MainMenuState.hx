@@ -107,6 +107,7 @@ class MainMenuState extends MusicBeatState
     });
 
     menuItems.enabled = true; // can move on intro
+    createMenuItem('storymode', 'mainmenu/storymode', function() startExitState(() -> new StoryMenuState()));
     createMenuItem('freeplay', 'mainmenu/freeplay', function() {
       persistentDraw = true;
       persistentUpdate = false;
@@ -169,7 +170,7 @@ class MainMenuState extends MusicBeatState
     super.create();
 
     // This has to come AFTER!
-    this.leftWatermarkText.text = "FUNKIN' " + Constants.VERSION + " - SPOOKY MIX v1.0.2";
+    this.leftWatermarkText.text = "FUNKIN' " + Constants.VERSION + " - SPOOKY MIX v1.1.0";
     // this.rightWatermarkText.text = "blablabla test";
 
     // NG.core.calls.event.logEvent('swag').send();
@@ -178,10 +179,11 @@ class MainMenuState extends MusicBeatState
   function playMenuMusic():Void
   {
     FunkinSound.playMusic('freakyMenu',
-      {
-        overrideExisting: true,
-        restartTrack: false
-      });
+        {
+        overrideExisting: false,
+        restartTrack: false,
+        persist: true
+        });
   }
 
   function resetCamStuff(?snap:Bool = true):Void

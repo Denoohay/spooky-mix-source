@@ -2,6 +2,7 @@
   "version": "1.0.0",
   "name": "TEACHING TIME",
   "titleAsset": "storymenu/titles/tutorial",
+  "visible": false,
   "props": [
     {
       "assetPath": "storymenu/props/gf",

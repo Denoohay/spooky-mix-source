@@ -241,8 +241,9 @@ class StoryMenuState extends MusicBeatState
   {
     FunkinSound.playMusic('freakyMenu',
       {
-        overrideExisting: true,
-        restartTrack: false
+        overrideExisting: false,
+        restartTrack: false,
+        persist: true
       });
   }
 
