@@ -2,9 +2,10 @@ import flixel.FlxG;
 import flixel.math.FlxAngle;
 import funkin.play.PlayState;
 import funkin.play.stage.Stage;
-import funkin.modding.base.ScriptedFlxRuntimeShader;
-import funkin.graphics.shaders.AdjustColorShader;
-import flixel.addons.display.FlxRuntimeShader;
+import funkin.graphics.shaders.DropShadowShader;
+import funkin.play.character.CharacterType;
+import openfl.display.BitmapData;
+import flixel.graphics.FlxGraphic;
 
 class TankmanBattlefieldStage extends Stage
 {
@@ -13,27 +14,91 @@ class TankmanBattlefieldStage extends Stage
 		super('tankmanBattlefield');
 	}
 
-	var colorShader:AdjustColorShader;
-
-	function onCreate(event:ScriptEvent):Void
-	{
-			super.onCreate(event);
+	function onCreate(event:ScriptEvent):Void {
+		super.onCreate(event);
 	}
-	
-	function onUpdate(event:UpdateScriptEvent):Void
-	{
-		if(PlayState.instance.currentStage.getBoyfriend() != null && PlayState.instance.currentStage.getBoyfriend().shader == null)
-		{
-			colorShader = new AdjustColorShader();
-			PlayState.instance.currentStage.getBoyfriend().shader = colorShader;
-			PlayState.instance.currentStage.getGirlfriend().shader = colorShader;
-			PlayState.instance.currentStage.getDad().shader = colorShader;
-			
-			colorShader.brightness = -45;
-			colorShader.saturation = -20;
-			colorShader.contrast = -20;
-			colorShader.hue = -35;
+
+	var tankmanRim:DropShadowShader;
+
+	public function onGameOver(event:ScriptEvent) {
+		getBoyfriend().shader = null;
+	}
+
+	override function addCharacter(character:BaseCharacter, charType:CharacterType):Void {
+		// Apply the shader automatically to each character as it gets added.
+		super.addCharacter(character, charType);
+		trace('Applied stage shader to ' + character.characterName);
+
+		var rim = new DropShadowShader();
+		rim.setAdjustColor(-46, -38, -25, -20);
+    rim.color = 0xFFDFEF3C;
+		character.shader = rim;
+		rim.attachedSprite = character;
+
+		// character.animation.callback = rim.onAttachedFrame;
+
+		switch(charType){
+			case CharacterType.BF:
+
+				rim.angle = 90;
+
+				character.animation.callback = function() {
+					if (getBoyfriend() != null)
+					{
+      			rim.updateFrameInfo(getBoyfriend().frame);
+					}
+    		};
+
+			case CharacterType.GF:
+
+				rim.angle = 90;
+
+				character.animation.callback = function() {
+      		rim.updateFrameInfo(getGirlfriend().frame);
+    		};
+
+				if(getGirlfriend().characterId == 'gf-tankmen'){
+					rim.loadAltMask('assets/week7/images/erect/masks/gfTankmen_mask.png');
+					rim.maskThreshold = 0.4;
+					rim.useAltMask = true;
+				}
+
+			case CharacterType.DAD:
+
+				rim.angle = 135;
+				rim.threshold = 0.3;
+
+				character.animation.callback = function() {
+      		rim.updateFrameInfo(getDad().frame);
+    		};
+
+				if(getDad().characterId == 'tankman-bloody'){
+					rim.loadAltMask('assets/week7/images/erect/masks/tankmanCaptainBloody_mask.png');
+					rim.maskThreshold = 1;
+					rim.useAltMask = false;
+				}
+
+				// need to save this for later for when the mask is needed
+				tankmanRim = rim;
+
+			default:
+
 		}
+
+	}
+
+	/**
+	 * Called when the chart hits a song event.
+	 */
+	public override function onSongEvent(scriptEvent:SongEventScriptEvent)
+	{
+		super.onSongEvent(scriptEvent);
+
+		if (scriptEvent.eventData.eventKind == "EnableMask" && tankmanRim != null)
+		{
+			tankmanRim.useAltMask = true;
+		}
+
 	}
 
 	override function buildStage()
@@ -41,21 +106,27 @@ class TankmanBattlefieldStage extends Stage
 		super.buildStage();
 	}
 
-	override function onGameOver(event:ScriptEvent):Void {
-		super.onGameOver(event);
-
-		colorShader.hue = 0;
-		colorShader.saturation = 0;
-		colorShader.contrast = 0;
-		colorShader.brightness = 0;
+	function onUpdate(event:UpdateScriptEvent):Void
+	{
+		super.onUpdate(event);
 	}
 
-	override function onSongRetry(event:ScriptEvent):Void {
+	function onBeatHit(event:SongTimeScriptEvent):Void
+	{
+		super.onBeatHit(event);
+
+		if(FlxG.random.bool(2)){
+			getNamedProp('sniper').playAnimation('sip', false, true);
+		}
+	}
+
+	function onSongRetry(event:ScriptEvent)
+	{
 		super.onSongRetry(event);
-		
-		colorShader.hue = -26;
-		colorShader.saturation = -16;
-		colorShader.contrast = 0;
-		colorShader.brightness = -5;
+
+		if (tankmanRim != null)
+		{
+			tankmanRim.useAltMask = false;
+		}
 	}
 }
