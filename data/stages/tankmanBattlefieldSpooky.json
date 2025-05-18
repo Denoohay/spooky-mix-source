@@ -1,0 +1,271 @@
+{
+  "version": "1.0.0",
+  "name": "Tankman Battlefield (Spooky)",
+  "cameraZoom": 0.9,
+  "props": [
+    {
+      "name": "weirdGlow",
+      "assetPath": "spooky/weirdGlow",
+      "position": [-450, -440],
+      "scale": [1, 1],
+      "zIndex": 3000,
+      "scroll": [1.1, 1.1]
+    },
+    {
+      "name": "tankSky",
+      "assetPath": "spooky/tankSky",
+      "position": [-400, -900],
+      "scale": [1, 1],
+      "zIndex": 10,
+      "scroll": [0, 0]
+    },
+    {
+      "name": "moon",
+      "assetPath": "spooky/moon",
+      "position": [-50, -50],
+      "scale": [1, 1],
+      "zIndex": 11,
+      "scroll": [0.2, 0.2]
+    },
+    {
+      "name": "bottomLighting",
+      "assetPath": "spooky/bottomLighting",
+      "position": [-400, 300],
+      "scale": [1, 1],
+      "zIndex": 2000,
+      "scroll": [0, 0]
+    },
+    {
+      "name": "solid",
+      "assetPath": "spooky/#E3A26D",
+      "position": [-500, -1000],
+      "scale": [2400, 2000],
+      "scroll": [0, 0]
+    },
+    {
+      "name": "tankMountains",
+      "assetPath": "spooky/tankMountains",
+      "position": [-280, 30],
+      "scale": [1, 1],
+      "zIndex": 11,
+      "scroll": [0.2, 0.2]
+    },
+    {
+      "name": "tankBuildings",
+      "assetPath": "spooky/tankBuildings",
+      "position": [-180, 280],
+      "scale": [1, 1],
+      "zIndex": 13,
+      "scroll": [0.3, 0.3]
+    },
+    {
+      "name": "tankRuins",
+      "assetPath": "spooky/tankRuins",
+      "position": [-320, 50],
+      "scale": [1, 1],
+      "zIndex": 13,
+      "scroll": [0.35, 0.35]
+    },
+    {
+      "name": "clouds",
+      "assetPath": "spooky/tankClouds",
+      "scale": [1, 1],
+      "position": [0, 0],
+      "zIndex": 11,
+      "scroll": [0.4, 0.4]
+    },
+    {
+      "name": "smokeLeft",
+      "assetPath": "spooky/smokeLeft",
+      "position": [-400, -200],
+      "scale": [1, 1],
+      "scroll": [1.1, 1.1],
+      "zIndex": 101,
+      "animations": [
+        { "name": "smokeLeft", "prefix": "left smoke instance 1", "looped": true }
+      ],
+      "startingAnimation": "smokeLeft"
+    },
+    {
+      "name": "smokeRight",
+      "assetPath": "spooky/smokeRight",
+      "position": [1300, -400],
+      "scale": [1, 1],
+      "zIndex": 101,
+      "scroll": [1.1, 1.1],
+      "animations": [
+        { "name": "smokeRight", "prefix": "right smoke instance 1", "looped": true }
+      ],
+      "startingAnimation": "smokeRight"
+    },
+    {
+      "name": "watchtower",
+      "assetPath": "spooky/tankWatchtower",
+      "position": [200, -50],
+      "scroll": [0.5, 0.5],
+      "scale": [1, 1],
+      "zIndex": 21,
+      "danceEvery": 1,
+      "animations": [
+        {
+          "name": "idle",
+          "prefix": "watchtower gradient color"
+        },
+        {
+          "name": "fallEvent",
+          "prefix": "wwatchtower skittles fall event",
+          "looped": false
+        },
+        {
+          "name": "idle-weird",
+          "prefix": "watchtower no skittles"
+        }
+      ],
+      "startingAnimation": "idle"
+    },
+    {
+      "name": "tankRolling",
+      "assetPath": "spooky/tankRolling",
+      "position": [300, 300],
+      "scale": [1, 1],
+      "zIndex": 22,
+      "scroll": [0.5, 0.5],
+      "animations": [
+        { "name": "roll", "prefix": "BG tank w lighting", "looped": true }
+      ],
+      "startingAnimation": "roll"
+    },
+    {
+      "name": "tankGround",
+      "assetPath": "spooky/tankGround",
+      "position": [-340, 350],
+      "scroll": [1, 1],
+      "scale": [1, 1],
+      "zIndex": 40
+    },
+    {
+      "name": "tankmanAudience0",
+      "assetPath": "spooky/tank5",
+      "zIndex": 1000,
+      "position": [-500, 650],
+      "scale": [1, 1],
+      "scroll": [1.7, 1.5],
+      "danceEvery": 1,
+      "flipX": true,
+      "animations": [
+        {
+          "name": "idle",
+          "prefix": "fg tankhead far right",
+          "looped": false
+        }
+      ],
+      "startingAnimation": "idle"
+    },
+    {
+      "name": "tankmanAudience2",
+      "assetPath": "spooky/tank2",
+      "zIndex": 1002,
+      "position": [260, 880],
+      "scale": [1.3, 1.3],
+      "scroll": [1.5, 1.5],
+      "danceEvery": 1,
+      "animations": [
+        {
+          "name": "idle",
+          "prefix": "foreground man 3",
+          "looped": false
+        }
+      ],
+      "startingAnimation": "idle"
+    },
+    {
+      "name": "tankmanAudience3",
+      "assetPath": "spooky/tank3",
+      "zIndex": 1016,
+      "position": [700, 900],
+      "scale": [1, 1],
+      "scroll": [1.5, 1.5],
+      "danceEvery": 1,
+      "animations": [
+        {
+          "name": "idle",
+          "prefix": "fg tankhead 4",
+          "looped": false
+        }
+      ],
+      "startingAnimation": "idle"
+    },
+    {
+      "name": "tankmanAudience4",
+      "assetPath": "spooky/tank4",
+      "zIndex": 1004,
+      "position": [1340, 880],
+      "scale": [1, 1],
+      "scroll": [1.5, 1.5],
+      "danceEvery": 1,
+      "animations": [
+        {
+          "name": "idle",
+          "prefix": "fg tankman bobbin 3",
+          "looped": false
+        }
+      ],
+      "startingAnimation": "idle"
+    },
+    {
+      "name": "tankmanAudience5",
+      "assetPath": "spooky/tank5",
+      "zIndex": 1003,
+      "position": [1750, 700],
+      "scale": [1, 1],
+      "scroll": [1.5, 1.5],
+      "danceEvery": 1,
+      "animations": [
+        {
+          "name": "idle",
+          "prefix": "fg tankhead far right",
+          "looped": false
+        }
+      ],
+      "startingAnimation": "idle"
+    },
+    {
+      "name": "tankmanAudience1",
+      "assetPath": "spooky/tank1",
+      "zIndex": 1100,
+      "position": [-300, 930],
+      "scale": [1, 1],
+      "scroll": [2.0, 2.0],
+      "danceEvery": 1,
+      "animations": [
+        {
+          "name": "idle",
+          "prefix": "fg tankhead 5",
+          "looped": false
+        }
+      ],
+      "startingAnimation": "idle"
+    }
+  ],
+  "characters": {
+    "bf": {
+      "zIndex": 100,
+      "scale": 0.8,
+      "position": [1200, 840],
+      "cameraOffsets": [-220, -140]
+    },
+    "gf": {
+      "zIndex": 100,
+      "scale": 0.7,
+      "position": [650, 715],
+      "cameraOffsets": [-150, -70]
+    },
+    "dad": {
+      "zIndex": 100,
+      "scale": 0.8,
+      "position": [230.5, 940],
+      "cameraOffsets": [150, -140]
+    }
+  },
+  "directory": "week7"
+}

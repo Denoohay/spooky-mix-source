@@ -1,0 +1,40 @@
+{
+  "version": "1.0.0",
+  "name": "Moloch (Stress)",
+  "assetPath": "characters/moloch/moloch-stress",
+  "startingAnimation": "idle",
+  "offsets": [75, 90],
+  "cameraOffsets": [40, -100],
+  "healthIcon": {
+    "id": "moloch"
+  },
+  "renderType": "sparrow",
+  "singTime": 8.0,
+  "animations": [
+    {
+      "name": "idle",
+      "prefix": "moloch stress idle",
+      "offsets": [0, 0]
+    },
+    {
+      "name": "shoot1",
+      "prefix": "swipe down left",
+      "offsets": [275, 54]
+    },
+    {
+      "name": "shoot2",
+      "prefix": "slash left up",
+      "offsets": [1, 286]
+    },
+    {
+      "name": "shoot3",
+      "prefix": "right up",
+      "offsets": [68, 219]
+    },
+    {
+      "name": "shoot4",
+      "prefix": "right down",
+      "offsets": [0, 83]
+    }
+  ]
+}

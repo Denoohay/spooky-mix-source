@@ -1,0 +1,369 @@
+{
+  "version": "1.0.0",
+  "cameraZoom": 0.7,
+  "props": [
+    {
+      "zIndex": 500,
+      "danceEvery": 0,
+      "position": [-400, -1080],
+      "scale": [1, 1],
+      "name": "moonlight",
+      "animType": "sparrow",
+      "isPixel": false,
+      "scroll": [0.1, 0.1],
+      "assetPath": "limo/spooky/moonlight",
+      "animations": []
+    },
+    {
+      "zIndex": 10,
+      "danceEvery": 0,
+      "position": [-700, -430],
+      "scale": [1.36, 1.36],
+      "name": "limoSky",
+      "animType": "sparrow",
+      "isPixel": false,
+      "scroll": [0.1, 0.1],
+      "assetPath": "limo/spooky/limoSky",
+      "animations": []
+    },
+    {
+      "zIndex": 20,
+      "danceEvery": 0,
+      "position": [-200, 480],
+      "scale": [1, 1],
+      "name": "bgLimo",
+      "animType": "sparrow",
+      "isPixel": false,
+      "startingAnimation": "drive",
+      "scroll": [0.4, 0.4],
+      "assetPath": "limo/spooky/bgLimo",
+      "animations": [
+        {
+          "offsets": [0, 0],
+          "flipY": false,
+          "frameRate": 24,
+          "prefix": "BG limo",
+          "name": "drive",
+          "looped": true,
+          "flipX": false
+        }
+      ]
+    },
+    {
+      "zIndex": 150,
+      "danceEvery": 0,
+      "position": [-120, 520],
+      "scale": [1, 1],
+      "name": "limo",
+      "animType": "sparrow",
+      "isPixel": false,
+      "startingAnimation": "drive",
+      "scroll": [1, 1],
+      "assetPath": "limo/spooky/limoDrive",
+      "animations": [
+        {
+          "offsets": [0, 0],
+          "flipY": false,
+          "frameRate": 24,
+          "prefix": "Limo stage",
+          "name": "drive",
+          "looped": true,
+          "flipX": false
+        }
+      ]
+    },
+    {
+      "zIndex": 500,
+      "danceEvery": 0,
+      "position": [-300, 200],
+      "scale": [1, 1],
+      "name": "bush",
+      "animType": "sparrow",
+      "isPixel": false,
+      "scroll": [1, 1],
+      "assetPath": "limo/spooky/FGbushThomas",
+      "animations": []
+    },
+    {
+      "zIndex": 11,
+      "danceEvery": 0,
+      "position": [-300, -50],
+      "scale": [1, 1],
+      "name": "tree",
+      "animType": "sparrow",
+      "isPixel": false,
+      "scroll": [0.3, 0.3],
+      "assetPath": "limo/spooky/BGtreeTimothy",
+      "animations": []
+    },
+    {
+      "zIndex": 30,
+      "danceEvery": 1,
+      "position": [100, 70],
+      "scale": [1, 1],
+      "name": "limoDancer1",
+      "animType": "sparrow",
+      "isPixel": false,
+      "startingAnimation": "danceLeft",
+      "scroll": [0.4, 0.4],
+      "assetPath": "limo/spooky/henchmen",
+      "animations": [
+        {
+          "offsets": [0, 0],
+          "flipY": false,
+          "frameRate": 24,
+          "frameIndices": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+          "prefix": "bg dancer sketch PINK",
+          "name": "danceLeft",
+          "flipX": false
+        },
+        {
+          "offsets": [0, 0],
+          "flipY": false,
+          "frameRate": 24,
+          "frameIndices": [
+            15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29
+          ],
+          "prefix": "bg dancer sketch PINK",
+          "name": "danceRight",
+          "flipX": false
+        },
+        {
+          "offsets": [0, 0],
+          "flipY": false,
+          "frameRate": 24,
+          "frameIndices": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+          "prefix": "sans bg dancer sketch PINK",
+          "name": "danceRight-sans",
+          "flipX": false
+        },
+        {
+          "offsets": [0, 0],
+          "flipY": false,
+          "frameRate": 24,
+          "frameIndices": [
+            15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29
+          ],
+          "prefix": "sans bg dancer sketch PINK",
+          "name": "danceLeft-sans",
+          "flipX": false
+        }
+      ]
+    },
+    {
+      "zIndex": 30,
+      "danceEvery": 1,
+      "position": [460, 70],
+      "scale": [1, 1],
+      "name": "limoDancer2",
+      "animType": "sparrow",
+      "isPixel": false,
+      "startingAnimation": "danceLeft",
+      "scroll": [0.4, 0.4],
+      "assetPath": "limo/spooky/henchmen",
+      "animations": [
+        {
+          "offsets": [0, 0],
+          "flipY": false,
+          "frameRate": 24,
+          "frameIndices": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+          "prefix": "bg dancer sketch PINK",
+          "name": "danceLeft",
+          "flipX": false
+        },
+        {
+          "offsets": [0, 0],
+          "flipY": false,
+          "frameRate": 24,
+          "frameIndices": [
+            15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29
+          ],
+          "prefix": "bg dancer sketch PINK",
+          "name": "danceRight",
+          "flipX": false
+        },
+        {
+          "offsets": [0, 0],
+          "flipY": false,
+          "frameRate": 24,
+          "frameIndices": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+          "prefix": "sans bg dancer sketch PINK",
+          "name": "danceRight-sans",
+          "flipX": false
+        },
+        {
+          "offsets": [0, 0],
+          "flipY": false,
+          "frameRate": 24,
+          "frameIndices": [
+            15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29
+          ],
+          "prefix": "sans bg dancer sketch PINK",
+          "name": "danceLeft-sans",
+          "flipX": false
+        }
+      ]
+    },
+    {
+      "zIndex": 30,
+      "danceEvery": 1,
+      "position": [820, 70],
+      "scale": [1, 1],
+      "name": "limoDancer3",
+      "animType": "sparrow",
+      "isPixel": false,
+      "startingAnimation": "danceLeft",
+      "scroll": [0.4, 0.4],
+      "assetPath": "limo/spooky/henchmen",
+      "animations": [
+        {
+          "offsets": [0, 0],
+          "flipY": false,
+          "frameRate": 24,
+          "frameIndices": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+          "prefix": "bg dancer sketch PINK",
+          "name": "danceLeft",
+          "flipX": false
+        },
+        {
+          "offsets": [0, 0],
+          "flipY": false,
+          "frameRate": 24,
+          "frameIndices": [
+            15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29
+          ],
+          "prefix": "bg dancer sketch PINK",
+          "name": "danceRight",
+          "flipX": false
+        },
+        {
+          "offsets": [0, 0],
+          "flipY": false,
+          "frameRate": 24,
+          "frameIndices": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+          "prefix": "sans bg dancer sketch PINK",
+          "name": "danceRight-sans",
+          "flipX": false
+        },
+        {
+          "offsets": [0, 0],
+          "flipY": false,
+          "frameRate": 24,
+          "frameIndices": [
+            15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29
+          ],
+          "prefix": "sans bg dancer sketch PINK",
+          "name": "danceLeft-sans",
+          "flipX": false
+        }
+      ]
+    },
+    {
+      "zIndex": 30,
+      "danceEvery": 1,
+      "position": [1180, 70],
+      "scale": [1, 1],
+      "name": "limoDancer4",
+      "animType": "sparrow",
+      "isPixel": false,
+      "startingAnimation": "danceLeft",
+      "scroll": [0.4, 0.4],
+      "assetPath": "limo/spooky/henchmen",
+      "animations": [
+        {
+          "offsets": [0, 0],
+          "flipY": false,
+          "frameRate": 24,
+          "frameIndices": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+          "prefix": "bg dancer sketch PINK",
+          "name": "danceLeft",
+          "flipX": false
+        },
+        {
+          "offsets": [0, 0],
+          "flipY": false,
+          "frameRate": 24,
+          "frameIndices": [
+            15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29
+          ],
+          "prefix": "bg dancer sketch PINK",
+          "name": "danceRight",
+          "flipX": false
+        },
+        {
+          "offsets": [0, 0],
+          "flipY": false,
+          "frameRate": 24,
+          "frameIndices": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+          "prefix": "sans bg dancer sketch PINK",
+          "name": "danceRight-sans",
+          "flipX": false
+        },
+        {
+          "offsets": [0, 0],
+          "flipY": false,
+          "frameRate": 24,
+          "frameIndices": [
+            15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29
+          ],
+          "prefix": "sans bg dancer sketch PINK",
+          "name": "danceLeft-sans",
+          "flipX": false
+        }
+      ]
+    },
+    {
+      "zIndex": 30,
+      "danceEvery": 1,
+      "position": [1540, 70],
+      "scale": [1, 1],
+      "name": "limoDancer5",
+      "animType": "sparrow",
+      "isPixel": false,
+      "startingAnimation": "danceLeft",
+      "scroll": [0.4, 0.4],
+      "assetPath": "limo/spooky/henchmen",
+      "animations": [
+        {
+          "offsets": [0, 0],
+          "flipY": false,
+          "frameRate": 24,
+          "frameIndices": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+          "prefix": "bg dancer sketch PINK",
+          "name": "danceLeft",
+          "flipX": false
+        },
+        {
+          "offsets": [0, 0],
+          "flipY": false,
+          "frameRate": 24,
+          "frameIndices": [
+            15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29
+          ],
+          "prefix": "bg dancer sketch PINK",
+          "name": "danceRight",
+          "flipX": false
+        }
+      ]
+    }
+  ],
+  "characters": {
+    "bf": {
+      "zIndex": 300,
+      "position": [1217.5, 592],
+      "cameraOffsets": [-300, -50]
+    },
+    "gf": {
+      "zIndex": 100,
+      "position": [600, 830],
+      "cameraOffsets": [0, -300]
+    },
+    "dad": {
+      "zIndex": 200,
+      "position": [190, 600],
+      "cameraOffsets": [100, 50]
+    }
+  },
+  "name": "Limo Ride [Spooky]",
+  "directory": "week4"
+}

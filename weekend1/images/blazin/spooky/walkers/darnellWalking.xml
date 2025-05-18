@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="darnellWalking.png">
+<SubTexture name="darnell  walking0000" x="0" y="0" width="324" height="504" frameX="-38" frameY="-47" frameWidth="396" frameHeight="567" />
+<SubTexture name="darnell  walking0001" x="0" y="0" width="324" height="504" frameX="-38" frameY="-47" frameWidth="396" frameHeight="567" />
+<SubTexture name="darnell  walking0002" x="0" y="504" width="334" height="496" frameX="-27" frameY="-54" frameWidth="396" frameHeight="567" />
+<SubTexture name="darnell  walking0003" x="0" y="504" width="334" height="496" frameX="-27" frameY="-54" frameWidth="396" frameHeight="567" />
+<SubTexture name="darnell  walking0004" x="648" y="0" width="291" height="501" frameX="-60" frameY="-49" frameWidth="396" frameHeight="567" />
+<SubTexture name="darnell  walking0005" x="648" y="0" width="291" height="501" frameX="-60" frameY="-49" frameWidth="396" frameHeight="567" />
+<SubTexture name="darnell  walking0006" x="324" y="0" width="324" height="504" frameX="-38" frameY="-47" frameWidth="396" frameHeight="567" />
+<SubTexture name="darnell  walking0007" x="324" y="0" width="324" height="504" frameX="-38" frameY="-47" frameWidth="396" frameHeight="567" />
+<SubTexture name="darnell  walking0008" x="334" y="504" width="334" height="496" frameX="-27" frameY="-54" frameWidth="396" frameHeight="567" />
+<SubTexture name="darnell  walking0009" x="334" y="504" width="334" height="496" frameX="-27" frameY="-54" frameWidth="396" frameHeight="567" />
+<SubTexture name="darnell  walking0010" x="939" y="0" width="291" height="501" frameX="-60" frameY="-49" frameWidth="396" frameHeight="567" />
+<SubTexture name="darnell  walking0011" x="939" y="0" width="291" height="501" frameX="-60" frameY="-49" frameWidth="396" frameHeight="567" />
+</TextureAtlas>

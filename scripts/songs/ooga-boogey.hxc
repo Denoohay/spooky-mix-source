@@ -1,0 +1,38 @@
+import flixel.tweens.FlxEase;
+import funkin.graphics.FunkinSprite;
+import flixel.tweens.FlxTween;
+import funkin.play.cutscene.dialogue.DialogueBox;
+import funkin.play.PlayState;
+import funkin.play.PlayStatePlaylist;
+import funkin.play.song.Song;
+import flixel.FlxG;
+import flixel.FlxSprite;
+import flixel.util.FlxTimer;
+import funkin.save.Save;
+import funkin.effects.RetroCameraFade;
+import funkin.play.PlayStatePlaylist;
+import funkin.graphics.adobeanimate.FlxAtlasSprite;
+import funkin.modding.base.ScriptedFlxAtlasSprite;
+import flixel.sound.FlxSound;
+import funkin.audio.FunkinSound;
+
+class OogaBoogeySong extends Song {
+	public function new() {
+		super('ooga-boogey');
+	}
+
+	public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool
+    {
+		  return !Save.instance.hasBeatenSong(this.id, null, '');
+	}
+	
+
+	public function listDifficulties(variationId:String, variationIds:Array<String>, showLocked:Bool):Array<String> {
+		if (showLocked || Save.instance.hasBeatenLevel('fool')) {
+			return super.listDifficulties(variationId, variationIds);
+		}
+
+		// Hide all difficulties if the player has not beaten the week.
+		return [];
+	}
+}

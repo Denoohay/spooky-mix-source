@@ -1,0 +1,43 @@
+{
+  "version": "1.0.0",
+  "name": "Spirit (Spooky)",
+  "assetPath": "characters/spirit-spooky",
+  "singTime": 8.0,
+  "isPixel": true,
+  "offsets": [30, 60],
+  "cameraOffsets": [-35, 20],
+  "scale": 6,
+  "animations": [
+    {
+      "name": "idle",
+      "prefix": "idle",
+      "looped": true,
+      "frameRate": 72,
+      "offsets": [0, 0]
+    },
+    {
+      "name": "singLEFT",
+      "prefix": "right",
+      "frameRate": 72,
+      "offsets": [5, 10]
+    },
+    {
+      "name": "singDOWN",
+      "prefix": "down",
+      "frameRate": 72,
+      "offsets": [6, -9]
+    },
+    {
+      "name": "singUP",
+      "prefix": "up",
+      "frameRate": 72,
+      "offsets": [-2, 25]
+    },
+    {
+      "name": "singRIGHT",
+      "prefix": "left",
+      "frameRate": 72,
+      "offsets": [-5, 15]
+    }
+  ]
+}

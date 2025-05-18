@@ -1,0 +1,40 @@
+{
+  "props": [
+    {
+      "name": "solid",
+      "assetPath": "#000000",
+      "position": [-500, -1000],
+      "scale": [2400, 2000],
+      "scroll": [0, 0]
+    },
+    {
+      "danceEvery": 0,
+      "zIndex": 20,
+      "position": [-200, 40],
+      "scale": [6, 6],
+      "animType": "sparrow",
+      "name": "evilSchoolBG",
+      "isPixel": true,
+      "assetPath": "weeb/spooky/evilSchoolBG",
+      "scroll": [1, 1],
+      "animations": []
+    }
+  ],
+  "cameraZoom": 0.9,
+  "version": "1.0.0",
+  "characters": {
+    "bf": {
+      "zIndex": 300,
+      "cameraOffsets": [-270, -94],
+      "position": [1220, 900]
+    },
+    "dad": {
+      "zIndex": 200,
+      "cameraOffsets": [550, 270],
+      "position": [10, 660]
+    },
+    "gf": { "zIndex": 100, "cameraOffsets": [80, -50], "position": [776, 823] }
+  },
+  "name": "School (Hate) [Spooky]",
+  "directory": "week6"
+}

@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="tankmanKilled1.png">
+	<!-- Created with Adobe Animate version 24.0.3.19 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="John Shot0000" x="2" y="2" width="683" height="532" frameX="-41" frameY="-104" frameWidth="919" frameHeight="679"/>
+	<SubTexture name="John Shot0001" x="687" y="2" width="807" height="596" frameX="0" frameY="-83" frameWidth="919" frameHeight="679"/>
+	<SubTexture name="John Shot0002" x="1496" y="2" width="789" height="611" frameX="-18" frameY="-68" frameWidth="919" frameHeight="679"/>
+	<SubTexture name="John Shot0003" x="2287" y="2" width="835" height="677" frameX="-39" frameY="0" frameWidth="919" frameHeight="679"/>
+	<SubTexture name="John Shot0004" x="3124" y="2" width="833" height="677" frameX="-41" frameY="0" frameWidth="919" frameHeight="679"/>
+	<SubTexture name="John Shot0005" x="2" y="681" width="919" height="671" frameX="0" frameY="-5" frameWidth="919" frameHeight="679"/>
+	<SubTexture name="John Shot0006" x="923" y="681" width="860" height="671" frameX="-59" frameY="-5" frameWidth="919" frameHeight="679"/>
+	<SubTexture name="John Shot0007" x="1785" y="681" width="528" height="648" frameX="-83" frameY="-28" frameWidth="919" frameHeight="679"/>
+	<SubTexture name="John Shot0008" x="2315" y="681" width="574" height="648" frameX="-37" frameY="-28" frameWidth="919" frameHeight="679"/>
+	<SubTexture name="John Shot0009" x="2891" y="681" width="605" height="612" frameX="-31" frameY="-64" frameWidth="919" frameHeight="679"/>
+	<SubTexture name="John Shot0010" x="2891" y="681" width="605" height="612" frameX="-31" frameY="-64" frameWidth="919" frameHeight="679"/>
+	<SubTexture name="John Shot0011" x="3498" y="681" width="549" height="597" frameX="-86" frameY="-79" frameWidth="919" frameHeight="679"/>
+	<SubTexture name="John Shot0012" x="2" y="1354" width="527" height="457" frameX="-86" frameY="-219" frameWidth="919" frameHeight="679"/>
+	<SubTexture name="John Shot0013" x="531" y="1354" width="452" height="457" frameX="-86" frameY="-219" frameWidth="919" frameHeight="679"/>
+	<SubTexture name="John Shot0014" x="531" y="1354" width="452" height="457" frameX="-86" frameY="-219" frameWidth="919" frameHeight="679"/>
+	<SubTexture name="John Shot0015" x="531" y="1354" width="452" height="457" frameX="-86" frameY="-219" frameWidth="919" frameHeight="679"/>
+	<SubTexture name="John Shot0016" x="531" y="1354" width="452" height="457" frameX="-86" frameY="-219" frameWidth="919" frameHeight="679"/>
+	<SubTexture name="John Shot0017" x="531" y="1354" width="452" height="457" frameX="-86" frameY="-219" frameWidth="919" frameHeight="679"/>
+	<SubTexture name="John Shot0018" x="531" y="1354" width="452" height="457" frameX="-86" frameY="-219" frameWidth="919" frameHeight="679"/>
+	<SubTexture name="tankman running0000" x="985" y="1354" width="503" height="425" frameX="0" frameY="-5" frameWidth="505" frameHeight="486"/>
+	<SubTexture name="tankman running0001" x="985" y="1354" width="503" height="425" frameX="0" frameY="-5" frameWidth="505" frameHeight="486"/>
+	<SubTexture name="tankman running0002" x="985" y="1354" width="503" height="425" frameX="0" frameY="-5" frameWidth="505" frameHeight="486"/>
+	<SubTexture name="tankman running0003" x="1490" y="1354" width="504" height="431" frameX="-1" frameY="-5" frameWidth="505" frameHeight="486"/>
+	<SubTexture name="tankman running0004" x="1490" y="1354" width="504" height="431" frameX="-1" frameY="-5" frameWidth="505" frameHeight="486"/>
+	<SubTexture name="tankman running0005" x="1996" y="1354" width="428" height="436" frameX="-14" frameY="-48" frameWidth="505" frameHeight="486"/>
+	<SubTexture name="tankman running0006" x="1996" y="1354" width="428" height="436" frameX="-14" frameY="-48" frameWidth="505" frameHeight="486"/>
+	<SubTexture name="tankman running0007" x="2426" y="1354" width="358" height="436" frameX="-116" frameY="0" frameWidth="505" frameHeight="486"/>
+	<SubTexture name="tankman running0008" x="2426" y="1354" width="358" height="436" frameX="-116" frameY="0" frameWidth="505" frameHeight="486"/>
+	<SubTexture name="tankman running0009" x="2426" y="1354" width="358" height="436" frameX="-116" frameY="0" frameWidth="505" frameHeight="486"/>
+	<SubTexture name="tankman running0010" x="2786" y="1354" width="366" height="428" frameX="-105" frameY="-13" frameWidth="505" frameHeight="486"/>
+	<SubTexture name="tankman running0011" x="2786" y="1354" width="366" height="428" frameX="-105" frameY="-13" frameWidth="505" frameHeight="486"/>
+	<SubTexture name="tankman running0012" x="3154" y="1354" width="270" height="423" frameX="-136" frameY="-63" frameWidth="505" frameHeight="486"/>
+	<SubTexture name="tankman running0013" x="3154" y="1354" width="270" height="423" frameX="-136" frameY="-63" frameWidth="505" frameHeight="486"/>
+</TextureAtlas>

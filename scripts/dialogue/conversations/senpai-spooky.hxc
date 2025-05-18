@@ -1,0 +1,43 @@
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
+import funkin.play.cutscene.dialogue.Conversation;
+
+class SenpaiSpookyConversation extends Conversation {
+	function new() {
+		super('senpai-spooky');
+	}
+
+  var musicStopped = false;
+  var musicLowered = false;
+
+  override function showCurrentSpeaker():Void {
+    super.showCurrentSpeaker();
+
+    // Funny moment; stop the music for dramatic effect.
+    if (currentSpeaker.id == 'senpai-spooky-shocked')
+    {
+      musicStopped = true;
+      this.music.pause();
+    }
+    else if (musicStopped && currentSpeaker.id == 'senpai-spooky')
+    {
+      musicStopped = false;
+      this.music.resume();
+      this.music.volume = 0.0;
+      var fadeTime = _data.music.fadeTime != null ? _data.music.fadeTime : 2.0;
+      FlxTween.tween(music, {volume: 1.0}, fadeTime, {ease: FlxEase.linear});
+    }
+    else if (currentSpeaker.id == 'senpai-spooky-ladiesplease')
+    {
+      musicLowered = true;
+      var fadeTime = _data.music.fadeTime != null ? _data.music.fadeTime : 1.0;
+      FlxTween.tween(music, {volume: 0.4}, fadeTime, {ease: FlxEase.linear});
+    }
+    else if (musicLowered && currentSpeaker.id == 'senpai-spooky')
+    {
+      musicLowered = false;
+      var fadeTime = _data.music.fadeTime != null ? _data.music.fadeTime : 1.0;
+      FlxTween.tween(music, {volume: 1.0}, fadeTime, {ease: FlxEase.linear});
+    }
+  }
+}

@@ -1,0 +1,182 @@
+{
+	"version": "1.0.0",
+	"renderType": "sparrow",
+	"offsets": [
+		0,
+		0
+	],
+	"danceEvery": 1,
+	"scale": 1,
+	"name": "Mommy Mearest (Spooky, Car)",
+	"cameraOffsets": [
+		0,
+		-100
+	],
+	"flipX": false,
+	"singTime": 8,
+	"startingAnimation": "idle",
+	"isPixel": false,
+	"healthIcon": {
+		"isPixel": false,
+		"offsets": [
+			0,
+			0
+		],
+		"scale": 1,
+		"id": "mom",
+		"flipX": false
+	},
+	"assetPath": "characters/momwitch",
+	"animations": [
+		{
+			"flipY": false,
+			"offsets": [
+				0,
+				0
+			],
+			"frameRate": 24,
+			"prefix": "idle",
+			"flipX": false,
+			"looped": false,
+			"name": "idle"
+		},
+		{
+			"flipY": false,
+			"offsets": [
+				0,
+				0
+			],
+			"frameRate": 24,
+			"prefix": "idle",
+			"frameIndices": [
+				8,
+				9,
+				10,
+				11
+			],
+			"flipX": false,
+			"name": "idle-hold",
+			"looped": true
+		},
+		{
+			"flipY": false,
+			"offsets": [
+				51,
+				-36
+			],
+			"frameRate": 24,
+			"prefix": "left",
+			"flipX": false,
+			"looped": false,
+			"name": "singLEFT"
+		},
+		{
+			"flipY": false,
+			"offsets": [
+				51,
+				-36
+			],
+			"frameRate": 24,
+			"prefix": "left",
+			"frameIndices": [
+				8,
+				9,
+				10,
+				11
+			],
+			"flipX": false,
+			"name": "singLEFT-hold",
+			"looped": true
+		},
+		{
+			"flipY": false,
+			"offsets": [
+				-5,
+				-87
+			],
+			"frameRate": 24,
+			"prefix": "down",
+			"flipX": false,
+			"looped": false,
+			"name": "singDOWN"
+		},
+		{
+			"flipY": false,
+			"offsets": [
+				-5,
+				-87
+			],
+			"frameRate": 24,
+			"prefix": "down",
+			"frameIndices": [
+				8,
+				9,
+				10,
+				11
+			],
+			"flipX": false,
+			"name": "singDOWN-hold",
+			"looped": true
+		},
+		{
+			"flipY": false,
+			"offsets": [
+				-9,
+				23
+			],
+			"frameRate": 24,
+			"prefix": "up",
+			"flipX": false,
+			"looped": false,
+			"name": "singUP"
+		},
+		{
+			"flipY": false,
+			"offsets": [
+				-9,
+				23
+			],
+			"frameRate": 24,
+			"prefix": "up",
+			"frameIndices": [
+				8,
+				9,
+				10,
+				11
+			],
+			"flipX": false,
+			"name": "singUP-hold",
+			"looped": true
+		},
+		{
+			"flipY": false,
+			"offsets": [
+				0,
+				-22
+			],
+			"frameRate": 24,
+			"prefix": "right",
+			"flipX": false,
+			"looped": false,
+			"name": "singRIGHT"
+		},
+		{
+			"flipY": false,
+			"offsets": [
+				0,
+				-22
+			],
+			"frameRate": 24,
+			"prefix": "right",
+			"frameIndices": [
+				8,
+				9,
+				10,
+				11
+			],
+			"flipX": false,
+			"name": "singRIGHT-hold",
+			"looped": true
+		}
+	]
+}

@@ -1,0 +1,8 @@
+{
+  "version": "1.0.0",
+  "name": "Spooky Mix Volume 1",
+  "artists": [""],
+  "albumArtAsset": "freeplay/albumRoll/spookymix1",
+  "albumTitleAsset": "freeplay/albumRoll/spookymix1-text",
+  "albumTitleOffsets": [-30, 10]
+}

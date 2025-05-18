@@ -1,0 +1,54 @@
+{
+  "version": "2.2.4",
+  "songName": "Stress (Spooky Mix)",
+  "artist": "Andrewman_19 (ft. RubyyyButCool)",
+  "charter": "LimeIsHere, RubyyyButCool",
+  "modArt": "givemethesalt, Andrewman_19, Denoohay",
+  "divisions": 96,
+  "playData": {
+    "difficulties": ["easy", "normal", "hard"],
+    "characters": {
+      "player": "spooky-playable",
+      "girlfriend": "moloch-stress",
+      "opponent": "tankman-spooky",
+      "instrumental": "spookymod",
+      "altInstrumentals": ["pico", ""]
+    },
+    "stage": "tankmanBattlefieldSpooky",
+    "noteStyle": "funkin",
+    "ratings": { "easy": 7, "normal": 9, "hard": 11 },
+    "album": "spookymix2",
+    "previewStart": 0,
+    "previewEnd": 15000
+  },
+  "generatedBy": "Friday Night Funkin' - v0.6.1",
+  "timeFormat": "ms",
+  "timeChanges": [
+    {
+      "t": 0,
+      "b": 0,
+      "bpm": 178,
+      "n": 4,
+      "d": 4,
+      "bt": [
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "t": 124044.943820225,
+      "b": 368,
+      "bpm": 115,
+      "n": 4,
+      "d": 4,
+      "bt": [
+        4,
+        4,
+        4,
+        4
+      ]
+    }
+  ]
+}

@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="tankWatchtower.png">
+	<!-- Created with Adobe Animate version 24.0.3.19 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="watchtower gradient color0000" x="2" y="2" width="369" height="727" frameX="0" frameY="-5" frameWidth="369" frameHeight="732"/>
+	<SubTexture name="watchtower gradient color0001" x="2" y="2" width="369" height="727" frameX="0" frameY="-5" frameWidth="369" frameHeight="732"/>
+	<SubTexture name="watchtower gradient color0002" x="373" y="2" width="365" height="730" frameX="-2" frameY="-2" frameWidth="369" frameHeight="732"/>
+	<SubTexture name="watchtower gradient color0003" x="373" y="2" width="365" height="730" frameX="-2" frameY="-2" frameWidth="369" frameHeight="732"/>
+	<SubTexture name="watchtower gradient color0004" x="740" y="2" width="364" height="732" frameX="-2" frameY="0" frameWidth="369" frameHeight="732"/>
+	<SubTexture name="watchtower gradient color0005" x="740" y="2" width="364" height="732" frameX="-2" frameY="0" frameWidth="369" frameHeight="732"/>
+	<SubTexture name="watchtower gradient color0006" x="1106" y="2" width="364" height="732" frameX="-2" frameY="0" frameWidth="369" frameHeight="732"/>
+	<SubTexture name="watchtower gradient color0007" x="1106" y="2" width="364" height="732" frameX="-2" frameY="0" frameWidth="369" frameHeight="732"/>
+	<SubTexture name="watchtower gradient color0008" x="1106" y="2" width="364" height="732" frameX="-2" frameY="0" frameWidth="369" frameHeight="732"/>
+	<SubTexture name="watchtower gradient color0009" x="1106" y="2" width="364" height="732" frameX="-2" frameY="0" frameWidth="369" frameHeight="732"/>
+	<SubTexture name="watchtower gradient color0010" x="1106" y="2" width="364" height="732" frameX="-2" frameY="0" frameWidth="369" frameHeight="732"/>
+	<SubTexture name="watchtower gradient color0011" x="1106" y="2" width="364" height="732" frameX="-2" frameY="0" frameWidth="369" frameHeight="732"/>
+	<SubTexture name="watchtower gradient color0012" x="1106" y="2" width="364" height="732" frameX="-2" frameY="0" frameWidth="369" frameHeight="732"/>
+	<SubTexture name="watchtower gradient color0013" x="1106" y="2" width="364" height="732" frameX="-2" frameY="0" frameWidth="369" frameHeight="732"/>
+	<SubTexture name="watchtower no skittles0000" x="1472" y="2" width="364" height="732"/>
+	<SubTexture name="watchtower no skittles0001" x="1472" y="2" width="364" height="732"/>
+	<SubTexture name="watchtower no skittles0002" x="1472" y="2" width="364" height="732"/>
+	<SubTexture name="watchtower no skittles0003" x="1472" y="2" width="364" height="732"/>
+	<SubTexture name="watchtower no skittles0004" x="1472" y="2" width="364" height="732"/>
+	<SubTexture name="watchtower no skittles0005" x="1472" y="2" width="364" height="732"/>
+	<SubTexture name="watchtower no skittles0006" x="1472" y="2" width="364" height="732"/>
+	<SubTexture name="watchtower no skittles0007" x="1472" y="2" width="364" height="732"/>
+	<SubTexture name="watchtower no skittles0008" x="1472" y="2" width="364" height="732"/>
+	<SubTexture name="watchtower no skittles0009" x="1472" y="2" width="364" height="732"/>
+	<SubTexture name="watchtower no skittles0010" x="1472" y="2" width="364" height="732"/>
+	<SubTexture name="watchtower no skittles0011" x="1472" y="2" width="364" height="732"/>
+	<SubTexture name="watchtower no skittles0012" x="1472" y="2" width="364" height="732"/>
+	<SubTexture name="watchtower no skittles0013" x="1472" y="2" width="364" height="732"/>
+	<SubTexture name="watchtower skittles fall event0000" x="1838" y="2" width="364" height="731" frameX="-1" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0001" x="1838" y="2" width="364" height="731" frameX="-1" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0002" x="2204" y="2" width="404" height="732" frameX="-2" frameY="-3" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0003" x="2204" y="2" width="404" height="732" frameX="-2" frameY="-3" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0004" x="2610" y="2" width="412" height="732" frameX="-2" frameY="-3" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0005" x="2610" y="2" width="412" height="732" frameX="-2" frameY="-3" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0006" x="3024" y="2" width="414" height="732" frameX="-2" frameY="-3" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0007" x="3024" y="2" width="414" height="732" frameX="-2" frameY="-3" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0008" x="3440" y="2" width="413" height="732" frameX="-2" frameY="-3" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0009" x="3440" y="2" width="413" height="732" frameX="-2" frameY="-3" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0010" x="2" y="736" width="414" height="732" frameX="-2" frameY="-3" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0011" x="2" y="736" width="414" height="732" frameX="-2" frameY="-3" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0012" x="418" y="736" width="415" height="732" frameX="-2" frameY="-3" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0013" x="418" y="736" width="415" height="732" frameX="-2" frameY="-3" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0014" x="3024" y="2" width="414" height="732" frameX="-2" frameY="-3" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0015" x="3024" y="2" width="414" height="732" frameX="-2" frameY="-3" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0016" x="3440" y="2" width="413" height="732" frameX="-2" frameY="-3" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0017" x="3440" y="2" width="413" height="732" frameX="-2" frameY="-3" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0018" x="2" y="736" width="414" height="732" frameX="-2" frameY="-3" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0019" x="2" y="736" width="414" height="732" frameX="-2" frameY="-3" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0020" x="418" y="736" width="415" height="732" frameX="-2" frameY="-3" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0021" x="418" y="736" width="415" height="732" frameX="-2" frameY="-3" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0022" x="835" y="736" width="447" height="731" frameX="-2" frameY="-3" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0023" x="835" y="736" width="447" height="731" frameX="-2" frameY="-3" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0024" x="1284" y="736" width="444" height="730" frameX="-3" frameY="-1" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0025" x="1284" y="736" width="444" height="730" frameX="-3" frameY="-1" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0026" x="1284" y="736" width="444" height="730" frameX="-3" frameY="-1" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0027" x="1730" y="736" width="454" height="729" frameX="-3" frameY="-1" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0028" x="1730" y="736" width="454" height="729" frameX="-3" frameY="-1" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0029" x="2186" y="736" width="458" height="729" frameX="-2" frameY="0" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0030" x="2186" y="736" width="458" height="729" frameX="-2" frameY="0" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0031" x="2646" y="736" width="462" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0032" x="2646" y="736" width="462" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0033" x="3110" y="736" width="465" height="731" frameX="0" frameY="-5" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0034" x="3110" y="736" width="465" height="731" frameX="0" frameY="-5" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0035" x="3577" y="736" width="465" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0036" x="3577" y="736" width="465" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0037" x="2" y="1470" width="465" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0038" x="469" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0039" x="469" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0040" x="469" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0041" x="469" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0042" x="469" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0043" x="469" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0044" x="469" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0045" x="469" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0046" x="469" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0047" x="469" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0048" x="469" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0049" x="469" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0050" x="469" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0051" x="469" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0052" x="469" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0053" x="469" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0054" x="469" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0055" x="469" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0056" x="836" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0057" x="836" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0058" x="1203" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0059" x="1203" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0060" x="1570" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0061" x="1570" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0062" x="1570" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0063" x="1937" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0064" x="1937" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0065" x="469" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0066" x="469" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0067" x="469" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0068" x="469" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0069" x="469" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0070" x="469" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0071" x="469" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0072" x="469" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0073" x="469" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0074" x="469" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0075" x="469" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0076" x="469" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0077" x="469" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0078" x="2304" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0079" x="2304" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0080" x="2671" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0081" x="2671" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0082" x="3038" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0083" x="3038" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0084" x="3038" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0085" x="3038" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0086" x="3038" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0087" x="3038" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0088" x="3038" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0089" x="3038" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0090" x="3405" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0091" x="3405" y="1470" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0092" x="2" y="2203" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0093" x="2" y="2203" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0094" x="369" y="2203" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0095" x="369" y="2203" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0096" x="736" y="2203" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0097" x="736" y="2203" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0098" x="736" y="2203" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0099" x="736" y="2203" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0100" x="736" y="2203" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0101" x="736" y="2203" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0102" x="736" y="2203" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0103" x="736" y="2203" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+	<SubTexture name="watchtower skittles fall event0104" x="736" y="2203" width="365" height="731" frameX="0" frameY="-4" frameWidth="465" frameHeight="736"/>
+</TextureAtlas>

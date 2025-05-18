@@ -1,0 +1,86 @@
+import flixel.FlxG;
+import flixel.FlxSprite;
+import flixel.addons.display.FlxRuntimeShader;
+import flixel.sound.FlxSound;
+import funkin.Conductor;
+import funkin.modding.base.ScriptedFlxRuntimeShader;
+import funkin.graphics.shaders.AdjustColorShader;
+import funkin.play.PlayState;
+import funkin.play.stage.Stage;
+import funkin.graphics.adobeanimate.FlxAtlasSprite;
+import funkin.modding.base.ScriptedFlxAtlasSprite;
+
+class MallXmasSpookyStage extends Stage
+{
+	function new()
+	{
+		super('mallXmasSpooky');
+	}
+
+	var colorShader:AdjustColorShader;
+
+	public override function onCountdownStart(event:CountdownScriptEvent):Void {
+		super.onCountdownStart(event);
+	}
+
+	function buildStage()
+	{
+		super.buildStage();
+
+		colorShader = new AdjustColorShader();
+
+		colorShader.brightness = 3;
+		colorShader.contrast = 9;
+		colorShader.saturation = -15;
+		colorShader.hue = -8;
+
+		getNamedProp('christmasGlow').blend = 0;
+	}
+
+	function onUpdate(event:UpdateScriptEvent):Void
+	{
+		super.onUpdate(event);
+
+		if(PlayState.instance.currentStage.getBoyfriend() != null && PlayState.instance.currentStage.getBoyfriend().shader == null)
+		{
+			PlayState.instance.currentStage.getBoyfriend().shader = colorShader;
+			PlayState.instance.currentStage.getGirlfriend().shader = colorShader;
+			PlayState.instance.currentStage.getDad().shader = colorShader;
+			getNamedProp('santa').shader = colorShader;
+			getNamedProp('bottomBoppers').shader = colorShader;
+		}
+
+		if (PlayState.instance.currentStage.getBoyfriend() != null && PlayState.instance.currentVariation == 'spookymod' && PlayState.instance.currentSong.id == 'eggnog')
+		{
+			PlayState.instance.currentStage.getBoyfriend().danceEvery = 2;
+			PlayState.instance.currentStage.getDad().danceEvery = 2;
+			PlayState.instance.currentStage.getGirlfriend().danceEvery = 2;
+			getNamedProp('bottomBoppers').danceEvery = 2;
+			getNamedProp('upperBoppers').danceEvery = 2;
+			getNamedProp('santa').danceEvery = 2;
+		}
+
+	}
+
+	override function onGameOver(event:ScriptEvent):Void {
+		super.onGameOver(event);
+		
+		PlayState.instance.currentStage.getBoyfriend().shader = null;
+	}
+
+	override function onSongRetry(event:ScriptEvent):Void {
+		super.onSongRetry(event);
+		
+		PlayState.instance.currentStage.getBoyfriend().shader = colorShader;
+	}
+
+	function onBeatHit(event:SongTimeScriptEvent):Void
+	{
+		super.onBeatHit(event);
+	}
+
+  function onStepHit(event:SongTimeScriptEvent):Void
+	{
+		super.onStepHit(event);
+	}
+}

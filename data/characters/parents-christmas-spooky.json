@@ -1,0 +1,119 @@
+{
+  "version": "1.0.0",
+  "name": "Mommy and Daddy (Festive, Spooky Mix)",
+  "assetPath": "characters/ChristmasParentsSpooky",
+  "healthIcon": {
+    "id": "parents-christmas"
+  },
+  "offsets": [-30, 20],
+  "animations": [
+    {
+      "name": "idle",
+      "prefix": "parents idle",
+      "offsets": [0, 0]
+    },
+    {
+      "name": "idle-hold",
+      "prefix": "parents idle",
+      "looped": true,
+      "frameIndices": [12, 13, 14, 15],
+      "offsets": [0, 0]
+    },
+    {
+      "name": "singLEFT",
+      "prefix": "dad left",
+      "offsets": [23, 15]
+    },
+    {
+      "name": "singLEFT-hold",
+      "prefix": "dad left",
+      "looped": true,
+      "frameIndices": [12, 13, 14, 15],
+      "offsets": [23, 15]
+    },
+    {
+      "name": "singDOWN",
+      "prefix": "dad down",
+      "offsets": [-64, -1]
+    },
+    {
+      "name": "singDOWN-hold",
+      "prefix": "dad down",
+      "looped": true,
+      "frameIndices": [12, 13, 14, 15],
+      "offsets": [-64, -1]
+    },
+    {
+      "name": "singUP",
+      "prefix": "dad up",
+      "offsets": [1, 5]
+    },
+    {
+      "name": "singUP-hold",
+      "prefix": "dad up",
+      "looped": true,
+      "frameIndices": [12, 13, 14, 15],
+      "offsets": [1, 5]
+    },
+    {
+      "name": "singRIGHT",
+      "prefix": "dad right",
+      "offsets": [-71, 0]
+    },
+    {
+      "name": "singRIGHT-hold",
+      "prefix": "dad right",
+      "looped": true,
+      "frameIndices": [12, 13, 14, 15],
+      "offsets": [-71, 0]
+    },
+    {
+      "name": "singLEFT-alt",
+      "prefix": "mom left",
+      "offsets": [23, 15]
+    },
+    {
+      "name": "singLEFT-alt-hold",
+      "prefix": "mom left",
+      "looped": true,
+      "frameIndices": [12, 13, 14, 15],
+      "offsets": [23, 15]
+    },
+    {
+      "name": "singDOWN-alt",
+      "prefix": "mom down",
+      "offsets": [-64, -1]
+    },
+    {
+      "name": "singDOWN-alt-hold",
+      "prefix": "mom down",
+      "looped": true,
+      "frameIndices": [12, 13, 14, 15],
+      "offsets": [-64, -1]
+    },
+    {
+      "name": "singUP-alt",
+      "prefix": "mom up",
+      "offsets": [1, 5]
+    },
+    {
+      "name": "singUP-alt-hold",
+      "prefix": "mom up",
+      "looped": true,
+      "frameIndices": [12, 13, 14, 15],
+      "offsets": [1, 5]
+    },
+    {
+      "name": "singRIGHT-alt",
+      "prefix": "mom right",
+      "offsets": [-71, 0]
+    },
+    {
+      "name": "singRIGHT-alt-hold",
+      "prefix": "mom right",
+      "looped": true,
+      "frameIndices": [12, 13, 14, 15],
+      "offsets": [-71, 0]
+    }
+  ]
+}

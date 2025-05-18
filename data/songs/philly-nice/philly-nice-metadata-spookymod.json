@@ -1,0 +1,43 @@
+{
+  "version": "2.2.4",
+  "songName": "Philly Nice (Spooky Mix)",
+  "artist": "alewito",
+  "charter": "givemethesalt",
+  "modArt": "Andrewman_19, givemethesalt, Denoohay",
+  "divisions": 96,
+  "playData": {
+    "difficulties": ["easy", "normal", "hard"],
+    "characters": {
+      "player": "spooky-playable",
+      "girlfriend": "moloch",
+      "opponent": "pico-spooky",
+      "instrumental": "spookymod",
+        "opponentVocals": [
+          "both"
+        ]
+    },
+    "stage": "phillyTrainSpooky",
+    "noteStyle": "funkin",
+    "ratings": { "easy": 7, "normal": 9, "hard": 11 },
+    "album": "spookymix2",
+    "previewStart": 0,
+    "previewEnd": 15000
+  },
+  "generatedBy": "Friday Night Funkin' - v0.4.1 (rewrite/master:47b7aa7) PROTOTYPE",
+  "timeFormat": "ms",
+  "timeChanges": [
+    {
+      "t": 0,
+      "b": 0,
+      "bpm": 185,
+      "n": 4,
+      "d": 4,
+      "bt": [
+        4,
+        4,
+        4,
+        4
+      ]
+    }
+  ]
+}

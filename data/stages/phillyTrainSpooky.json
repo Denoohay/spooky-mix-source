@@ -1,0 +1,212 @@
+{
+  "props": [
+    {
+      "danceEvery": 0,
+      "zIndex": 10,
+      "position": [-500, -450],
+      "scale": [1, 1],
+      "animType": "sparrow",
+      "name": "sky",
+      "isPixel": false,
+      "assetPath": "philly/spooky/sky",
+      "scroll": [0.4, 0.4],
+      "animations": []
+    },
+    {
+      "danceEvery": 0,
+      "zIndex": 20,
+      "position": [-200, 350],
+      "scale": [1, 1],
+      "animType": "sparrow",
+      "name": "backFarHills",
+      "isPixel": false,
+      "assetPath": "philly/spooky/backFarHills",
+      "scroll": [0.6, 0.6],
+      "animations": []
+    },
+    {
+      "danceEvery": 0,
+      "zIndex": 30,
+      "position": [1280, 380],
+      "scale": [1, 1],
+      "animType": "sparrow",
+      "name": "mansion",
+      "isPixel": false,
+      "assetPath": "philly/spooky/mansion",
+      "scroll": [0.8, 0.8],
+      "animations": []
+    },
+    {
+      "danceEvery": 0,
+      "zIndex": 31,
+      "position": [1280, 380],
+      "scale": [1, 1],
+      "animType": "sparrow",
+      "name": "mansionWindow",
+      "isPixel": false,
+      "assetPath": "philly/spooky/mansionWindow",
+      "scroll": [0.8, 0.8],
+      "animations": []
+    },
+    {
+      "danceEvery": 0,
+      "zIndex": 40,
+      "position": [50, 320],
+      "scale": [1, 1],
+      "animType": "sparrow",
+      "name": "backHills",
+      "isPixel": false,
+      "assetPath": "philly/spooky/backHills",
+      "scroll": [0.8, 0.8],
+      "animations": []
+    },
+    {
+      "danceEvery": 0,
+      "zIndex": 50,
+      "position": [187, 1087],
+      "scale": [1, 1],
+      "animType": "sparrow",
+      "name": "road",
+      "isPixel": false,
+      "assetPath": "philly/spooky/road",
+      "scroll": [1, 1],
+      "animations": []
+    },
+    {
+      "danceEvery": 0,
+      "zIndex": 60,
+      "position": [193, 668],
+      "scale": [1, 1],
+      "animType": "sparrow",
+      "name": "ground",
+      "isPixel": false,
+      "assetPath": "philly/spooky/ground",
+      "scroll": [1, 1],
+      "animations": []
+    },
+    {
+      "name": "ghostLeft",
+      "assetPath": "philly/spooky/danceDanceDanceGhost",
+      "position": [938, 659],
+      "scroll": [1, 1],
+      "scale": [0.7, 0.7],
+      "zIndex": 70,
+      "alpha": 0,
+      "animations": [
+        {
+          "name": "idle",
+          "prefix": "spooky dancing ghost easter egg",
+          "looped": true
+        },
+        {
+          "name": "spawnIn",
+          "prefix": "spawning in ghost",
+          "looped": false
+        },
+        {
+          "name": "spawnOut",
+          "prefix": "spawn out ghost",
+          "looped": false
+        }
+      ],
+      "startingAnimation": "idle"
+    },
+    {
+      "name": "ghostRight",
+      "assetPath": "philly/spooky/danceDanceDanceGhost",
+      "position": [2204, 659],
+      "scroll": [1, 1],
+      "scale": [0.7, 0.7],
+      "zIndex": 70,
+      "alpha": 0,
+      "flipX": true,
+      "animations": [
+        {
+          "name": "idle",
+          "prefix": "spooky dancing ghost easter egg",
+          "looped": true
+        },
+        {
+          "name": "spawnIn",
+          "prefix": "spawning in ghost",
+          "looped": false
+        },
+        {
+          "name": "spawnOut",
+          "prefix": "spawn out ghost",
+          "looped": false
+        }
+      ],
+      "startingAnimation": "idle"
+    },
+    {
+      "danceEvery": 0,
+      "zIndex": 400,
+      "position": [550, 1250],
+      "scale": [1, 1],
+      "animType": "sparrow",
+      "name": "frontGraves",
+      "isPixel": false,
+      "assetPath": "philly/spooky/frontGraves",
+      "scroll": [1.1, 1.1],
+      "animations": []
+    },
+    {
+      "danceEvery": 0,
+      "zIndex": 420,
+      "position": [281, 1439],
+      "scale": [1, 1],
+      "animType": "sparrow",
+      "name": "bottomLight",
+      "isPixel": false,
+      "assetPath": "philly/spooky/bottomLight",
+      "scroll": [1, 1],
+      "animations": []
+    },
+    {
+      "danceEvery": 0,
+      "zIndex": 430,
+      "position": [-121, -257],
+      "scale": [1, 1],
+      "animType": "sparrow",
+      "name": "moonlight",
+      "isPixel": false,
+      "assetPath": "philly/spooky/moonlight",
+      "scroll": [0.4, 0.4],
+      "animations": []
+    },
+    {
+      "danceEvery": 0,
+      "zIndex": 440,
+      "position": [350.6, 233.6],
+      "scale": [1, 1],
+      "animType": "sparrow",
+      "name": "topGradient",
+      "isPixel": false,
+      "assetPath": "philly/spooky/topGradient",
+      "scroll": [1, 1],
+      "animations": []
+    }
+  ],
+  "cameraZoom": 0.7,
+  "version": "1.0.0",
+  "characters": {
+    "bf": {
+      "zIndex": 300,
+      "position": [2500, 1500],
+      "cameraOffsets": [-200, -100]
+    },
+    "dad": {
+      "zIndex": 200,
+      "position": [1200, 1500],
+      "cameraOffsets": [200, -100]
+    },
+    "gf": {
+      "zIndex": 100,
+      "position": [1750, 1380],
+      "cameraOffsets": [50, 0]
+    }
+  },
+  "name": "Philly (Train) [Spooky]",
+  "directory": "week3"
+}

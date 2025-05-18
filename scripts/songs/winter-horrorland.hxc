@@ -1,0 +1,98 @@
+import flixel.FlxG;
+import flixel.FlxSprite;
+import flixel.math.FlxBasePoint;
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
+import flixel.util.FlxTimer;
+import funkin.audio.FunkinSound;
+import funkin.Conductor;
+import funkin.graphics.adobeanimate.FlxAtlasSprite;
+import funkin.graphics.FunkinSprite;
+import funkin.modding.base.ScriptedFlxAtlasSprite;
+import funkin.play.cutscene.CutsceneType;
+import funkin.play.cutscene.VideoCutscene;
+import funkin.play.GameOverSubState;
+import funkin.play.PlayState;
+import funkin.play.PlayStatePlaylist;
+import funkin.play.song.Song;
+import funkin.play.stage.StageProp;
+import funkin.play.Countdown;
+import funkin.ui.freeplay.FreeplayState;
+import funkin.save.Save;
+
+class WinterHorrorlandSong extends Song
+{
+	var skippedCountdown:Bool = false;
+
+	function new()
+	{
+		super('winter-horrorland');
+	}
+
+	override function onSongRetry(event:ScriptEvent):Void {
+		super.onSongRetry(event);
+		
+		if (PlayState.instance.currentVariation == 'spookymod')
+		{
+			new FlxTimer().start(0.2, function(tmr:FlxTimer)
+			{
+				PlayState.instance.isInCutscene = true;
+			});
+		}
+	}
+
+	override function onSongLoaded(event:SongLoadScriptEvent):Void
+	{
+		super.onSongLoaded(event);
+		
+		skippedCountdown = false;
+
+		if (PlayState.instance.currentVariation == 'spookymod')
+		{
+			new FlxTimer().start(0.1, function(tmr:FlxTimer)
+			{
+				PlayState.instance.startCountdown();
+				Countdown.skipCountdown();
+				skippedCountdown = true;
+			});
+
+			new FlxTimer().start(0.2, function(tmr:FlxTimer)
+			{
+				PlayState.instance.isInCutscene = true;
+			});
+		}
+	}
+	public function listDifficulties(variationId:String, variationIds:Array<String>, showLocked:Bool):Array<String>
+	{
+		if (showLocked || Save.instance.hasBeatenSong('eggnog', null, 'spookymod'))
+		{
+			return super.listDifficulties(variationId, variationIds);
+		}
+
+		// Hide all difficulties if the player has not beaten the week.
+		return [];
+	}
+
+	override function onUpdate(event:UpdateScriptEvent)
+	{
+		super.onUpdate(event);
+
+		//Save.instance.hasBeatenSong('eggnog', null, 'spookymod')
+
+		if (PlayState.instance.currentVariation == 'spookymod' && skippedCountdown == false)
+		{
+			skippedCountdown = true;
+			Countdown.skipCountdown();
+		}
+	}
+
+    public override function listAltInstrumentalIds(difficultyId:String, variationId:String):Array<String>
+    {
+		var targetDifficulty:Null<SongDifficulty> = getDifficulty(difficultyId, variationId);
+
+		if ((difficultyId == "erect" || difficultyId == "nightmare") && (Save.instance.hasBeatenSong(this.id, ["erect"], "") || Save.instance.hasBeatenSong(this.id, ["nightmare"], ""))) return targetDifficulty?.characters?.altInstrumentals ?? [];
+		else if (variationId == "default" && Save.instance.hasBeatenSong(this.id, null, "")) return targetDifficulty?.characters?.altInstrumentals ?? [];
+		else if (Save.instance.hasBeatenSong(this.id, null, variationId)) return targetDifficulty?.characters?.altInstrumentals ?? [];
+		else return [];
+    }
+}

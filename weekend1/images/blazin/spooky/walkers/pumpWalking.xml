@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="pumpWalking.png">
+	<!-- Created with Adobe Animate version 24.0.3.19 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="pump walk0000" x="2" y="2" width="497" height="367" frameX="-4" frameY="0" frameWidth="505" frameHeight="367"/>
+	<SubTexture name="pump walk0001" x="2" y="2" width="497" height="367" frameX="-4" frameY="0" frameWidth="505" frameHeight="367"/>
+	<SubTexture name="pump walk0002" x="2" y="2" width="497" height="367" frameX="-4" frameY="0" frameWidth="505" frameHeight="367"/>
+	<SubTexture name="pump walk0003" x="2" y="2" width="497" height="367" frameX="-4" frameY="0" frameWidth="505" frameHeight="367"/>
+	<SubTexture name="pump walk0004" x="501" y="2" width="502" height="366" frameX="0" frameY="-1" frameWidth="505" frameHeight="367"/>
+	<SubTexture name="pump walk0005" x="501" y="2" width="502" height="366" frameX="0" frameY="-1" frameWidth="505" frameHeight="367"/>
+	<SubTexture name="pump walk0006" x="501" y="2" width="502" height="366" frameX="0" frameY="-1" frameWidth="505" frameHeight="367"/>
+	<SubTexture name="pump walk0007" x="501" y="2" width="502" height="366" frameX="0" frameY="-1" frameWidth="505" frameHeight="367"/>
+	<SubTexture name="pump walk0008" x="1005" y="2" width="505" height="366" frameX="0" frameY="-1" frameWidth="505" frameHeight="367"/>
+	<SubTexture name="pump walk0009" x="1005" y="2" width="505" height="366" frameX="0" frameY="-1" frameWidth="505" frameHeight="367"/>
+	<SubTexture name="pump walk0010" x="1005" y="2" width="505" height="366" frameX="0" frameY="-1" frameWidth="505" frameHeight="367"/>
+	<SubTexture name="pump walk0011" x="1005" y="2" width="505" height="366" frameX="0" frameY="-1" frameWidth="505" frameHeight="367"/>
+	<SubTexture name="pump walk0012" x="1512" y="2" width="503" height="367" frameX="-2" frameY="0" frameWidth="505" frameHeight="367"/>
+	<SubTexture name="pump walk0013" x="1512" y="2" width="503" height="367" frameX="-2" frameY="0" frameWidth="505" frameHeight="367"/>
+	<SubTexture name="pump walk0014" x="1512" y="2" width="503" height="367" frameX="-2" frameY="0" frameWidth="505" frameHeight="367"/>
+	<SubTexture name="pump walk0015" x="1512" y="2" width="503" height="367" frameX="-2" frameY="0" frameWidth="505" frameHeight="367"/>
+	<SubTexture name="pump walk0016" x="2" y="371" width="493" height="366" frameX="-4" frameY="-1" frameWidth="505" frameHeight="367"/>
+	<SubTexture name="pump walk0017" x="2" y="371" width="493" height="366" frameX="-4" frameY="-1" frameWidth="505" frameHeight="367"/>
+	<SubTexture name="pump walk0018" x="2" y="371" width="493" height="366" frameX="-4" frameY="-1" frameWidth="505" frameHeight="367"/>
+	<SubTexture name="pump walk0019" x="2" y="371" width="493" height="366" frameX="-4" frameY="-1" frameWidth="505" frameHeight="367"/>
+	<SubTexture name="pump walk0020" x="497" y="371" width="494" height="367" frameX="-4" frameY="0" frameWidth="505" frameHeight="367"/>
+	<SubTexture name="pump walk0021" x="497" y="371" width="494" height="367" frameX="-4" frameY="0" frameWidth="505" frameHeight="367"/>
+	<SubTexture name="pump walk0022" x="497" y="371" width="494" height="367" frameX="-4" frameY="0" frameWidth="505" frameHeight="367"/>
+	<SubTexture name="pump walk0023" x="497" y="371" width="494" height="367" frameX="-4" frameY="0" frameWidth="505" frameHeight="367"/>
+</TextureAtlas>

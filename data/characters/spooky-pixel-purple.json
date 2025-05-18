@@ -1,0 +1,105 @@
+{
+  "version": "1.0.0",
+  "name": "Spooky Kids (Pixel, Purple)",
+  "assetPath": "characters/SpookyKids-pixel-purple",
+  "renderType": "multisparrow",
+  "isPixel": true,
+  "offsets": [0, 4],
+  "cameraOffsets": [0, 40],
+  "scale": 6,
+  "flipX": true,
+  "healthIcon": {
+    "id": "spooky-pixel",
+    "isPixel": true
+  },
+  "singTime": 8.0,
+  "startingAnimation": "danceRight",
+  "animations": [
+    {
+      "name": "danceLeft",
+      "prefix": "idleLeft",
+      "frameRate": 24,
+      "offsets": [0, 0]
+    },
+    {
+      "name": "danceRight",
+      "prefix": "idleRight",
+      "frameRate": 24,
+      "offsets": [0, 0]
+    },
+    {
+      "name": "singLEFT",
+      "prefix": "spookyLeft",
+      "offsets": [0, 0]
+    },
+    {
+      "name": "singLEFTmiss",
+      "prefix": "leftMiss",
+      "offsets": [0, 0]
+    },
+    {
+      "name": "singDOWN",
+      "prefix": "spookyDown",
+      "offsets": [0, 0]
+    },
+    {
+      "name": "singDOWNmiss",
+      "prefix": "downMiss",
+      "offsets": [0, 0]
+    },
+    {
+      "name": "singUP",
+      "prefix": "spookyUp",
+      "offsets": [0, 0]
+    },
+    {
+      "name": "singUPmiss",
+      "prefix": "upMiss",
+      "offsets": [0, 0]
+    },
+    {
+      "name": "singRIGHT",
+      "prefix": "spookyRight",
+      "offsets": [0, 0]
+    },
+    {
+      "name": "singRIGHTmiss-hold",
+      "prefix": "rightMiss",
+      "frameIndices": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
+      "looped": true,
+      "offsets": [0, 0]
+    },
+    {
+      "name": "singRIGHTmiss",
+      "prefix": "rightMiss",
+      "offsets": [0, 0]
+    },
+    {
+      "name": "cheer",
+      "prefix": "spookyUp",
+      "offsets": [0, 0]
+    },
+    {
+      "name": "firstDeath",
+      "prefix": "die",
+      "assetPath": "characters/SpookyKids-pixel_DEATH",
+      "offsets": [6, -5]
+    },
+    {
+      "name": "deathLoop",
+      "prefix": "loop",
+      "assetPath": "characters/SpookyKids-pixel_DEATH",
+      "looped": true,
+      "offsets": [6, -5]
+    },
+    {
+      "name": "deathConfirm",
+      "prefix": "retry",
+      "assetPath": "characters/SpookyKids-pixel_DEATH",
+      "offsets": [6, -5]
+    }
+  ],
+  "death": {
+    "cameraOffsets": [0, 120]
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "cameraZoom": 0.9,
+  "props": [
+    {
+      "name": "vignette",
+      "assetPath": "blazin/spooky/houseOverlay",
+      "zIndex": 500,
+      "position": [0, 0],
+      "scale": [1, 1],
+      "scroll": [1, 1]
+    },
+    {
+      "name": "darnellWalking",
+      "assetPath": "blazin/spooky/walkers/darnellWalking",
+      "position": [470, -1165],
+      "scroll": [1, 1],
+      "scale": [1, 1],
+      "zIndex": 10,
+      "animations": [
+        {
+          "name": "walk",
+          "prefix": "darnell  walking",
+          "frameRate": 12,
+          "looped": true
+        }
+      ],
+      "startingAnimation": "walk"
+    },
+    {
+      "name": "pumpWalking",
+      "assetPath": "blazin/spooky/walkers/pumpWalking",
+      "position": [-85, -970],
+      "scroll": [1, 1],
+      "scale": [1, 1],
+      "zIndex": 11,
+      "animations": [
+        {
+          "name": "walk",
+          "prefix": "pump walk",
+          "looped": true
+        }
+      ],
+      "startingAnimation": "walk"
+    },
+    {
+      "name": "skidWalking",
+      "assetPath": "blazin/spooky/walkers/skidWalking",
+      "position": [288, -1005],
+      "scroll": [1, 1],
+      "scale": [1, 1],
+      "zIndex": 9,
+      "animations": [
+        {
+          "name": "walk",
+          "prefix": "skid walk",
+          "looped": true
+        }
+      ],
+      "startingAnimation": "walk"
+    },
+    {
+      "name": "lowTaper",
+      "assetPath": "blazin/spooky/walkingBG/lowTaper",
+      "position": [0, -688],
+      "scroll": [1, 1],
+      "scale": [1, 1],
+      "zIndex": 20
+    },
+    {
+      "name": "strumBG",
+      "assetPath": "blazin/spooky/walkingBG/strumBG",
+      "position": [872, -1439],
+      "scroll": [1, 1],
+      "scale": [1, 1],
+      "zIndex": 21
+    }
+  ],
+  "version": "1.0.0",
+  "characters": {
+    "bf": {
+      "zIndex": 400,
+      "position": [1010, 1200],
+      "cameraOffsets": [0, 0]
+    },
+    "gf": {
+      "zIndex": 300,
+      "position": [840, 1205],
+      "cameraOffsets": [0, 0]
+    },
+    "dad": {
+      "zIndex": 350,
+      "position": [480, 1240],
+      "cameraOffsets": [0, 0]
+    }
+  },
+  "name": "Blazin' Neighborhood [Spooky]",
+  "directory": "weekend1"
+}

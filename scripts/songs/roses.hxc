@@ -1,0 +1,121 @@
+import funkin.play.song.Song;
+import funkin.play.PlayState;
+import funkin.Preferences;
+import flixel.FlxSprite;
+import funkin.graphics.FunkinSprite;
+import flixel.FlxG;
+import funkin.play.PlayStatePlaylist;
+import funkin.audio.FunkinSound;
+import flixel.tweens.FlxTween;
+import funkin.save.Save;
+import flixel.tweens.FlxEase;
+import funkin.ui.options.PreferencesMenu;
+
+class RosesSong extends Song {
+  var hasPlayedCutscene:Bool;
+
+	public function new() {
+		super('roses');
+	}
+
+	public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool
+    {
+        if (currentVariation == 'spookymod')
+          return !Save.instance.hasBeatenSong(this.id, null, 'spookymod');
+
+        return false;
+	}
+
+    public override function listAltInstrumentalIds(difficultyId:String, variationId:String):Array<String>
+    {
+		var targetDifficulty:Null<SongDifficulty> = getDifficulty(difficultyId, variationId);
+
+		if ((difficultyId == "erect" || difficultyId == "nightmare") && (Save.instance.hasBeatenSong(this.id, ["erect"], "") || Save.instance.hasBeatenSong(this.id, ["nightmare"], ""))) return targetDifficulty?.characters?.altInstrumentals ?? [];
+		else if (variationId == "default" && Save.instance.hasBeatenSong(this.id, null, "")) return targetDifficulty?.characters?.altInstrumentals ?? [];
+		else if (Save.instance.hasBeatenSong(this.id, null, variationId)) return targetDifficulty?.characters?.altInstrumentals ?? [];
+		else return [];
+    }
+
+  public override function onCountdownStart(event:CountdownScriptEvent):Void {
+		super.onCountdownStart(event);
+    trace('Started countdown for Roses...');
+
+    // Skip the cutscene on the normal variation if we are in Freeplay.
+    if (PlayState.instance.currentVariation == 'default' && !PlayStatePlaylist.isStoryMode) hasPlayedCutscene = true;
+
+    if (!hasPlayedCutscene) {
+      trace('Pausing countdown to play cutscene.');
+
+      hasPlayedCutscene = true;
+
+      event.cancel(); // CANCEL THE COUNTDOWN!
+
+      // Play a SFX
+      FunkinSound.playOnce(Paths.sound('ANGRY_TEXT_BOX'), 1.0);
+
+      // ERIC: There's a known bug where, on the School stage, pausing the stage animations then trying
+      // to restart them causes the animations to freeze.
+      // TODO: Commenting out this line causes the animations to work but they play even during the dialogue, which is supposed to pause everything.
+      // PlayState.instance.currentStage.pause();
+
+      startDialogue();
+    }
+	}
+
+  function startDialogue() {
+    var targetDialogue = 'roses';
+
+    if (PlayState.instance.currentVariation == 'pico') targetDialogue += "-pico";
+    else if (PlayState.instance.currentVariation == 'spookymod') targetDialogue += "-spooky";
+    if (!Preferences.naughtyness && PlayState.instance.currentVariation != 'spookymod') targetDialogue += "-censored";
+
+    trace('Playing dialogue...');
+    PlayState.instance.startConversation(targetDialogue);
+  }
+
+  /**
+   * Don't replay the cutscene between restarts.
+   */
+  function onSongRetry(event:ScriptEvent)
+  {
+    super.onSongRetry(event);
+
+    hasPlayedCutscene = true;
+  }
+
+  /**
+   * Replay the cutscene after leaving the song.
+   */
+  function onCreate(event:ScriptEvent):Void
+  {
+    super.onCreate(event);
+
+    hasPlayedCutscene = false;
+  }
+
+	function onBeatHit(event:SongTimeScriptEvent)
+  {
+    // When overriding onBeatHit, make sure to call super.onBeatHit,
+    // otherwise boppers will not work.
+    super.onBeatHit(event);
+
+    if (event.beat == 180 && PlayStatePlaylist.isStoryMode) {
+      trace('Hit end of song! Starting outro.');
+
+      PlayState.instance.camCutscene.visible = true;
+
+      var red = new FunkinSprite(-20, -20).makeSolidColor(FlxG.width * 1.5, FlxG.height * 1.5, 0xFFFF1B31);
+      red.cameras = [PlayState.instance.camCutscene];
+
+      red.alpha = 0.0;
+      FlxTween.tween(PlayState.instance.camHUD, {alpha: 0.0}, 1.5, {ease: FlxEase.linear});
+      FlxTween.tween(red, {alpha: 1.0}, 2.0, {ease: FlxEase.linear});
+      PlayState.instance.add(red);
+    }
+  }
+
+  public override function onDialogueEnd() {
+    // We may need to wait for the outro to play.
+    Countdown.performCountdown();
+  }
+}

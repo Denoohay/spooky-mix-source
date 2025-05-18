@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="molochCandleGlow.png">
+	<!-- Created with Adobe Animate version 24.0.3.19 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="glowg0000" x="2" y="2" width="209" height="214" frameX="-2" frameY="-3" frameWidth="213" frameHeight="218"/>
+	<SubTexture name="glowg0001" x="2" y="2" width="209" height="214" frameX="-2" frameY="-3" frameWidth="213" frameHeight="218"/>
+	<SubTexture name="glowg0002" x="213" y="2" width="209" height="215" frameX="0" frameY="-3" frameWidth="213" frameHeight="218"/>
+	<SubTexture name="glowg0003" x="213" y="2" width="209" height="215" frameX="0" frameY="-3" frameWidth="213" frameHeight="218"/>
+	<SubTexture name="glowg0004" x="2" y="219" width="210" height="214" frameX="-3" frameY="0" frameWidth="213" frameHeight="218"/>
+	<SubTexture name="glowg0005" x="2" y="219" width="210" height="214" frameX="-3" frameY="0" frameWidth="213" frameHeight="218"/>
+</TextureAtlas>

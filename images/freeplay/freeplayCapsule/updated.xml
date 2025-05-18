@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="updated.png">
+	<!-- Created with Adobe Animate version 24.0.3.19 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="UPDATED notif0000" x="2" y="2" width="147" height="27" frameX="0" frameY="-3" frameWidth="147" frameHeight="31"/>
+	<SubTexture name="UPDATED notif0001" x="2" y="2" width="147" height="27" frameX="0" frameY="-3" frameWidth="147" frameHeight="31"/>
+	<SubTexture name="UPDATED notif0002" x="2" y="2" width="147" height="27" frameX="0" frameY="-3" frameWidth="147" frameHeight="31"/>
+	<SubTexture name="UPDATED notif0003" x="2" y="2" width="147" height="27" frameX="0" frameY="-3" frameWidth="147" frameHeight="31"/>
+	<SubTexture name="UPDATED notif0004" x="2" y="2" width="147" height="27" frameX="0" frameY="-3" frameWidth="147" frameHeight="31"/>
+	<SubTexture name="UPDATED notif0005" x="2" y="2" width="147" height="27" frameX="0" frameY="-3" frameWidth="147" frameHeight="31"/>
+	<SubTexture name="UPDATED notif0006" x="2" y="2" width="147" height="27" frameX="0" frameY="-3" frameWidth="147" frameHeight="31"/>
+	<SubTexture name="UPDATED notif0007" x="2" y="2" width="147" height="27" frameX="0" frameY="-3" frameWidth="147" frameHeight="31"/>
+	<SubTexture name="UPDATED notif0008" x="2" y="2" width="147" height="27" frameX="0" frameY="-3" frameWidth="147" frameHeight="31"/>
+	<SubTexture name="UPDATED notif0009" x="2" y="2" width="147" height="27" frameX="0" frameY="-3" frameWidth="147" frameHeight="31"/>
+	<SubTexture name="UPDATED notif0010" x="2" y="2" width="147" height="27" frameX="0" frameY="-3" frameWidth="147" frameHeight="31"/>
+	<SubTexture name="UPDATED notif0011" x="2" y="2" width="147" height="27" frameX="0" frameY="-3" frameWidth="147" frameHeight="31"/>
+	<SubTexture name="UPDATED notif0012" x="2" y="2" width="147" height="27" frameX="0" frameY="-3" frameWidth="147" frameHeight="31"/>
+	<SubTexture name="UPDATED notif0013" x="2" y="2" width="147" height="27" frameX="0" frameY="-3" frameWidth="147" frameHeight="31"/>
+	<SubTexture name="UPDATED notif0014" x="2" y="2" width="147" height="27" frameX="0" frameY="-3" frameWidth="147" frameHeight="31"/>
+	<SubTexture name="UPDATED notif0015" x="2" y="2" width="147" height="27" frameX="0" frameY="-3" frameWidth="147" frameHeight="31"/>
+	<SubTexture name="UPDATED notif0016" x="2" y="2" width="147" height="27" frameX="0" frameY="-3" frameWidth="147" frameHeight="31"/>
+	<SubTexture name="UPDATED notif0017" x="2" y="2" width="147" height="27" frameX="0" frameY="-3" frameWidth="147" frameHeight="31"/>
+	<SubTexture name="UPDATED notif0018" x="2" y="2" width="147" height="27" frameX="0" frameY="-3" frameWidth="147" frameHeight="31"/>
+	<SubTexture name="UPDATED notif0019" x="2" y="2" width="147" height="27" frameX="0" frameY="-3" frameWidth="147" frameHeight="31"/>
+	<SubTexture name="UPDATED notif0020" x="2" y="2" width="147" height="27" frameX="0" frameY="-3" frameWidth="147" frameHeight="31"/>
+	<SubTexture name="UPDATED notif0021" x="2" y="2" width="147" height="27" frameX="0" frameY="-3" frameWidth="147" frameHeight="31"/>
+	<SubTexture name="UPDATED notif0022" x="2" y="2" width="147" height="27" frameX="0" frameY="-3" frameWidth="147" frameHeight="31"/>
+	<SubTexture name="UPDATED notif0023" x="2" y="2" width="147" height="27" frameX="0" frameY="-3" frameWidth="147" frameHeight="31"/>
+	<SubTexture name="UPDATED notif0024" x="2" y="2" width="147" height="27" frameX="0" frameY="-3" frameWidth="147" frameHeight="31"/>
+	<SubTexture name="UPDATED notif0025" x="2" y="2" width="147" height="27" frameX="0" frameY="-3" frameWidth="147" frameHeight="31"/>
+	<SubTexture name="UPDATED notif0026" x="2" y="2" width="147" height="27" frameX="0" frameY="-3" frameWidth="147" frameHeight="31"/>
+	<SubTexture name="UPDATED notif0027" x="2" y="2" width="147" height="27" frameX="0" frameY="-3" frameWidth="147" frameHeight="31"/>
+	<SubTexture name="UPDATED notif0028" x="2" y="2" width="147" height="27" frameX="0" frameY="-3" frameWidth="147" frameHeight="31"/>
+	<SubTexture name="UPDATED notif0029" x="2" y="2" width="147" height="27" frameX="0" frameY="-3" frameWidth="147" frameHeight="31"/>
+	<SubTexture name="UPDATED notif0030" x="151" y="2" width="147" height="30" frameX="0" frameY="0" frameWidth="147" frameHeight="31"/>
+	<SubTexture name="UPDATED notif0031" x="151" y="2" width="147" height="30" frameX="0" frameY="0" frameWidth="147" frameHeight="31"/>
+	<SubTexture name="UPDATED notif0032" x="300" y="2" width="147" height="30" frameX="0" frameY="0" frameWidth="147" frameHeight="31"/>
+	<SubTexture name="UPDATED notif0033" x="300" y="2" width="147" height="30" frameX="0" frameY="0" frameWidth="147" frameHeight="31"/>
+	<SubTexture name="UPDATED notif0034" x="2" y="34" width="147" height="31"/>
+	<SubTexture name="UPDATED notif0035" x="2" y="34" width="147" height="31"/>
+	<SubTexture name="UPDATED notif0036" x="151" y="34" width="147" height="31"/>
+	<SubTexture name="UPDATED notif0037" x="151" y="34" width="147" height="31"/>
+	<SubTexture name="UPDATED notif0038" x="300" y="34" width="147" height="30" frameX="0" frameY="-1" frameWidth="147" frameHeight="31"/>
+	<SubTexture name="UPDATED notif0039" x="300" y="34" width="147" height="30" frameX="0" frameY="-1" frameWidth="147" frameHeight="31"/>
+	<SubTexture name="UPDATED notif0040" x="2" y="67" width="147" height="31"/>
+	<SubTexture name="UPDATED notif0041" x="2" y="67" width="147" height="31"/>
+	<SubTexture name="UPDATED notif0042" x="151" y="67" width="147" height="31"/>
+	<SubTexture name="UPDATED notif0043" x="151" y="67" width="147" height="31"/>
+	<SubTexture name="UPDATED notif0044" x="300" y="67" width="147" height="31"/>
+	<SubTexture name="UPDATED notif0045" x="300" y="67" width="147" height="31"/>
+	<SubTexture name="UPDATED notif0046" x="2" y="100" width="147" height="28" frameX="0" frameY="-3" frameWidth="147" frameHeight="31"/>
+	<SubTexture name="UPDATED notif0047" x="2" y="100" width="147" height="28" frameX="0" frameY="-3" frameWidth="147" frameHeight="31"/>
+	<SubTexture name="UPDATED notif0048" x="151" y="100" width="147" height="28" frameX="0" frameY="-3" frameWidth="147" frameHeight="31"/>
+	<SubTexture name="UPDATED notif0049" x="151" y="100" width="147" height="28" frameX="0" frameY="-3" frameWidth="147" frameHeight="31"/>
+	<SubTexture name="UPDATED notif0050" x="300" y="100" width="147" height="28" frameX="0" frameY="-3" frameWidth="147" frameHeight="31"/>
+	<SubTexture name="UPDATED notif0051" x="300" y="100" width="147" height="28" frameX="0" frameY="-3" frameWidth="147" frameHeight="31"/>
+	<SubTexture name="UPDATED notif0052" x="2" y="2" width="147" height="27" frameX="0" frameY="-3" frameWidth="147" frameHeight="31"/>
+</TextureAtlas>

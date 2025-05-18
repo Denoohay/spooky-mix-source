@@ -1,0 +1,135 @@
+{
+  "version": "1.0.0",
+
+  "backdrop": {
+    "type": "solid",
+    "fadeTime": 2.0,
+    "color": "#BFB3DFD8"
+  },
+
+  "music": {
+    "asset": "",
+    "fadeTime": 0,
+    "looped": false
+  },
+
+  "outro": {
+    "type": "fade",
+    "fadeTime": 1.0
+  },
+
+  "dialogue": [
+    {
+      "speaker": "senpai-spooky-angry",
+      "speakerAnimation": "talk",
+      "box": "roses-spooky",
+      "boxAnimation": "angrySenpai",
+
+      "text": [
+          "You ugly witless brats. ",
+          "How DARE you humiliate me in front of all these fine demoiselles."
+      ]
+    },
+    {
+      "speaker": "senpai-spooky-angry",
+      "speakerAnimation": "talk",
+      "box": "roses-spooky",
+      "boxAnimation": "idle",
+
+      "text": [
+        "This was supposed to turn out in MY favor!"
+      ]
+    },
+    {
+      "speaker": "skidandpump-pixel-errm",
+      "speakerAnimation": "talkEnter",
+      "box": "roses-spooky",
+      "boxAnimation": "idle",
+
+      "text": [
+        "..."
+      ]
+    },
+    {
+      "speaker": "pump-pixel-think",
+      "speakerAnimation": "talk",
+      "box": "roses-spooky",
+      "boxAnimation": "idle",
+
+      "text": [
+        "But didn't you ask us to sing with you?"
+      ]
+    },
+    {
+      "speaker": "skid-pixel-errm",
+      "speakerAnimation": "talk",
+      "box": "roses-spooky",
+      "boxAnimation": "idle",
+
+      "text": [
+        "Yeah... when are we getting our cand-"
+      ]
+    },
+    {
+      "speaker": "senpai-spooky-angry",
+      "speakerAnimation": "talk",
+      "box": "roses-spooky",
+      "boxAnimation": "idle",
+
+      "text": [
+        "ENOUGH. I won't let you make a fool of me any longer."
+      ]
+    },
+    {
+      "speaker": "senpai-spooky-angry",
+      "speakerAnimation": "talk",
+      "box": "roses-spooky",
+      "boxAnimation": "idle",
+
+      "text": [
+        "You two aren't going anywhere. ",
+        "I DEMAND a rematch."
+      ]
+    },
+    {
+      "speaker": "senpai-spooky-angry",
+      "speakerAnimation": "talk",
+      "box": "roses-spooky",
+      "boxAnimation": "idle",
+
+      "text": [
+        "...and after I mutilate your hideous puppet-"
+      ]
+    },
+    {
+      "speaker": "moloch-pixel",
+      "speakerAnimation": "talk",
+      "box": "roses-spooky",
+      "boxAnimation": "idle",
+
+      "text": [
+        "..."
+      ]
+    },
+    {
+      "speaker": "senpai-spooky-angry",
+      "speakerAnimation": "talk",
+      "box": "roses-spooky",
+      "boxAnimation": "idle",
+
+      "text": [
+        "-I'll make sure you two are on crutches for the rest of your lives."
+      ]
+    },
+    {
+      "speaker": "skidandpump-pixel-errm",
+      "speakerAnimation": "talk",
+      "box": "roses-spooky",
+      "boxAnimation": "idle",
+
+      "text": [
+        "..."
+      ]
+    }
+  ]
+}

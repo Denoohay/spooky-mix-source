@@ -1,0 +1,41 @@
+{
+  "version": "2.2.4",
+  "songName": "Guns (Spooky Mix)",
+  "artist": "SBMB",
+  "charter": "LimeIsHere",
+  "modArt": "givemethesalt, Andrewman_19, Denoohay",
+  "divisions": 96,
+  "playData": {
+    "difficulties": ["easy", "normal", "hard"],
+    "characters": {
+      "player": "spooky-playable",
+      "girlfriend": "moloch-tankmen",
+      "opponent": "tankman-spooky",
+      "instrumental": "spookymod",
+      "altInstrumentals": ["pico", ""]
+    },
+    "stage": "tankmanBattlefieldSpooky",
+    "noteStyle": "funkin",
+    "ratings": { "easy": 6, "normal": 8, "hard": 9 },
+    "album": "spookymix2",
+    "previewStart": 0,
+    "previewEnd": 15000
+  },
+  "generatedBy": "Friday Night Funkin' - v0.4.1 (rewrite/master:47b7aa7) PROTOTYPE",
+  "timeFormat": "ms",
+  "timeChanges": [
+    {
+      "t": 0,
+      "b": 0,
+      "bpm": 185,
+      "n": 4,
+      "d": 4,
+      "bt": [
+        4,
+        4,
+        4,
+        4
+      ]
+    }
+  ]
+}

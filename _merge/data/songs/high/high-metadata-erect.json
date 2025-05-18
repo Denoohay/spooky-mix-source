@@ -1,0 +1,4 @@
+[
+  { "op": "add", "path": "/playData/characters/altInstrumentals/-", "value": "spookymod" },
+  { "op": "add", "path": "/playData/characters/altInstrumentals/-", "value": "" }
+]

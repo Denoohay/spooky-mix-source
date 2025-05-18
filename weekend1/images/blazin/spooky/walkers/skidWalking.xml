@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="skidWalking.png">
+	<!-- Created with Adobe Animate version 24.0.3.19 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="skid walk0000" x="2" y="2" width="253" height="334" frameX="-11" frameY="-4" frameWidth="264" frameHeight="347"/>
+	<SubTexture name="skid walk0001" x="2" y="2" width="253" height="334" frameX="-11" frameY="-4" frameWidth="264" frameHeight="347"/>
+	<SubTexture name="skid walk0002" x="2" y="2" width="253" height="334" frameX="-11" frameY="-4" frameWidth="264" frameHeight="347"/>
+	<SubTexture name="skid walk0003" x="2" y="2" width="253" height="334" frameX="-11" frameY="-4" frameWidth="264" frameHeight="347"/>
+	<SubTexture name="skid walk0004" x="257" y="2" width="253" height="345" frameX="-11" frameY="-2" frameWidth="264" frameHeight="347"/>
+	<SubTexture name="skid walk0005" x="257" y="2" width="253" height="345" frameX="-11" frameY="-2" frameWidth="264" frameHeight="347"/>
+	<SubTexture name="skid walk0006" x="257" y="2" width="253" height="345" frameX="-11" frameY="-2" frameWidth="264" frameHeight="347"/>
+	<SubTexture name="skid walk0007" x="257" y="2" width="253" height="345" frameX="-11" frameY="-2" frameWidth="264" frameHeight="347"/>
+	<SubTexture name="skid walk0008" x="512" y="2" width="258" height="346" frameX="-2" frameY="0" frameWidth="264" frameHeight="347"/>
+	<SubTexture name="skid walk0009" x="512" y="2" width="258" height="346" frameX="-2" frameY="0" frameWidth="264" frameHeight="347"/>
+	<SubTexture name="skid walk0010" x="512" y="2" width="258" height="346" frameX="-2" frameY="0" frameWidth="264" frameHeight="347"/>
+	<SubTexture name="skid walk0011" x="512" y="2" width="258" height="346" frameX="-2" frameY="0" frameWidth="264" frameHeight="347"/>
+	<SubTexture name="skid walk0012" x="2" y="350" width="259" height="341" frameX="0" frameY="-1" frameWidth="264" frameHeight="347"/>
+	<SubTexture name="skid walk0013" x="2" y="350" width="259" height="341" frameX="0" frameY="-1" frameWidth="264" frameHeight="347"/>
+	<SubTexture name="skid walk0014" x="2" y="350" width="259" height="341" frameX="0" frameY="-1" frameWidth="264" frameHeight="347"/>
+	<SubTexture name="skid walk0015" x="2" y="350" width="259" height="341" frameX="0" frameY="-1" frameWidth="264" frameHeight="347"/>
+	<SubTexture name="skid walk0016" x="263" y="350" width="258" height="347" frameX="-3" frameY="0" frameWidth="264" frameHeight="347"/>
+	<SubTexture name="skid walk0017" x="263" y="350" width="258" height="347" frameX="-3" frameY="0" frameWidth="264" frameHeight="347"/>
+	<SubTexture name="skid walk0018" x="263" y="350" width="258" height="347" frameX="-3" frameY="0" frameWidth="264" frameHeight="347"/>
+	<SubTexture name="skid walk0019" x="263" y="350" width="258" height="347" frameX="-3" frameY="0" frameWidth="264" frameHeight="347"/>
+	<SubTexture name="skid walk0020" x="523" y="350" width="257" height="342" frameX="-6" frameY="-1" frameWidth="264" frameHeight="347"/>
+	<SubTexture name="skid walk0021" x="523" y="350" width="257" height="342" frameX="-6" frameY="-1" frameWidth="264" frameHeight="347"/>
+	<SubTexture name="skid walk0022" x="523" y="350" width="257" height="342" frameX="-6" frameY="-1" frameWidth="264" frameHeight="347"/>
+	<SubTexture name="skid walk0023" x="523" y="350" width="257" height="342" frameX="-6" frameY="-1" frameWidth="264" frameHeight="347"/>
+</TextureAtlas>

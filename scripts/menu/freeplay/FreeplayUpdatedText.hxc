@@ -1,0 +1,100 @@
+import funkin.ui.freeplay.FreeplayState;
+import funkin.ui.freeplay.CapsuleOptionsMenu;
+import flixel.FlxCamera;
+import flixel.math.FlxMath;
+import flixel.FlxSprite;
+import flixel.math.FlxAngle;
+import flixel.math.FlxPoint;
+import flixel.text.FlxText;
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
+import flixel.util.FlxSpriteUtil;
+import flixel.util.FlxTimer;
+import funkin.graphics.adobeanimate.FlxAtlasSprite;
+import funkin.graphics.FunkinSprite;
+import funkin.ui.freeplay.charselect.PlayableCharacter;
+import funkin.ui.MusicBeatSubState;
+import funkin.graphics.shaders.AdjustColorShader;
+import flixel.addons.display.FlxTiledSprite;
+import flixel.addons.display.FlxBackdrop;
+import funkin.PlayerSettings;
+import funkin.modding.module.Module;
+import funkin.modding.events.ScriptEvent;
+import funkin.modding.base.ScriptedMusicBeatSubState;
+import funkin.modding.base.ScriptedFlxRuntimeShader;
+import funkin.modding.base.ScriptedMusicBeatState;
+import funkin.util.ReflectUtil;
+import flixel.FlxG;
+import funkin.audio.FunkinSound;
+import funkin.save.Save;
+import StringTools;
+
+class UpdatedFreeplayText extends Module
+{
+  var addedStuff:Bool = false;
+
+  public function new()
+  {
+    super('UpdatedFreeplayText');
+  }
+
+  override function onStateChangeEnd(event)
+  {
+    super.onStateChangeEnd(event);
+    addedStuff = false;
+  }
+
+  override function onSubStateCloseEnd(event)
+  {
+    super.onSubStateCloseEnd(event);
+    addedStuff = false;
+  }
+
+  override function onUpdate(event:UpdateScriptEvent)
+  {
+	super.onUpdate(event);
+
+    if (ReflectUtil.getClassNameOf(FlxG.state.subState) == "funkin.ui.freeplay.FreeplayState")
+    {
+        if (FlxG.state.subState.currentFilteredSongs != null && FlxG.state.subState.grpCapsules != null)
+        {
+            if (addedStuff == false)
+            {
+                var songListTemp:Array<String>;
+                var songList:Array<String> = [];
+
+                var stupidNumb:Int = 1;
+                
+                songListTemp = FlxG.state.subState.currentFilteredSongs;
+                
+                for (i in 0...songListTemp.length - 1)
+                {
+                    var stupidData:String = "" + songListTemp[stupidNumb].data;
+                    var replaceString:String = StringTools.replace(StringTools.replace(stupidData, "Song(", ""), ")", "");
+
+                    songList.insert(i, replaceString);
+                    stupidNumb = stupidNumb + 1;
+                }
+
+                //FlxG.state.subState.ostName.text = songList;
+
+                for (i in 0...FlxG.state.subState.grpCapsules.members.length - 1)
+                {
+                    if (FlxG.state.subState.currentCharacterId == 'spookymod' && (songList[i - 1] == "high" || songList[i - 1] == "milf" || songList[i - 1] == "darnell" || songList[i - 1] == "lit-up" || songList[i - 1] == "2hot"))
+                    {
+                        if (FlxG.state.subState.grpCapsules.members[i].newText.visible == true && FlxG.state.subState.grpCapsules.members[i].newText.frames != Paths.getSparrowAtlas('freeplay/freeplayCapsule/updated'))
+                        {
+                            FlxG.state.subState.grpCapsules.members[i].newText.frames = Paths.getSparrowAtlas('freeplay/freeplayCapsule/updated');
+                            FlxG.state.subState.grpCapsules.members[i].newText.animation.addByPrefix('updatedAnim', 'UPDATED notif', 24, true);
+                            FlxG.state.subState.grpCapsules.members[i].newText.animation.play('updatedAnim', true);
+                            FlxG.state.subState.grpCapsules.members[i].newText.x = FlxG.state.subState.grpCapsules.members[i].newText.x - 70;
+                        }
+                    }
+                }
+
+                addedStuff = true;
+            }
+        }
+    }
+  }
+}

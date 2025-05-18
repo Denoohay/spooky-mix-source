@@ -1,0 +1,40 @@
+{
+  "version": "1.0.0",
+  "name": "Senpai (Angry) (Spooky)",
+  "assetPath": "characters/senpaiCatboy",
+  "singTime": 8.0,
+  "isPixel": true,
+  "scale": 6,
+  "cameraOffsets": [0, -50],
+  "healthIcon": {
+    "id": "senpai-angry",
+    "isPixel": true
+  },
+  "animations": [
+    {
+      "name": "idle",
+      "prefix": "angryIdle",
+      "offsets": [0, 0]
+    },
+    {
+      "name": "singLEFT",
+      "prefix": "leftAngry",
+      "offsets": [0, 0]
+    },
+    {
+      "name": "singDOWN",
+      "prefix": "downAngry",
+      "offsets": [0, 0]
+    },
+    {
+      "name": "singUP",
+      "prefix": "upAngry",
+      "offsets": [0, 0]
+    },
+    {
+      "name": "singRIGHT",
+      "prefix": "rightAngry",
+      "offsets": [0, 0]
+    }
+  ]
+}

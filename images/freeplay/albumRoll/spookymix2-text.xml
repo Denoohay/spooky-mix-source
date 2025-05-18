@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="spookymix2-text.png">
+	<!-- Created with Adobe Animate version 24.0.3.19 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="idle0000" x="2" y="2" width="325" height="137"/>
+	<SubTexture name="idle0001" x="2" y="2" width="325" height="137"/>
+	<SubTexture name="idle0002" x="2" y="2" width="325" height="137"/>
+	<SubTexture name="idle0003" x="2" y="2" width="325" height="137"/>
+	<SubTexture name="idle0004" x="2" y="2" width="325" height="137"/>
+	<SubTexture name="idle0005" x="2" y="2" width="325" height="137"/>
+	<SubTexture name="idle0006" x="2" y="2" width="325" height="137"/>
+	<SubTexture name="idle0007" x="2" y="2" width="325" height="137"/>
+	<SubTexture name="switch0000" x="2" y="141" width="325" height="136" frameX="0" frameY="7.15" frameWidth="325" frameHeight="136"/>
+	<SubTexture name="switch0001" x="2" y="141" width="325" height="136" frameX="0" frameY="7.15" frameWidth="325" frameHeight="136"/>
+	<SubTexture name="switch0002" x="2" y="141" width="325" height="136" frameX="0" frameY="7.15" frameWidth="325" frameHeight="136"/>
+	<SubTexture name="switch0003" x="2" y="141" width="325" height="136" frameX="0" frameY="7.15" frameWidth="325" frameHeight="136"/>
+</TextureAtlas>

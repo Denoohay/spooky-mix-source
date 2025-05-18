@@ -1,0 +1,50 @@
+import flixel.FlxG;
+import funkin.play.song.Song;
+import funkin.play.PlayState;
+import funkin.play.cutscene.VideoCutscene;
+import funkin.save.Save;
+
+import funkin.play.PlayStatePlaylist;
+
+class LitUpSong extends Song {
+	public function new() {
+		super('lit-up');
+	}
+
+	public function listDifficulties(variationId:String, variationIds:Array<String>, showLocked:Bool):Array<String> {
+		if (showLocked || Save.instance.hasBeatenLevel('weekend1')) {
+			return super.listDifficulties(variationId, variationIds);
+		}
+
+		// Hide all difficulties if the player has not beaten the week.
+		return [];
+	}
+	
+	public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool
+    {
+		if (FlxG.save.data.beatenLitUpUpdated != false && FlxG.save.data.beatenLitUpUpdated != true) FlxG.save.data.beatenLitUpUpdated = false;
+
+		if(currentVariation == 'spookymod')
+		  return !FlxG.save.data.beatenLitUpUpdated;
+
+        return false;
+	}
+    
+    public override function listAltInstrumentalIds(difficultyId:String, variationId:String):Array<String>
+    {
+		var targetDifficulty:Null<SongDifficulty> = getDifficulty(difficultyId, variationId);
+
+		if (variationId == "spookymod" && FlxG.save.data.beatenLitUpUpdated != true) return [];
+		else if ((difficultyId == "erect" || difficultyId == "nightmare") && (Save.instance.hasBeatenSong(this.id, ["erect"], "") || Save.instance.hasBeatenSong(this.id, ["nightmare"], ""))) return targetDifficulty?.characters?.altInstrumentals ?? [];
+		else if (variationId == "default" && Save.instance.hasBeatenSong(this.id, null, "")) return targetDifficulty?.characters?.altInstrumentals ?? [];
+		else if (Save.instance.hasBeatenSong(this.id, null, variationId)) return targetDifficulty?.characters?.altInstrumentals ?? [];
+		else return [];
+    }
+
+	public override function onSongEnd(event:CountdownScriptEvent):Void
+	{
+		super.onSongEnd(event);
+
+		if (PlayState.instance.currentVariation == 'spookymod') FlxG.save.data.beatenLitUpUpdated = true;
+	}
+}

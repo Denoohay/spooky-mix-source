@@ -1,0 +1,40 @@
+{
+  "version": "2.2.4",
+  "songName": "Satin Panties (Spooky Mix)",
+  "artist": "RubyyyButCool",
+  "charter": "swagsalt",
+  "modArt": "swagsalt, Denoohay, givemethesalt",
+  "playData": {
+    "difficulties": ["easy", "normal", "hard"],
+    "characters": {
+      "player": "spooky-playable",
+      "girlfriend": "moloch",
+      "opponent": "mom-spooky-car",
+      "instrumental": "spookymod",
+      "altInstrumentals": [""]
+    },
+    "stage": "limoRideSpooky",
+    "noteStyle": "funkin",
+    "ratings": { "easy": 3, "normal": 4, "hard": 5 },
+    "album": "spookymix2",
+    "previewStart": 0,
+    "previewEnd": 15000
+  },
+  "generatedBy": "Denoohay (by hand)",
+  "timeFormat": "ms",
+  "timeChanges": [
+    {
+      "t": 0,
+      "b": 0,
+      "bpm": 110,
+      "n": 4,
+      "d": 4,
+      "bt": [
+        4,
+        4,
+        4,
+        4
+      ]
+    }
+  ]
+}

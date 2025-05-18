@@ -1,0 +1,20 @@
+{
+  "version": "1.0.0",
+  "name": "Senpai (Spooky)",
+  "assetPath": "weeb/portrait-senpaiSpooky-ladiesplease",
+  "flipX": false,
+  "isPixel": true,
+  "scale": 5.4,
+  "offsets": [93, 90],
+  "animations": [
+    {
+      "name": "talkEnter",
+      "prefix": "portraitEnter0",
+      "frameRate": 12
+    },
+    {
+      "name": "talk",
+      "prefix": "portraitTalk0"
+    }
+  ]
+}

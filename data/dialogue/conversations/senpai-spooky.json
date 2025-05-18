@@ -1,0 +1,261 @@
+{
+  "version": "1.0.0",
+
+  "backdrop": {
+    "type": "solid",
+    "fadeTime": 2.0,
+    "color": "#BFB3DFD8"
+  },
+
+  "music": {
+    "asset": "Lunchbox",
+    "fadeTime": 2.0,
+    "looped": true
+  },
+
+  "outro": {
+    "type": "fade",
+    "fadeTime": 1.0
+  },
+
+  "dialogue": [
+    {
+      "speaker": "senpai-spooky",
+      "speakerAnimation": "talkEnter",
+      "box": "roses-spooky",
+      "boxAnimation": "enter",
+
+      "text": ["Let's see here..."]
+    },
+    {
+      "speaker": "senpai-spooky",
+      "speakerAnimation": "talk",
+      "box": "roses-spooky",
+      "boxAnimation": "speaking",
+
+      "text": [
+        "Frightful decor? Check."
+      ]
+    },
+    {
+      "speaker": "senpai-spooky",
+      "speakerAnimation": "talk",
+      "box": "roses-spooky",
+      "boxAnimation": "speaking",
+
+      "text": [
+        "Our viands? Likewise."
+      ]
+    },
+    {
+      "speaker": "senpai-spooky",
+      "speakerAnimation": "talk",
+      "box": "roses-spooky",
+      "boxAnimation": "speaking",
+
+      "text": [
+        "*oof!* Do watch where you're heading-"
+      ]
+    },
+    {
+      "speaker": "senpai-spooky-shocked",
+      "speakerAnimation": "talk",
+      "box": "roses-spooky",
+      "boxAnimation": "speaking",
+      "speed": 5.0,
+
+      "text": [
+        "WHAT IN GOD'S NAME IS THAT??"
+      ]
+    },
+    {
+      "speaker": "moloch-pixel",
+      "speakerAnimation": "talkEnter",
+      "box": "roses-spooky",
+      "boxAnimation": "speaking",
+
+      "text": [
+        "..."
+      ]
+    },
+    {
+      "speaker": "skidandpump-pixel",
+      "speakerAnimation": "talkEnter",
+      "box": "roses-spooky",
+      "boxAnimation": "speaking",
+
+      "text": ["Hi!"]
+    },
+    {
+      "speaker": "senpai-spooky",
+      "speakerAnimation": "talk",
+      "box": "roses-spooky",
+      "boxAnimation": "speaking",
+
+      "text": [
+        "Oh uhum.. ha ha! Great heavens! Such a realistic looking prop, this is perfect for tonight!"
+      ]
+    },
+    {
+      "speaker": "senpai-spooky",
+      "speakerAnimation": "talk",
+      "box": "roses-spooky",
+      "boxAnimation": "speaking",
+
+      "text": [
+        "And hello children, What would your names be?"
+      ]
+    },
+    {
+      "speaker": "skid-pixel",
+      "speakerAnimation": "talk",
+      "box": "roses-spooky",
+      "boxAnimation": "speaking",
+
+      "text": [
+        "I'm Skid!"
+      ]
+    },
+    {
+      "speaker": "pump-pixel",
+      "speakerAnimation": "talk",
+      "box": "roses-spooky",
+      "boxAnimation": "speaking",
+
+      "text": [
+        "And I'm Pump!"
+      ]
+    },
+    {
+      "speaker": "skid-pixel",
+      "speakerAnimation": "talk",
+      "box": "roses-spooky",
+      "boxAnimation": "speaking",
+
+      "text": [
+        "This is our friend, Moloch!"
+      ]
+    },
+    {
+      "speaker": "senpai-spooky",
+      "speakerAnimation": "talk",
+      "box": "roses-spooky",
+      "boxAnimation": "speaking",
+
+      "text": [
+        "I see you both are ready for this year's festivity!"
+      ]
+    },
+    {
+      "speaker": "senpai-spooky",
+      "speakerAnimation": "talk",
+      "box": "roses-spooky",
+      "boxAnimation": "speaking",
+
+      "text": [
+        "I am rather impressed with this puppet here."
+      ]
+    },
+    {
+      "speaker": "pump-pixel",
+      "speakerAnimation": "talk",
+      "box": "roses-spooky",
+      "boxAnimation": "speaking",
+
+      "text": [
+        "No he's a real demon."
+      ]
+    },
+    {
+      "speaker": "skid-pixel",
+      "speakerAnimation": "talk",
+      "box": "roses-spooky",
+      "boxAnimation": "speaking",
+
+      "text": [
+        "Yeah, we summoned him."
+      ]
+    },
+    {
+      "speaker": "senpai-spooky",
+      "speakerAnimation": "talk",
+      "box": "roses-spooky",
+      "boxAnimation": "speaking",
+
+      "text": [
+        "Ahh, to be juvenile again. ",
+        "Such fun imagination."
+      ]
+    },
+    {
+      "speaker": "senpai-spooky",
+      "speakerAnimation": "talk",
+      "box": "roses-spooky",
+      "boxAnimation": "speaking",
+
+      "text": [
+        "Hmm... Would you two tots like to participate in this year's singing contest?"
+      ]
+    },
+    {
+      "speaker": "senpai-spooky",
+      "speakerAnimation": "talk",
+      "box": "roses-spooky",
+      "boxAnimation": "speaking",
+
+      "text": [
+        "You can win candy!"
+      ]
+    },
+    {
+      "speaker": "senpai-spooky-ladiesplease",
+      "speakerAnimation": "talk",
+      "box": "roses-spooky",
+      "boxAnimation": "speaking",
+
+      "text": [
+        "(''Singing contest''? HA!)"
+      ]
+    },
+    {
+      "speaker": "senpai-spooky-ladiesplease",
+      "speakerAnimation": "talk",
+      "box": "roses-spooky",
+      "boxAnimation": "speaking",
+
+      "text": [
+        "(I'll just merely use these dunces to demonstrate my singing abilities...)"
+      ]
+    },
+    {
+      "speaker": "senpai-spooky-ladiesplease",
+      "speakerAnimation": "talk",
+      "box": "roses-spooky",
+      "boxAnimation": "speaking",
+
+      "text": [
+        "(...and charm all the lovely damsels who seek my heart!)"
+      ]
+    },
+    {
+      "speaker": "senpai-spooky",
+      "speakerAnimation": "talk",
+      "box": "roses-spooky",
+      "boxAnimation": "speaking",
+
+      "text": [
+        "Ahem. So children, What do you say? Care to sing with me?"
+      ]
+    },
+    {
+      "speaker": "skidandpump-pixel-cheer",
+      "speakerAnimation": "talk",
+      "box": "roses-spooky",
+      "boxAnimation": "speaking",
+
+      "text": [
+        "YEAH!"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "version": "2.2.4",
+  "songName": "Ooga Boogey",
+  "artist": "LeGooey (ft. alewito)",
+  "modArt": "Denoohay, givemethesalt",
+  "charter": "LimeIsHere",
+  "timeFormat": "ms",
+  "timeChanges": [{ "t": 0, "bpm": 160, "n": 4, "d": 4, "bt": [4, 4, 4, 4] }],
+  "playData": {
+    "ratings": { "easy": 4, "normal": 6, "hard": 7 },
+    "difficulties": ["easy", "normal", "hard"],
+    "characters": {
+      "player": "spooky-nogreen",
+      "girlfriend": "gf",
+      "opponent": "ooga-booga"
+    },
+    "stage": "oogasHouse",
+    "noteStyle": "funkin",
+    "album": "fool",
+    "stickerPack": "bonus-oogabooga",
+    "previewStart": 0,
+    "previewEnd": 15000
+  },
+  "generatedBy": "Denoohay (by hand)"
+}

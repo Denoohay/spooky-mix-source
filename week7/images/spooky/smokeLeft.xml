@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="smokeLeft.png">
+	<!-- Created with Adobe Animate version 24.0.3.19 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="left smoke instance 10000" x="2" y="2" width="446" height="617" frameX="-43" frameY="-204" frameWidth="511" frameHeight="843"/>
+	<SubTexture name="left smoke instance 10001" x="2" y="2" width="446" height="617" frameX="-43" frameY="-204" frameWidth="511" frameHeight="843"/>
+	<SubTexture name="left smoke instance 10002" x="2" y="2" width="446" height="617" frameX="-43" frameY="-204" frameWidth="511" frameHeight="843"/>
+	<SubTexture name="left smoke instance 10003" x="450" y="2" width="467" height="655" frameX="-28" frameY="-177" frameWidth="511" frameHeight="843"/>
+	<SubTexture name="left smoke instance 10004" x="450" y="2" width="467" height="655" frameX="-28" frameY="-177" frameWidth="511" frameHeight="843"/>
+	<SubTexture name="left smoke instance 10005" x="450" y="2" width="467" height="655" frameX="-28" frameY="-177" frameWidth="511" frameHeight="843"/>
+	<SubTexture name="left smoke instance 10006" x="919" y="2" width="481" height="673" frameX="-15" frameY="-151" frameWidth="511" frameHeight="843"/>
+	<SubTexture name="left smoke instance 10007" x="919" y="2" width="481" height="673" frameX="-15" frameY="-151" frameWidth="511" frameHeight="843"/>
+	<SubTexture name="left smoke instance 10008" x="919" y="2" width="481" height="673" frameX="-15" frameY="-151" frameWidth="511" frameHeight="843"/>
+	<SubTexture name="left smoke instance 10009" x="1402" y="2" width="487" height="724" frameX="0" frameY="-119" frameWidth="511" frameHeight="843"/>
+	<SubTexture name="left smoke instance 10010" x="1402" y="2" width="487" height="724" frameX="0" frameY="-119" frameWidth="511" frameHeight="843"/>
+	<SubTexture name="left smoke instance 10011" x="1402" y="2" width="487" height="724" frameX="0" frameY="-119" frameWidth="511" frameHeight="843"/>
+	<SubTexture name="left smoke instance 10012" x="1891" y="2" width="472" height="736" frameX="-11" frameY="-83" frameWidth="511" frameHeight="843"/>
+	<SubTexture name="left smoke instance 10013" x="1891" y="2" width="472" height="736" frameX="-11" frameY="-83" frameWidth="511" frameHeight="843"/>
+	<SubTexture name="left smoke instance 10014" x="1891" y="2" width="472" height="736" frameX="-11" frameY="-83" frameWidth="511" frameHeight="843"/>
+	<SubTexture name="left smoke instance 10015" x="2365" y="2" width="477" height="741" frameX="-7" frameY="-68" frameWidth="511" frameHeight="843"/>
+	<SubTexture name="left smoke instance 10016" x="2365" y="2" width="477" height="741" frameX="-7" frameY="-68" frameWidth="511" frameHeight="843"/>
+	<SubTexture name="left smoke instance 10017" x="2365" y="2" width="477" height="741" frameX="-7" frameY="-68" frameWidth="511" frameHeight="843"/>
+	<SubTexture name="left smoke instance 10018" x="2844" y="2" width="472" height="741" frameX="-19" frameY="-56" frameWidth="511" frameHeight="843"/>
+	<SubTexture name="left smoke instance 10019" x="2844" y="2" width="472" height="741" frameX="-19" frameY="-56" frameWidth="511" frameHeight="843"/>
+	<SubTexture name="left smoke instance 10020" x="2844" y="2" width="472" height="741" frameX="-19" frameY="-56" frameWidth="511" frameHeight="843"/>
+	<SubTexture name="left smoke instance 10021" x="3318" y="2" width="476" height="742" frameX="-22" frameY="-58" frameWidth="511" frameHeight="843"/>
+	<SubTexture name="left smoke instance 10022" x="3318" y="2" width="476" height="742" frameX="-22" frameY="-58" frameWidth="511" frameHeight="843"/>
+	<SubTexture name="left smoke instance 10023" x="3318" y="2" width="476" height="742" frameX="-22" frameY="-58" frameWidth="511" frameHeight="843"/>
+	<SubTexture name="left smoke instance 10024" x="2" y="746" width="479" height="769" frameX="-21" frameY="-33" frameWidth="511" frameHeight="843"/>
+	<SubTexture name="left smoke instance 10025" x="2" y="746" width="479" height="769" frameX="-21" frameY="-33" frameWidth="511" frameHeight="843"/>
+	<SubTexture name="left smoke instance 10026" x="2" y="746" width="479" height="769" frameX="-21" frameY="-33" frameWidth="511" frameHeight="843"/>
+	<SubTexture name="left smoke instance 10027" x="483" y="746" width="496" height="776" frameX="-9" frameY="-23" frameWidth="511" frameHeight="843"/>
+	<SubTexture name="left smoke instance 10028" x="483" y="746" width="496" height="776" frameX="-9" frameY="-23" frameWidth="511" frameHeight="843"/>
+	<SubTexture name="left smoke instance 10029" x="483" y="746" width="496" height="776" frameX="-9" frameY="-23" frameWidth="511" frameHeight="843"/>
+	<SubTexture name="left smoke instance 10030" x="981" y="746" width="498" height="791" frameX="-13" frameY="-11" frameWidth="511" frameHeight="843"/>
+	<SubTexture name="left smoke instance 10031" x="981" y="746" width="498" height="791" frameX="-13" frameY="-11" frameWidth="511" frameHeight="843"/>
+	<SubTexture name="left smoke instance 10032" x="981" y="746" width="498" height="791" frameX="-13" frameY="-11" frameWidth="511" frameHeight="843"/>
+	<SubTexture name="left smoke instance 10033" x="1481" y="746" width="490" height="802" frameX="-17" frameY="-5" frameWidth="511" frameHeight="843"/>
+	<SubTexture name="left smoke instance 10034" x="1481" y="746" width="490" height="802" frameX="-17" frameY="-5" frameWidth="511" frameHeight="843"/>
+	<SubTexture name="left smoke instance 10035" x="1481" y="746" width="490" height="802" frameX="-17" frameY="-5" frameWidth="511" frameHeight="843"/>
+	<SubTexture name="left smoke instance 10036" x="1973" y="746" width="487" height="808" frameX="-21" frameY="0" frameWidth="511" frameHeight="843"/>
+	<SubTexture name="left smoke instance 10037" x="1973" y="746" width="487" height="808" frameX="-21" frameY="0" frameWidth="511" frameHeight="843"/>
+	<SubTexture name="left smoke instance 10038" x="1973" y="746" width="487" height="808" frameX="-21" frameY="0" frameWidth="511" frameHeight="843"/>
+	<SubTexture name="left smoke instance 10039" x="2462" y="746" width="471" height="770" frameX="-25" frameY="-39" frameWidth="511" frameHeight="843"/>
+	<SubTexture name="left smoke instance 10040" x="2462" y="746" width="471" height="770" frameX="-25" frameY="-39" frameWidth="511" frameHeight="843"/>
+	<SubTexture name="left smoke instance 10041" x="2462" y="746" width="471" height="770" frameX="-25" frameY="-39" frameWidth="511" frameHeight="843"/>
+	<SubTexture name="left smoke instance 10042" x="2935" y="746" width="447" height="775" frameX="-30" frameY="-37" frameWidth="511" frameHeight="843"/>
+	<SubTexture name="left smoke instance 10043" x="2935" y="746" width="447" height="775" frameX="-30" frameY="-37" frameWidth="511" frameHeight="843"/>
+	<SubTexture name="left smoke instance 10044" x="2935" y="746" width="447" height="775" frameX="-30" frameY="-37" frameWidth="511" frameHeight="843"/>
+	<SubTexture name="left smoke instance 10045" x="3384" y="746" width="452" height="602" frameX="-29" frameY="-217" frameWidth="511" frameHeight="843"/>
+	<SubTexture name="left smoke instance 10046" x="3384" y="746" width="452" height="602" frameX="-29" frameY="-217" frameWidth="511" frameHeight="843"/>
+	<SubTexture name="left smoke instance 10047" x="3384" y="746" width="452" height="602" frameX="-29" frameY="-217" frameWidth="511" frameHeight="843"/>
+</TextureAtlas>

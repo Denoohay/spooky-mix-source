@@ -1,0 +1,8 @@
+Songs such as Roses, Thorns, and Lit Up have extra instrumentals like, "spookymod-picocut" or "pico-defaultcut".
+
+This system is super scuffed and unnecessarily takes up extra storage space. I made this before the ability
+to add offsets to alt instrumentals was a thing and I was having a little trouble with trying to do offsets so I
+shifted my focus back to adding in new content since that's more important than trying to fix something that will have
+the same result in-game either way.
+
+I will try to make this better in a future patch. I just wanted to write this so you know that I know my system sucks.

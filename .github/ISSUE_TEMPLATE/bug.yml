@@ -13,24 +13,13 @@ body:
         
   - type: dropdown
     attributes:
-      label: Platform
-      description: Are you playing on the Executable Build or V-Slice Mod Pack?
-      options:
-        - Executable Build
-        - V-Slice Mod Pack
-    validations:
-      required: true
-
-  - type: dropdown
-    attributes:
       label: Download Source
       description: Where did you download the mod from?
       options:
         - Gamebanana
         - Game Jolt
         - Google Drive
-        - Github Release Assets
-        - Compiled from GitHub Source Code
+        - Github
     validations:
       required: true
 

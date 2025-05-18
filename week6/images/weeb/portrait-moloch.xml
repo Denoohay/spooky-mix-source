@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TextureAtlas imagePath="spritesheet.png">
+	<SubTexture name="portraitEnter0000" x="0" y="0" width="115" height="71" frameX="0" frameY="0" frameWidth="115" frameHeight="71" />
+	<SubTexture name="portraitEnter0001" x="0" y="0" width="115" height="71" frameX="0" frameY="0" frameWidth="115" frameHeight="71" />
+	<SubTexture name="portraitEnter0002" x="115" y="0" width="115" height="71" frameX="0" frameY="0" frameWidth="115" frameHeight="71" />
+	<SubTexture name="portraitEnter0003" x="115" y="0" width="115" height="71" frameX="0" frameY="0" frameWidth="115" frameHeight="71" />
+	<SubTexture name="portraitEnter0004" x="0" y="71" width="115" height="71" frameX="0" frameY="0" frameWidth="115" frameHeight="71" />
+	<SubTexture name="portraitEnter0005" x="0" y="71" width="115" height="71" frameX="0" frameY="0" frameWidth="115" frameHeight="71" />
+	<SubTexture name="portraitEnter0006" x="115" y="71" width="115" height="71" frameX="0" frameY="0" frameWidth="115" frameHeight="71" />
+	<SubTexture name="portraitEnter0007" x="115" y="71" width="115" height="71" frameX="0" frameY="0" frameWidth="115" frameHeight="71" />
+	<SubTexture name="portraitTalk0000" x="115" y="71" width="115" height="71" frameX="0" frameY="0" frameWidth="115" frameHeight="71" />
+	<SubTexture name="portraitTalk0001" x="115" y="71" width="115" height="71" frameX="0" frameY="0" frameWidth="115" frameHeight="71" />
+</TextureAtlas>

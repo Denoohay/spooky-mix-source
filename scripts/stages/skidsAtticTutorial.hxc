@@ -1,0 +1,119 @@
+import flixel.FlxG;
+import flixel.FlxSprite;
+import flixel.addons.display.FlxRuntimeShader;
+import flixel.sound.FlxSound;
+import funkin.Conductor;
+import funkin.modding.base.ScriptedFlxRuntimeShader;
+import funkin.graphics.shaders.AdjustColorShader;
+import funkin.play.PlayState;
+import funkin.play.stage.Stage;
+import funkin.graphics.adobeanimate.FlxAtlasSprite;
+import funkin.modding.base.ScriptedFlxAtlasSprite;
+import funkin.graphics.shaders.DropShadowShader;
+import funkin.play.character.CharacterType;
+import flixel.math.FlxPoint;
+
+class SkidsAtticTutorialStage extends Stage
+{
+	function new()
+	{
+		super('skidsAtticTutorial');
+	}
+
+	var endCameraStop:Bool = false;
+
+	function onCreate(event:ScriptEvent):Void {
+		super.onCreate(event);
+	}
+
+	public override function onCountdownStart(event:CountdownScriptEvent):Void {
+		super.onCountdownStart(event);
+
+		endCameraStop = false;
+	}
+
+	function buildStage()
+	{
+		super.buildStage();
+
+		getNamedProp('glow').blend = 1;
+
+	}
+
+	override function addCharacter(character:BaseCharacter, charType:CharacterType):Void {
+		// Apply the shader automatically to each character as it gets added.
+		super.addCharacter(character, charType);
+		trace('Applied stage shader to ' + character.characterName);
+
+		var rim = new DropShadowShader();
+		character.shader = rim;
+		rim.attachedSprite = character;
+
+		switch(charType){
+			case CharacterType.BF:
+			
+				rim.setAdjustColor(-100, -46, -10, -45); //b, h, c, s
+				rim.angle = 135;
+				rim.color = 0xFF252E72;
+				//rim.distance = 0;
+
+				character.animation.onFrameChange.add(function() {
+					if (getBoyfriend() != null)
+					{
+      					rim.updateFrameInfo(getBoyfriend().frame);
+					}
+    			});
+
+			case CharacterType.DAD:
+				
+				
+				rim.setAdjustColor(-53, -16, -14, 0); //b, h, c, s
+				rim.angle = 135;
+				rim.color = 0xFF747DCE;
+
+				character.animation.onFrameChange.add(function() {
+					if (getDad() != null)
+					{
+      					rim.updateFrameInfo(getDad().frame);
+					}
+    			});
+
+			default:
+
+		}
+
+	}
+
+	function onUpdate(event:UpdateScriptEvent):Void
+	{
+		super.onUpdate(event);
+
+		if (endCameraStop == true)
+		{
+			FlxG.camera.target = null;
+		}
+
+	}
+
+	override function onGameOver(event:ScriptEvent):Void {
+		super.onGameOver(event);
+
+		getBoyfriend().shader = null;
+	}
+
+	public override function onSongEnd(event:CountdownScriptEvent):Void {
+		super.onSongEnd(event);
+
+		endCameraStop = true;
+	}
+
+	function onBeatHit(event:SongTimeScriptEvent):Void
+	{
+		super.onBeatHit(event);
+	}
+
+  function onStepHit(event:SongTimeScriptEvent):Void
+	{
+		super.onStepHit(event);
+	}
+}

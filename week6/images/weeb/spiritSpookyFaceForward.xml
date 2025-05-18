@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="spiritSpookyFaceForward.png">
+	<SubTexture name="portraitEnter0001" x="0" y="0" width="49" height="112" />
+	<SubTexture name="portraitTalk0001" x="0" y="0" width="49" height="112" />
+</TextureAtlas>

@@ -1,0 +1,40 @@
+{
+  "version": "1.0.0",
+  "name": "Senpai (Spooky)",
+  "assetPath": "characters/senpaiCatboy",
+  "singTime": 8.0,
+  "isPixel": true,
+  "scale": 6,
+  "cameraOffsets": [0, -50],
+  "healthIcon": {
+    "id": "senpai",
+    "isPixel": true
+  },
+  "animations": [
+    {
+      "name": "idle",
+      "prefix": "idle0",
+      "offsets": [0, 0]
+    },
+    {
+      "name": "singLEFT",
+      "prefix": "left0",
+      "offsets": [0, 0]
+    },
+    {
+      "name": "singDOWN",
+      "prefix": "down0",
+      "offsets": [0, 0]
+    },
+    {
+      "name": "singUP",
+      "prefix": "up0",
+      "offsets": [0, 0]
+    },
+    {
+      "name": "singRIGHT",
+      "prefix": "right0",
+      "offsets": [0, 0]
+    }
+  ]
+}

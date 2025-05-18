@@ -1,0 +1,129 @@
+{
+  "title": "FNF: SPOOKY MIX",
+  "description": "Unlocks the Spooky Kids as a playable character with all new remixes.",
+  "contributors": [
+    {
+      "name": "Denoohay",
+	  "role": "Director, Artist, Coder",
+	  "url": "https://twitter.com/Denoohay"
+    },
+    {
+      "name": "givemethesalt",
+	  "role": "Artist",
+	  "url": "https://twitter.com/7saltybro"
+    },
+    {
+      "name": "RubyyyButCool",
+	  "role": "Composer, Charter, Voice of Monster and Moloch",
+	  "url": "https://twitter.com/Rubyyy_but_cool"
+    },
+    {
+      "name": "Official_NO",
+	  "role": "Pixel Artist",
+	  "url": "https://twitter.com/official_no6"
+    },
+    {
+      "name": "LeGooey",
+	  "role": "Artist, Composer, Charter",
+	  "url": "https://twitter.com/LeGooey"
+    },
+    {
+      "name": "swagsalt",
+	  "role": "Artist, Composer, Charter",
+	  "url": "https://twitter.com/swagsalt"
+    },
+    {
+      "name": "SacredSky",
+	  "role": "Artist, Composer, Charter",
+	  "url": "https://twitter.com/sacred_sky_"
+    },
+    {
+      "name": "Andrewman_19",
+	  "role": "Artist, Composer",
+	  "url": "https://twitter.com/andrewman_19"
+    },
+    {
+      "name": "Clarky_Dev",
+	  "role": "Composer, Charter",
+	  "url": "https://twitter.com/Clarky_Dev"
+    },
+    {
+      "name": "LimeIsHere",
+	  "role": "Composer, Charter",
+	  "url": "https://twitter.com/HereIsLime"
+    },
+    {
+      "name": "ChuckySkullHead",
+	  "role": "Composer, Charter",
+	  "url": "https://twitter.com/ChuckySkullHead"
+    },
+    {
+      "name": "eden_essence",
+	  "role": "Composer",
+	  "url": "https://twitter.com/edxn_essence"
+    },
+    {
+      "name": "Jotacast",
+	  "role": "Composer",
+	  "url": "https://twitter.com/castingjota"
+    },
+    {
+      "name": "Y_F_MUS",
+	  "role": "Composer",
+	  "url": "https://twitter.com/imjustheresoth1"
+    },
+    {
+      "name": "Vaderlings",
+	  "role": "Composer",
+	  "url": "https://twitter.com/vaderlings"
+    },
+    {
+      "name": "Rofos",
+	  "role": "Composer",
+	  "url": "https://twitter.com/HristoRofos"
+    },
+    {
+      "name": "QuasarXP",
+	  "role": "Composer",
+	  "url": "https://twitter.com/QuasarXP_"
+    },
+    {
+      "name": "Thrick",
+	  "role": "Composer",
+	  "url": "https://twitter.com/Thrick_"
+    },
+    {
+      "name": "SolarDTM",
+	  "role": "Composer",
+	  "url": "https://twitter.com/SolarDTM"
+    },
+    {
+      "name": "KrakenPower",
+	  "role": "Composer",
+	  "url": "https://twitter.com/KrakenPower1"
+    },
+    {
+      "name": "RandoHorn",
+	  "role": "Composer",
+	  "url": "https://twitter.com/Randohorn"
+    },
+    {
+      "name": "alewito",
+	  "role": "Composer",
+	  "url": "https://twitter.com/alwkzzz"
+    },
+    {
+      "name": "SBMB",
+	  "role": "Composer",
+	  "url": "https://twitter.com/That_SBMB"
+    },
+    {
+      "name": "Rareblin",
+	  "role": "Composer",
+	  "url": "https://twitter.com/uncommonblin"
+    }
+  ],
+  "api_version": "0.6.3",
+  "mod_version": "2.0.0",
+  "license": "Apache-2.0"
+}

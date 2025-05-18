@@ -1,0 +1,39 @@
+{
+  "version": "2.2.4",
+  "songName": "Blazin' (Spooky Mix)",
+  "artist": "swagsalt (ft. Andrewman_19)",
+  "charter": "swagsalt",
+  "modArt": "swagsalt, Denoohay",
+  "playData": {
+    "difficulties": ["easy", "normal", "hard"],
+    "characters": {
+      "player": "spooky-blazin",
+      "girlfriend": "none",
+      "opponent": "darnell-blazin-spooky",
+      "instrumental": "spookymod"
+    },
+    "stage": "blazinNeighborhood",
+    "noteStyle": "funkin",
+    "ratings": { "easy": 6, "normal": 8, "hard": 10 },
+    "album": "spookymix2",
+    "previewStart": 0,
+    "previewEnd": 15000
+  },
+  "generatedBy": "Denoohay (by hand)",
+  "timeFormat": "ms",
+  "timeChanges": [
+    {
+      "t": 0,
+      "b": 0,
+      "bpm": 180,
+      "n": 4,
+      "d": 4,
+      "bt": [
+        4,
+        4,
+        4,
+        4
+      ]
+    }
+  ]
+}

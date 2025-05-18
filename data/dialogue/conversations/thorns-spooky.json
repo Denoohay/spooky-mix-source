@@ -1,0 +1,94 @@
+{
+  "version": "1.0.0",
+
+  "backdrop": {
+    "type": "solid",
+    "fadeTime": 2.0,
+    "color": "#BFB3DFD8"
+  },
+
+  "music": {
+    "asset": "LunchboxScary",
+    "fadeTime": 2.0,
+    "looped": true
+  },
+
+  "outro": {
+    "type": "fade",
+    "fadeTime": 1.0
+  },
+
+  "dialogue": [
+    {
+      "speaker": "spirit-spooky",
+      "speakerAnimation": "talk",
+      "box": "thorns",
+      "boxAnimation": "enter",
+
+      "text": [
+        "It... can't be..."
+      ],
+      "speed": 1.0
+    },
+    {
+      "speaker": "spirit-spooky",
+      "speakerAnimation": "talk",
+      "box": "thorns",
+      "boxAnimation": "enter",
+
+      "text": [
+        "Direct contact with real lifeforms, after being trapped in here for so so long..."
+      ],
+      "speed": 1.0
+    },
+    {
+      "speaker": "spirit-spooky",
+      "speakerAnimation": "talk",
+      "box": "thorns",
+      "boxAnimation": "idle",
+
+      "text": [
+        "A chance like this may never show again."
+      ]
+    },
+    {
+      "speaker": "spirit-spooky",
+      "speakerAnimation": "talk",
+      "box": "thorns",
+      "boxAnimation": "idle",
+
+      "text": ["I'll steal your bodies and you'll take my place."]
+    },
+    {
+      "speaker": "spirit-spooky",
+      "speakerAnimation": "talk",
+      "box": "thorns",
+      "boxAnimation": "idle",
+
+      "text": [
+        "You may be innocent in this, but it's the only way I can make HIM pay for what he's done to me and all the others...."
+      ]
+    },
+    {
+      "speaker": "spirit-spooky",
+      "speakerAnimation": "talk",
+      "box": "thorns",
+      "boxAnimation": "idle",
+
+      "text": [
+        "Forgive me for this..."
+      ]
+    },
+    {
+      "speaker": "skid-pixel-errm",
+      "speakerAnimation": "talkEnter",
+      "box": "thorns",
+      "boxAnimation": "idle",
+
+      "text": [
+        "...",
+        "then will we win our candy...?"
+      ]
+    }
+  ]
+}
