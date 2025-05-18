@@ -25,9 +25,17 @@ body:
 
   - type: input
     attributes:
-      label: Version
-      description: Which version are you playing on? The game version is in the bottom left corner of the main menu. 
-      placeholder: ex. 1.0.0
+      label: Friday Night Funkin' Version
+      description: Which version of FNF are you playing on? The game version is in the bottom left corner of the main menu. 
+      placeholder: ex. 0.6.0
+    validations:
+      required: true
+  
+  - type: input
+    attributes:
+      label: Spooky Mix Version
+      description: Which version of Spooky Mix are you playing on? The mod version is in the bottom right corner of the main menu. 
+      placeholder: ex. 2.0.0
     validations:
       required: true
   

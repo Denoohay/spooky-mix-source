@@ -204,7 +204,8 @@ class AltInstsModCompatibility extends Module
                     FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.insert(FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.length, "cut");
                 }
 
-                if (songList[FlxG.state.subState.curSelected - 1] == "eggnog" && FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("spookymod"))
+                //IN THE FUTURE, MAKE SO IF THE REMIX BPMs ARE DIFFERENT, IT WON'T INCLUDE THE ALT INST
+                if ((songList[FlxG.state.subState.curSelected - 1] == "eggnog" || songList[FlxG.state.subState.curSelected - 1] == "philly-nice") && FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("spookymod"))
                 {
                     FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.remove('spookymod');
                 }
