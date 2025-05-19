@@ -23,6 +23,7 @@ body:
 
   - type: textarea
     attributes:
+      label: 
       description: If so, please list all of the mods you had installed here.
       placeholder: List your installed mods other than Spooky Mix
 
