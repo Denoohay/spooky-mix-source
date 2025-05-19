@@ -54,6 +54,15 @@ body:
       label: If so, please list all of the mods you had installed here.
       placeholder: List your installed mods other than Spooky Mix
 
+  - type: dropdown
+    attributes:
+      label: Do you still encounter this issue with no other mods installed?
+      options:
+        - This issue only occurs when I have the mods listed above installed
+        - I have tested it and this issue still occurs when I don't have any other mods installed
+    validations:
+      required: true
+
   - type: markdown
     attributes:
       value: "## Describe the crash."
