@@ -13,21 +13,6 @@ body:
 
   - type: dropdown
     attributes:
-      label: Installed Mods
-      description: Did you have any other mods installed when encountering this bug?
-      options:
-        - I did not have any mods installed other than Spooky Mix
-        - I did have other mods installed
-    validations:
-      required: true
-
-  - type: textarea
-    attributes:
-      label: If so, please list all of the mods you had installed here.
-      placeholder: List your installed mods other than Spooky Mix
-        
-  - type: dropdown
-    attributes:
       label: Download Source
       description: Where did you download the mod from?
       options:
@@ -53,6 +38,22 @@ body:
       placeholder: ex. 2.0.0
     validations:
       required: true
+
+  - type: dropdown
+    attributes:
+      label: Installed Mods
+      description: Did you have any other mods installed when encountering this bug?
+      options:
+        - I did not have any mods installed other than Spooky Mix
+        - I did have other mods installed
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: If so, please list all of the mods you had installed here.
+      placeholder: List your installed mods other than Spooky Mix
+        
   
   - type: markdown
     attributes:
