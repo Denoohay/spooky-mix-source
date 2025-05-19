@@ -75,7 +75,6 @@ class CenterGameOverCam extends Module
       }
     }
 
-    //game over sound will get cut off for spooky kids, couldn't figure out how to delay the game over state closing
     if (ReflectUtil.getClassNameOf(FlxG.state.subState) == "funkin.play.GameOverSubState" && PlayState.instance.currentSong.id.toLowerCase() != "stress")
     {
         if (addedStuff == false)

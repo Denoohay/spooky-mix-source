@@ -108,7 +108,7 @@
 	  "url": "https://twitter.com/Randohorn"
     },
     {
-      "name": "alewito",
+      "name": "alwk",
 	  "role": "Composer",
 	  "url": "https://twitter.com/alwkzzz"
     },
@@ -121,9 +121,14 @@
       "name": "Rareblin",
 	  "role": "Composer",
 	  "url": "https://twitter.com/uncommonblin"
+    },
+    {
+      "name": "Thrick",
+	  "role": "Composer",
+	  "url": "https://twitter.com/Thrick_"
     }
   ],
   "api_version": "0.6.3",
-  "mod_version": "2.0.0",
+  "mod_version": "2.0.1",
   "license": "Apache-2.0"
 }

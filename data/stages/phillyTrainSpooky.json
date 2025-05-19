@@ -90,7 +90,7 @@
       "position": [938, 659],
       "scroll": [1, 1],
       "scale": [0.7, 0.7],
-      "zIndex": 70,
+      "zIndex": 101,
       "alpha": 0,
       "animations": [
         {
@@ -117,7 +117,7 @@
       "position": [2204, 659],
       "scroll": [1, 1],
       "scale": [0.7, 0.7],
-      "zIndex": 70,
+      "zIndex": 101,
       "alpha": 0,
       "flipX": true,
       "animations": [

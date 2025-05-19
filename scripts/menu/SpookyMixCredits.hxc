@@ -198,9 +198,10 @@ class SpookyMixCredits extends Module
                 addModCredit("SolarDTM", "body");
                 addModCredit("KrakenPower", "body");
                 addModCredit("RandoHorn", "body");
-                addModCredit("alewito", "body");
+                addModCredit("alwk", "body");
                 addModCredit("Rareblin", "body");
-                addModCredit("givemethesalt", "body", true);
+                addModCredit("givemethesalt", "body");
+                addModCredit("Thrick", "body", true);
 
             addModCredit("Voice Acting", "header");
                 addModCredit("RubyyyButCool (Voice of Moloch and Monster)", "body");

@@ -50,7 +50,7 @@ class TankmanBattlefieldSpookyStage extends Stage
 	var hasPlayedCutscene:Bool = false;
 	var cutsceneSkipped:Bool = false;
 	var canSkipCutscene:Bool = false;
-	var cutsceneSound:FunkinSound;
+	var cutsceneMusic:FunkinSound;
 
 	var mistBack:FlxBackdrop;
 	var mistFront:FlxBackdrop;
@@ -130,7 +130,7 @@ class TankmanBattlefieldSpookyStage extends Stage
 		
 		PlayState.instance.resetCamera(false, true);
 		
-		cutsceneSound = FunkinSound.load(Paths.sound("cutscene/stress/cutsceneSongSpook"), true);
+		cutsceneMusic = FunkinSound.load(Paths.sound("cutscene/stress/cutsceneSongSpook"), true);
 
 		//tween telports camera to position. follow point needs to be set to stay in place
 		PlayState.instance.currentCameraZoom = 1.1;
@@ -148,7 +148,7 @@ class TankmanBattlefieldSpookyStage extends Stage
 			if (hasPlayedCutscene != true)
 			{
 				molochKillsThem.anim.play("");
-				cutsceneSound.play(false);
+				cutsceneMusic.play(false);
 			}
 
 			
@@ -230,7 +230,8 @@ class TankmanBattlefieldSpookyStage extends Stage
 			PlayState.instance.justUnpaused = true;
 			PlayState.instance.camCutscene.fade(0xFF000000, 0.5, true, null, true);
 
-			cutsceneSound.stop();
+			cutsceneMusic.stop();
+			cutsceneSoundEffect.stop();
 			
 			PlayState.instance.cancelAllCameraTweens();
 			PlayState.instance.currentCameraZoom = 0.9;
@@ -416,7 +417,6 @@ class TankmanBattlefieldSpookyStage extends Stage
 		mistBack.y = 100 - (Math.sin(_timer*0.35)*70);
 		mistFront.y = 500 + (Math.sin(_timer*0.3)*80);
 
-		/*
 		if (PlayState.instance.controls.CUTSCENE_ADVANCE && cutsceneSkipped == false)
 		{
 			if(canSkipCutscene == false)
@@ -429,7 +429,6 @@ class TankmanBattlefieldSpookyStage extends Stage
 				});
 			}
 		}
-		*/
 		
 		if (PlayState.instance.iconP2.characterId == 'monster' && switchedToMonster == false)
 		{
@@ -472,14 +471,12 @@ class TankmanBattlefieldSpookyStage extends Stage
 			switchedToMonster = true;
 		}
 
-		/*
 		if(PlayState.instance.controls.CUTSCENE_ADVANCE && cutsceneSkipped == false && canSkipCutscene == true)
 		{
 			hasPlayedCutscene = true;
 			skipCutscene();
 			trace('skipped');
 		}
-		*/
 		
 		//extra stuff to correct the offsets getting screwed up from the sprites being scaled down
 		if (getBoyfriend() != null && getGirlfriend() != null && getDad() != null)
@@ -639,8 +636,11 @@ class TankmanBattlefieldSpookyStage extends Stage
 	{
 		var results:Array<String> = super.fetchAssetPaths();
 		
-		results.push(Paths.sound("cutscene/stress/stressSpookyCutscene"));
 		results.push(Paths.sound("cutscene/stress/weirdAppearsSound"));
+		results.push(Paths.sound("cutscene/stress/cutsceneSongSpook"));
+		results.push(Paths.sound("cutscene/stress/spookyCock"));
+		results.push(Paths.sound("cutscene/stress/360noScope"));
+		results.push(Paths.sound("cutscene/stress/molochIsPISSED"));
 		results.push(Paths.animateAtlas("spooky/cutscene/MolochKillin", "week7"));
 		results.push(Paths.animateAtlas("spooky/redMist", "week7"));
 

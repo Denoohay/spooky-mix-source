@@ -2376,42 +2376,6 @@
 }
     },
     {
-      "t": 185251.465559355,
-      "e": "Lyrics",
-      "v": {
-	"customY": 0,
-	"fontSize": 32,
-	"layering": 1,
-	"position": 0,
-	"opacity": 100,
-	"alignment": 0,
-	"outlineWidth": 1.3,
-	"letterSpacing": 0,
-	"textColor": 12,
-	"font": "vcr",
-	"lyric": "Tick",
-	"customX": 0
-}
-    },
-    {
-      "t": 185773.20468979,
-      "e": "Lyrics",
-      "v": {
-	"customY": 0,
-	"fontSize": 32,
-	"layering": 1,
-	"position": 0,
-	"opacity": 100,
-	"alignment": 0,
-	"outlineWidth": 1.3,
-	"letterSpacing": 0,
-	"textColor": 12,
-	"font": "vcr",
-	"lyric": "Tick tock",
-	"customX": 0
-}
-    },
-    {
       "t": 187566.68295066,
       "e": "Lyrics",
       "v": {

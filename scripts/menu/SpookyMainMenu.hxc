@@ -47,7 +47,7 @@ class MainMenu extends Module
     {   
         FlxG.mouse.visible = false;
 
-        if (FlxG.state.rightWatermarkText.text == "") FlxG.state.rightWatermarkText.text = "SPOOKY MIX v2.0.0";
+        if (FlxG.state.rightWatermarkText.text == "") FlxG.state.rightWatermarkText.text = "SPOOKY MIX v2.0.1";
         //if (FlxG.state.rightWatermarkText.text == "") FlxG.state.rightWatermarkText.text = "SPOOKY MIX v" + Json.parse(Assets.getText("_polymod_meta.json")).mod_version;
 
         Constants.URL_MERCH = "https://needlejuicerecords.com/collections/friday-night-funkin";

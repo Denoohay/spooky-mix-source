@@ -273,7 +273,6 @@ class BlazinNeighborhoodStage extends Stage
 	}
 
 	function skipCutscene(){
-		PlayState.instance.isInCutscene = false;
 		cutsceneSkipped = true;
 		hasPlayedCutscene = true;
 		PlayState.instance.camCutscene.fade(0xFF000000, 0.5, false, null, true);
@@ -281,6 +280,7 @@ class BlazinNeighborhoodStage extends Stage
 		cutsceneMusic.fadeOut(0.5, 0);
 
 		new FlxTimer().start(0.5, _ -> {
+			PlayState.instance.isInCutscene = false;
 			hasPlayedCutscene = true;
 			PlayState.instance.justUnpaused = true;
 			PlayState.instance.camCutscene.fade(0xFF000000, 0.5, true, null, true);
@@ -307,7 +307,7 @@ class BlazinNeighborhoodStage extends Stage
 			scrollingGraves2.alpha = 1;
 		}
 
-		if(PlayState.instance.controls.CUTSCENE_ADVANCE && cutsceneSkipped == false && canSkipCutscene == true)
+		if((PlayState.instance.controls.CUTSCENE_ADVANCE || PlayState.instance.controls.NOTE_LEFT || PlayState.instance.controls.NOTE_RIGHT || PlayState.instance.controls.NOTE_UP || PlayState.instance.controls.NOTE_DOWN) && cutsceneSkipped == false && canSkipCutscene == true)
 		{
 			hasPlayedCutscene = true;
 			skipCutscene();

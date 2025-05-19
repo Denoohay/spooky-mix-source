@@ -62,16 +62,6 @@ class WinterHorrorlandSong extends Song
 			});
 		}
 	}
-	public function listDifficulties(variationId:String, variationIds:Array<String>, showLocked:Bool):Array<String>
-	{
-		if (showLocked || Save.instance.hasBeatenSong('eggnog', null, 'spookymod'))
-		{
-			return super.listDifficulties(variationId, variationIds);
-		}
-
-		// Hide all difficulties if the player has not beaten the week.
-		return [];
-	}
 
 	override function onUpdate(event:UpdateScriptEvent)
 	{
