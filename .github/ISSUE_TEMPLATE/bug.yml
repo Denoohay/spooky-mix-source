@@ -38,10 +38,10 @@ body:
       placeholder: ex. 2.0.0
     validations:
       required: true
-
+      
   - type: dropdown
     attributes:
-      label: Installed Mods
+      label: Any Installed Mods?
       description: Did you have any other mods installed when encountering this bug?
       options:
         - I did not have any mods installed other than Spooky Mix
@@ -51,18 +51,20 @@ body:
 
   - type: textarea
     attributes:
-      label: If so, please list all of the mods you had installed here.
+      label: Installed Mods List
+      description: If you did have other mods installed, please list all of them here.
       placeholder: List your installed mods other than Spooky Mix
 
   - type: dropdown
     attributes:
-      label: Do you still encounter this issue with no other mods installed?
+      label: Issue Present With/Without Other Mods
+      description: Do you still encounter this issue with no other mods installed?
       options:
         - This issue only occurs when I have the mods listed above installed
         - I have tested it and this issue still occurs when I don't have any other mods installed
     validations:
       required: true
-  
+
   - type: markdown
     attributes:
       value: "## Describe your bug."
