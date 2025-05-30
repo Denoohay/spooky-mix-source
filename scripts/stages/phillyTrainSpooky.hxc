@@ -46,6 +46,8 @@ class PhillyTrainSpookyStage extends Stage
 	var limo:FlxAtlasSprite;
 	var limoWeird:FlxAtlasSprite;
 
+	var makeGhostsAppear:Bool = false;
+
 	/**
    * Replay the cutscene after leaving the song.
    */
@@ -313,7 +315,7 @@ class PhillyTrainSpookyStage extends Stage
 		bottomSmokeAdd.setPosition(0, 1007);
 		bottomSmokeAdd.scrollFactor.set(1.2, 1);
 		bottomSmokeAdd.zIndex = 410;
-		bottomSmokeAdd.blend = 0;
+		if (FlxG.save.data.spookyShaders != false) bottomSmokeAdd.blend = 0;
 		bottomSmokeAdd.velocity.x = 200;
 
 		PlayState.instance.currentStage.add(bottomSmokeAdd);
@@ -338,7 +340,10 @@ class PhillyTrainSpookyStage extends Stage
 		//trainSound = new FlxSound().loadEmbedded(Paths.sound('train_passes'));
 		//FlxG.sound.list.add(trainSound);
 		
-		getNamedProp("topGradient").blend = 0;
+		if (FlxG.save.data.spookyShaders != false)
+			getNamedProp("topGradient").blend = 0;
+		else
+			getNamedProp("topGradient").visible = false;
 
 		for (i in 0...LIGHT_COUNT)
 		{
@@ -357,6 +362,17 @@ class PhillyTrainSpookyStage extends Stage
 	function onUpdate(event:UpdateScriptEvent):Void
 	{
 		super.onUpdate(event);
+		
+		if (FlxG.save.data.spookyShaders != false){}
+		else
+		{
+			if(getBoyfriend() != null)
+			{
+				getBoyfriend().color = 0xA6B3BC;
+				getGirlfriend().color = 0xA6B3BC;
+				getDad().color = 0xA6B3BC;
+			}
+		}
 
 		if(cutsceneTimerManager != null) cutsceneTimerManager.update(event.elapsed);
 		// Update beat lights
@@ -402,59 +418,78 @@ class PhillyTrainSpookyStage extends Stage
 	override function addCharacter(character:BaseCharacter, charType:CharacterType):Void {
 		// Apply the shader automatically to each character as it gets added.
 		super.addCharacter(character, charType);
-		trace('Applied stage shader to ' + character.characterName);
+		if (FlxG.save.data.spookyShaders != false)
+		{
+			trace('Applied stage shader to ' + character.characterName);
 		
-		var rim = new DropShadowShader();
-		character.shader = rim;
-		rim.color = 0xFF1C2628;
-		rim.attachedSprite = character;
-		rim.setAdjustColor(-20, -30, -45, -20); //b, h, c, s
-		rim.angle = 120;
+			var rim = new DropShadowShader();
+			character.shader = rim;
+			rim.color = 0xFF1C2628;
+			rim.attachedSprite = character;
+			rim.setAdjustColor(-20, -30, -45, -20); //b, h, c, s
+			rim.angle = 120;
 
-		switch(charType){
-			case CharacterType.BF:
-				character.animation.onFrameChange.add(function() {
-					if (getBoyfriend() != null)
-					{
-      					rim.updateFrameInfo(getBoyfriend().frame);
-					}
-    			});
+			switch(charType){
+				case CharacterType.BF:
+					character.animation.onFrameChange.add(function() {
+						if (getBoyfriend() != null)
+						{
+      						rim.updateFrameInfo(getBoyfriend().frame);
+						}
+    				});
 
-			case CharacterType.DAD:
-				character.animation.onFrameChange.add(function() {
-					if (getDad() != null)
-					{
-      					rim.updateFrameInfo(getDad().frame);
-					}
-    			});
+				case CharacterType.DAD:
+					character.animation.onFrameChange.add(function() {
+						if (getDad() != null)
+						{
+      						rim.updateFrameInfo(getDad().frame);
+						}
+    				});
 
-			case CharacterType.GF:
-				character.animation.onFrameChange.add(function() {
-					if (getGirlfriend() != null)
-					{
-      					rim.updateFrameInfo(getGirlfriend().frame);
-					}
-    			});
+				case CharacterType.GF:
+					character.animation.onFrameChange.add(function() {
+						if (getGirlfriend() != null)
+						{
+      						rim.updateFrameInfo(getGirlfriend().frame);
+						}
+    				});
 
-			default:
+				default:
 
+			}
 		}
 
 	}
 
 	override function onGameOver(event:ScriptEvent):Void {
 		super.onGameOver(event);
-		getBoyfriend().shader = null;
-
+		if (FlxG.save.data.spookyShaders != false)
+			getBoyfriend().shader = null;
+		else
+			getBoyfriend().color = 0xFFFFFF;
+			
 		getNamedProp('ghostLeft').alpha = 0;
 		getNamedProp('ghostRight').alpha = 0;
+
+		//getNamedProp('ghostLeft').animation.play('spawnOut');
+		//getNamedProp('ghostRight').animation.play('spawnOut');
+
+		makeGhostsAppear = false;
 	}
 
 	override function onSongRetry(event:ScriptEvent):Void {
 		super.onSongRetry(event);
-
+		if (FlxG.save.data.spookyShaders != false){}
+		else{
+			getBoyfriend().color = 0xA6B3BC;}
+			
 		getNamedProp('ghostLeft').alpha = 0;
 		getNamedProp('ghostRight').alpha = 0;
+
+		//getNamedProp('ghostLeft').animation.play('spawnOut');
+		//getNamedProp('ghostRight').animation.play('spawnOut');
+
+		makeGhostsAppear = false;
 	}
 
 	function onBeatHit(event:SongTimeScriptEvent):Void
@@ -509,6 +544,52 @@ class PhillyTrainSpookyStage extends Stage
 		trainFinishing = false;
 		startedMoving = false;
 	}
+
+    public override function onSongEvent(scriptEvent:SongEventScriptEvent)
+    {
+        super.onSongEvent(scriptEvent);
+
+        if (scriptEvent.eventData.eventKind == "PicoGhosts") //ghost appear animation time 0.625, ghost dissapear is 1.25
+        {
+			makeGhostsAppear = true;
+
+            if (scriptEvent.eventData.value.ghostsFade == 0)
+			{
+				getNamedProp('ghostLeft').animation.play('spawnOut');
+				getNamedProp('ghostRight').animation.play('spawnOut');
+
+				new FlxTimer().start(1.25, function(tmr)
+				{
+					if (makeGhostsAppear == true)
+					{
+						getNamedProp('ghostLeft').alpha = 0;
+						getNamedProp('ghostRight').alpha = 0;
+
+						makeGhostsAppear = false;
+					}
+				});
+			}
+			else if (scriptEvent.eventData.value.ghostsFade == 1)
+			{
+				getNamedProp('ghostLeft').animation.play('spawnIn');
+				getNamedProp('ghostRight').animation.play('spawnIn');
+
+				getNamedProp('ghostLeft').alpha = 1;
+				getNamedProp('ghostRight').alpha = 1;
+
+				new FlxTimer().start(0.625, function(tmr)
+				{
+					if (makeGhostsAppear == true)
+					{
+						getNamedProp('ghostLeft').animation.play('idle');
+						getNamedProp('ghostRight').animation.play('idle');
+
+						makeGhostsAppear = false;
+					}
+				});
+			}
+        }
+    }
 
 	/**
 	 * If your stage uses additional assets not specified in the JSON,

@@ -47,9 +47,12 @@ class MolochDarkCharacter extends MultiSparrowCharacter
 		
 		colorShaderNormal = new AdjustColorShader();
 		
-		colorShaderNormal.brightness = -33;
-		colorShaderNormal.contrast = 39;
-		colorShaderNormal.saturation = -25;
+		if (FlxG.save.data.spookyShaders != false)
+		{
+			colorShaderNormal.brightness = -33;
+			colorShaderNormal.contrast = 39;
+			colorShaderNormal.saturation = -25;
+		}
 
 		normalChar = CharacterDataParser.fetchCharacter('moloch');
 		normalChar.zIndex = 99;

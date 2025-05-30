@@ -170,7 +170,6 @@ class SpookyMixCredits extends Module
                 addModCredit("Denoohay", "body");
                 addModCredit("givemethesalt", "body");
                 addModCredit("Andrewman_19", "body");
-                addModCredit("SacredSky", "body");
                 addModCredit("LeGooey", "body");
                 addModCredit("swagsalt", "body", true);
                 
@@ -182,7 +181,6 @@ class SpookyMixCredits extends Module
             addModCredit("Music Production", "header");
                 addModCredit("RubyyyButCool", "body");
                 addModCredit("Andrewman_19", "body");
-                addModCredit("SacredSky", "body");
                 addModCredit("LeGooey", "body");
                 addModCredit("swagsalt", "body");
                 addModCredit("Clarky_Dev", "body");
@@ -222,7 +220,8 @@ class SpookyMixCredits extends Module
                 addModCredit("Clarky_Dev", "body");
                 addModCredit("swagsalt", "body");
                 addModCredit("Jotacast", "body");
-                addModCredit("givemethesalt", "body", true);
+                addModCredit("givemethesalt", "body");
+                addModCredit("Denoohay", "body", true);
 
             addModCredit("---------------------------------------", "header", true);
 

@@ -21,9 +21,9 @@
   "stickerPack": "standard-spooky",
   "freeplayDJ": {
     "assetPath": "freeplay/freeplay-spooky",
-    "text1": "IT'S A SPOOKY MONTH",
-    "text2": "IT'S A SPOOKY MONTH",
-    "text3": "IT'S A SPOOKY MONTH",
+    "text1": "IT'S SPOOKY MONTH",
+    "text2": "IT'S SPOOKY MONTH",
+    "text3": "IT'S SPOOKY MONTH",
     "fistPump": {
       "introStartFrame": 0,
       "introEndFrame": 4,

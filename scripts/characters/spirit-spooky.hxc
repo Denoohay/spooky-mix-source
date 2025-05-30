@@ -20,16 +20,19 @@ class SpiritSpookyCharacter extends SparrowCharacter {
 		
 		blood = new AdjustColorShader();
 		broken = new AdjustColorShader();
+		
+		if (FlxG.save.data.spookyShaders != false)
+		{
+			blood.brightness = -10;
+			blood.contrast = 0;
+			blood.saturation = 0;
+			blood.hue = 60;
 
-		blood.brightness = -10;
-		blood.contrast = 0;
-		blood.saturation = 0;
-		blood.hue = 60;
-
-		broken.brightness = 10;
-		broken.contrast = 100;
-		broken.saturation = -100;
-		broken.hue = 0;
+			broken.brightness = 10;
+			broken.contrast = 100;
+			broken.saturation = -100;
+			broken.hue = 0;
+		}
 		
 		var isWeird:Int;
 		var isBroken:Int;
@@ -42,11 +45,21 @@ class SpiritSpookyCharacter extends SparrowCharacter {
 		if (isWeird == 1 && Save.instance.hasBeatenSong("thorns", null, 'spookymod'))
 		{
 			isBroken = FlxG.random.int(1, 8);
-
-			if (isBroken == 1)
-				this.shader = broken;
+			
+			if (FlxG.save.data.spookyShaders != false)
+			{
+				if (isBroken == 1)
+					this.shader = broken;
+				else
+					this.shader = blood;
+			}
 			else
-				this.shader = blood;
+			{
+				if (isBroken == 1)
+					this.color = 0x000000;
+				else
+					this.color = 0xFF165B;
+			}
 		}
 		else
 		{

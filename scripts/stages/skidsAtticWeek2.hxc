@@ -48,71 +48,80 @@ class SkidsAtticWeekTwoStage extends Stage
   override function buildStage()
 	{
 		super.buildStage();
+		
+		if (FlxG.save.data.spookyShaders != false)
+		{
+			colorShaderBG = new AdjustColorShader();
 
-		colorShaderBG = new AdjustColorShader();
-
-		colorShaderBG.brightness = 10;
-		colorShaderBG.contrast = 39;
-		colorShaderBG.hue = -9;
+			colorShaderBG.brightness = 10;
+			colorShaderBG.contrast = 39;
+			colorShaderBG.hue = -9;
+		}
 
 		getNamedProp('bgLight').alpha = 0;
 		getNamedProp('bgLightGlow').alpha = 0;
 		getNamedProp('weird').alpha = 0;
 		getNamedProp('bgDarkGlow').alpha = 1;
 		getNamedProp('bgDark').shader = colorShaderBG;
-
-		getNamedProp('bgLightGlow').blend = 0;
-		getNamedProp('bgDarkGlow').blend = 0;
+		
+		if (FlxG.save.data.spookyShaders != false)
+		{
+			getNamedProp('bgLightGlow').blend = 0;
+			getNamedProp('bgDarkGlow').blend = 0;
+		}
 	}
 
 	override function addCharacter(character:BaseCharacter, charType:CharacterType):Void {
 		// Apply the shader automatically to each character as it gets added.
 		super.addCharacter(character, charType);
-		trace('Applied stage shader to ' + character.characterName);
+		if (FlxG.save.data.spookyShaders != false)
+		{
+			trace('Applied stage shader to ' + character.characterName);
 		
-		var rim = new DropShadowShader();
-		character.shader = rim;
-		rim.setAdjustColor(3, -7, 20, 0); //b, h, c, s
-		rim.attachedSprite = character;
+			var rim = new DropShadowShader();
+			character.shader = rim;
+			rim.setAdjustColor(3, -7, 20, 0); //b, h, c, s
+			rim.attachedSprite = character;
 
-		storeShader = rim;
+			storeShader = rim;
 
-		switch(charType){
-			case CharacterType.BF:
-				rim.color = 0xFF00443D;
-				rim.angle = 120;
-				character.animation.onFrameChange.add(function() {
-					if (getBoyfriend() != null)
-					{
-      					rim.updateFrameInfo(getBoyfriend().frame);
-					}
-    			});
-		storeBfShader = getBoyfriend().shader;
+			switch(charType){
+				case CharacterType.BF:
+					rim.color = 0xFF00443D;
+					rim.angle = 120;
+					character.animation.onFrameChange.add(function() {
+						if (getBoyfriend() != null)
+						{
+      						rim.updateFrameInfo(getBoyfriend().frame);
+						}
+    				});
+			storeBfShader = getBoyfriend().shader;
 
-			case CharacterType.DAD:
-				rim.color = 0xFF00443D;
-				rim.angle = 120;
-				character.animation.onFrameChange.add(function() {
-					if (getDad() != null)
-					{
-      					rim.updateFrameInfo(getDad().frame);
-					}
-    			});
-		storeDadShader = getDad().shader;
+				case CharacterType.DAD:
+					rim.color = 0xFF00443D;
+					rim.angle = 120;
+					character.animation.onFrameChange.add(function() {
+						if (getDad() != null)
+						{
+      						rim.updateFrameInfo(getDad().frame);
+						}
+    				});
+			storeDadShader = getDad().shader;
 
-			case CharacterType.GF:
-				rim.color = 0xFF006D64;
-				rim.angle = 90;
-				character.animation.onFrameChange.add(function() {
-					if (getGirlfriend() != null)
-					{
-      					rim.updateFrameInfo(getGirlfriend().frame);
-					}
-    			});
-		storeGfShader = getGirlfriend().shader;
+				case CharacterType.GF:
+					rim.color = 0xFF006D64;
+					rim.angle = 90;
+					character.animation.onFrameChange.add(function() {
+						if (getGirlfriend() != null)
+						{
+      						rim.updateFrameInfo(getGirlfriend().frame);
+						}
+    				});
+			storeGfShader = getGirlfriend().shader;
 
-			default:
+				default:
 
+			}
 		}
 
 	}
@@ -168,95 +177,98 @@ class SkidsAtticWeekTwoStage extends Stage
 		  getGirlfriend().alpha = 0;
 
 		  //i'm so sorry for this. the lightning flash wasn't working with the drop shadow shader so i had to make the rim light smoothly fade in after they already faded back to their dark sprites and this was the only way i could think to do it
-		  new FlxTimer().start(1.5, function(_)
+		  if (FlxG.save.data.spookyShaders != false)
 		  {
-			if (isDead == false)
-			{
-				storeBfShader.color = 0xFF000000;
-				getBoyfriend().shader = storeBfShader;
-
-				storeDadShader.color = storeBfShader.color;
-				getDad().shader = storeDadShader;
-
-				storeGfShader.color = storeBfShader.color;
-				getGirlfriend().shader = storeGfShader;
-			}
-
-			new FlxTimer().start(0.05, function(_)
-			{
+			  new FlxTimer().start(1.5, function(_)
+			  {
 				if (isDead == false)
 				{
-					storeBfShader.color = 0xFF00100F;
+					storeBfShader.color = 0xFF000000;
 					getBoyfriend().shader = storeBfShader;
-				
+
 					storeDadShader.color = storeBfShader.color;
 					getDad().shader = storeDadShader;
 
-					storeGfShader.color = 0xFF001615;
+					storeGfShader.color = storeBfShader.color;
 					getGirlfriend().shader = storeGfShader;
 				}
-			  
+
 				new FlxTimer().start(0.05, function(_)
 				{
 					if (isDead == false)
 					{
-						storeBfShader.color = 0xFF001815;
+						storeBfShader.color = 0xFF00100F;
 						getBoyfriend().shader = storeBfShader;
-					
+				
 						storeDadShader.color = storeBfShader.color;
 						getDad().shader = storeDadShader;
 
-						storeGfShader.color = 0xFF002623;
+						storeGfShader.color = 0xFF001615;
 						getGirlfriend().shader = storeGfShader;
 					}
-				  
+			  
 					new FlxTimer().start(0.05, function(_)
 					{
 						if (isDead == false)
 						{
-							storeBfShader.color = 0xFF002824;
+							storeBfShader.color = 0xFF001815;
 							getBoyfriend().shader = storeBfShader;
-						
+					
 							storeDadShader.color = storeBfShader.color;
 							getDad().shader = storeDadShader;
 
-							storeGfShader.color = 0xFF00423C;
+							storeGfShader.color = 0xFF002623;
 							getGirlfriend().shader = storeGfShader;
 						}
-					  
+				  
 						new FlxTimer().start(0.05, function(_)
 						{
 							if (isDead == false)
 							{
-								storeBfShader.color = 0xFF003A34;
+								storeBfShader.color = 0xFF002824;
 								getBoyfriend().shader = storeBfShader;
-							
+						
 								storeDadShader.color = storeBfShader.color;
 								getDad().shader = storeDadShader;
 
-								storeGfShader.color = 0xFF005B54;
+								storeGfShader.color = 0xFF00423C;
 								getGirlfriend().shader = storeGfShader;
 							}
-						  
+					  
 							new FlxTimer().start(0.05, function(_)
 							{
 								if (isDead == false)
 								{
-									storeBfShader.color = 0xFF00443D;
+									storeBfShader.color = 0xFF003A34;
 									getBoyfriend().shader = storeBfShader;
-									
+							
 									storeDadShader.color = storeBfShader.color;
 									getDad().shader = storeDadShader;
 
-									storeGfShader.color = 0xFF006D64;
+									storeGfShader.color = 0xFF005B54;
 									getGirlfriend().shader = storeGfShader;
 								}
+						  
+								new FlxTimer().start(0.05, function(_)
+								{
+									if (isDead == false)
+									{
+										storeBfShader.color = 0xFF00443D;
+										getBoyfriend().shader = storeBfShader;
+									
+										storeDadShader.color = storeBfShader.color;
+										getDad().shader = storeDadShader;
+
+										storeGfShader.color = 0xFF006D64;
+										getGirlfriend().shader = storeGfShader;
+									}
+								});
 							});
 						});
 					});
 				});
 			});
-		});
+		}
 		FlxTween.tween(getNamedProp('bgLight'), {alpha: 0}, 1.5);
 		FlxTween.tween(getNamedProp('bgLightGlow'), {alpha: 0}, 1.5);
 		FlxTween.tween(getNamedProp('weird'), {alpha: 0}, 0.4);
@@ -313,15 +325,18 @@ class SkidsAtticWeekTwoStage extends Stage
 	function onSongRetry(event:ScriptEvent)
 	{
 		super.onSongRetry(event);
-		
-		storeBfShader.color = 0xFF00443D;
-		getBoyfriend().shader = storeBfShader;
-									
-		storeDadShader.color = storeBfShader.color;
-		getDad().shader = storeDadShader;
 
-		storeGfShader.color = 0xFF006D64;
-		getGirlfriend().shader = storeGfShader;
+		if (FlxG.save.data.spookyShaders != false)
+		{
+			storeBfShader.color = 0xFF00443D;
+			getBoyfriend().shader = storeBfShader;
+									
+			storeDadShader.color = storeBfShader.color;
+			getDad().shader = storeDadShader;
+
+			storeGfShader.color = 0xFF006D64;
+			getGirlfriend().shader = storeGfShader;
+		}
 
 		// Properly reset lightning when restarting the song.
 		lightningStrikeBeat = 0;

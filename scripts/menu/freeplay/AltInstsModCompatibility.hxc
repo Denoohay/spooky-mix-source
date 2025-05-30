@@ -67,7 +67,7 @@ class AltInstsModCompatibility extends Module
                 /*
                 if (FlxG.state.subState.currentCharacterId != 'bf' && FlxG.state.subState.currentCharacterId != 'pico')
                 {
-                    for (i in 0...Save.instance.data.unlocks.charactersSeen.members.length)
+                    for (i in 0...Save.instance.data.unlocks.charactersSeen.length)
                     {
                         if (FlxG.state.subState.currentCharacterId != Save.instance.data.unlocks.charactersSeen.members[i] && Assets.exists("data/songs/" + PlayState.instance.currentSong.id + "/" + PlayState.instance.currentSong.id + "-metadata-" + Save.instance.data.unlocks.charactersSeen.members[i] + ".json"))
                         FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.insert(FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.length, Save.instance.data.unlocks.charactersSeen.members[i]);

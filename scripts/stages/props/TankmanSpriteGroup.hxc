@@ -20,7 +20,7 @@ class TankmanSpriteGroup extends FlxTypedSpriteGroup
 
 	function new(erect:Bool)
 	{
-		if (PlayState.instance.currentVariation == 'spookymod') MAX_SIZE = 20;
+		if (PlayState.instance.currentVariation == 'spookymod') MAX_SIZE = 30;
 
 		super(0, 0, MAX_SIZE);
 		this.zIndex = 30;
@@ -45,6 +45,7 @@ class TankmanSpriteGroup extends FlxTypedSpriteGroup
 	{
 		trace('Initializing Tankman timings...');
 		tankmanTimes = [];
+		tankmanDirs = [];
 		// The tankmen's timings and directions are determined
 		// by the chart, specifically the internal "picospeaker" difficulty.
 		var animChart:SongDifficulty = PlayState.instance.currentSong.getDifficulty('picospeaker', PlayState.instance.currentVariation);
@@ -70,7 +71,8 @@ class TankmanSpriteGroup extends FlxTypedSpriteGroup
 			if (FlxG.random.bool(1 / 16 * 100) || PlayState.instance.currentVariation == 'spookymod')
 			{
 				tankmanTimes.push(note.time);
-				var goingRight:Bool = (note.data == 2 || note.data == 3) ? false : true;
+				if (PlayState.instance.currentVariation == 'spookymod') var goingRight:Bool = (note.data == 0 || note.data == 1) ? false : true;
+				else var goingRight:Bool = (note.data == 2 || note.data == 3) ? false : true;
 				tankmanDirs.push(goingRight);
 			}
 		}

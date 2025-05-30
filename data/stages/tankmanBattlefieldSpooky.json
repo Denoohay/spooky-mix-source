@@ -112,8 +112,8 @@
           "prefix": "watchtower gradient color"
         },
         {
-          "name": "fallEvent",
-          "prefix": "wwatchtower skittles fall event",
+          "name": "idle-fallEvent",
+          "prefix": "watchtower skittles fall event",
           "looped": false
         },
         {

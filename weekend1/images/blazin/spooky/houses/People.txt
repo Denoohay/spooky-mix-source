@@ -4,6 +4,7 @@
 3-LimeIsHere
 4-Ignacio
 5-Official_NO
+
 6-Thrick
 7-RandoHorn
 8-givemethesalt
@@ -11,10 +12,11 @@
 10-SrPelo
 11-KrakenPower
 12-Rareblin
-13-RubyyyButCool
+13-Pico & Nene
+
 14-eden_essence
-15-LeGooey
-16-sacredsky
+15-RubyyyButCool
+16-LeGooey
 17-Clarky_Dev
 18-Y_F_MUS
 19-alwk

@@ -146,7 +146,8 @@ class PhillyStreetsSpookyStage extends Stage
 		mist0.setPosition(-650, -100);
 		mist0.scrollFactor.set(1.2, 1.2);
 		mist0.zIndex = 1000;
-    mist0.blend = 0;
+	if (FlxG.save.data.spookyShaders != false) mist0.blend = 0;
+	else mist0.visible = false;
 		mist0.color = 0xFF3E3341;
 		mist0.alpha = 1;
 		mist0.velocity.x = 172;
@@ -158,7 +159,8 @@ class PhillyStreetsSpookyStage extends Stage
 		mist1.setPosition(-650, -100);
 		mist1.scrollFactor.set(1.1, 1.1);
 		mist1.zIndex = 1000;
-    mist1.blend = 0;
+	if (FlxG.save.data.spookyShaders != false) mist1.blend = 0;
+	else mist1.visible = false;
 		mist1.color = 0xFF3E3341;
 		mist1.alpha = 1;
 		mist1.velocity.x = 150;
@@ -170,7 +172,8 @@ class PhillyStreetsSpookyStage extends Stage
 		mist2.setPosition(-650, -100);
 		mist2.scrollFactor.set(1.2, 1.2);
 		mist2.zIndex = 1001;
-    mist2.blend = 0;
+	if (FlxG.save.data.spookyShaders != false) mist2.blend = 0;
+	else mist2.visible = false;
 		mist2.color = 0xFF3E3341;
 		mist2.alpha = 1;
 		mist2.velocity.x = -80;
@@ -182,7 +185,8 @@ class PhillyStreetsSpookyStage extends Stage
 		mist3.setPosition(-650, -100);
 		mist3.scrollFactor.set(0.95, 0.95);
 		mist3.zIndex = 99;
-   	mist3.blend = 0;
+	if (FlxG.save.data.spookyShaders != false) mist3.blend = 0;
+	else mist3.visible = false;
 		mist3.color = 0xFF3E3341;
 		mist3.alpha = 1;
 		mist3.velocity.x = -50;
@@ -195,7 +199,8 @@ class PhillyStreetsSpookyStage extends Stage
 		mist4.setPosition(-650, -100);
 		mist4.scrollFactor.set(0.8, 0.8);
 		mist4.zIndex = 88;
-   	mist4.blend = 0;
+	if (FlxG.save.data.spookyShaders != false) mist4.blend = 0;
+	else mist4.visible = false;
 		mist4.color = 0xFF3E3341;
 		mist4.alpha = 1;
 		mist4.velocity.x = 40;
@@ -208,7 +213,8 @@ class PhillyStreetsSpookyStage extends Stage
 		mist5.setPosition(-650, -100);
 		mist5.scrollFactor.set(0.5, 0.5);
 		mist5.zIndex = 39;
-   	mist5.blend = 0;
+	if (FlxG.save.data.spookyShaders != false) mist5.blend = 0;
+	else mist5.visible = false;
 		mist5.color = 0xFF3E3341;
 		mist5.alpha = 1;
 		mist5.velocity.x = 20;
@@ -223,7 +229,7 @@ class PhillyStreetsSpookyStage extends Stage
 		molochCandleGlow.animation.play('idle');
 		molochCandleGlow.scrollFactor.set(1, 1);
 		molochCandleGlow.zIndex = 301;
-   		molochCandleGlow.blend = 0;
+		if (FlxG.save.data.spookyShaders != false) molochCandleGlow.blend = 0;
    		molochCandleGlow.visible = false;
 		PlayState.instance.currentStage.add(molochCandleGlow);
 		PlayState.instance.currentStage.refresh(); // Apply z-index.
@@ -238,7 +244,7 @@ class PhillyStreetsSpookyStage extends Stage
 		DarnellPumpkinGlow.animation.play('idle');
 		DarnellPumpkinGlow.scrollFactor.set(1, 1);
 		DarnellPumpkinGlow.zIndex = 351;
-   		DarnellPumpkinGlow.blend = 0;
+   		if (FlxG.save.data.spookyShaders != false) DarnellPumpkinGlow.blend = 0;
    		DarnellPumpkinGlow.visible = false;
 		PlayState.instance.currentStage.add(DarnellPumpkinGlow);
 		PlayState.instance.currentStage.refresh(); // Apply z-index.
@@ -459,7 +465,7 @@ class PhillyStreetsSpookyStage extends Stage
 	{
 		super.onUpdate(event);
 
-		if (molochCandleGlow.visible == false && PlayState.instance.currentStage.getGirlfriend().characterId == "moloch")
+		if (molochCandleGlow.visible == false && PlayState.instance.currentStage.getGirlfriend().characterId == "moloch" && FlxG.save.data.spookyShaders != false)
 		{
 			molochCandleGlow.x = PlayState.instance.currentStage.getGirlfriend().x + 115;
 			molochCandleGlow.y = PlayState.instance.currentStage.getGirlfriend().y + 350;
@@ -491,21 +497,40 @@ class PhillyStreetsSpookyStage extends Stage
 
 		if(scrollingSky != null) scrollingSky.scrollX -= FlxG.elapsed * 22;
 
-		if(PlayState.instance.currentStage.getBoyfriend() != null && PlayState.instance.currentStage.getBoyfriend().shader == null){
-      PlayState.instance.currentStage.getBoyfriend().shader = colorShader;
-		  PlayState.instance.currentStage.getGirlfriend().shader = colorShader;
-		  PlayState.instance.currentStage.getDad().shader = colorShaderDarnell;
+		if(getBoyfriend() != null && getBoyfriend().shader == null)
+		{
+			if (FlxG.save.data.spookyShaders != false)
+			{
+				if(getBoyfriend() != null && getBoyfriend().shader == null)
+				{
+					getBoyfriend().shader = colorShader;
+					getGirlfriend().shader = colorShader;
+					getDad().shader = colorShaderDarnell;
+				}
+			}
+			else
+			{
+				if(getBoyfriend() != null)
+				{
+					getBoyfriend().color = 0x8E7A93;
+					getGirlfriend().color = 0x8E7A93;
+					getDad().color = 0x8E7A93;
+				}
+			}
 		  
-		  colorShader.brightness = -39;
-		  colorShader.contrast = -7;
-		  colorShader.saturation = -59;
-		  colorShader.hue = -19;
+			if (FlxG.save.data.spookyShaders != false)
+			{
+			  colorShader.brightness = -39;
+			  colorShader.contrast = -7;
+			  colorShader.saturation = -59;
+			  colorShader.hue = -19;
 		  
-		  colorShaderDarnell.brightness = -39;
-		  colorShaderDarnell.contrast = -7;
-		  colorShaderDarnell.saturation = -68;
-		  colorShaderDarnell.hue = 0;
-    }
+			  colorShaderDarnell.brightness = -39;
+			  colorShaderDarnell.contrast = -7;
+			  colorShaderDarnell.saturation = -68;
+			  colorShaderDarnell.hue = 0;
+			}
+		}
 	}
 
 	function onBeatHit(event:SongTimeScriptEvent)
@@ -603,8 +628,11 @@ class PhillyStreetsSpookyStage extends Stage
 
 	override function onGameOver(event:ScriptEvent):Void {
 		super.onGameOver(event);
-
-		PlayState.instance.currentStage.getBoyfriend().shader = null;
+		
+		if (FlxG.save.data.spookyShaders != false)
+			getBoyfriend().shader = null;
+		else
+			getBoyfriend().color = 0xFFFFFF;
 	}
 
 	override function onSongRetry(event:ScriptEvent):Void {
@@ -614,7 +642,10 @@ class PhillyStreetsSpookyStage extends Stage
 		resetStageValues();
 		
 		DarnellPumpkinGlow.animation.play("idle");
-		PlayState.instance.currentStage.getBoyfriend().shader = colorShader;
+		if (FlxG.save.data.spookyShaders != false)
+			getBoyfriend().shader = colorShader;
+		else
+			getBoyfriend().color = 0x8E7A93;
 	}
 
 	override function addProp(prop:StageProp, ?name:String = null)
@@ -622,7 +653,7 @@ class PhillyStreetsSpookyStage extends Stage
 		super.addProp(prop, name);
 		if (StringTools.endsWith(name, "_lightmap"))
 		{
-			prop.blend = 0; // 0 means ADD (see openfl.display.BlendMode)
+			if (FlxG.save.data.spookyShaders != false) prop.blend = 0; // 0 means ADD (see openfl.display.BlendMode)
 			prop.alpha = 0.6;
 			//frameBufferMan.moveSpriteTo("lightmap", prop);
 		}

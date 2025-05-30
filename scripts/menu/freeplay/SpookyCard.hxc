@@ -24,6 +24,7 @@ import funkin.modding.base.ScriptedFlxRuntimeShader;
 import funkin.modding.base.ScriptedMusicBeatState;
 import funkin.util.ReflectUtil;
 import flixel.FlxG;
+import funkin.Preferences;
 
 class SpookyCard extends Module
 {
@@ -84,13 +85,19 @@ class SpookyCard extends Module
         FlxG.state.subState.insert(FlxG.state.subState.members.indexOf(FlxG.state.subState.dj), backLines);
         backLines.cameras = [FlxG.state.subState.funnyCam];
 
-        topCandyRow = new FlxBackdrop(Paths.image('freeplay/backingCards/spooky/candyRow1'), 0x01, 20);
+        if (!Preferences.naughtyness)
+            topCandyRow = new FlxBackdrop(Paths.image('freeplay/backingCards/spooky/candyRow1 no naughty'), 0x01, 20);
+        else
+            topCandyRow = new FlxBackdrop(Paths.image('freeplay/backingCards/spooky/candyRow1'), 0x01, 20);
         topCandyRow.setPosition(0, 165);
         topCandyRow.velocity.x = -200;
         FlxG.state.subState.insert(FlxG.state.subState.members.indexOf(FlxG.state.subState.dj), topCandyRow);
         topCandyRow.cameras = [FlxG.state.subState.funnyCam];
-
-        lowCandyRow = new FlxBackdrop(Paths.image('freeplay/backingCards/spooky/candyRow2'), 0x01, 15);
+        
+        if (!Preferences.naughtyness)
+            lowCandyRow = new FlxBackdrop(Paths.image('freeplay/backingCards/spooky/candyRow2 no naughty'), 0x01, 15);
+        else
+            lowCandyRow = new FlxBackdrop(Paths.image('freeplay/backingCards/spooky/candyRow2'), 0x01, 15);
         lowCandyRow.setPosition(0, 340);
         FlxG.state.subState.insert(FlxG.state.subState.members.indexOf(FlxG.state.subState.dj), lowCandyRow);
         lowCandyRow.velocity.x = 200;
@@ -162,7 +169,7 @@ class SpookyCard extends Module
         {
             pinkBack.x = FlxG.state.subState.backingCard.pinkBack.x;
             backLines.x = FlxG.state.subState.backingCard.pinkBack.x - 30;
-            cardGlow.x = FlxG.state.subState.backingCard.pinkBack.x;
+            cardGlow.x = FlxG.state.subState.backingCard.pinkBack.x - 15;
         }
 
         if (FlxG.state.subState.backingCard.cardGlow != null)

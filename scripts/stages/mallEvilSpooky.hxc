@@ -30,18 +30,21 @@ class MallEvilSpookyStage extends Stage
 
     colorShaderBf = new AdjustColorShader();
     colorShaderDad = new AdjustColorShader();
+	
+	if (FlxG.save.data.spookyShaders != false)
+	{
+		colorShaderBf.brightness = -48;
+		colorShaderBf.contrast = 28;
+		colorShaderBf.saturation = -18;
+		colorShaderBf.hue = -29;
 
-    colorShaderBf.brightness = -48;
-    colorShaderBf.contrast = 28;
-	colorShaderBf.saturation = -18;
-    colorShaderBf.hue = -29;
+		colorShaderDad.brightness = -28;
+		colorShaderDad.contrast = -14;
+		colorShaderDad.saturation = -21;
+		colorShaderDad.hue = -22;
 
-    colorShaderDad.brightness = -28;
-    colorShaderDad.contrast = -14;
-	colorShaderDad.saturation = -21;
-    colorShaderDad.hue = -22;
-
-    getNamedProp('topGlow').blend = 0;
+		getNamedProp('topGlow').blend = 0;
+	}
 
 	}
 
@@ -49,29 +52,41 @@ class MallEvilSpookyStage extends Stage
 	{
 		super.onUpdate(event);
 
-    if(PlayState.instance.currentStage.getBoyfriend() != null && PlayState.instance.currentStage.getBoyfriend().shader == null){
-      PlayState.instance.currentStage.getBoyfriend().shader = colorShaderBf;
-			PlayState.instance.currentStage.getDad().shader = colorShaderDad;
-    }
+		if (FlxG.save.data.spookyShaders != false)
+		{
+			if(getBoyfriend() != null && getBoyfriend().shader == null)
+			{
+				getBoyfriend().shader = colorShaderBf;
+				getDad().shader = colorShaderDad;
+			}
+		}
+		else
+		{
+			if(getBoyfriend() != null)
+			{
+				getBoyfriend().color = 0xFFA8B3;
+				getDad().color = 0xFFA8B3;
+			}
+		}
 
 	}
 
 	override function onGameOver(event:ScriptEvent):Void {
 		super.onGameOver(event);
-
-		colorShaderBf.hue = 0;
-		colorShaderBf.saturation = 0;
-		colorShaderBf.contrast = 0;
-		colorShaderBf.brightness = 0;
+		
+		if (FlxG.save.data.spookyShaders != false)
+			getBoyfriend().shader = null;
+		else
+			getBoyfriend().color = 0xFFFFFF;
 	}
 
 	override function onSongRetry(event:ScriptEvent):Void {
 		super.onSongRetry(event);
 		
-		colorShaderBf.brightness = -48;
-		colorShaderBf.contrast = 28;
-		colorShaderBf.saturation = -18;
-		colorShaderBf.hue = -29;
+		if (FlxG.save.data.spookyShaders != false)
+			getBoyfriend().shader = colorShaderBf;
+		else
+			getBoyfriend().color = 0xFFA8B3;
 	}
 
 	function onBeatHit(event:SongTimeScriptEvent):Void

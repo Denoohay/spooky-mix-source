@@ -37,6 +37,7 @@ class SpookyPauseMenu extends Module
   //made by Denoohay for FNF: SPOOKY MIX aha ha
 
   var addedStuff:Bool = false;
+  var refreshedGame:Bool = false;
 
   var metadataArtwork:FlxText;
   var metadataCharter:FlxText;
@@ -53,6 +54,7 @@ class SpookyPauseMenu extends Module
     super.onStateChangeEnd(event);
     addedStuff = false;
     artwork = null;
+    refreshedGame = false;
   }
 
   override function onSubStateCloseEnd(event)
@@ -60,13 +62,19 @@ class SpookyPauseMenu extends Module
     super.onSubStateCloseEnd(event);
     addedStuff = false;
     artwork = null;
+    refreshedGame = false;
   }
 
   override function onUpdate(event:UpdateScriptEvent)
   {
 	super.onUpdate(event);
+    
+    if (FlxG.keys.justPressed.F5)
+    {
+        refreshedGame = true;
+    }
 
-    if (ReflectUtil.getClassNameOf(FlxG.state.subState) == "funkin.play.PauseSubState")
+    if (ReflectUtil.getClassNameOf(FlxG.state.subState) == "funkin.play.PauseSubState" && refreshedGame == false)
     {
         if (addedStuff == false)
         {
@@ -125,7 +133,7 @@ class SpookyPauseMenu extends Module
             FlxG.state.subState.metadata.members[4].y = FlxG.state.subState.metadata.members[3].y + 32;
         }
             
-        if (!StringTools.startsWith(PlayState.instance.currentStage.getBoyfriend().characterId, 'bf'))
+        if (!StringTools.startsWith(PlayState.instance.currentStage.getBoyfriend().characterId, 'bf') && refreshedGame == false)
         {
             FlxG.state.subState.metadata.members[3].text = PlayState.instance.deathCounter + ' Game Overs';
         }

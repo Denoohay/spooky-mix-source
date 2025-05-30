@@ -15,10 +15,12 @@ class thornsSpookyConversation extends Conversation {
     if (currentSpeaker.id == 'spirit-spooky')
     {
       currentSpeaker.shader = PlayState.instance.currentStage.getDad().shader;
+      currentSpeaker.color = PlayState.instance.currentStage.getDad().color;
     }
     else
     {
       currentSpeaker.shader = null;
+      currentSpeaker.color = 0xFFFFFF;
     }
   }
 }

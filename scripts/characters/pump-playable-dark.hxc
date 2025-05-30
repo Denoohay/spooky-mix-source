@@ -87,9 +87,12 @@ class PumpPlayableDarkCharacter extends MultiSparrowCharacter
 		
 		colorShaderNormal = new AdjustColorShader();
 		
-		colorShaderNormal.brightness = -45;
-		colorShaderNormal.contrast = 47;
-		colorShaderNormal.saturation = -43;
+		if (FlxG.save.data.spookyShaders != false)
+		{
+			colorShaderNormal.brightness = -45;
+			colorShaderNormal.contrast = 47;
+			colorShaderNormal.saturation = -43;
+		}
 		
 		normalChar = CharacterDataParser.fetchCharacter('pump-playable');
 		normalChar.zIndex = 199;

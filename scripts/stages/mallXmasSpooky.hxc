@@ -9,6 +9,7 @@ import funkin.play.PlayState;
 import funkin.play.stage.Stage;
 import funkin.graphics.adobeanimate.FlxAtlasSprite;
 import funkin.modding.base.ScriptedFlxAtlasSprite;
+import funkin.save.Save;
 
 class MallXmasSpookyStage extends Stage
 {
@@ -19,6 +20,8 @@ class MallXmasSpookyStage extends Stage
 
 	var colorShader:AdjustColorShader;
 
+	var isMokey:Bool = false;
+
 	public override function onCountdownStart(event:CountdownScriptEvent):Void {
 		super.onCountdownStart(event);
 	}
@@ -28,13 +31,25 @@ class MallXmasSpookyStage extends Stage
 		super.buildStage();
 
 		colorShader = new AdjustColorShader();
+		
+		if (FlxG.save.data.spookyShaders != false)
+		{
+			colorShader.brightness = 3;
+			colorShader.contrast = 9;
+			colorShader.saturation = -15;
+			colorShader.hue = -8;
 
-		colorShader.brightness = 3;
-		colorShader.contrast = 9;
-		colorShader.saturation = -15;
-		colorShader.hue = -8;
+			getNamedProp('christmasGlow').blend = 0;
+		}
 
-		getNamedProp('christmasGlow').blend = 0;
+		if (Save.instance.hasBeatenSong(PlayState.instance.currentSong.id, null, 'spookymod') && FlxG.random.int(1, 50) == 1)
+		{
+			getNamedProp('upperBoppers').frames = Paths.getSparrowAtlas('christmas/spooky/mokey');
+			getNamedProp('upperBoppers').animation.addByPrefix('idle-mokey', 'KRIMAAAAAAAAAAAAA', 12, false);
+			getNamedProp('upperBoppers').animation.play('idle-mokey');
+
+			isMokey = true;
+		}
 	}
 
 	function onUpdate(event:UpdateScriptEvent):Void
@@ -77,10 +92,26 @@ class MallXmasSpookyStage extends Stage
 	function onBeatHit(event:SongTimeScriptEvent):Void
 	{
 		super.onBeatHit(event);
+
+		if (isMokey == true)
+			getNamedProp('upperBoppers').animation.play('idle-mokey');
 	}
 
   function onStepHit(event:SongTimeScriptEvent):Void
 	{
 		super.onStepHit(event);
+	}
+
+	/**
+	 * If your stage uses additional assets not specified in the JSON,
+	 * make sure to specify them like this, or they won't get cached in the loading screen.
+	 */
+	function fetchAssetPaths():Array<String>
+	{
+		var results:Array<String> = super.fetchAssetPaths();
+
+		results.push(Paths.image('christmas/spooky/mokey', "week5"));
+
+		return results;
 	}
 }

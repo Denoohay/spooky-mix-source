@@ -35,51 +35,55 @@ class SkidsAtticTutorialStage extends Stage
 	function buildStage()
 	{
 		super.buildStage();
-
-		getNamedProp('glow').blend = 1;
+		
+		if (FlxG.save.data.spookyShaders != false)
+			getNamedProp('glow').blend = 1;
 
 	}
 
 	override function addCharacter(character:BaseCharacter, charType:CharacterType):Void {
 		// Apply the shader automatically to each character as it gets added.
 		super.addCharacter(character, charType);
-		trace('Applied stage shader to ' + character.characterName);
+		if (FlxG.save.data.spookyShaders != false)
+		{
+			trace('Applied stage shader to ' + character.characterName);
 
-		var rim = new DropShadowShader();
-		character.shader = rim;
-		rim.attachedSprite = character;
+			var rim = new DropShadowShader();
+			character.shader = rim;
+			rim.attachedSprite = character;
 
-		switch(charType){
-			case CharacterType.BF:
+			switch(charType){
+				case CharacterType.BF:
 			
-				rim.setAdjustColor(-100, -46, -10, -45); //b, h, c, s
-				rim.angle = 135;
-				rim.color = 0xFF252E72;
-				//rim.distance = 0;
+					rim.setAdjustColor(-100, -46, -10, -45); //b, h, c, s
+					rim.angle = 135;
+					rim.color = 0xFF252E72;
+					//rim.distance = 0;
 
-				character.animation.onFrameChange.add(function() {
-					if (getBoyfriend() != null)
-					{
-      					rim.updateFrameInfo(getBoyfriend().frame);
-					}
-    			});
+					character.animation.onFrameChange.add(function() {
+						if (getBoyfriend() != null)
+						{
+      						rim.updateFrameInfo(getBoyfriend().frame);
+						}
+    				});
 
-			case CharacterType.DAD:
+				case CharacterType.DAD:
 				
 				
-				rim.setAdjustColor(-53, -16, -14, 0); //b, h, c, s
-				rim.angle = 135;
-				rim.color = 0xFF747DCE;
+					rim.setAdjustColor(-53, -16, -14, 0); //b, h, c, s
+					rim.angle = 135;
+					rim.color = 0xFF747DCE;
 
-				character.animation.onFrameChange.add(function() {
-					if (getDad() != null)
-					{
-      					rim.updateFrameInfo(getDad().frame);
-					}
-    			});
+					character.animation.onFrameChange.add(function() {
+						if (getDad() != null)
+						{
+      						rim.updateFrameInfo(getDad().frame);
+						}
+    				});
 
-			default:
+				default:
 
+			}
 		}
 
 	}
@@ -92,13 +96,33 @@ class SkidsAtticTutorialStage extends Stage
 		{
 			FlxG.camera.target = null;
 		}
-
+		
+		if (FlxG.save.data.spookyShaders != false){}
+		else
+		{
+			if(getBoyfriend() != null)
+			{
+				getBoyfriend().color = 0x969CBA;
+				getDad().color = 0x969CBA;
+			}
+		}
 	}
 
 	override function onGameOver(event:ScriptEvent):Void {
 		super.onGameOver(event);
+		
+		if (FlxG.save.data.spookyShaders != false)
+			getBoyfriend().shader = null;
+		else
+			getBoyfriend().color = 0xFFFFFF;
+	}
 
-		getBoyfriend().shader = null;
+	override function onSongRetry(event:ScriptEvent):Void {
+		super.onSongRetry(event);
+		
+		if (FlxG.save.data.spookyShaders != false){}
+		else{
+			getBoyfriend().color = 0x969CBA;}
 	}
 
 	public override function onSongEnd(event:CountdownScriptEvent):Void {

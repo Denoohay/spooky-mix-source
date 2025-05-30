@@ -20,10 +20,10 @@ class HighSong extends Song {
 
 	public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool
     {
-		if (FlxG.save.data.beatenHighUpdated != false && FlxG.save.data.beatenHighUpdated != true) FlxG.save.data.beatenHighUpdated = false;
+		if (FlxG.save.data.beatenNewHighUpdated != false && FlxG.save.data.beatenNewHighUpdated != true) FlxG.save.data.beatenNewHighUpdated = false;
 
 		if(currentVariation == 'spookymod')
-		  return !FlxG.save.data.beatenHighUpdated;
+		  return !FlxG.save.data.beatenNewHighUpdated;
 
         return false;
 	}
@@ -32,7 +32,7 @@ class HighSong extends Song {
     {
 		var targetDifficulty:Null<SongDifficulty> = getDifficulty(difficultyId, variationId);
 
-		if (variationId == "spookymod" && FlxG.save.data.beatenHighUpdated != true) return [];
+		if (variationId == "spookymod" && FlxG.save.data.beatenNewHighUpdated != true) return [];
 		else if ((difficultyId == "erect" || difficultyId == "nightmare") && (Save.instance.hasBeatenSong(this.id, ["erect"], "") || Save.instance.hasBeatenSong(this.id, ["nightmare"], ""))) return targetDifficulty?.characters?.altInstrumentals ?? [];
 		else if (variationId == "default" && Save.instance.hasBeatenSong(this.id, null, "")) return targetDifficulty?.characters?.altInstrumentals ?? [];
 		else if (Save.instance.hasBeatenSong(this.id, null, variationId)) return targetDifficulty?.characters?.altInstrumentals ?? [];
@@ -43,6 +43,6 @@ class HighSong extends Song {
 	{
 		super.onSongEnd(event);
 
-		if (PlayState.instance.currentVariation == 'spookymod') FlxG.save.data.beatenHighUpdated = true;
+		if (PlayState.instance.currentVariation == 'spookymod') FlxG.save.data.beatenNewHighUpdated = true;
 	}
 }

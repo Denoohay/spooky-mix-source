@@ -1,9 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<TextureAtlas imagePath="SpookySanta.png">
-<SubTexture name="santa idle in fear0000" x="0" y="0" width="786" height="669" frameX="-3" frameY="-99" frameWidth="800" frameHeight="800" />
-<SubTexture name="santa idle in fear0001" x="786" y="0" width="786" height="670" frameX="-3" frameY="-98" frameWidth="800" frameHeight="800" />
-<SubTexture name="santa idle in fear0002" x="0" y="670" width="783" height="676" frameX="-6" frameY="-92" frameWidth="800" frameHeight="800" />
-<SubTexture name="santa idle in fear0003" x="783" y="670" width="778" height="679" frameX="-9" frameY="-89" frameWidth="800" frameHeight="800" />
-<SubTexture name="santa idle in fear0004" x="0" y="1349" width="775" height="680" frameX="-10" frameY="-88" frameWidth="800" frameHeight="800" />
-<SubTexture name="santa idle in fear0005" x="775" y="1349" width="775" height="680" frameX="-10" frameY="-88" frameWidth="800" frameHeight="800" />
-</TextureAtlas>

@@ -57,6 +57,8 @@ class ThornsSong extends Song {
     {
         red.color = 0xFF9048C2;
         red.shader = PlayState.instance.currentStage.getDad().shader;
+        if (PlayState.instance.currentStage.getDad().color == 0xFF165B) red.color = 0xFFC3355E;
+        if (PlayState.instance.currentStage.getDad().color == 0x000000) red.color = 0xFFFFFFFF;
     }
     red.cameras = [PlayState.instance.camCutscene];
     red.alpha = 1.0;

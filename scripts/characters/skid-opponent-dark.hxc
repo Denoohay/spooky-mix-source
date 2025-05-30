@@ -68,9 +68,12 @@ class SkidOpponentDarkCharacter extends MultiSparrowCharacter
 		
 		colorShaderNormal = new AdjustColorShader();
 		
-		colorShaderNormal.brightness = -93;
-		colorShaderNormal.contrast = 55;
-		colorShaderNormal.saturation = -46;
+		if (FlxG.save.data.spookyShaders != false)
+		{
+			colorShaderNormal.brightness = -93;
+			colorShaderNormal.contrast = 55;
+			colorShaderNormal.saturation = -46;
+		}
 
 		normalChar = CharacterDataParser.fetchCharacter('skid-opponent');
 		normalChar.zIndex = 199;

@@ -786,13 +786,13 @@
 }
     },
     {
-      "t": 137419.35483871,
+      "t": 137806.451612903,
       "e": "Lyrics",
       "v": {
 	"customY": 0,
 	"fontSize": 32,
-	"layering": 0,
 	"position": 0,
+	"layering": 0,
 	"alignment": 0,
 	"opacity": 100,
 	"outlineWidth": 1.3,
@@ -20557,5 +20557,5 @@
       }
     ]
   },
-  "generatedBy": "Friday Night Funkin' - v0.6.3"
+  "generatedBy": "Friday Night Funkin' - v0.6.4"
 }

@@ -80,6 +80,24 @@
 			"frameRate": 24,
 			"prefix": "tankinman idle",
 			"frameIndices": [
+				17,
+				18,
+				19,
+				20
+			],
+			"looped": true,
+			"name": "danceRight-hold",
+			"flipX": false
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"flipY": false,
+			"frameRate": 24,
+			"prefix": "tankinman idle",
+			"frameIndices": [
 				29,
 				30,
 				31,
@@ -118,6 +136,24 @@
 		},
 		{
 			"offsets": [
+				0,
+				0
+			],
+			"flipY": false,
+			"frameRate": 24,
+			"prefix": "tankinman idle",
+			"frameIndices": [
+				19,
+				20,
+				17,
+				18
+			],
+			"looped": true,
+			"name": "danceLeft-hold",
+			"flipX": false
+		},
+		{
+			"offsets": [
 				191,
 				-2
 			],
@@ -126,6 +162,19 @@
 			"prefix": "left",
 			"looped": false,
 			"name": "singLEFT",
+			"flipX": false
+		},
+		{
+			"offsets": [
+				191,
+				-2
+			],
+			"flipY": false,
+			"frameRate": 24,
+			"prefix": "left",
+			"frameIndices": [4, 5, 6, 7],
+			"looped": true,
+			"name": "singLEFT-hold",
 			"flipX": false
 		},
 		{
@@ -142,6 +191,19 @@
 		},
 		{
 			"offsets": [
+				47,
+				-72
+			],
+			"flipY": false,
+			"frameRate": 24,
+			"prefix": "down tankinman",
+			"frameIndices": [4, 5, 6, 7],
+			"looped": true,
+			"name": "singDOWN-hold",
+			"flipX": false
+		},
+		{
+			"offsets": [
 				-15,
 				50
 			],
@@ -154,6 +216,19 @@
 		},
 		{
 			"offsets": [
+				-15,
+				50
+			],
+			"flipY": false,
+			"frameRate": 24,
+			"prefix": "up",
+			"frameIndices": [4, 5, 6, 7],
+			"looped": true,
+			"name": "singUP-hold",
+			"flipX": false
+		},
+		{
+			"offsets": [
 				-62,
 				64
 			],
@@ -162,6 +237,19 @@
 			"prefix": "right",
 			"looped": false,
 			"name": "singRIGHT",
+			"flipX": false
+		},
+		{
+			"offsets": [
+				-62,
+				64
+			],
+			"flipY": false,
+			"frameRate": 24,
+			"prefix": "right",
+			"frameIndices": [4, 5, 6, 7],
+			"looped": true,
+			"name": "singRIGHT-hold",
 			"flipX": false
 		},
 		{
@@ -206,8 +294,22 @@
 			"flipY": false,
 			"frameRate": 24,
 			"prefix": "spooky dance punkman",
+			"frameIndices": [0, 1, 2, 3, 4, 5, 6, 7],
 			"looped": false,
-			"name": "spookyDance",
+			"name": "danceRight-spooky",
+			"flipX": false
+		},
+		{
+			"offsets": [
+				65,
+				35
+			],
+			"flipY": false,
+			"frameRate": 24,
+			"prefix": "spooky dance punkman",
+			"frameIndices": [8, 9, 10, 11, 12, 13, 14, 15],
+			"looped": false,
+			"name": "danceLeft-spooky",
 			"flipX": false
 		},
 		{

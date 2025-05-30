@@ -19,21 +19,49 @@
     {
       "name": "shoot1",
       "prefix": "swipe down left",
+      "frameIndices": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+      "offsets": [275, 54]
+    },
+    {
+      "name": "shoot1-end",
+      "prefix": "swipe down left",
+      "frameIndices": [11, 12, 13, 14],
       "offsets": [275, 54]
     },
     {
       "name": "shoot2",
       "prefix": "slash left up",
+      "frameIndices": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+      "offsets": [1, 286]
+    },
+    {
+      "name": "shoot2-end",
+      "prefix": "slash left up",
+      "frameIndices": [11, 12, 13, 14],
       "offsets": [1, 286]
     },
     {
       "name": "shoot3",
       "prefix": "right up",
+      "frameIndices": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+      "offsets": [68, 219]
+    },
+    {
+      "name": "shoot3-end",
+      "prefix": "right up",
+      "frameIndices": [11, 12, 13, 14],
       "offsets": [68, 219]
     },
     {
       "name": "shoot4",
       "prefix": "right down",
+      "frameIndices": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+      "offsets": [0, 83]
+    },
+    {
+      "name": "shoot4-end",
+      "prefix": "right down",
+      "frameIndices": [11, 12, 13, 14],
       "offsets": [0, 83]
     }
   ]

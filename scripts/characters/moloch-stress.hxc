@@ -45,6 +45,7 @@ class MolochStressCharacter extends SparrowCharacter {
 	{
 		trace('Initializing Otis timings...');
 		shootTimes = [];
+		shootDirs = [];
 		// The tankmen's timings and directions are determined
 		// by the chart, specifically the internal "picospeaker" difficulty.
 		var animChart:SongDifficulty = PlayState.instance.currentSong.getDifficulty('picospeaker', PlayState.instance.currentVariation);

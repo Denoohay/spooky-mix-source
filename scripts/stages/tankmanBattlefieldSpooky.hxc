@@ -20,6 +20,7 @@ import flixel.sound.FlxSound;
 import funkin.play.PlayStatePlaylist;
 import flixel.addons.display.FlxTiledSprite;
 import flixel.addons.display.FlxBackdrop;
+import funkin.Conductor;
 
 class TankmanBattlefieldSpookyStage extends Stage
 {
@@ -59,6 +60,9 @@ class TankmanBattlefieldSpookyStage extends Stage
 
 	var spookyDanceCutscene:Bool = true;
 	var tankmanDanceCutscene:Bool = true;
+
+	var skittlesFallen:Bool = false;
+	var skittlesChance:Int;
 	
 	function new()
 	{
@@ -76,6 +80,7 @@ class TankmanBattlefieldSpookyStage extends Stage
 		hasPlayedCutscene = false;
 		cutsceneSkipped = false;
 		canSkipCutscene = false;
+		skittlesFallen = false;
 	}
 
 	public override function onCountdownStart(event:CountdownScriptEvent):Void {
@@ -254,9 +259,12 @@ class TankmanBattlefieldSpookyStage extends Stage
 		switchedToMonster = false;
 
 		stageTint = new AdjustColorShader();
-
-		stageTint.brightness = -15;
-		stageTint.saturation = -15;
+		
+		if (FlxG.save.data.spookyShaders != false)
+		{
+			stageTint.brightness = -15;
+			stageTint.saturation = -15;
+		}
 		
 		getNamedProp('moon').shader = stageTint;
 		getNamedProp('tankSky').shader = stageTint;
@@ -278,8 +286,8 @@ class TankmanBattlefieldSpookyStage extends Stage
 		getNamedProp('tankmanAudience1').shader = stageTint;
 
 		getNamedProp('weirdGlow').visible = false;
-
-		getNamedProp('weirdGlow').blend = 0;
+		
+		if (FlxG.save.data.spookyShaders != false) getNamedProp('weirdGlow').blend = 0;
 
 		scarecrow = new FlxAtlasSprite(1300, 220, Paths.animateAtlas("spooky/scarecrow", "week7"));
 		scarecrow.anim.play("");
@@ -311,7 +319,7 @@ class TankmanBattlefieldSpookyStage extends Stage
 		tankAngle = FlxG.random.int(-90, 45);
 		tankSpeed = FlxG.random.float(5, 7);
 
-		getNamedProp('bottomLighting').blend = 0;
+		if (FlxG.save.data.spookyShaders != false) getNamedProp('bottomLighting').blend = 0;
 
 		gotCameraPos = false;
 
@@ -319,7 +327,7 @@ class TankmanBattlefieldSpookyStage extends Stage
 		mistBack.setPosition(0, 100);
 		mistBack.scrollFactor.set(0.7, 0.7);
 		mistBack.zIndex = 39;
-		mistBack.blend = 0;
+		if (FlxG.save.data.spookyShaders != false) mistBack.blend = 0;
 		mistBack.alpha = 0.6;
 		mistBack.velocity.x = 0;
 		mistBack.visible = false;
@@ -330,7 +338,7 @@ class TankmanBattlefieldSpookyStage extends Stage
 		mistFront.setPosition(0, 500);
 		mistFront.scrollFactor.set(1.3, 1.3);
 		mistFront.zIndex = 2999;
-		mistFront.blend = 0;
+		if (FlxG.save.data.spookyShaders != false) mistFront.blend = 0;
 		mistFront.alpha = 1;
 		mistFront.flipX = true;
 		mistFront.velocity.x = 0;
@@ -342,46 +350,54 @@ class TankmanBattlefieldSpookyStage extends Stage
 		weirdPlayerTint = new AdjustColorShader();
 		weirdGuyTint = new AdjustColorShader();
 
-		weirdPlayerTint.brightness = -88;
-		weirdPlayerTint.contrast = -1;
-		weirdPlayerTint.saturation = -2;
-		weirdPlayerTint.hue = -40;
+		if (FlxG.save.data.spookyShaders != false)
+		{
+			weirdPlayerTint.brightness = -88;
+			weirdPlayerTint.contrast = -1;
+			weirdPlayerTint.saturation = -2;
+			weirdPlayerTint.hue = -40;
 
-		weirdGuyTint.brightness = -62;
-		weirdGuyTint.contrast = -16;
-		weirdGuyTint.saturation = 0;
-		weirdGuyTint.hue = -28;
+			weirdGuyTint.brightness = -62;
+			weirdGuyTint.contrast = -16;
+			weirdGuyTint.saturation = 0;
+			weirdGuyTint.hue = -28;
+		}
 
 		mainWeirdTint = new AdjustColorShader();
 		weirdMoonTint = new AdjustColorShader();
 		weirdSmokeTint = new AdjustColorShader();
 		weirdMountainsTint = new AdjustColorShader();
 		weirdSkyTint = new AdjustColorShader();
+		
+		if (FlxG.save.data.spookyShaders != false)
+		{
+			mainWeirdTint.brightness = -74;
+			mainWeirdTint.contrast = 0;
+			mainWeirdTint.saturation = 44;
+			mainWeirdTint.hue = -137;
 
-		mainWeirdTint.brightness = -74;
-		mainWeirdTint.contrast = 0;
-		mainWeirdTint.saturation = 44;
-		mainWeirdTint.hue = -137;
+			weirdMoonTint.brightness = -100;
+			weirdMoonTint.contrast = 14;
+			weirdMoonTint.saturation = 42;
+			weirdMoonTint.hue = -76;
 
-		weirdMoonTint.brightness = -100;
-		weirdMoonTint.contrast = 14;
-		weirdMoonTint.saturation = 42;
-		weirdMoonTint.hue = -76;
+			weirdSmokeTint.brightness = -79;
+			weirdSmokeTint.contrast = 0;
+			weirdSmokeTint.saturation = 92;
+			weirdSmokeTint.hue = -151;
 
-		weirdSmokeTint.brightness = -79;
-		weirdSmokeTint.contrast = 0;
-		weirdSmokeTint.saturation = 92;
-		weirdSmokeTint.hue = -151;
+			weirdMountainsTint.brightness = -71;
+			weirdMountainsTint.contrast = -16;
+			weirdMountainsTint.saturation = 43;
+			weirdMountainsTint.hue = -143;
 
-		weirdMountainsTint.brightness = -71;
-		weirdMountainsTint.contrast = -16;
-		weirdMountainsTint.saturation = 43;
-		weirdMountainsTint.hue = -143;
+			weirdSkyTint.brightness = -82;
+			weirdSkyTint.contrast = -14;
+			weirdSkyTint.saturation = 30;
+			weirdSkyTint.hue = -128;
+		}
 
-		weirdSkyTint.brightness = -82;
-		weirdSkyTint.contrast = -14;
-		weirdSkyTint.saturation = 30;
-		weirdSkyTint.hue = -128;
+		skittlesChance = FlxG.random.int(1, 10);
 	}
 
 	var _timer:Float = 0;
@@ -390,6 +406,23 @@ class TankmanBattlefieldSpookyStage extends Stage
 	{
 		super.onUpdate(event);
 		moveTank(event.elapsed);
+
+		if (getDad().idleSuffix == '-spooky' && getDad().danceEvery != 1) getDad().danceEvery = 1;
+
+		//skittles falling
+		if (FlxG.sound?.music?.time >= (FlxG.sound?.music?.length / 2) && skittlesFallen == false && PlayState.instance.cameraFollowPoint.x == dadCameraPosX && PlayState.instance.cameraFollowPoint.y == dadCameraPosY && skittlesChance == 1)
+		{
+			skittlesFallen = true;
+
+			getNamedProp('watchtower').idleSuffix = '-fallEvent';
+			getNamedProp('watchtower').danceEvery = 1000000000000;
+
+			new FlxTimer().start(4.3333, function(tmr)
+			{
+				getNamedProp('watchtower').idleSuffix = '';
+				getNamedProp('watchtower').danceEvery = 1;
+			});
+		}
 
 		if (getBoyfriend() != null && hasPlayedCutscene != true && spookyDanceCutscene == true) 
 		{
@@ -432,39 +465,69 @@ class TankmanBattlefieldSpookyStage extends Stage
 		
 		if (PlayState.instance.iconP2.characterId == 'monster' && switchedToMonster == false)
 		{
-			getNamedProp('moon').shader = weirdMoonTint;
-			getNamedProp('tankSky').shader = weirdSkyTint;
+			if (FlxG.save.data.spookyShaders != false) 
+			{
+				getNamedProp('moon').shader = weirdMoonTint;
+				getNamedProp('tankSky').shader = weirdSkyTint;
 
-			getNamedProp('tankMountains').shader = weirdMountainsTint;
+				getNamedProp('tankMountains').shader = weirdMountainsTint;
 
-			getNamedProp('clouds').shader = weirdSmokeTint;
-			getNamedProp('smokeLeft').shader = weirdSmokeTint;
-			getNamedProp('smokeRight').shader = weirdSmokeTint;
+				getNamedProp('clouds').shader = weirdSmokeTint;
+				getNamedProp('smokeLeft').shader = weirdSmokeTint;
+				getNamedProp('smokeRight').shader = weirdSmokeTint;
 
-			getNamedProp('tankBuildings').shader = mainWeirdTint;
-			getNamedProp('tankRuins').shader = mainWeirdTint;
-			getNamedProp('watchtower').shader = mainWeirdTint;
-			getNamedProp('watchtower').idleSuffix = '-weird';
-			getNamedProp('tankGround').shader = mainWeirdTint;
+				getNamedProp('tankBuildings').shader = mainWeirdTint;
+				getNamedProp('tankRuins').shader = mainWeirdTint;
+				getNamedProp('watchtower').shader = mainWeirdTint;
+				getNamedProp('tankGround').shader = mainWeirdTint;
+				windmill.shader = mainWeirdTint;
+
+				getNamedProp('weirdGlow').visible = true;
+			}
+			else
+			{
+				getNamedProp('moon').color = 0xFFFF0000;
+				getNamedProp('tankSky').color = 0xFFFF0000;
+
+				getNamedProp('tankMountains').color = 0xFFFF0000;
+
+				getNamedProp('clouds').color = 0xFFFF0000;
+				getNamedProp('smokeLeft').color = 0xFFFF0000;
+				getNamedProp('smokeRight').color = 0xFFFF0000;
+
+				getNamedProp('tankBuildings').color = 0xFFFF0000;
+				getNamedProp('tankRuins').color = 0xFFFF0000;
+				getNamedProp('watchtower').color = 0xFFFF0000;
+				getNamedProp('tankGround').color = 0xFFFF0000;
+				windmill.color = 0xFFFF0000;
+			}
+			
 			getNamedProp('tankGround').loadGraphic(Paths.image('spooky/tankGroundWeird'));
-			windmill.shader = mainWeirdTint;
+			getNamedProp('watchtower').idleSuffix = '-weird';
 			
 			scarecrow.alpha = 0;
 			getNamedProp('tankRolling').alpha = 0;
 			getNamedProp('bottomLighting').visible = false;
-
-			getNamedProp('weirdGlow').visible = true;
 			
 			mistBack.visible = true;
 			mistFront.visible = true;
 			mistBack.velocity.x = -172;
 			mistFront.velocity.x = 172;
+			
+			if (FlxG.save.data.spookyShaders != false) 
+			{
+				getBoyfriend().shader = weirdPlayerTint;
+				getBoyfriend().color = 0xFFFFFF;
 
-			getBoyfriend().shader = weirdPlayerTint;
-			getBoyfriend().color = 0xFFFFFF;
+				getDad().shader = weirdGuyTint;
+				getDad().color = 0xFFFFFF;
+			}
+			else
+			{
+				getBoyfriend().color = 0xFFA8B3;
+				getDad().color = 0xFFA8B3;
+			}
 
-			getDad().shader = weirdGuyTint;
-			getDad().color = 0xFFFFFF;
 
 			getGirlfriend().alpha = 0;
 
@@ -566,29 +629,56 @@ class TankmanBattlefieldSpookyStage extends Stage
 		clouds.x = FlxG.random.int(-700, -100);
 		clouds.y = FlxG.random.int(-20, 20);
 		clouds.velocity.x = FlxG.random.float(5, 15);
+		
+		getDad().danceEvery = 4;
+		getDad().idleSuffix = '';
+			
+		getNamedProp('watchtower').idleSuffix = '';
+		getNamedProp('watchtower').danceEvery = 1;
+		getNamedProp('watchtower').animation.play('idle');
+		skittlesFallen = false;
+		skittlesChance = FlxG.random.int(1, 10);
 
 		if (switchedToMonster == true)
 		{
-			getDad().danceEvery = 4;
 			getDad().scale.set(0.7, 0.7);
 			
-			getNamedProp('moon').shader = stageTint;
-			getNamedProp('tankSky').shader = stageTint;
+			if (FlxG.save.data.spookyShaders != false) 
+			{
+				getNamedProp('moon').shader = stageTint;
+				getNamedProp('tankSky').shader = stageTint;
 
-			getNamedProp('tankMountains').shader = stageTint;
+				getNamedProp('tankMountains').shader = stageTint;
 
-			getNamedProp('clouds').shader = stageTint;
-			getNamedProp('smokeLeft').shader = stageTint;
-			getNamedProp('smokeRight').shader = stageTint;
+				getNamedProp('clouds').shader = stageTint;
+				getNamedProp('smokeLeft').shader = stageTint;
+				getNamedProp('smokeRight').shader = stageTint;
 
-			getNamedProp('tankBuildings').shader = stageTint;
-			getNamedProp('tankRuins').shader = stageTint;
-			getNamedProp('watchtower').shader = stageTint;
-			getNamedProp('watchtower').idleSuffix = '';
-			getNamedProp('tankGround').shader = stageTint;
+				getNamedProp('tankBuildings').shader = stageTint;
+				getNamedProp('tankRuins').shader = stageTint;
+				getNamedProp('watchtower').shader = stageTint;
+				getNamedProp('tankGround').shader = stageTint;
+				windmill.shader = stageTint;
+			}
+			else
+			{
+				getNamedProp('moon').color = 0xFFFFFFFF;
+				getNamedProp('tankSky').color = 0xFFFFFFFF;
+
+				getNamedProp('tankMountains').color = 0xFFFFFFFF;
+
+				getNamedProp('clouds').color = 0xFFFFFFFF;
+				getNamedProp('smokeLeft').color = 0xFFFFFFFF;
+				getNamedProp('smokeRight').color = 0xFFFFFFFF;
+
+				getNamedProp('tankBuildings').color = 0xFFFFFFFF;
+				getNamedProp('tankRuins').color = 0xFFFFFFFF;
+				getNamedProp('watchtower').color = 0xFFFFFFFF;
+				getNamedProp('tankGround').color = 0xFFFFFFFF;
+				windmill.color = 0xFFFFFFFF;
+			}
 			getNamedProp('tankGround').loadGraphic(Paths.image('spooky/tankGround'));
-			windmill.shader = stageTint;
-			
+
 			scarecrow.alpha = 1;
 			getNamedProp('tankRolling').alpha = 1;
 			getNamedProp('tankmanAudience0').alpha = 1;
@@ -627,6 +717,17 @@ class TankmanBattlefieldSpookyStage extends Stage
         PlayState.instance.iconP2.characterId = 'tankman-spooky';
         PlayState.instance.iconP2.loadCharacter(PlayState.instance.iconP2.characterId);
 	}
+
+    public override function onSongEvent(scriptEvent:SongEventScriptEvent)
+    {
+        super.onSongEvent(scriptEvent);
+
+        if (scriptEvent.eventData.eventKind == "changeIdleSuffix")
+        {
+			getDad().idleSuffix = '-spooky';
+			getDad().danceEvery = 1;
+        }
+    }
 
 	/**
 	 * If your stage uses additional assets not specified in the JSON,

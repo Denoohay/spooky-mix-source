@@ -30,6 +30,8 @@ import StringTools;
 
 class ChangeOldIcon extends Module
 {
+  var refreshedGame:Bool = false;
+
   var addedStuff:Bool = false;
   var changingIcon:String = "";
 
@@ -42,19 +44,26 @@ class ChangeOldIcon extends Module
   {
     super.onStateChangeEnd(event);
     addedStuff = false;
+    refreshedGame = false;
   }
 
   override function onSubStateCloseEnd(event)
   {
     super.onSubStateCloseEnd(event);
     addedStuff = false;
+    refreshedGame = false;
   }
 
   override function onUpdate(event:UpdateScriptEvent)
   {
 	super.onUpdate(event);
+    
+    if (FlxG.keys.justPressed.F5)
+    {
+        refreshedGame = true;
+    }
 
-    if (ReflectUtil.getClassNameOf(FlxG.state) == "funkin.play.PlayState")
+    if (ReflectUtil.getClassNameOf(FlxG.state) == "funkin.play.PlayState" && refreshedGame == false)
     {
         if (FlxG.keys.justPressed.NINE)
         {

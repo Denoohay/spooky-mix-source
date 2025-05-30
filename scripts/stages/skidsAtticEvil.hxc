@@ -30,48 +30,63 @@ class SkidsAtticEvilStage extends Stage
 
     colorShaderBf = new AdjustColorShader();
     colorShaderDad = new AdjustColorShader();
+	
+	if (FlxG.save.data.spookyShaders != false)
+	{
+		colorShaderBf.brightness = -39;
+		colorShaderBf.contrast = -1;
+		colorShaderBf.saturation = -2;
+		colorShaderBf.hue = -40;
 
-    colorShaderBf.brightness = -39;
-    colorShaderBf.contrast = -1;
-	colorShaderBf.saturation = -2;
-    colorShaderBf.hue = -40;
+		colorShaderDad.brightness = -31;
+		colorShaderDad.contrast = -16;
+		colorShaderDad.saturation = 0;
+		colorShaderDad.hue = -28;
 
-    colorShaderDad.brightness = -31;
-    colorShaderDad.contrast = -16;
-	colorShaderDad.saturation = 0;
-    colorShaderDad.hue = -28;
-
-    getNamedProp('glow').blend = 0;
+		getNamedProp('glow').blend = 0;
+	}
 
 	}
 
 	function onUpdate(event:UpdateScriptEvent):Void
 	{
 		super.onUpdate(event);
-
-    if(PlayState.instance.currentStage.getBoyfriend() != null && PlayState.instance.currentStage.getBoyfriend().shader == null){
-      PlayState.instance.currentStage.getBoyfriend().shader = colorShaderBf;
-			PlayState.instance.currentStage.getDad().shader = colorShaderDad;
-    }
+		
+		if (FlxG.save.data.spookyShaders != false)
+		{
+			if(getBoyfriend() != null && getBoyfriend().shader == null)
+			{
+				getBoyfriend().shader = colorShaderBf;
+				getDad().shader = colorShaderDad;
+			}
+		}
+		else
+		{
+			if(getBoyfriend() != null)
+			{
+				getBoyfriend().color = 0xFFA8B3;
+				getDad().color = 0xFFA8B3;
+			}
+		}
 
 	}
 
 	override function onGameOver(event:ScriptEvent):Void {
 		super.onGameOver(event);
-
-		colorShaderBf.hue = 0;
-		colorShaderBf.saturation = 0;
-		colorShaderBf.contrast = 0;
-		colorShaderBf.brightness = 0;
+		
+		if (FlxG.save.data.spookyShaders != false)
+			getBoyfriend().shader = null;
+		else
+			getBoyfriend().color = 0xFFFFFF;
 	}
 
 	override function onSongRetry(event:ScriptEvent):Void {
 		super.onSongRetry(event);
 		
-		colorShaderBf.brightness = -39;
-		colorShaderBf.contrast = -1;
-		colorShaderBf.saturation = -2;
-		colorShaderBf.hue = -40;
+		if (FlxG.save.data.spookyShaders != false)
+			getBoyfriend().shader = colorShaderBf;
+		else
+			getBoyfriend().color = 0xFFA8B3;
 	}
 
 	function onBeatHit(event:SongTimeScriptEvent):Void

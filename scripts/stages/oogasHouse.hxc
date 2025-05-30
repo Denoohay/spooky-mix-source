@@ -274,19 +274,26 @@ class OogasHouse extends Stage
 		getNamedProp('leftBlack').color = 0xFF000000;
 		getNamedProp('rightBlack').color = 0xFF000000;
 
-		getNamedProp('bottomBlue').color = 0xFF485D6D;
-		getNamedProp('bottomBlue').blend = 9;
+		if (FlxG.save.data.spookyShaders != false)
+		{
+			getNamedProp('bottomBlue').color = 0xFF485D6D;
+			getNamedProp('leftBlue').color = 0xFF485D6D;
+			getNamedProp('rightBlue').color = 0xFF485D6D;
 
-		getNamedProp('leftBlue').color = 0xFF485D6D;
-		getNamedProp('leftBlue').blend = 9;
+			getNamedProp('bottomBlue').blend = 9;
+			getNamedProp('leftBlue').blend = 9;
+			getNamedProp('rightBlue').blend = 9;
+		}
+		else
+		{
+			getNamedProp('bottomBlue').color = 0xFF14161C;
+			getNamedProp('leftBlue').color = 0xFF14161C;
+			getNamedProp('rightBlue').color = 0xFF14161C;
 
-		getNamedProp('rightBlue').color = 0xFF485D6D;
-		getNamedProp('rightBlue').blend = 9;
-
-		//getNamedProp('orangeLight').blend = 0;
-		//getNamedProp('lightgreen').blend = 0;
-		//getNamedProp('lightred').blend = 0;
-		//getNamedProp('lightAbove').blend = 0;
+			getNamedProp('bottomBlue').alpha = 0.7;
+			getNamedProp('leftBlue').alpha = 0.7;
+			getNamedProp('rightBlue').alpha = 0.7;
+		}
 
 	}
 

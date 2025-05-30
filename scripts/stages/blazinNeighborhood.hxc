@@ -70,11 +70,14 @@ class BlazinNeighborhoodStage extends Stage
 		super.buildStage();
 
 		colorShaderWalkers = new AdjustColorShader();
-
-		colorShaderWalkers.brightness = -6;
-		colorShaderWalkers.contrast = -11;
-		colorShaderWalkers.saturation = -7;
-		colorShaderWalkers.hue = -5;
+		
+		if (FlxG.save.data.spookyShaders != false)
+		{
+			colorShaderWalkers.brightness = -6;
+			colorShaderWalkers.contrast = -11;
+			colorShaderWalkers.saturation = -7;
+			colorShaderWalkers.hue = -5;
+		}
 
 		getNamedProp('darnellWalking').shader = colorShaderWalkers;
 		getNamedProp('pumpWalking').shader = colorShaderWalkers;
@@ -269,6 +272,7 @@ class BlazinNeighborhoodStage extends Stage
 		
 		cutsceneMusic = FunkinSound.load(Paths.music("spooky/blazin/dillydally", "weekend1"), true);
 		cutsceneMusic.volume = 0.4;
+		cutsceneMusic.looped = true;
 		cutsceneMusic.play(false);
 	}
 

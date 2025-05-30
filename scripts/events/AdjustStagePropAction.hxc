@@ -76,4 +76,9 @@ class AdjustStagePropAction extends Module
                 PlayState.instance.currentStage.getNamedProp(scriptEvent.eventData.value.propName).alpha = PlayState.instance.currentStage.getNamedProp(scriptEvent.eventData.value.alpha);
         }
     }
+
+    public function onStateChangeEnd(event:StateChangeScriptEvent)
+    {
+        props = [];
+    }
 }

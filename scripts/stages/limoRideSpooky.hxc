@@ -36,13 +36,14 @@ class LimoRideSpookyStage extends Stage
 		super.buildStage();
 
    	getNamedProp('moonlight').alpha = 0.17;
-   	getNamedProp('moonlight').blend = 0;
+   	if (FlxG.save.data.spookyShaders != false) getNamedProp('moonlight').blend = 0;
 
     mist1 = new FlxBackdrop(Paths.image('limo/erect/mistMid'), 0x01);
 		mist1.setPosition(-650, -100);
 		mist1.scrollFactor.set(1.1, 1.1);
 		mist1.zIndex = 400;
-    mist1.blend = 0;
+	if (FlxG.save.data.spookyShaders != false) mist1.blend = 0;
+	else mist1.visible = false;
 		mist1.color = 0xFF4F6F64;
 		mist1.alpha = 0.4;
 		mist1.velocity.x = 1700;
@@ -54,7 +55,8 @@ class LimoRideSpookyStage extends Stage
 		mist2.setPosition(-650, -100);
 		mist2.scrollFactor.set(1.2, 1.2);
 		mist2.zIndex = 401;
-    mist2.blend = 0;
+    if (FlxG.save.data.spookyShaders != false) mist2.blend = 0;
+	else mist2.visible = false;
 		mist2.color = 0xFF233032;
 		mist2.alpha = 1;
 		mist2.velocity.x = 2100;
@@ -67,7 +69,8 @@ class LimoRideSpookyStage extends Stage
 		mist3.setPosition(-650, -100);
 		mist3.scrollFactor.set(0.8, 0.8);
 		mist3.zIndex = 99;
-   	mist3.blend = 0;
+   	if (FlxG.save.data.spookyShaders != false) mist3.blend = 0;
+	else mist3.visible = false;
 		mist3.color = 0xFFa7d9be;
 		mist3.alpha = 0.5;
 		mist3.velocity.x = 900;
@@ -81,7 +84,8 @@ class LimoRideSpookyStage extends Stage
 		mist4.setPosition(-650, -380);
 		mist4.scrollFactor.set(0.6, 0.6);
 		mist4.zIndex = 98;
-    mist4.blend = 0;
+    if (FlxG.save.data.spookyShaders != false) mist4.blend = 0;
+	else mist4.visible = false;
 		mist4.color = 0xFF658B7A;
 		mist4.alpha = 1;
 		mist4.velocity.x = 700;
@@ -94,7 +98,8 @@ class LimoRideSpookyStage extends Stage
 		mist5.setPosition(-650, -400);
 		mist5.scrollFactor.set(0.2, 0.2);
 		mist5.zIndex = 15;
-   	mist5.blend = 0;
+   	if (FlxG.save.data.spookyShaders != false) mist5.blend = 0;
+	else mist5.visible = false;
 		mist5.color = 0xFF678D7B;
 		mist5.alpha = 1;
 		mist5.velocity.x = 100;
@@ -151,47 +156,51 @@ class LimoRideSpookyStage extends Stage
 	override function addCharacter(character:BaseCharacter, charType:CharacterType):Void {
 		// Apply the shader automatically to each character as it gets added.
 		super.addCharacter(character, charType);
-		trace('Applied stage shader to ' + character.characterName);
+		if (FlxG.save.data.spookyShaders != false)
+		{
+			trace('Applied stage shader to ' + character.characterName);
 		
-		var rim = new DropShadowShader();
-		character.shader = rim;
-		rim.color = 0xFF426875;
-		rim.attachedSprite = character;
+			var rim = new DropShadowShader();
+			character.shader = rim;
+			rim.color = 0xFF426875;
+			rim.attachedSprite = character;
 
-		storeShader = rim;
+			storeShader = rim;
 
-		switch(charType){
-			case CharacterType.BF:
-				rim.setAdjustColor(-30, 13, 0, -30); //b, h, c, s
-				rim.angle = 120;
-				character.animation.onFrameChange.add(function() {
-					if (getBoyfriend() != null)
-					{
-      					rim.updateFrameInfo(getBoyfriend().frame);
-					}
-    			});
+			switch(charType){
+				case CharacterType.BF:
+					rim.setAdjustColor(-30, 13, 0, -30); //b, h, c, s
+					rim.angle = 120;
+					character.animation.onFrameChange.add(function() {
+						if (getBoyfriend() != null)
+						{
+      						rim.updateFrameInfo(getBoyfriend().frame);
+						}
+    				});
 
-			case CharacterType.DAD:
-				rim.setAdjustColor(-11, -10, 0, -21); //b, h, c, s
-				rim.angle = 60;
-				character.animation.onFrameChange.add(function() {
-					if (getDad() != null)
-					{
-      					rim.updateFrameInfo(getDad().frame);
-					}
-    			});
+				case CharacterType.DAD:
+					rim.setAdjustColor(-11, -10, 0, -21); //b, h, c, s
+					rim.angle = 60;
+					character.animation.onFrameChange.add(function() {
+						if (getDad() != null)
+						{
+      						rim.updateFrameInfo(getDad().frame);
+						}
+    				});
 
-			case CharacterType.GF:
-				rim.setAdjustColor(-28, -12, 0, -41); //b, h, c, s
-				rim.angle = 90;
-				character.animation.onFrameChange.add(function() {
-					if (getGirlfriend() != null)
-					{
-      					rim.updateFrameInfo(getGirlfriend().frame);
-					}
-    			});
+				case CharacterType.GF:
+					rim.setAdjustColor(-28, -12, 0, -41); //b, h, c, s
+					rim.angle = 90;
+					character.animation.onFrameChange.add(function() {
+						if (getGirlfriend() != null)
+						{
+      						rim.updateFrameInfo(getGirlfriend().frame);
+						}
+    				});
 
-			default:
+				default:
+
+			}
 
 		}
 
@@ -211,7 +220,7 @@ class LimoRideSpookyStage extends Stage
 	function runSansChance(mustHaveBeatenSong:Bool):Void
 	{
 		if ((PlayState.instance.currentSong.id.toLowerCase() == "satin-panties" && Save.instance.hasBeatenSong(PlayState.instance.currentSong.id, null, 'spookymod') && mustHaveBeatenSong == true)
-		|| (PlayState.instance.currentSong.id.toLowerCase() == "high" && FlxG.save.data.beatenHighUpdated == true && mustHaveBeatenSong == true)
+		|| (PlayState.instance.currentSong.id.toLowerCase() == "high" && FlxG.save.data.beatenNewHighUpdated == true && mustHaveBeatenSong == true)
 		|| (PlayState.instance.currentSong.id.toLowerCase() == "milf" && FlxG.save.data.beatenMilfUpdated == true && mustHaveBeatenSong == true)
 		|| (mustHaveBeatenSong == false))
 		{

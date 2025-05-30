@@ -31,7 +31,6 @@ import StringTools;
 
 class SpookyFreeplay extends Module
 {
-  var currentAlbum:String = '';
   var playedTutorialPreview:Bool = false;
 
   public function new()
@@ -42,14 +41,12 @@ class SpookyFreeplay extends Module
   override function onStateChangeEnd(event)
   {
     super.onStateChangeEnd(event);
-    currentAlbum = '';
     playedTutorialPreview = false;
   }
 
   override function onSubStateCloseEnd(event)
   {
     super.onSubStateCloseEnd(event);
-    currentAlbum = '';
     playedTutorialPreview = false;
   }
 
