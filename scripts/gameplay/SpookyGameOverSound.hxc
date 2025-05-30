@@ -1,10 +1,7 @@
 import funkin.modding.module.Module;
 import flixel.FlxG;
-import funkin.save.Save;
 import funkin.play.GameOverSubState;
 import funkin.audio.FunkinSound;
-import funkin.play.PlayState;
-import flixel.sound.FlxSound;
 import funkin.PlayerSettings;
 import funkin.util.ReflectUtil;
 
