@@ -1,39 +1,31 @@
 import funkin.play.character.SparrowCharacter;
-import flixel.FlxG;
-import flixel.util.FlxTimer;
-import funkin.play.PlayState;
-import funkin.play.PauseSubState;
-import funkin.graphics.FunkinSprite;
-import funkin.play.character.SparrowCharacter;
 import funkin.play.character.CharacterType;
-import funkin.play.GameOverSubState;
-import StringTools;
 
 class DadSpookyCharacter extends SparrowCharacter
 {
-	function new()
-	{
-		super('dad-spooky');
-	}
+  function new()
+  {
+    super('dad-spooky');
+  }
 
-	function onNoteHit(event:HitNoteScriptEvent)
-	{
-		// Override the hit note animation.
+  function onNoteHit(event:HitNoteScriptEvent)
+  {
+    // Override the hit note animation.
 
-		if (!event.note.noteData.getMustHitNote() && characterType == CharacterType.DAD)
-		{
-			switch (event.note.kind)
-			{
-				case "Scare":
-					holdTimer = 0;
-					this.playAnimation('scare', false);
-				case "scare":
-					holdTimer = 0;
-					this.playAnimation('scare', false);
-				default:
-					holdTimer = 0;
-					this.playSingAnimation(event.note.noteData.getDirection(), false);
-			}
-		}
-	}
+    if (!event.note.noteData.getMustHitNote() && characterType == CharacterType.DAD)
+    {
+      switch (event.note.kind)
+      {
+        case "Scare":
+          holdTimer = 0;
+          this.playAnimation('scare', false);
+        case "scare":
+          holdTimer = 0;
+          this.playAnimation('scare', false);
+        default:
+          holdTimer = 0;
+          this.playSingAnimation(event.note.noteData.getDirection(), false);
+      }
+    }
+  }
 }

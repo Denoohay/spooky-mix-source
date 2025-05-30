@@ -66,39 +66,42 @@ class CenterGameOverCam extends Module
 
   override function onUpdate(event:UpdateScriptEvent)
   {
-	super.onUpdate(event);
-    
+    super.onUpdate(event);
+
     if (FlxG.keys.justPressed.F5)
     {
-        refreshedGame = true;
+      refreshedGame = true;
     }
 
     if (refreshedGame == false)
     {
-        if (ReflectUtil.getClassNameOf(FlxG.state) == "funkin.play.PlayState" && PlayState.instance.currentSong.id.toLowerCase() != "stress")
+      if (ReflectUtil.getClassNameOf(FlxG.state) == "funkin.play.PlayState" && PlayState.instance.currentSong.id.toLowerCase() != "stress")
+      {
+        if (PlayState.instance.currentStage.getBoyfriend() != null && gotMidPoint == false)
         {
-          if (PlayState.instance.currentStage.getBoyfriend() != null && gotMidPoint == false)
-          {
-            theMidPointX = (PlayState.instance.currentStage.getBoyfriend().x + PlayState.instance.currentStage.getBoyfriend().frameWidth * 0.5 * PlayState.instance.currentStage.getBoyfriend().scale.x);
-            theMidPointY = (PlayState.instance.currentStage.getBoyfriend().y + PlayState.instance.currentStage.getBoyfriend().frameHeight * 0.5 * PlayState.instance.currentStage.getBoyfriend().scale.y);
+          theMidPointX = (PlayState.instance.currentStage.getBoyfriend().x
+            + PlayState.instance.currentStage.getBoyfriend().frameWidth * 0.5 * PlayState.instance.currentStage.getBoyfriend().scale.x);
+          theMidPointY = (PlayState.instance.currentStage.getBoyfriend().y
+            + PlayState.instance.currentStage.getBoyfriend().frameHeight * 0.5 * PlayState.instance.currentStage.getBoyfriend().scale.y);
 
-            gotMidPoint = true;
-          }
+          gotMidPoint = true;
         }
+      }
 
-        if (ReflectUtil.getClassNameOf(FlxG.state.subState) == "funkin.play.GameOverSubState" && PlayState.instance.currentSong.id.toLowerCase() != "stress")
+      if (ReflectUtil.getClassNameOf(FlxG.state.subState) == "funkin.play.GameOverSubState"
+        && PlayState.instance.currentSong.id.toLowerCase() != "stress")
+      {
+        if (addedStuff == false)
         {
-            if (addedStuff == false)
-            {
-                FlxG.state.subState.cameraFollowPoint.x = theMidPointX;
-                FlxG.state.subState.cameraFollowPoint.y = theMidPointY;
-                var offsets:Array<Float> = FlxG.state.subState.boyfriend.getDeathCameraOffsets();
-                FlxG.state.subState.cameraFollowPoint.x += offsets[0];
-                FlxG.state.subState.cameraFollowPoint.y += offsets[1];
+          FlxG.state.subState.cameraFollowPoint.x = theMidPointX;
+          FlxG.state.subState.cameraFollowPoint.y = theMidPointY;
+          var offsets:Array<Float> = FlxG.state.subState.boyfriend.getDeathCameraOffsets();
+          FlxG.state.subState.cameraFollowPoint.x += offsets[0];
+          FlxG.state.subState.cameraFollowPoint.y += offsets[1];
 
-                addedStuff = true;
-            }
+          addedStuff = true;
         }
+      }
     }
   }
 }

@@ -32,7 +32,7 @@ import funkin.util.WindowUtil;
 import funkin.Preferences;
 
 class SpookyCharSelectScreen extends Module
-{  
+{
   public function new()
   {
     super('SpookyCharSelectScreen');
@@ -40,22 +40,21 @@ class SpookyCharSelectScreen extends Module
 
   override function onUpdate(event:UpdateScriptEvent)
   {
-	super.onUpdate(event);
+    super.onUpdate(event);
 
     if (ReflectUtil.getClassNameOf(FlxG.state) == "funkin.ui.charSelect.CharSelectSubState")
     {
-        if (FlxG.state.gfChill != null)
+      if (FlxG.state.gfChill != null)
+      {
+        if (FlxG.state.curChar == 'spookymod')
         {
-            if (FlxG.state.curChar == 'spookymod')
-            {
-                FlxG.state.gfChill.danceEvery = 1;
-            }
-            else
-            {
-                FlxG.state.gfChill.danceEvery = 2;
-            }
+          FlxG.state.gfChill.danceEvery = 1;
         }
+        else
+        {
+          FlxG.state.gfChill.danceEvery = 2;
+        }
+      }
     }
-
   }
 }

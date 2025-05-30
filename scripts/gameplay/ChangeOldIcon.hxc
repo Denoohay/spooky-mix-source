@@ -56,95 +56,96 @@ class ChangeOldIcon extends Module
 
   override function onUpdate(event:UpdateScriptEvent)
   {
-	super.onUpdate(event);
-    
+    super.onUpdate(event);
+
     if (FlxG.keys.justPressed.F5)
     {
-        refreshedGame = true;
+      refreshedGame = true;
     }
 
     if (ReflectUtil.getClassNameOf(FlxG.state) == "funkin.play.PlayState" && refreshedGame == false)
     {
-        if (FlxG.keys.justPressed.NINE)
+      if (FlxG.keys.justPressed.NINE)
+      {
+        if (!StringTools.startsWith(PlayState.instance.iconP1.characterId, 'bf-pixel'))
         {
-            if (!StringTools.startsWith(PlayState.instance.iconP1.characterId, 'bf-pixel'))
+          if (StringTools.startsWith(PlayState.instance.iconP1.characterId, 'spooky-flipped'))
+          {
+            if (PlayState.instance.iconP1.characterId == 'spooky-flipped-old')
             {
-                if (StringTools.startsWith(PlayState.instance.iconP1.characterId, 'spooky-flipped'))
-                {
-                    if (PlayState.instance.iconP1.characterId == 'spooky-flipped-old')
-                    {
-                      PlayState.instance.currentStage.getBoyfriend().initHealthIcon(false);
-                      changingIcon = ('spooky-flipped');
-                    }
-                    else
-                    {
-                      PlayState.instance.iconP1.characterId = 'spooky-flipped-old';
-                      PlayState.instance.iconP1.loadCharacter(PlayState.instance.iconP1.characterId);
-                      changingIcon = ('spooky-flipped-old');
-                    }
-                }
-                else if (StringTools.startsWith(PlayState.instance.iconP1.characterId, 'spooky') && PlayState.instance.iconP1.characterId != "spooky-pixel")
-                {
-                    if (PlayState.instance.iconP1.characterId == 'spooky-old')
-                    {
-                      PlayState.instance.currentStage.getBoyfriend().initHealthIcon(false);
-                      changingIcon = ('spooky');
-                    }
-                    else
-                    {
-                      PlayState.instance.iconP1.characterId = 'spooky-old';
-                      PlayState.instance.iconP1.loadCharacter(PlayState.instance.iconP1.characterId);
-                      changingIcon = ('spooky-old');
-                    }
-                }
-                else if (StringTools.startsWith(PlayState.instance.iconP1.characterId, 'bf-old'))
-                {
-                      PlayState.instance.iconP1.loadCharacter(PlayState.instance.iconP1.characterId);
-                }
-                else if (StringTools.startsWith(PlayState.instance.iconP1.characterId, 'bf'))
-                {
-                    if (PlayState.instance.iconP1.characterId == 'bf-REAL-old')
-                    {
-                      PlayState.instance.currentStage.getBoyfriend().initHealthIcon(false);
-                      changingIcon = ('bf');
-                    }
-                    else
-                    {
-                      PlayState.instance.iconP1.characterId = 'bf-REAL-old';
-                      PlayState.instance.iconP1.loadCharacter(PlayState.instance.iconP1.characterId);
-                      changingIcon = ('bf-REAL-old');
-                    }
-                }
-            }
-        }
-
-        if (changingIcon != "")
-        {
-            if (StringTools.endsWith(changingIcon, "old"))
-            {
-                PlayState.instance.iconP1.characterId = changingIcon;
-                PlayState.instance.iconP1.loadCharacter(changingIcon);
+              PlayState.instance.currentStage.getBoyfriend().initHealthIcon(false);
+              changingIcon = ('spooky-flipped');
             }
             else
             {
-                PlayState.instance.currentStage.getBoyfriend().initHealthIcon(false);
+              PlayState.instance.iconP1.characterId = 'spooky-flipped-old';
+              PlayState.instance.iconP1.loadCharacter(PlayState.instance.iconP1.characterId);
+              changingIcon = ('spooky-flipped-old');
             }
-
-            new FlxTimer().start(0.1, function(_) {
-                changingIcon = "";
-            });
+          }
+          else if (StringTools.startsWith(PlayState.instance.iconP1.characterId, 'spooky')
+            && PlayState.instance.iconP1.characterId != "spooky-pixel")
+          {
+            if (PlayState.instance.iconP1.characterId == 'spooky-old')
+            {
+              PlayState.instance.currentStage.getBoyfriend().initHealthIcon(false);
+              changingIcon = ('spooky');
+            }
+            else
+            {
+              PlayState.instance.iconP1.characterId = 'spooky-old';
+              PlayState.instance.iconP1.loadCharacter(PlayState.instance.iconP1.characterId);
+              changingIcon = ('spooky-old');
+            }
+          }
+          else if (StringTools.startsWith(PlayState.instance.iconP1.characterId, 'bf-old'))
+          {
+            PlayState.instance.iconP1.loadCharacter(PlayState.instance.iconP1.characterId);
+          }
+          else if (StringTools.startsWith(PlayState.instance.iconP1.characterId, 'bf'))
+          {
+            if (PlayState.instance.iconP1.characterId == 'bf-REAL-old')
+            {
+              PlayState.instance.currentStage.getBoyfriend().initHealthIcon(false);
+              changingIcon = ('bf');
+            }
+            else
+            {
+              PlayState.instance.iconP1.characterId = 'bf-REAL-old';
+              PlayState.instance.iconP1.loadCharacter(PlayState.instance.iconP1.characterId);
+              changingIcon = ('bf-REAL-old');
+            }
+          }
         }
+      }
 
-        if (PlayState.instance.iconP1.characterId == 'bf-old')
+      if (changingIcon != "")
+      {
+        if (StringTools.endsWith(changingIcon, "old"))
         {
-            new FlxTimer().start(0.1, function(_) {
-                if (PlayState.instance.iconP1.characterId == 'bf-old')
-                {
-                    PlayState.instance.currentStage.getBoyfriend().initHealthIcon(false);
-                    changingIcon = "";
-                }
-            });
+          PlayState.instance.iconP1.characterId = changingIcon;
+          PlayState.instance.iconP1.loadCharacter(changingIcon);
         }
+        else
+        {
+          PlayState.instance.currentStage.getBoyfriend().initHealthIcon(false);
+        }
+
+        new FlxTimer().start(0.1, function(_) {
+          changingIcon = "";
+        });
+      }
+
+      if (PlayState.instance.iconP1.characterId == 'bf-old')
+      {
+        new FlxTimer().start(0.1, function(_) {
+          if (PlayState.instance.iconP1.characterId == 'bf-old')
+          {
+            PlayState.instance.currentStage.getBoyfriend().initHealthIcon(false);
+            changingIcon = "";
+          }
+        });
+      }
     }
   }
 }

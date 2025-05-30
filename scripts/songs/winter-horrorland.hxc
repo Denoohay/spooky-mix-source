@@ -22,67 +22,69 @@ import funkin.save.Save;
 
 class WinterHorrorlandSong extends Song
 {
-	var skippedCountdown:Bool = false;
+  var skippedCountdown:Bool = false;
 
-	function new()
-	{
-		super('winter-horrorland');
-	}
+  function new()
+  {
+    super('winter-horrorland');
+  }
 
-	override function onSongRetry(event:ScriptEvent):Void {
-		super.onSongRetry(event);
-		
-		if (PlayState.instance.currentVariation == 'spookymod')
-		{
-			new FlxTimer().start(0.2, function(tmr:FlxTimer)
-			{
-				PlayState.instance.isInCutscene = true;
-			});
-		}
-	}
+  override function onSongRetry(event:ScriptEvent):Void
+  {
+    super.onSongRetry(event);
 
-	override function onSongLoaded(event:SongLoadScriptEvent):Void
-	{
-		super.onSongLoaded(event);
-		
-		skippedCountdown = false;
-
-		if (PlayState.instance.currentVariation == 'spookymod')
-		{
-			new FlxTimer().start(0.1, function(tmr:FlxTimer)
-			{
-				PlayState.instance.startCountdown();
-				Countdown.skipCountdown();
-				skippedCountdown = true;
-			});
-
-			new FlxTimer().start(0.2, function(tmr:FlxTimer)
-			{
-				PlayState.instance.isInCutscene = true;
-			});
-		}
-	}
-
-	override function onUpdate(event:UpdateScriptEvent)
-	{
-		super.onUpdate(event);
-
-		//Save.instance.hasBeatenSong('eggnog', null, 'spookymod')
-
-		if (PlayState.instance.currentVariation == 'spookymod' && skippedCountdown == false)
-		{
-			skippedCountdown = true;
-			Countdown.skipCountdown();
-		}
-	}
-
-    public override function listAltInstrumentalIds(difficultyId:String, variationId:String):Array<String>
+    if (PlayState.instance.currentVariation == 'spookymod')
     {
-		var targetDifficulty:Null<SongDifficulty> = getDifficulty(difficultyId, variationId);
-
-		if ((difficultyId == "erect" || difficultyId == "nightmare") && (Save.instance.hasBeatenSong(this.id, ["erect"], "") || Save.instance.hasBeatenSong(this.id, ["nightmare"], ""))) return targetDifficulty?.characters?.altInstrumentals ?? [];
-		else if (variationId == "default" && Save.instance.hasBeatenSong(this.id, null, "")) return targetDifficulty?.characters?.altInstrumentals ?? [];
-		else if (Save.instance.hasBeatenSong(this.id, null, variationId)) return targetDifficulty?.characters?.altInstrumentals ?? [];
-		else return [];
+      new FlxTimer().start(0.2, function(tmr:FlxTimer) {
+        PlayState.instance.isInCutscene = true;
+      });
     }
+  }
+
+  override function onSongLoaded(event:SongLoadScriptEvent):Void
+  {
+    super.onSongLoaded(event);
+
+    skippedCountdown = false;
+
+    if (PlayState.instance.currentVariation == 'spookymod')
+    {
+      new FlxTimer().start(0.1, function(tmr:FlxTimer) {
+        PlayState.instance.startCountdown();
+        Countdown.skipCountdown();
+        skippedCountdown = true;
+      });
+
+      new FlxTimer().start(0.2, function(tmr:FlxTimer) {
+        PlayState.instance.isInCutscene = true;
+      });
+    }
+  }
+
+  override function onUpdate(event:UpdateScriptEvent)
+  {
+    super.onUpdate(event);
+
+    // Save.instance.hasBeatenSong('eggnog', null, 'spookymod')
+
+    if (PlayState.instance.currentVariation == 'spookymod' && skippedCountdown == false)
+    {
+      skippedCountdown = true;
+      Countdown.skipCountdown();
+    }
+  }
+
+  public override function listAltInstrumentalIds(difficultyId:String, variationId:String):Array<String>
+  {
+    var targetDifficulty:Null<SongDifficulty> = getDifficulty(difficultyId, variationId);
+
+    if ((difficultyId == "erect" || difficultyId == "nightmare")
+      && (Save.instance.hasBeatenSong(this.id, ["erect"], "")
+        || Save.instance.hasBeatenSong(this.id, ["nightmare"], ""))) return targetDifficulty?.characters?.altInstrumentals ?? [];
+    else if (variationId == "default"
+      && Save.instance.hasBeatenSong(this.id, null, "")) return targetDifficulty?.characters?.altInstrumentals ?? [];
+    else if (Save.instance.hasBeatenSong(this.id, null, variationId)) return targetDifficulty?.characters?.altInstrumentals ?? [];
+    else
+      return [];
+  }
 }

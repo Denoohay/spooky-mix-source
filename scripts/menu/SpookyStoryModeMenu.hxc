@@ -40,26 +40,28 @@ class SpookyStoryModeMenu extends Module
 
   override function onUpdate(event:UpdateScriptEvent)
   {
-	super.onUpdate(event);
+    super.onUpdate(event);
 
     if (ReflectUtil.getClassNameOf(FlxG.state) == "funkin.ui.story.StoryMenuState")
-    {   
-        if (FlxG.state.levelProps != null)
-        {
-            FlxG.state.levelTitles.members[8].y = FlxG.state.levelTitles.members[7].y + 80;
+    {
+      if (FlxG.state.levelProps != null)
+      {
+        FlxG.state.levelTitles.members[8].y = FlxG.state.levelTitles.members[7].y + 80;
 
-            if (FlxG.state.currentLevelId == 'fool')
-            {
-                if (Save.instance.hasBeatenSong('ooga-boogey', ['easy'], '') || Save.instance.hasBeatenSong('ooga-boogey', ['normal'], '') || Save.instance.hasBeatenSong('ooga-boogey', ['hard'], ''))
-                {
-                    FlxG.state.levelProps.members[0].visible = true;
-                }
-                else
-                {
-                    FlxG.state.levelProps.members[0].visible = false;
-                }
-            }
+        if (FlxG.state.currentLevelId == 'fool')
+        {
+          if (Save.instance.hasBeatenSong('ooga-boogey', ['easy'], '')
+            || Save.instance.hasBeatenSong('ooga-boogey', ['normal'], '')
+            || Save.instance.hasBeatenSong('ooga-boogey', ['hard'], ''))
+          {
+            FlxG.state.levelProps.members[0].visible = true;
+          }
+          else
+          {
+            FlxG.state.levelProps.members[0].visible = false;
+          }
         }
+      }
     }
   }
 }

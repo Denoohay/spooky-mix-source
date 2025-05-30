@@ -11,38 +11,39 @@ import StringTools;
 
 class SkidOpponentCharacter extends MultiSparrowCharacter
 {
-	function new()
-	{
-		super('skid-opponent');
-	}
+  function new()
+  {
+    super('skid-opponent');
+  }
 
-	function onCreate(event:ScriptEvent)
-	{
-		super.onCreate(event);
-	}
+  function onCreate(event:ScriptEvent)
+  {
+    super.onCreate(event);
+  }
 
-	function onNoteHit(event:HitNoteScriptEvent)
-	{
-		// Override the hit note animation.
+  function onNoteHit(event:HitNoteScriptEvent)
+  {
+    // Override the hit note animation.
 
-		if (!event.note.noteData.getMustHitNote() && characterType != CharacterType.BF)
-		{
-			switch (event.note.kind)
-			{
-				case "Cheer":
-					holdTimer = 0;
-					this.playAnimation('cheer', false);
-				case "cheer":
-					holdTimer = 0;
-					this.playAnimation('cheer', false);
-				default:
-					holdTimer = 0;
-					this.playSingAnimation(event.note.noteData.getDirection(), false);
-			}
-		}
-	}
+    if (!event.note.noteData.getMustHitNote() && characterType != CharacterType.BF)
+    {
+      switch (event.note.kind)
+      {
+        case "Cheer":
+          holdTimer = 0;
+          this.playAnimation('cheer', false);
+        case "cheer":
+          holdTimer = 0;
+          this.playAnimation('cheer', false);
+        default:
+          holdTimer = 0;
+          this.playSingAnimation(event.note.noteData.getDirection(), false);
+      }
+    }
+  }
 
-	function playAnimation(name:String, restart:Bool, ignoreOther:Bool) {
-		super.playAnimation(name, restart, ignoreOther);
-	}
+  function playAnimation(name:String, restart:Bool, ignoreOther:Bool)
+  {
+    super.playAnimation(name, restart, ignoreOther);
+  }
 }

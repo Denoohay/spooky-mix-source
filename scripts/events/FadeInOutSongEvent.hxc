@@ -36,43 +36,42 @@ import funkin.play.event.SongEvent;
 
 class FadeInOutSongEvent extends SongEvent
 {
-	public function new()
-	{
-		super('FadeInOut');
-	}
+  public function new()
+  {
+    super('FadeInOut');
+  }
 
-	public override function handleEvent(data) {}
-	
-	public function getTitle()
-	{
-		return "Fade In/Out";
-	}
+  public override function handleEvent(data) {}
 
-	public function getEventSchema()
-	{
-		return
-		[
-			{
-				name: "inout",
-				title: "Fade",
-				defaultValue: 0,
-				type: "enum",
-				keys: ["In" => 0, "Out" => 1]
-			},
-			{
-				name: "object",
-				title: "Object",
-				defaultValue: 0,
-				type: "enum",
-				keys: ["Black Screen" => 0, "UI" => 1, "Subtitles" => 2]
-			},
-			{
-				name: "seconds",
-				title: "Duration",
-				defaultValue: 0,
-				type: "float",
-				units: 'seconds'
-			}
-		];
-	}
+  public function getTitle()
+  {
+    return "Fade In/Out";
+  }
+
+  public function getEventSchema()
+  {
+    return [
+      {
+        name: "inout",
+        title: "Fade",
+        defaultValue: 0,
+        type: "enum",
+        keys: ["In" => 0, "Out" => 1]
+      },
+      {
+        name: "object",
+        title: "Object",
+        defaultValue: 0,
+        type: "enum",
+        keys: ["Black Screen" => 0, "UI" => 1, "Subtitles" => 2]
+      },
+      {
+        name: "seconds",
+        title: "Duration",
+        defaultValue: 0,
+        type: "float",
+        units: 'seconds'
+      }
+    ];
+  }
 }

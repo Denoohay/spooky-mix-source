@@ -15,339 +15,338 @@ import funkin.graphics.shaders.DropShadowShader;
 
 class SkidsAtticWeekTwoStage extends Stage
 {
-	function new()
-	{
-		super('skidsAtticWeek2');
-	}
+  function new()
+  {
+    super('skidsAtticWeek2');
+  }
 
-	var lightningStrikeBeat:Int = 0;
-	var lightningStrikeOffset:Int = 8;
-	
-	var storeBfShader:DropShadowShader;
-	var storeDadShader:DropShadowShader;
-	var storeGfShader:DropShadowShader;
+  var lightningStrikeBeat:Int = 0;
+  var lightningStrikeOffset:Int = 8;
 
-	var colorShaderBG:AdjustColorShader;
+  var storeBfShader:DropShadowShader;
+  var storeDadShader:DropShadowShader;
+  var storeGfShader:DropShadowShader;
 
-	var isDead:Bool = false;
+  var colorShaderBG:AdjustColorShader;
 
-	override function onCreate(event:ScriptEvent):Void
-	{
-		super.onCreate(event);
-	}
+  var isDead:Bool = false;
 
-	public override function onCountdownStart(event:CountdownScriptEvent):Void {
-		super.onCountdownStart(event);
+  override function onCreate(event:ScriptEvent):Void
+  {
+    super.onCreate(event);
+  }
 
-		getBoyfriend().dance();
-		getDad().dance();
+  public override function onCountdownStart(event:CountdownScriptEvent):Void
+  {
+    super.onCountdownStart(event);
 
-		isDead = false;
-	}
+    getBoyfriend().dance();
+    getDad().dance();
+
+    isDead = false;
+  }
 
   override function buildStage()
-	{
-		super.buildStage();
-		
-		if (FlxG.save.data.spookyShaders != false)
-		{
-			colorShaderBG = new AdjustColorShader();
+  {
+    super.buildStage();
 
-			colorShaderBG.brightness = 10;
-			colorShaderBG.contrast = 39;
-			colorShaderBG.hue = -9;
-		}
+    if (FlxG.save.data.spookyShaders != false)
+    {
+      colorShaderBG = new AdjustColorShader();
 
-		getNamedProp('bgLight').alpha = 0;
-		getNamedProp('bgLightGlow').alpha = 0;
-		getNamedProp('weird').alpha = 0;
-		getNamedProp('bgDarkGlow').alpha = 1;
-		getNamedProp('bgDark').shader = colorShaderBG;
-		
-		if (FlxG.save.data.spookyShaders != false)
-		{
-			getNamedProp('bgLightGlow').blend = 0;
-			getNamedProp('bgDarkGlow').blend = 0;
-		}
-	}
+      colorShaderBG.brightness = 10;
+      colorShaderBG.contrast = 39;
+      colorShaderBG.hue = -9;
+    }
 
-	override function addCharacter(character:BaseCharacter, charType:CharacterType):Void {
-		// Apply the shader automatically to each character as it gets added.
-		super.addCharacter(character, charType);
-		if (FlxG.save.data.spookyShaders != false)
-		{
-			trace('Applied stage shader to ' + character.characterName);
-		
-			var rim = new DropShadowShader();
-			character.shader = rim;
-			rim.setAdjustColor(3, -7, 20, 0); //b, h, c, s
-			rim.attachedSprite = character;
+    getNamedProp('bgLight').alpha = 0;
+    getNamedProp('bgLightGlow').alpha = 0;
+    getNamedProp('weird').alpha = 0;
+    getNamedProp('bgDarkGlow').alpha = 1;
+    getNamedProp('bgDark').shader = colorShaderBG;
 
-			storeShader = rim;
+    if (FlxG.save.data.spookyShaders != false)
+    {
+      getNamedProp('bgLightGlow').blend = 0;
+      getNamedProp('bgDarkGlow').blend = 0;
+    }
+  }
 
-			switch(charType){
-				case CharacterType.BF:
-					rim.color = 0xFF00443D;
-					rim.angle = 120;
-					character.animation.onFrameChange.add(function() {
-						if (getBoyfriend() != null)
-						{
-      						rim.updateFrameInfo(getBoyfriend().frame);
-						}
-    				});
-			storeBfShader = getBoyfriend().shader;
+  override function addCharacter(character:BaseCharacter, charType:CharacterType):Void
+  {
+    // Apply the shader automatically to each character as it gets added.
+    super.addCharacter(character, charType);
+    if (FlxG.save.data.spookyShaders != false)
+    {
+      trace('Applied stage shader to ' + character.characterName);
 
-				case CharacterType.DAD:
-					rim.color = 0xFF00443D;
-					rim.angle = 120;
-					character.animation.onFrameChange.add(function() {
-						if (getDad() != null)
-						{
-      						rim.updateFrameInfo(getDad().frame);
-						}
-    				});
-			storeDadShader = getDad().shader;
+      var rim = new DropShadowShader();
+      character.shader = rim;
+      rim.setAdjustColor(3, -7, 20, 0); // b, h, c, s
+      rim.attachedSprite = character;
 
-				case CharacterType.GF:
-					rim.color = 0xFF006D64;
-					rim.angle = 90;
-					character.animation.onFrameChange.add(function() {
-						if (getGirlfriend() != null)
-						{
-      						rim.updateFrameInfo(getGirlfriend().frame);
-						}
-    				});
-			storeGfShader = getGirlfriend().shader;
+      storeShader = rim;
 
-				default:
+      switch (charType)
+      {
+        case CharacterType.BF:
+          rim.color = 0xFF00443D;
+          rim.angle = 120;
+          character.animation.onFrameChange.add(function() {
+            if (getBoyfriend() != null)
+            {
+              rim.updateFrameInfo(getBoyfriend().frame);
+            }
+          });
+          storeBfShader = getBoyfriend().shader;
 
-			}
-		}
+        case CharacterType.DAD:
+          rim.color = 0xFF00443D;
+          rim.angle = 120;
+          character.animation.onFrameChange.add(function() {
+            if (getDad() != null)
+            {
+              rim.updateFrameInfo(getDad().frame);
+            }
+          });
+          storeDadShader = getDad().shader;
 
-	}
+        case CharacterType.GF:
+          rim.color = 0xFF006D64;
+          rim.angle = 90;
+          character.animation.onFrameChange.add(function() {
+            if (getGirlfriend() != null)
+            {
+              rim.updateFrameInfo(getGirlfriend().frame);
+            }
+          });
+          storeGfShader = getGirlfriend().shader;
 
-	function doLightningStrike(playSound:Bool, beat:Int):Void
-	{
-		if(getBoyfriend() == null || getGirlfriend() == null || getDad() == null) return;
+        default:
+      }
+    }
+  }
 
-		if (playSound)
-		{
-			FunkinSound.playOnce(Paths.soundRandom('thunder_', 1, 2), 1.0);
-		}
+  function doLightningStrike(playSound:Bool, beat:Int):Void
+  {
+    if (getBoyfriend() == null || getGirlfriend() == null || getDad() == null) return;
 
-		var isWeird:Int;
+    if (playSound)
+    {
+      FunkinSound.playOnce(Paths.soundRandom('thunder_', 1, 2), 1.0);
+    }
 
-		isWeird = FlxG.random.int(1, 20);
+    var isWeird:Int;
 
-		//getNamedProp('halloweenBG').animation.play('lightning');
-		getNamedProp('bgLight').alpha = 1;
-		getNamedProp('bgLightGlow').alpha = 0.31;
-		if (isWeird == 1) getNamedProp('weird').alpha = 1;
-		getNamedProp('bgDarkGlow').alpha = 0;
-		getBoyfriend().shader = null;
-		getDad().shader = null;
-		getGirlfriend().shader = null;
-		getBoyfriend().alpha = 0;
-		getDad().alpha = 0;
-		getGirlfriend().alpha = 0;
+    isWeird = FlxG.random.int(1, 20);
 
-		new FlxTimer().start(0.06, function(_) {
-			getNamedProp('bgLight').alpha = 0;
-			getNamedProp('bgLightGlow').alpha = 0;
-			getNamedProp('weird').alpha = 0;
-			getNamedProp('bgDarkGlow').alpha = 1;
-			getBoyfriend().shader = storeBfShader;
-			getDad().shader = storeDadShader;
-			getGirlfriend().shader = storeGfShader;
-			getBoyfriend().alpha = 1;
-			getDad().alpha = 1;
-			getGirlfriend().alpha = 1;
-		});
+    // getNamedProp('halloweenBG').animation.play('lightning');
+    getNamedProp('bgLight').alpha = 1;
+    getNamedProp('bgLightGlow').alpha = 0.31;
+    if (isWeird == 1) getNamedProp('weird').alpha = 1;
+    getNamedProp('bgDarkGlow').alpha = 0;
+    getBoyfriend().shader = null;
+    getDad().shader = null;
+    getGirlfriend().shader = null;
+    getBoyfriend().alpha = 0;
+    getDad().alpha = 0;
+    getGirlfriend().alpha = 0;
 
-		new FlxTimer().start(0.12, function(_) {
-		  getNamedProp('bgLight').alpha = 1;
-		  getNamedProp('bgLightGlow').alpha = 0.31;
-		  if (isWeird == 1) getNamedProp('weird').alpha = 1;
-			getNamedProp('bgDarkGlow').alpha = 0;
-		  getBoyfriend().alpha = 0;
-		  getBoyfriend().shader = null;
-		getGirlfriend().shader = null;
-		  getDad().shader = null;
-		  getDad().alpha = 0;
-		  getGirlfriend().alpha = 0;
+    new FlxTimer().start(0.06, function(_) {
+      getNamedProp('bgLight').alpha = 0;
+      getNamedProp('bgLightGlow').alpha = 0;
+      getNamedProp('weird').alpha = 0;
+      getNamedProp('bgDarkGlow').alpha = 1;
+      getBoyfriend().shader = storeBfShader;
+      getDad().shader = storeDadShader;
+      getGirlfriend().shader = storeGfShader;
+      getBoyfriend().alpha = 1;
+      getDad().alpha = 1;
+      getGirlfriend().alpha = 1;
+    });
 
-		  //i'm so sorry for this. the lightning flash wasn't working with the drop shadow shader so i had to make the rim light smoothly fade in after they already faded back to their dark sprites and this was the only way i could think to do it
-		  if (FlxG.save.data.spookyShaders != false)
-		  {
-			  new FlxTimer().start(1.5, function(_)
-			  {
-				if (isDead == false)
-				{
-					storeBfShader.color = 0xFF000000;
-					getBoyfriend().shader = storeBfShader;
+    new FlxTimer().start(0.12, function(_) {
+      getNamedProp('bgLight').alpha = 1;
+      getNamedProp('bgLightGlow').alpha = 0.31;
+      if (isWeird == 1) getNamedProp('weird').alpha = 1;
+      getNamedProp('bgDarkGlow').alpha = 0;
+      getBoyfriend().alpha = 0;
+      getBoyfriend().shader = null;
+      getGirlfriend().shader = null;
+      getDad().shader = null;
+      getDad().alpha = 0;
+      getGirlfriend().alpha = 0;
 
-					storeDadShader.color = storeBfShader.color;
-					getDad().shader = storeDadShader;
+      // i'm so sorry for this. the lightning flash wasn't working with the drop shadow shader so i had to make the rim light smoothly fade in after they already faded back to their dark sprites and this was the only way i could think to do it
+      if (FlxG.save.data.spookyShaders != false)
+      {
+        new FlxTimer().start(1.5, function(_) {
+          if (isDead == false)
+          {
+            storeBfShader.color = 0xFF000000;
+            getBoyfriend().shader = storeBfShader;
 
-					storeGfShader.color = storeBfShader.color;
-					getGirlfriend().shader = storeGfShader;
-				}
+            storeDadShader.color = storeBfShader.color;
+            getDad().shader = storeDadShader;
 
-				new FlxTimer().start(0.05, function(_)
-				{
-					if (isDead == false)
-					{
-						storeBfShader.color = 0xFF00100F;
-						getBoyfriend().shader = storeBfShader;
-				
-						storeDadShader.color = storeBfShader.color;
-						getDad().shader = storeDadShader;
+            storeGfShader.color = storeBfShader.color;
+            getGirlfriend().shader = storeGfShader;
+          }
 
-						storeGfShader.color = 0xFF001615;
-						getGirlfriend().shader = storeGfShader;
-					}
-			  
-					new FlxTimer().start(0.05, function(_)
-					{
-						if (isDead == false)
-						{
-							storeBfShader.color = 0xFF001815;
-							getBoyfriend().shader = storeBfShader;
-					
-							storeDadShader.color = storeBfShader.color;
-							getDad().shader = storeDadShader;
+          new FlxTimer().start(0.05, function(_) {
+            if (isDead == false)
+            {
+              storeBfShader.color = 0xFF00100F;
+              getBoyfriend().shader = storeBfShader;
 
-							storeGfShader.color = 0xFF002623;
-							getGirlfriend().shader = storeGfShader;
-						}
-				  
-						new FlxTimer().start(0.05, function(_)
-						{
-							if (isDead == false)
-							{
-								storeBfShader.color = 0xFF002824;
-								getBoyfriend().shader = storeBfShader;
-						
-								storeDadShader.color = storeBfShader.color;
-								getDad().shader = storeDadShader;
+              storeDadShader.color = storeBfShader.color;
+              getDad().shader = storeDadShader;
 
-								storeGfShader.color = 0xFF00423C;
-								getGirlfriend().shader = storeGfShader;
-							}
-					  
-							new FlxTimer().start(0.05, function(_)
-							{
-								if (isDead == false)
-								{
-									storeBfShader.color = 0xFF003A34;
-									getBoyfriend().shader = storeBfShader;
-							
-									storeDadShader.color = storeBfShader.color;
-									getDad().shader = storeDadShader;
+              storeGfShader.color = 0xFF001615;
+              getGirlfriend().shader = storeGfShader;
+            }
 
-									storeGfShader.color = 0xFF005B54;
-									getGirlfriend().shader = storeGfShader;
-								}
-						  
-								new FlxTimer().start(0.05, function(_)
-								{
-									if (isDead == false)
-									{
-										storeBfShader.color = 0xFF00443D;
-										getBoyfriend().shader = storeBfShader;
-									
-										storeDadShader.color = storeBfShader.color;
-										getDad().shader = storeDadShader;
+            new FlxTimer().start(0.05, function(_) {
+              if (isDead == false)
+              {
+                storeBfShader.color = 0xFF001815;
+                getBoyfriend().shader = storeBfShader;
 
-										storeGfShader.color = 0xFF006D64;
-										getGirlfriend().shader = storeGfShader;
-									}
-								});
-							});
-						});
-					});
-				});
-			});
-		}
-		FlxTween.tween(getNamedProp('bgLight'), {alpha: 0}, 1.5);
-		FlxTween.tween(getNamedProp('bgLightGlow'), {alpha: 0}, 1.5);
-		FlxTween.tween(getNamedProp('weird'), {alpha: 0}, 0.4);
-		FlxTween.tween(getNamedProp('bgDarkGlow'), {alpha: 1}, 1.5);
-		FlxTween.tween(getBoyfriend(), {alpha: 1}, 1.5);
-		FlxTween.tween(getDad(), {alpha: 1}, 1.5);
-		FlxTween.tween(getGirlfriend(), {alpha: 1}, 1.5);
-		});
+                storeDadShader.color = storeBfShader.color;
+                getDad().shader = storeDadShader;
 
-		lightningStrikeBeat = beat;
-		lightningStrikeOffset = FlxG.random.int(8, 24);
+                storeGfShader.color = 0xFF002623;
+                getGirlfriend().shader = storeGfShader;
+              }
 
-		if (getBoyfriend() != null) {
-			getBoyfriend().playAnimation('scared', true, true);
-		}
+              new FlxTimer().start(0.05, function(_) {
+                if (isDead == false)
+                {
+                  storeBfShader.color = 0xFF002824;
+                  getBoyfriend().shader = storeBfShader;
 
-		if (getGirlfriend() != null) {
-			getGirlfriend().playAnimation('scared', true, true);
-		}
-	}
+                  storeDadShader.color = storeBfShader.color;
+                  getDad().shader = storeDadShader;
 
-	/**
-	 * If your stage uses additional assets not specified in the JSON,
-	 * make sure to specify them like this, or they won't get cached in the loading screen.
-	 */
-	function fetchAssetPaths():Array<String>
-	{
-		var results:Array<String> = super.fetchAssetPaths();
-		results.push(Paths.sound('thunder_1'));
-		results.push(Paths.sound('thunder_2'));
-		return results;
-	}
+                  storeGfShader.color = 0xFF00423C;
+                  getGirlfriend().shader = storeGfShader;
+                }
 
-	function onBeatHit(event:SongTimeScriptEvent)
-	{
-		super.onBeatHit(event);
+                new FlxTimer().start(0.05, function(_) {
+                  if (isDead == false)
+                  {
+                    storeBfShader.color = 0xFF003A34;
+                    getBoyfriend().shader = storeBfShader;
 
-		// Play lightning on sync at the start of this specific song.
-		// TODO: Rework this after chart format redesign.
-		if (PlayState.instance.currentSong != null) {
-			if (event.beat == 4 && PlayState.instance.currentSong.id == "spookeez" && isDead == false)
-			{
-				doLightningStrike(false, event.beat);
-			}
-		}
+                    storeDadShader.color = storeBfShader.color;
+                    getDad().shader = storeDadShader;
 
-		// Play lightning at random intervals.
-		if (FlxG.random.bool(10) && event.beat > (lightningStrikeBeat + lightningStrikeOffset) && isDead == false)
-		{
-			doLightningStrike(true, event.beat);
-		}
-	}
+                    storeGfShader.color = 0xFF005B54;
+                    getGirlfriend().shader = storeGfShader;
+                  }
 
-	function onSongRetry(event:ScriptEvent)
-	{
-		super.onSongRetry(event);
+                  new FlxTimer().start(0.05, function(_) {
+                    if (isDead == false)
+                    {
+                      storeBfShader.color = 0xFF00443D;
+                      getBoyfriend().shader = storeBfShader;
 
-		if (FlxG.save.data.spookyShaders != false)
-		{
-			storeBfShader.color = 0xFF00443D;
-			getBoyfriend().shader = storeBfShader;
-									
-			storeDadShader.color = storeBfShader.color;
-			getDad().shader = storeDadShader;
+                      storeDadShader.color = storeBfShader.color;
+                      getDad().shader = storeDadShader;
 
-			storeGfShader.color = 0xFF006D64;
-			getGirlfriend().shader = storeGfShader;
-		}
+                      storeGfShader.color = 0xFF006D64;
+                      getGirlfriend().shader = storeGfShader;
+                    }
+                  });
+                });
+              });
+            });
+          });
+        });
+      }
+      FlxTween.tween(getNamedProp('bgLight'), {alpha: 0}, 1.5);
+      FlxTween.tween(getNamedProp('bgLightGlow'), {alpha: 0}, 1.5);
+      FlxTween.tween(getNamedProp('weird'), {alpha: 0}, 0.4);
+      FlxTween.tween(getNamedProp('bgDarkGlow'), {alpha: 1}, 1.5);
+      FlxTween.tween(getBoyfriend(), {alpha: 1}, 1.5);
+      FlxTween.tween(getDad(), {alpha: 1}, 1.5);
+      FlxTween.tween(getGirlfriend(), {alpha: 1}, 1.5);
+    });
 
-		// Properly reset lightning when restarting the song.
-		lightningStrikeBeat = 0;
-		lightningStrikeOffset = 8;
-	}
+    lightningStrikeBeat = beat;
+    lightningStrikeOffset = FlxG.random.int(8, 24);
 
-	override function onGameOver(event:ScriptEvent):Void {
-		super.onGameOver(event);
+    if (getBoyfriend() != null)
+    {
+      getBoyfriend().playAnimation('scared', true, true);
+    }
 
-		isDead = true;
+    if (getGirlfriend() != null)
+    {
+      getGirlfriend().playAnimation('scared', true, true);
+    }
+  }
 
-		getBoyfriend().shader = null;
-	}
+  /**
+   * If your stage uses additional assets not specified in the JSON,
+   * make sure to specify them like this, or they won't get cached in the loading screen.
+   */
+  function fetchAssetPaths():Array<String>
+  {
+    var results:Array<String> = super.fetchAssetPaths();
+    results.push(Paths.sound('thunder_1'));
+    results.push(Paths.sound('thunder_2'));
+    return results;
+  }
+
+  function onBeatHit(event:SongTimeScriptEvent)
+  {
+    super.onBeatHit(event);
+
+    // Play lightning on sync at the start of this specific song.
+    // TODO: Rework this after chart format redesign.
+    if (PlayState.instance.currentSong != null)
+    {
+      if (event.beat == 4 && PlayState.instance.currentSong.id == "spookeez" && isDead == false)
+      {
+        doLightningStrike(false, event.beat);
+      }
+    }
+
+    // Play lightning at random intervals.
+    if (FlxG.random.bool(10) && event.beat > (lightningStrikeBeat + lightningStrikeOffset) && isDead == false)
+    {
+      doLightningStrike(true, event.beat);
+    }
+  }
+
+  function onSongRetry(event:ScriptEvent)
+  {
+    super.onSongRetry(event);
+
+    if (FlxG.save.data.spookyShaders != false)
+    {
+      storeBfShader.color = 0xFF00443D;
+      getBoyfriend().shader = storeBfShader;
+
+      storeDadShader.color = storeBfShader.color;
+      getDad().shader = storeDadShader;
+
+      storeGfShader.color = 0xFF006D64;
+      getGirlfriend().shader = storeGfShader;
+    }
+
+    // Properly reset lightning when restarting the song.
+    lightningStrikeBeat = 0;
+    lightningStrikeOffset = 8;
+  }
+
+  override function onGameOver(event:ScriptEvent):Void
+  {
+    super.onGameOver(event);
+
+    isDead = true;
+
+    getBoyfriend().shader = null;
+  }
 }

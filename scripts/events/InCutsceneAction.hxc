@@ -38,27 +38,29 @@ import funkin.Preferences;
 
 class InCutsceneAction extends Module
 {
-    public function new()
+  public function new()
+  {
+    super('InCutsceneAction');
+  }
+
+  // I think this stupid script might be messing some things up for other mods' cutscenes. I'll look into it for a hotfix.
+
+  public override function onSongEvent(scriptEvent:SongEventScriptEvent)
+  {
+    super.onSongEvent(scriptEvent);
+
+    if (scriptEvent.eventData.eventKind == "InCutscene")
     {
-        super('InCutsceneAction');
+      PlayState.instance.isInCutscene = scriptEvent.eventData.value.pressNotes;
+      PlayState.instance.mayPauseGame = !scriptEvent.eventData.value.pause;
     }
-    //I think this stupid script might be messing some things up for other mods' cutscenes. I'll look into it for a hotfix.
+  }
 
-    public override function onSongEvent(scriptEvent:SongEventScriptEvent)
-    {
-        super.onSongEvent(scriptEvent);
+  override function onSongRetry(event:ScriptEvent):Void
+  {
+    super.onSongRetry(event);
 
-        if (scriptEvent.eventData.eventKind == "InCutscene")
-        {
-            PlayState.instance.isInCutscene = scriptEvent.eventData.value.pressNotes;
-            PlayState.instance.mayPauseGame = !scriptEvent.eventData.value.pause;
-        }
-    }
-
-	override function onSongRetry(event:ScriptEvent):Void {
-		super.onSongRetry(event);
-
-        PlayState.instance.isInCutscene = false;
-        PlayState.instance.mayPauseGame = true;
-	}
+    PlayState.instance.isInCutscene = false;
+    PlayState.instance.mayPauseGame = true;
+  }
 }

@@ -12,111 +12,111 @@ import funkin.modding.base.ScriptedFlxAtlasSprite;
 
 class MainStageSpookyStage extends Stage
 {
-	function new()
-	{
-		super('mainStageSpooky');
-	}
+  function new()
+  {
+    super('mainStageSpooky');
+  }
 
   var colorShaderBf:AdjustColorShader;
   var colorShaderDad:AdjustColorShader;
   var colorShaderGf:AdjustColorShader;
 
-	public override function onCountdownStart(event:CountdownScriptEvent):Void {
-		super.onCountdownStart(event);
-	}
+  public override function onCountdownStart(event:CountdownScriptEvent):Void
+  {
+    super.onCountdownStart(event);
+  }
 
-	function buildStage()
-	{
-		super.buildStage();
+  function buildStage()
+  {
+    super.buildStage();
 
     colorShaderBf = new AdjustColorShader();
     colorShaderDad = new AdjustColorShader();
     colorShaderGf = new AdjustColorShader();
-	
-	if (FlxG.save.data.spookyShaders != false)
-	{
-		colorShaderBf.brightness = -31;
-		colorShaderBf.contrast = 4;
-		colorShaderBf.saturation = 0;
-		colorShaderBf.hue = -12;
 
-		colorShaderGf.brightness = -42;
-		colorShaderGf.contrast = -18;
-		colorShaderGf.saturation = -11;
-		colorShaderGf.hue = -12;
+    if (FlxG.save.data.spookyShaders != false)
+    {
+      colorShaderBf.brightness = -31;
+      colorShaderBf.contrast = 4;
+      colorShaderBf.saturation = 0;
+      colorShaderBf.hue = -12;
 
-		colorShaderDad.brightness = -31;
-		colorShaderDad.contrast = -27;
-		colorShaderDad.saturation = 0;
-		colorShaderDad.hue = -31;
+      colorShaderGf.brightness = -42;
+      colorShaderGf.contrast = -18;
+      colorShaderGf.saturation = -11;
+      colorShaderGf.hue = -12;
 
-		getNamedProp('brightLightSmall').blend = 0;
-		getNamedProp('orangeLight').blend = 0;
-		getNamedProp('lightgreen').blend = 0;
-		getNamedProp('lightred').blend = 0;
-		getNamedProp('lightAbove').blend = 0;
-		getNamedProp('sideDarkLight').blend = 9;
-		getNamedProp('mainDarkLight').blend = 9;
-	}
-	else
-	{
-		getNamedProp('orangeLight').alpha = 0.5;
-		getNamedProp('sideDarkLight').alpha = 0.7;
-		getNamedProp('sideDarkLight').color = 0x210021;
-		getNamedProp('mainDarkLight').alpha = 0.3;
-		getNamedProp('mainDarkLight').color = 0x210021;
-	}
+      colorShaderDad.brightness = -31;
+      colorShaderDad.contrast = -27;
+      colorShaderDad.saturation = 0;
+      colorShaderDad.hue = -31;
 
-	if (FlxG.random.int(1, 20) == 1)
-		getNamedProp('lights').loadGraphic(Paths.image('spooky/lightsWeird'));
+      getNamedProp('brightLightSmall').blend = 0;
+      getNamedProp('orangeLight').blend = 0;
+      getNamedProp('lightgreen').blend = 0;
+      getNamedProp('lightred').blend = 0;
+      getNamedProp('lightAbove').blend = 0;
+      getNamedProp('sideDarkLight').blend = 9;
+      getNamedProp('mainDarkLight').blend = 9;
+    }
+    else
+    {
+      getNamedProp('orangeLight').alpha = 0.5;
+      getNamedProp('sideDarkLight').alpha = 0.7;
+      getNamedProp('sideDarkLight').color = 0x210021;
+      getNamedProp('mainDarkLight').alpha = 0.3;
+      getNamedProp('mainDarkLight').color = 0x210021;
+    }
 
-	}
+    if (FlxG.random.int(1, 20) == 1) getNamedProp('lights').loadGraphic(Paths.image('spooky/lightsWeird'));
+  }
 
-	function onUpdate(event:UpdateScriptEvent):Void
-	{
-		super.onUpdate(event);
+  function onUpdate(event:UpdateScriptEvent):Void
+  {
+    super.onUpdate(event);
 
-		if(getBoyfriend() != null && getBoyfriend().shader == null)
-		{
-			getBoyfriend().shader = colorShaderBf;
-			getGirlfriend().shader = colorShaderGf;
-			getDad().shader = colorShaderDad;
-		}
+    if (getBoyfriend() != null && getBoyfriend().shader == null)
+    {
+      getBoyfriend().shader = colorShaderBf;
+      getGirlfriend().shader = colorShaderGf;
+      getDad().shader = colorShaderDad;
+    }
+  }
 
-	}
+  override function onGameOver(event:ScriptEvent):Void
+  {
+    super.onGameOver(event);
 
-	override function onGameOver(event:ScriptEvent):Void {
-		super.onGameOver(event);
+    getBoyfriend().shader = null;
+  }
 
-		getBoyfriend().shader = null;
-	}
+  override function onSongRetry(event:ScriptEvent):Void
+  {
+    super.onSongRetry(event);
 
-	override function onSongRetry(event:ScriptEvent):Void {
-		super.onSongRetry(event);
-		
-		getBoyfriend().shader = colorShaderBf;
-	}
+    getBoyfriend().shader = colorShaderBf;
+  }
 
-	function onBeatHit(event:SongTimeScriptEvent):Void
-	{
-		super.onBeatHit(event);
-	}
+  function onBeatHit(event:SongTimeScriptEvent):Void
+  {
+    super.onBeatHit(event);
+  }
 
   function onStepHit(event:SongTimeScriptEvent):Void
-	{
-		super.onStepHit(event);
-	}
+  {
+    super.onStepHit(event);
+  }
 
-	/**
-	 * If your stage uses additional assets not specified in the JSON,
-	 * make sure to specify them like this, or they won't get cached in the loading screen.
-	 */
-	function fetchAssetPaths():Array<String>
-	{
-		var results:Array<String> = super.fetchAssetPaths();
-		
-		results.push(Paths.image('spooky/lightsWeird'));
+  /**
+   * If your stage uses additional assets not specified in the JSON,
+   * make sure to specify them like this, or they won't get cached in the loading screen.
+   */
+  function fetchAssetPaths():Array<String>
+  {
+    var results:Array<String> = super.fetchAssetPaths();
 
-		return results;
-	}
+    results.push(Paths.image('spooky/lightsWeird'));
+
+    return results;
+  }
 }

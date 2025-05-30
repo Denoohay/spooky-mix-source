@@ -18,39 +18,41 @@ import funkin.play.song.Song;
 import funkin.play.stage.StageProp;
 import funkin.save.Save;
 
-
 class MilfSong extends Song
 {
-	function new()
-	{
-		super('milf');
-	}
+  function new()
+  {
+    super('milf');
+  }
 
-	public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool
-    {
-		if (FlxG.save.data.beatenMilfUpdated != false && FlxG.save.data.beatenMilfUpdated != true) FlxG.save.data.beatenMilfUpdated = false;
+  public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool
+  {
+    if (FlxG.save.data.beatenMilfUpdated != false && FlxG.save.data.beatenMilfUpdated != true) FlxG.save.data.beatenMilfUpdated = false;
 
-		if(currentVariation == 'spookymod')
-		  return !FlxG.save.data.beatenMilfUpdated;
+    if (currentVariation == 'spookymod') return !FlxG.save.data.beatenMilfUpdated;
 
-        return false;
-	}
-    
-    public override function listAltInstrumentalIds(difficultyId:String, variationId:String):Array<String>
-    {
-		var targetDifficulty:Null<SongDifficulty> = getDifficulty(difficultyId, variationId);
+    return false;
+  }
 
-		if (variationId == "spookymod" && FlxG.save.data.beatenMilfUpdated != true) return [];
-		else if ((difficultyId == "erect" || difficultyId == "nightmare") && (Save.instance.hasBeatenSong(this.id, ["erect"], "") || Save.instance.hasBeatenSong(this.id, ["nightmare"], ""))) return targetDifficulty?.characters?.altInstrumentals ?? [];
-		else if (variationId == "default" && Save.instance.hasBeatenSong(this.id, null, "")) return targetDifficulty?.characters?.altInstrumentals ?? [];
-		else if (Save.instance.hasBeatenSong(this.id, null, variationId)) return targetDifficulty?.characters?.altInstrumentals ?? [];
-		else return [];
-    }
+  public override function listAltInstrumentalIds(difficultyId:String, variationId:String):Array<String>
+  {
+    var targetDifficulty:Null<SongDifficulty> = getDifficulty(difficultyId, variationId);
 
-	public override function onSongEnd(event:CountdownScriptEvent):Void
-	{
-		super.onSongEnd(event);
+    if (variationId == "spookymod" && FlxG.save.data.beatenMilfUpdated != true) return [];
+    else if ((difficultyId == "erect" || difficultyId == "nightmare")
+      && (Save.instance.hasBeatenSong(this.id, ["erect"], "")
+        || Save.instance.hasBeatenSong(this.id, ["nightmare"], ""))) return targetDifficulty?.characters?.altInstrumentals ?? [];
+    else if (variationId == "default"
+      && Save.instance.hasBeatenSong(this.id, null, "")) return targetDifficulty?.characters?.altInstrumentals ?? [];
+    else if (Save.instance.hasBeatenSong(this.id, null, variationId)) return targetDifficulty?.characters?.altInstrumentals ?? [];
+    else
+      return [];
+  }
 
-		if (PlayState.instance.currentVariation == 'spookymod') FlxG.save.data.beatenMilfUpdated = true;
-	}
+  public override function onSongEnd(event:CountdownScriptEvent):Void
+  {
+    super.onSongEnd(event);
+
+    if (PlayState.instance.currentVariation == 'spookymod') FlxG.save.data.beatenMilfUpdated = true;
+  }
 }

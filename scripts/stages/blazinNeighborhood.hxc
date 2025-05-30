@@ -23,36 +23,36 @@ import funkin.audio.FunkinSound;
 
 class BlazinNeighborhoodStage extends Stage
 {
-	var housesGroup:FlxTypedSpriteGroup;
+  var housesGroup:FlxTypedSpriteGroup;
 
-	var currentHouse:Int = 1;
+  var currentHouse:Int = 1;
 
-	var moveHouseTween:FlxTween;
-	var moveStrumlineTween:FlxTween;
+  var moveHouseTween:FlxTween;
+  var moveStrumlineTween:FlxTween;
 
-	var playerStrumline:FlxSprite;
+  var playerStrumline:FlxSprite;
 
-	var scrollingSky:FlxBackdrop;
-	var scrollingBuildings:FlxSprite;
-	var scrollingGround:FlxSprite;
-	var scrollingGraves1:FlxSprite;
-	var scrollingGraves2:FlxSprite;
+  var scrollingSky:FlxBackdrop;
+  var scrollingBuildings:FlxSprite;
+  var scrollingGround:FlxSprite;
+  var scrollingGraves1:FlxSprite;
+  var scrollingGraves2:FlxSprite;
 
-	var colorShaderWalkers:AdjustColorShader;
+  var colorShaderWalkers:AdjustColorShader;
 
-	var hasPlayedInGameCutscene:Bool = false;
-	var hasPlayedCutscene:Bool = false;
-	var cutsceneSkipped:Bool = false;
-	var canSkipCutscene:Bool = false;
+  var hasPlayedInGameCutscene:Bool = false;
+  var hasPlayedCutscene:Bool = false;
+  var cutsceneSkipped:Bool = false;
+  var canSkipCutscene:Bool = false;
 
-	var dillyDally:FunkinSound;
+  var dillyDally:FunkinSound;
 
-	function new()
-	{
-		super('blazinNeighborhood');
-	}
+  function new()
+  {
+    super('blazinNeighborhood');
+  }
 
-	/**
+  /**
    * Replay the cutscene after leaving the song.
    */
   function onCreate(event:ScriptEvent):Void
@@ -60,486 +60,505 @@ class BlazinNeighborhoodStage extends Stage
     super.onCreate(event);
 
     hasPlayedInGameCutscene = false;
-	hasPlayedCutscene = false;
-	cutsceneSkipped = false;
-	canSkipCutscene = false;
+    hasPlayedCutscene = false;
+    cutsceneSkipped = false;
+    canSkipCutscene = false;
   }
 
-	function buildStage()
-	{
-		super.buildStage();
+  function buildStage()
+  {
+    super.buildStage();
 
-		colorShaderWalkers = new AdjustColorShader();
-		
-		if (FlxG.save.data.spookyShaders != false)
-		{
-			colorShaderWalkers.brightness = -6;
-			colorShaderWalkers.contrast = -11;
-			colorShaderWalkers.saturation = -7;
-			colorShaderWalkers.hue = -5;
-		}
+    colorShaderWalkers = new AdjustColorShader();
 
-		getNamedProp('darnellWalking').shader = colorShaderWalkers;
-		getNamedProp('pumpWalking').shader = colorShaderWalkers;
-		getNamedProp('skidWalking').shader = colorShaderWalkers;
-		
-		scrollingSky = new FlxBackdrop(Paths.image('blazin/spooky/walkingBG/skyBG'), 0x01);
-		scrollingSky.setPosition(0, -1439);
-		scrollingSky.scrollFactor.set(1, 1);
-		scrollingSky.zIndex = 1;
-		scrollingSky.velocity.x = -20;
-		PlayState.instance.currentStage.add(scrollingSky);
-		
-		scrollingBuildings = new FlxBackdrop(Paths.image('blazin/spooky/walkingBG/treeshouses'), 0x01);
-		scrollingBuildings.setPosition(0, -1976);
-		scrollingBuildings.scrollFactor.set(1, 1);
-		scrollingBuildings.zIndex = 2;
-		scrollingBuildings.velocity.x = -80;
-		PlayState.instance.currentStage.add(scrollingBuildings);
-		
-		scrollingGround = new FlxBackdrop(Paths.image('blazin/spooky/walkingBG/grassGround'), 0x01);
-		scrollingGround.setPosition(0, -830);
-		scrollingGround.scrollFactor.set(1, 1);
-		scrollingGround.zIndex = 3;
-		scrollingGround.velocity.x = -130;
-		PlayState.instance.currentStage.add(scrollingGround);
-		
-		scrollingGraves1 = new FlxBackdrop(Paths.image('blazin/spooky/walkingBG/graves1'), 0x01);
-		scrollingGraves1.setPosition(0, -1718);
-		scrollingGraves1.scrollFactor.set(1, 1);
-		scrollingGraves1.zIndex = 11;
-		scrollingGraves1.velocity.x = -1000;
-		PlayState.instance.currentStage.add(scrollingGraves1);
-		
-		scrollingGraves2 = new FlxBackdrop(Paths.image('blazin/spooky/walkingBG/graves2'), 0x01);
-		scrollingGraves2.setPosition(0, -1718);
-		scrollingGraves2.scrollFactor.set(1, 1);
-		scrollingGraves2.zIndex = 11;
-		scrollingGraves2.velocity.x = -1000;
-		scrollingGraves2.alpha = 0;
-		PlayState.instance.currentStage.add(scrollingGraves2);
-
-		housesGroup = new FlxTypedSpriteGroup();
-		
-		var houseX:Float = 0;
-		
-		var outOfBoundsHouse:FlxSprite = new FlxSprite(-1484, 0);
-		outOfBoundsHouse.frames = Paths.getSparrowAtlas('blazin/spooky/houses/0');
-		outOfBoundsHouse.animation.addByPrefix('close', 'close');
-		outOfBoundsHouse.animation.play('close');
-		outOfBoundsHouse.scrollFactor.set(1, 1);
-		outOfBoundsHouse.zIndex = 0;
-		housesGroup.add(outOfBoundsHouse);
-
-		for (i in 0...22)
-		{
-			var house:FlxSprite = new FlxSprite(houseX, 0);
-			house.frames = Paths.getSparrowAtlas('blazin/spooky/houses/' + i);
-			house.animation.addByPrefix('open', 'open');
-			house.animation.addByPrefix('close', 'close');
-			house.animation.play('close');
-			house.scrollFactor.set(1, 1);
-			house.zIndex = 0;
-			housesGroup.add(house);
-
-			houseX = houseX + 1484;
-		}
-		PlayState.instance.currentStage.add(housesGroup);
-		
-		var outOfBoundsHouseTwo:FlxSprite = new FlxSprite(housesGroup.members[22].x + 1484, 0);
-		outOfBoundsHouseTwo.frames = Paths.getSparrowAtlas('blazin/spooky/houses/21');
-		outOfBoundsHouseTwo.animation.addByPrefix('close', 'close');
-		outOfBoundsHouseTwo.animation.play('close');
-		outOfBoundsHouseTwo.scrollFactor.set(1, 1);
-		outOfBoundsHouseTwo.zIndex = 0;
-		housesGroup.add(outOfBoundsHouseTwo);
-
-
-		PlayState.instance.currentStage.refresh(); // Apply z-index.
-	}
-
-	public override function onCountdownStart(event:CountdownScriptEvent):Void {
-		super.onCountdownStart(event);
-
-		currentHouse = 1;
-		
-		scrollingGraves1.alpha = 1;
-		scrollingGraves2.alpha = 0;
-
-		for (i in 0...housesGroup.members.length)
-		{
-			housesGroup.members[i].animation.play('close');
-		}
-				
-		getBoyfriend().idleSuffix = "";
-		getBoyfriend().danceEvery = 1;
-
-		getDad().idleSuffix = "";
-		getDad().danceEvery = 1;
-
-		scrollingSky.x = 0;
-		scrollingBuildings.x = 0;
-		scrollingGround.x = 0;
-		scrollingGraves1.x = 0;
-		scrollingGraves2.x = 0;
-		
-		playerStrumline = PlayState.instance.playerStrumline;
-
-		if (playerStrumline != null)
-		{
-			playerStrumline.x = 415; //640 - 225
-		}
-
-		var opponentStrumline:FlxSprite = PlayState.instance.opponentStrumline;
-		if (opponentStrumline != null)
-		{
-			for (arrow in opponentStrumline.members)
-			{
-				arrow.visible = false;
-			}
-		}
-
-		FlxG.camera.focusOn(new FlxPoint(getGirlfriend().cameraFocusPoint.x, getGirlfriend().cameraFocusPoint.y)); //-1650 for walking segment
-		PlayState.instance.cameraFollowPoint.setPosition(getGirlfriend().cameraFocusPoint.x, getGirlfriend().cameraFocusPoint.y); //-1650 for walking segment
-		
-		if (!hasPlayedInGameCutscene)
-		{
-			  trace('Pausing countdown to play in game cutscene');
-
-			  hasPlayedInGameCutscene = true;
-
-			  event.cancel(); // CANCEL THE COUNTDOWN!
-
-			  openingCutscene();
-		}
-		else
-		{
-			hasPlayedInGameCutscene = true;
-			hasPlayedCutscene = true;
-			cutsceneSkipped = true;
-	 	 	canSkipCutscene = true;
-		}
-	}
-
-	var cutscenePaper:FlxSprite;
-
-	function openingCutscene()
-	{
-		PlayState.instance.isInCutscene = true;
-
-		coverscreen = new FlxSprite(-100, -100).makeGraphic(FlxG.width * 2, FlxG.height * 2, 0xFF000000);
-		coverscreen.visible = true;
-		coverscreen.zIndex = 900;
-		PlayState.instance.add(coverscreen);
-		coverscreen.cameras = [PlayState.instance.camCutscene];
-
-		skipText = new FlxText(936, 650, 0, '[ ' + PlayState.instance.controls.getDialogueNameFromToken("CUTSCENE_ADVANCE", true) + ' ] to Continue', 20);
-		skipText.setFormat(Paths.font('vcr.ttf'), 30, 0xFFFFFFFF, "right", FlxTextBorderStyle.OUTLINE, 0xFF000000);
-		skipText.scrollFactor.set(0, 0);
-		skipText.borderSize = 2;
-		skipText.alpha = 0;
-		skipText.zIndex = 1000;
-		PlayState.instance.add(skipText);
-		skipText.cameras = [PlayState.instance.camCutscene];
-		
-		cutscenePaper = new FlxSprite(110, -230).loadGraphic(Paths.image('blazin/spooky/Pre-BlazinCutscene', "weekend1"));
-		cutscenePaper.scrollFactor.set(0, 0);
-		cutscenePaper.scale.set(0.6, 0.6);
-		cutscenePaper.alpha = 0;
-		cutscenePaper.angle = 6;
-		cutscenePaper.zIndex = 950;
-		PlayState.instance.add(cutscenePaper);
-		cutscenePaper.cameras = [PlayState.instance.camCutscene];
-
-		PlayState.instance.currentStage.refresh(); // Apply z-index.
-		
-		new FlxTimer().start(0.5, _ -> {
-			FlxTween.tween(cutscenePaper, {alpha: 1}, 1, {ease: FlxEase.quadOut});
-			FlxTween.tween(cutscenePaper, {x: 150}, 1, {ease: FlxEase.quadOut});
-
-			FlxTween.tween(skipText, {alpha: 1}, 1, {ease: FlxEase.quadOut});
-			new FlxTimer().start(1, _ -> {
-				canSkipCutscene = true;
-				trace('can skip!');
-			});
-		});
-		
-		theCutscene = new FlxAtlasSprite(0, 0, Paths.animateAtlas("spookyStages/oogasHouse/cutscene/ending"));
-		theCutscene.zIndex = 10000;
-		theCutscene.alpha = 0;
-		PlayState.instance.currentStage.add(theCutscene);
-		theCutscene.cameras = [PlayState.instance.camHUD];
-		
-		cutsceneMusic = FunkinSound.load(Paths.music("spooky/blazin/dillydally", "weekend1"), true);
-		cutsceneMusic.volume = 0.4;
-		cutsceneMusic.looped = true;
-		cutsceneMusic.play(false);
-	}
-
-	function skipCutscene(){
-		cutsceneSkipped = true;
-		hasPlayedCutscene = true;
-		PlayState.instance.camCutscene.fade(0xFF000000, 0.5, false, null, true);
-		FlxTween.tween(cutscenePaper, {x: 200}, 1, {ease: FlxEase.quadOut});
-		cutsceneMusic.fadeOut(0.5, 0);
-
-		new FlxTimer().start(0.5, _ -> {
-			PlayState.instance.isInCutscene = false;
-			hasPlayedCutscene = true;
-			PlayState.instance.justUnpaused = true;
-			PlayState.instance.camCutscene.fade(0xFF000000, 0.5, true, null, true);
-			cutsceneMusic.stop();
-
-			coverscreen.visible = false;
-			cutsceneMusic.stop();
-
-			PlayState.instance.startCountdown();
-
-			skipText.visible = false;
-			cutscenePaper.visible = false;
-		});
-
-	}
-
-	function onUpdate(event:UpdateScriptEvent):Void
-	{
-		super.onUpdate(event);
-
-		if (currentHouse > 10 && scrollingGraves1 != null && scrollingGraves2 != null)
-		{
-			scrollingGraves1.alpha = 0;
-			scrollingGraves2.alpha = 1;
-		}
-
-		if((PlayState.instance.controls.CUTSCENE_ADVANCE || PlayState.instance.controls.NOTE_LEFT || PlayState.instance.controls.NOTE_RIGHT || PlayState.instance.controls.NOTE_UP || PlayState.instance.controls.NOTE_DOWN) && cutsceneSkipped == false && canSkipCutscene == true)
-		{
-			hasPlayedCutscene = true;
-			skipCutscene();
-			trace('skipped');
-		}
-
-		PlayState.instance.comboPopUps.offsets = [-370, -50];
-		
-		if (Highscore.tallies.totalNotesHit == Highscore.tallies.totalNotes && Highscore.tallies.good == 0 && Highscore.tallies.bad == 0 && Highscore.tallies.shit == 0 && PlayState.instance.iconP2.characterId != 'blazin1')
-		{
-			PlayState.instance.iconP2.characterId = 'blazin1';
-			PlayState.instance.iconP2.loadCharacter(PlayState.instance.iconP2.characterId);
-		}
-		else if (Highscore.tallies.totalNotesHit == Highscore.tallies.totalNotes && Highscore.tallies.good != 0 && Highscore.tallies.bad == 0 && Highscore.tallies.shit == 0 && PlayState.instance.iconP2.characterId != 'blazin2')
-		{
-			PlayState.instance.iconP2.characterId = 'blazin2';
-			PlayState.instance.iconP2.loadCharacter(PlayState.instance.iconP2.characterId);
-		}
-		else if (Highscore.tallies.totalNotesHit >= Highscore.tallies.totalNotes * 0.9 && Highscore.tallies.totalNotesHit != Highscore.tallies.totalNotes && PlayState.instance.iconP2.characterId != 'blazin3')
-		{
-			PlayState.instance.iconP2.characterId = 'blazin3';
-			PlayState.instance.iconP2.loadCharacter(PlayState.instance.iconP2.characterId);
-		}
-		else if (Highscore.tallies.totalNotesHit >= Highscore.tallies.totalNotes * 0.6 && Highscore.tallies.totalNotesHit < Highscore.tallies.totalNotes * 0.9 && PlayState.instance.iconP2.characterId != 'blazin4')
-		{
-			PlayState.instance.iconP2.characterId = 'blazin4';
-			PlayState.instance.iconP2.loadCharacter(PlayState.instance.iconP2.characterId);
-		}
-		else if (Highscore.tallies.totalNotesHit >= Highscore.tallies.totalNotes * 0.2 && Highscore.tallies.totalNotesHit < Highscore.tallies.totalNotes * 0.6 && PlayState.instance.iconP2.characterId != 'blazin5')
-		{
-			PlayState.instance.iconP2.characterId = 'blazin5';
-			PlayState.instance.iconP2.loadCharacter(PlayState.instance.iconP2.characterId);
-		}
-		else if (Highscore.tallies.totalNotesHit < Highscore.tallies.totalNotes * 0.2 && PlayState.instance.iconP2.characterId != 'blazin6')
-		{
-			PlayState.instance.iconP2.characterId = 'blazin6';
-			PlayState.instance.iconP2.loadCharacter(PlayState.instance.iconP2.characterId);
-		}
-	}
-	
-	function onNoteHit(event:HitNoteScriptEvent)
-	{
-		if (event.note.noteData.getMustHitNote())
-		{
-			switch (event.note.kind)
-			{
-				case "noAnim":
-					getDad().holdTimer = 0;
-				case "noanim":
-					getDad().holdTimer = 0;
-				default:
-					getDad().holdTimer = 0;
-					getDad().playSingAnimation(event.note.noteData.getDirection(), false);
-			}
-		}
-	}
-
-	override function onGameOver(event:ScriptEvent):Void {
-		super.onGameOver(event);
-
-	}
-
-	override function onSongRetry(event:ScriptEvent):Void {
-		super.onSongRetry(event);
-		
-		PlayState.instance.iconP2.characterId = 'blazin6';
-		PlayState.instance.iconP2.loadCharacter(PlayState.instance.iconP2.characterId);
-
-		if (moveHouseTween != null)
-		{
-			moveHouseTween.cancel();
-			moveHouseTween = null;
-		}
-
-		if (moveStrumlineTween != null)
-		{
-			moveStrumlineTween.cancel();
-			moveStrumlineTween = null;
-		}
-
-		if (playerStrumline != null)
-		{
-			playerStrumline.x = 415; //640 - 225
-		}
-		
-		currentHouse = 1;
-		scrollingGraves1.alpha = 1;
-		scrollingGraves2.alpha = 0;
-		housesGroup.x = 0;
-
-		for (i in 0...housesGroup.members.length)
-		{
-			housesGroup.members[i].animation.play('close');
-		}
-				
-		getBoyfriend().idleSuffix = "";
-		getBoyfriend().danceEvery = 1;
-
-		getBoyfriend().x = 1010;
-
-		getDad().idleSuffix = "";
-		getDad().danceEvery = 1;
-
-		FlxG.camera.focusOn(new FlxPoint(getGirlfriend().cameraFocusPoint.x, getGirlfriend().cameraFocusPoint.y));
-		PlayState.instance.cameraFollowPoint.setPosition(getGirlfriend().cameraFocusPoint.x, getGirlfriend().cameraFocusPoint.y);
-	}
-
-	function onBeatHit(event:SongTimeScriptEvent):Void
-	{
-		super.onBeatHit(event);
-	}
-
-  function onStepHit(event:SongTimeScriptEvent):Void
-	{
-		super.onStepHit(event);
-	}	  
-
-    public override function onSongEvent(scriptEvent:SongEventScriptEvent)
+    if (FlxG.save.data.spookyShaders != false)
     {
-        super.onSongEvent(scriptEvent);
-
-        if (scriptEvent.eventData.eventKind == "blazinSpookyEvent")
-        {
-            if (scriptEvent.eventData.value.houseEvent == 0)
-			{
-				moveHouseTween = FlxTween.tween(housesGroup, {x: housesGroup.x - 1484}, 0.3, {ease: FlxEase.backInOut});
-				currentHouse = currentHouse + 1;
-				
-				getBoyfriend().idleSuffix = "";
-				getBoyfriend().danceEvery = 1;
-
-				getDad().idleSuffix = "";
-				getDad().danceEvery = 1;
-			}
-			else if (scriptEvent.eventData.value.houseEvent == 1)
-			{
-				housesGroup.members[currentHouse].animation.play('open');
-				PlayState.instance.currentCameraZoom = 1.2;
-				PlayState.instance.tweenCameraZoom(1, 0.5, false, FlxEase.expoOut);
-				
-				getBoyfriend().playAnimation('idle-cheer');
-				getBoyfriend().idleSuffix = "-cheer";
-				getBoyfriend().danceEvery = 0;
-
-				getDad().playAnimation('idle-cheer');
-				getDad().idleSuffix = "-cheer";
-				getDad().danceEvery = 0;
-			}
-			else if (scriptEvent.eventData.value.houseEvent == 2)
-			{
-				housesGroup.members[currentHouse].animation.play('close');
-				PlayState.instance.currentCameraZoom = 1.2;
-				PlayState.instance.tweenCameraZoom(1, 0.5, false, FlxEase.expoOut);
-				
-				getBoyfriend().playAnimation('idle-errm');
-				getBoyfriend().idleSuffix = "-errm";
-				getBoyfriend().danceEvery = 0;
-
-				getDad().playAnimation('idle-errm');
-				getDad().idleSuffix = "-errm";
-				getDad().danceEvery = 0;
-			}
-			else if (scriptEvent.eventData.value.houseEvent == 3)
-			{
-				if (playerStrumline.x == 415)
-					moveStrumlineTween = FlxTween.tween(playerStrumline, {x: 790}, 1, {ease: FlxEase.smootherStepInOut});
-				if (playerStrumline.x == 790)
-					moveStrumlineTween = FlxTween.tween(playerStrumline, {x: 415}, 1, {ease: FlxEase.smootherStepInOut});
-			}
-			else if (scriptEvent.eventData.value.houseEvent == 4)
-			{
-				housesGroup.members[currentHouse].animation.play('open');
-				PlayState.instance.currentCameraZoom = 1.2;
-				PlayState.instance.tweenCameraZoom(1, 0.5, false, FlxEase.expoOut);
-			}
-			else if (scriptEvent.eventData.value.houseEvent == 5)
-			{
-				getBoyfriend().playAnimation('idle-cheer');
-				getBoyfriend().idleSuffix = "-cheer";
-				getBoyfriend().danceEvery = 0;
-
-				getDad().playAnimation('idle-cheer');
-				getDad().idleSuffix = "-cheer";
-				getDad().danceEvery = 0;
-			}
-        }
+      colorShaderWalkers.brightness = -6;
+      colorShaderWalkers.contrast = -11;
+      colorShaderWalkers.saturation = -7;
+      colorShaderWalkers.hue = -5;
     }
 
-	/**
-	 * If your stage uses additional assets not specified in the JSON,
-	 * make sure to specify them like this, or they won't get cached in the loading screen.
-	 */
-	function fetchAssetPaths():Array<String>
-	{
-		var results:Array<String> = super.fetchAssetPaths();
-		
-		results.push(Paths.image('blazin/spooky/houses/0', "weekend1"));
-		results.push(Paths.image('blazin/spooky/houses/1', "weekend1"));
-		results.push(Paths.image('blazin/spooky/houses/2', "weekend1"));
-		results.push(Paths.image('blazin/spooky/houses/3', "weekend1"));
-		results.push(Paths.image('blazin/spooky/houses/4', "weekend1"));
-		results.push(Paths.image('blazin/spooky/houses/5', "weekend1"));
-		results.push(Paths.image('blazin/spooky/houses/6', "weekend1"));
-		results.push(Paths.image('blazin/spooky/houses/7', "weekend1"));
-		results.push(Paths.image('blazin/spooky/houses/8', "weekend1"));
-		results.push(Paths.image('blazin/spooky/houses/9', "weekend1"));
-		results.push(Paths.image('blazin/spooky/houses/10', "weekend1"));
-		results.push(Paths.image('blazin/spooky/houses/11', "weekend1"));
-		results.push(Paths.image('blazin/spooky/houses/12', "weekend1"));
-		results.push(Paths.image('blazin/spooky/houses/13', "weekend1"));
-		results.push(Paths.image('blazin/spooky/houses/14', "weekend1"));
-		results.push(Paths.image('blazin/spooky/houses/15', "weekend1"));
-		results.push(Paths.image('blazin/spooky/houses/16', "weekend1"));
-		results.push(Paths.image('blazin/spooky/houses/17', "weekend1"));
-		results.push(Paths.image('blazin/spooky/houses/18', "weekend1"));
-		results.push(Paths.image('blazin/spooky/houses/19', "weekend1"));
-		results.push(Paths.image('blazin/spooky/houses/20', "weekend1"));
-		results.push(Paths.image('blazin/spooky/houses/21', "weekend1"));
+    getNamedProp('darnellWalking').shader = colorShaderWalkers;
+    getNamedProp('pumpWalking').shader = colorShaderWalkers;
+    getNamedProp('skidWalking').shader = colorShaderWalkers;
 
-		results.push(Paths.image('blazin/spooky/walkingBG/grassGround', "weekend1"));
-		results.push(Paths.image('blazin/spooky/walkingBG/graves1', "weekend1"));
-		results.push(Paths.image('blazin/spooky/walkingBG/graves2', "weekend1"));
-		results.push(Paths.image('blazin/spooky/walkingBG/skyBG', "weekend1"));
-		results.push(Paths.image('blazin/spooky/walkingBG/treeshouses', "weekend1"));
+    scrollingSky = new FlxBackdrop(Paths.image('blazin/spooky/walkingBG/skyBG'), 0x01);
+    scrollingSky.setPosition(0, -1439);
+    scrollingSky.scrollFactor.set(1, 1);
+    scrollingSky.zIndex = 1;
+    scrollingSky.velocity.x = -20;
+    PlayState.instance.currentStage.add(scrollingSky);
 
-		results.push(Paths.music("spooky/blazin/dillydally", "weekend1"));
-		results.push(Paths.image('blazin/spooky/Pre-BlazinCutscene', "weekend1"));
+    scrollingBuildings = new FlxBackdrop(Paths.image('blazin/spooky/walkingBG/treeshouses'), 0x01);
+    scrollingBuildings.setPosition(0, -1976);
+    scrollingBuildings.scrollFactor.set(1, 1);
+    scrollingBuildings.zIndex = 2;
+    scrollingBuildings.velocity.x = -80;
+    PlayState.instance.currentStage.add(scrollingBuildings);
 
-		return results;
-	}
+    scrollingGround = new FlxBackdrop(Paths.image('blazin/spooky/walkingBG/grassGround'), 0x01);
+    scrollingGround.setPosition(0, -830);
+    scrollingGround.scrollFactor.set(1, 1);
+    scrollingGround.zIndex = 3;
+    scrollingGround.velocity.x = -130;
+    PlayState.instance.currentStage.add(scrollingGround);
+
+    scrollingGraves1 = new FlxBackdrop(Paths.image('blazin/spooky/walkingBG/graves1'), 0x01);
+    scrollingGraves1.setPosition(0, -1718);
+    scrollingGraves1.scrollFactor.set(1, 1);
+    scrollingGraves1.zIndex = 11;
+    scrollingGraves1.velocity.x = -1000;
+    PlayState.instance.currentStage.add(scrollingGraves1);
+
+    scrollingGraves2 = new FlxBackdrop(Paths.image('blazin/spooky/walkingBG/graves2'), 0x01);
+    scrollingGraves2.setPosition(0, -1718);
+    scrollingGraves2.scrollFactor.set(1, 1);
+    scrollingGraves2.zIndex = 11;
+    scrollingGraves2.velocity.x = -1000;
+    scrollingGraves2.alpha = 0;
+    PlayState.instance.currentStage.add(scrollingGraves2);
+
+    housesGroup = new FlxTypedSpriteGroup();
+
+    var houseX:Float = 0;
+
+    var outOfBoundsHouse:FlxSprite = new FlxSprite(-1484, 0);
+    outOfBoundsHouse.frames = Paths.getSparrowAtlas('blazin/spooky/houses/0');
+    outOfBoundsHouse.animation.addByPrefix('close', 'close');
+    outOfBoundsHouse.animation.play('close');
+    outOfBoundsHouse.scrollFactor.set(1, 1);
+    outOfBoundsHouse.zIndex = 0;
+    housesGroup.add(outOfBoundsHouse);
+
+    for (i in 0...22)
+    {
+      var house:FlxSprite = new FlxSprite(houseX, 0);
+      house.frames = Paths.getSparrowAtlas('blazin/spooky/houses/' + i);
+      house.animation.addByPrefix('open', 'open');
+      house.animation.addByPrefix('close', 'close');
+      house.animation.play('close');
+      house.scrollFactor.set(1, 1);
+      house.zIndex = 0;
+      housesGroup.add(house);
+
+      houseX = houseX + 1484;
+    }
+    PlayState.instance.currentStage.add(housesGroup);
+
+    var outOfBoundsHouseTwo:FlxSprite = new FlxSprite(housesGroup.members[22].x + 1484, 0);
+    outOfBoundsHouseTwo.frames = Paths.getSparrowAtlas('blazin/spooky/houses/21');
+    outOfBoundsHouseTwo.animation.addByPrefix('close', 'close');
+    outOfBoundsHouseTwo.animation.play('close');
+    outOfBoundsHouseTwo.scrollFactor.set(1, 1);
+    outOfBoundsHouseTwo.zIndex = 0;
+    housesGroup.add(outOfBoundsHouseTwo);
+
+    PlayState.instance.currentStage.refresh(); // Apply z-index.
+  }
+
+  public override function onCountdownStart(event:CountdownScriptEvent):Void
+  {
+    super.onCountdownStart(event);
+
+    currentHouse = 1;
+
+    scrollingGraves1.alpha = 1;
+    scrollingGraves2.alpha = 0;
+
+    for (i in 0...housesGroup.members.length)
+    {
+      housesGroup.members[i].animation.play('close');
+    }
+
+    getBoyfriend().idleSuffix = "";
+    getBoyfriend().danceEvery = 1;
+
+    getDad().idleSuffix = "";
+    getDad().danceEvery = 1;
+
+    scrollingSky.x = 0;
+    scrollingBuildings.x = 0;
+    scrollingGround.x = 0;
+    scrollingGraves1.x = 0;
+    scrollingGraves2.x = 0;
+
+    playerStrumline = PlayState.instance.playerStrumline;
+
+    if (playerStrumline != null)
+    {
+      playerStrumline.x = 415; // 640 - 225
+    }
+
+    var opponentStrumline:FlxSprite = PlayState.instance.opponentStrumline;
+    if (opponentStrumline != null)
+    {
+      for (arrow in opponentStrumline.members)
+      {
+        arrow.visible = false;
+      }
+    }
+
+    FlxG.camera.focusOn(new FlxPoint(getGirlfriend().cameraFocusPoint.x, getGirlfriend().cameraFocusPoint.y)); //-1650 for walking segment
+    PlayState.instance.cameraFollowPoint.setPosition(getGirlfriend().cameraFocusPoint.x, getGirlfriend().cameraFocusPoint.y); //-1650 for walking segment
+
+    if (!hasPlayedInGameCutscene)
+    {
+      trace('Pausing countdown to play in game cutscene');
+
+      hasPlayedInGameCutscene = true;
+
+      event.cancel(); // CANCEL THE COUNTDOWN!
+
+      openingCutscene();
+    }
+    else
+    {
+      hasPlayedInGameCutscene = true;
+      hasPlayedCutscene = true;
+      cutsceneSkipped = true;
+      canSkipCutscene = true;
+    }
+  }
+
+  var cutscenePaper:FlxSprite;
+
+  function openingCutscene()
+  {
+    PlayState.instance.isInCutscene = true;
+
+    coverscreen = new FlxSprite(-100, -100).makeGraphic(FlxG.width * 2, FlxG.height * 2, 0xFF000000);
+    coverscreen.visible = true;
+    coverscreen.zIndex = 900;
+    PlayState.instance.add(coverscreen);
+    coverscreen.cameras = [PlayState.instance.camCutscene];
+
+    skipText = new FlxText(936, 650, 0, '[ ' + PlayState.instance.controls.getDialogueNameFromToken("CUTSCENE_ADVANCE", true) + ' ] to Continue', 20);
+    skipText.setFormat(Paths.font('vcr.ttf'), 30, 0xFFFFFFFF, "right", FlxTextBorderStyle.OUTLINE, 0xFF000000);
+    skipText.scrollFactor.set(0, 0);
+    skipText.borderSize = 2;
+    skipText.alpha = 0;
+    skipText.zIndex = 1000;
+    PlayState.instance.add(skipText);
+    skipText.cameras = [PlayState.instance.camCutscene];
+
+    cutscenePaper = new FlxSprite(110, -230).loadGraphic(Paths.image('blazin/spooky/Pre-BlazinCutscene', "weekend1"));
+    cutscenePaper.scrollFactor.set(0, 0);
+    cutscenePaper.scale.set(0.6, 0.6);
+    cutscenePaper.alpha = 0;
+    cutscenePaper.angle = 6;
+    cutscenePaper.zIndex = 950;
+    PlayState.instance.add(cutscenePaper);
+    cutscenePaper.cameras = [PlayState.instance.camCutscene];
+
+    PlayState.instance.currentStage.refresh(); // Apply z-index.
+
+    new FlxTimer().start(0.5, _ -> {
+      FlxTween.tween(cutscenePaper, {alpha: 1}, 1, {ease: FlxEase.quadOut});
+      FlxTween.tween(cutscenePaper, {x: 150}, 1, {ease: FlxEase.quadOut});
+
+      FlxTween.tween(skipText, {alpha: 1}, 1, {ease: FlxEase.quadOut});
+      new FlxTimer().start(1, _ -> {
+        canSkipCutscene = true;
+        trace('can skip!');
+      });
+    });
+
+    theCutscene = new FlxAtlasSprite(0, 0, Paths.animateAtlas("spookyStages/oogasHouse/cutscene/ending"));
+    theCutscene.zIndex = 10000;
+    theCutscene.alpha = 0;
+    PlayState.instance.currentStage.add(theCutscene);
+    theCutscene.cameras = [PlayState.instance.camHUD];
+
+    cutsceneMusic = FunkinSound.load(Paths.music("spooky/blazin/dillydally", "weekend1"), true);
+    cutsceneMusic.volume = 0.4;
+    cutsceneMusic.looped = true;
+    cutsceneMusic.play(false);
+  }
+
+  function skipCutscene()
+  {
+    cutsceneSkipped = true;
+    hasPlayedCutscene = true;
+    PlayState.instance.camCutscene.fade(0xFF000000, 0.5, false, null, true);
+    FlxTween.tween(cutscenePaper, {x: 200}, 1, {ease: FlxEase.quadOut});
+    cutsceneMusic.fadeOut(0.5, 0);
+
+    new FlxTimer().start(0.5, _ -> {
+      PlayState.instance.isInCutscene = false;
+      hasPlayedCutscene = true;
+      PlayState.instance.justUnpaused = true;
+      PlayState.instance.camCutscene.fade(0xFF000000, 0.5, true, null, true);
+      cutsceneMusic.stop();
+
+      coverscreen.visible = false;
+      cutsceneMusic.stop();
+
+      PlayState.instance.startCountdown();
+
+      skipText.visible = false;
+      cutscenePaper.visible = false;
+    });
+  }
+
+  function onUpdate(event:UpdateScriptEvent):Void
+  {
+    super.onUpdate(event);
+
+    if (currentHouse > 10 && scrollingGraves1 != null && scrollingGraves2 != null)
+    {
+      scrollingGraves1.alpha = 0;
+      scrollingGraves2.alpha = 1;
+    }
+
+    if ((PlayState.instance.controls.CUTSCENE_ADVANCE
+      || PlayState.instance.controls.NOTE_LEFT
+      || PlayState.instance.controls.NOTE_RIGHT
+      || PlayState.instance.controls.NOTE_UP
+      || PlayState.instance.controls.NOTE_DOWN)
+      && cutsceneSkipped == false
+      && canSkipCutscene == true)
+    {
+      hasPlayedCutscene = true;
+      skipCutscene();
+      trace('skipped');
+    }
+
+    PlayState.instance.comboPopUps.offsets = [-370, -50];
+
+    if (Highscore.tallies.totalNotesHit == Highscore.tallies.totalNotes
+      && Highscore.tallies.good == 0
+      && Highscore.tallies.bad == 0
+      && Highscore.tallies.shit == 0
+      && PlayState.instance.iconP2.characterId != 'blazin1')
+    {
+      PlayState.instance.iconP2.characterId = 'blazin1';
+      PlayState.instance.iconP2.loadCharacter(PlayState.instance.iconP2.characterId);
+    }
+    else if (Highscore.tallies.totalNotesHit == Highscore.tallies.totalNotes
+      && Highscore.tallies.good != 0
+      && Highscore.tallies.bad == 0
+      && Highscore.tallies.shit == 0
+      && PlayState.instance.iconP2.characterId != 'blazin2')
+    {
+      PlayState.instance.iconP2.characterId = 'blazin2';
+      PlayState.instance.iconP2.loadCharacter(PlayState.instance.iconP2.characterId);
+    }
+    else if (Highscore.tallies.totalNotesHit >= Highscore.tallies.totalNotes * 0.9
+      && Highscore.tallies.totalNotesHit != Highscore.tallies.totalNotes
+      && PlayState.instance.iconP2.characterId != 'blazin3')
+    {
+      PlayState.instance.iconP2.characterId = 'blazin3';
+      PlayState.instance.iconP2.loadCharacter(PlayState.instance.iconP2.characterId);
+    }
+    else if (Highscore.tallies.totalNotesHit >= Highscore.tallies.totalNotes * 0.6
+      && Highscore.tallies.totalNotesHit < Highscore.tallies.totalNotes * 0.9
+      && PlayState.instance.iconP2.characterId != 'blazin4')
+    {
+      PlayState.instance.iconP2.characterId = 'blazin4';
+      PlayState.instance.iconP2.loadCharacter(PlayState.instance.iconP2.characterId);
+    }
+    else if (Highscore.tallies.totalNotesHit >= Highscore.tallies.totalNotes * 0.2
+      && Highscore.tallies.totalNotesHit < Highscore.tallies.totalNotes * 0.6
+      && PlayState.instance.iconP2.characterId != 'blazin5')
+    {
+      PlayState.instance.iconP2.characterId = 'blazin5';
+      PlayState.instance.iconP2.loadCharacter(PlayState.instance.iconP2.characterId);
+    }
+    else if (Highscore.tallies.totalNotesHit < Highscore.tallies.totalNotes * 0.2 && PlayState.instance.iconP2.characterId != 'blazin6')
+    {
+      PlayState.instance.iconP2.characterId = 'blazin6';
+      PlayState.instance.iconP2.loadCharacter(PlayState.instance.iconP2.characterId);
+    }
+  }
+
+  function onNoteHit(event:HitNoteScriptEvent)
+  {
+    if (event.note.noteData.getMustHitNote())
+    {
+      switch (event.note.kind)
+      {
+        case "noAnim":
+          getDad().holdTimer = 0;
+        case "noanim":
+          getDad().holdTimer = 0;
+        default:
+          getDad().holdTimer = 0;
+          getDad().playSingAnimation(event.note.noteData.getDirection(), false);
+      }
+    }
+  }
+
+  override function onGameOver(event:ScriptEvent):Void
+  {
+    super.onGameOver(event);
+  }
+
+  override function onSongRetry(event:ScriptEvent):Void
+  {
+    super.onSongRetry(event);
+
+    PlayState.instance.iconP2.characterId = 'blazin6';
+    PlayState.instance.iconP2.loadCharacter(PlayState.instance.iconP2.characterId);
+
+    if (moveHouseTween != null)
+    {
+      moveHouseTween.cancel();
+      moveHouseTween = null;
+    }
+
+    if (moveStrumlineTween != null)
+    {
+      moveStrumlineTween.cancel();
+      moveStrumlineTween = null;
+    }
+
+    if (playerStrumline != null)
+    {
+      playerStrumline.x = 415; // 640 - 225
+    }
+
+    currentHouse = 1;
+    scrollingGraves1.alpha = 1;
+    scrollingGraves2.alpha = 0;
+    housesGroup.x = 0;
+
+    for (i in 0...housesGroup.members.length)
+    {
+      housesGroup.members[i].animation.play('close');
+    }
+
+    getBoyfriend().idleSuffix = "";
+    getBoyfriend().danceEvery = 1;
+
+    getBoyfriend().x = 1010;
+
+    getDad().idleSuffix = "";
+    getDad().danceEvery = 1;
+
+    FlxG.camera.focusOn(new FlxPoint(getGirlfriend().cameraFocusPoint.x, getGirlfriend().cameraFocusPoint.y));
+    PlayState.instance.cameraFollowPoint.setPosition(getGirlfriend().cameraFocusPoint.x, getGirlfriend().cameraFocusPoint.y);
+  }
+
+  function onBeatHit(event:SongTimeScriptEvent):Void
+  {
+    super.onBeatHit(event);
+  }
+
+  function onStepHit(event:SongTimeScriptEvent):Void
+  {
+    super.onStepHit(event);
+  }
+
+  public override function onSongEvent(scriptEvent:SongEventScriptEvent)
+  {
+    super.onSongEvent(scriptEvent);
+
+    if (scriptEvent.eventData.eventKind == "blazinSpookyEvent")
+    {
+      if (scriptEvent.eventData.value.houseEvent == 0)
+      {
+        moveHouseTween = FlxTween.tween(housesGroup, {x: housesGroup.x - 1484}, 0.3, {ease: FlxEase.backInOut});
+        currentHouse = currentHouse + 1;
+
+        getBoyfriend().idleSuffix = "";
+        getBoyfriend().danceEvery = 1;
+
+        getDad().idleSuffix = "";
+        getDad().danceEvery = 1;
+      }
+      else if (scriptEvent.eventData.value.houseEvent == 1)
+      {
+        housesGroup.members[currentHouse].animation.play('open');
+        PlayState.instance.currentCameraZoom = 1.2;
+        PlayState.instance.tweenCameraZoom(1, 0.5, false, FlxEase.expoOut);
+
+        getBoyfriend().playAnimation('idle-cheer');
+        getBoyfriend().idleSuffix = "-cheer";
+        getBoyfriend().danceEvery = 0;
+
+        getDad().playAnimation('idle-cheer');
+        getDad().idleSuffix = "-cheer";
+        getDad().danceEvery = 0;
+      }
+      else if (scriptEvent.eventData.value.houseEvent == 2)
+      {
+        housesGroup.members[currentHouse].animation.play('close');
+        PlayState.instance.currentCameraZoom = 1.2;
+        PlayState.instance.tweenCameraZoom(1, 0.5, false, FlxEase.expoOut);
+
+        getBoyfriend().playAnimation('idle-errm');
+        getBoyfriend().idleSuffix = "-errm";
+        getBoyfriend().danceEvery = 0;
+
+        getDad().playAnimation('idle-errm');
+        getDad().idleSuffix = "-errm";
+        getDad().danceEvery = 0;
+      }
+      else if (scriptEvent.eventData.value.houseEvent == 3)
+      {
+        if (playerStrumline.x == 415) moveStrumlineTween = FlxTween.tween(playerStrumline, {x: 790}, 1, {ease: FlxEase.smootherStepInOut});
+        if (playerStrumline.x == 790) moveStrumlineTween = FlxTween.tween(playerStrumline, {x: 415}, 1, {ease: FlxEase.smootherStepInOut});
+      }
+      else if (scriptEvent.eventData.value.houseEvent == 4)
+      {
+        housesGroup.members[currentHouse].animation.play('open');
+        PlayState.instance.currentCameraZoom = 1.2;
+        PlayState.instance.tweenCameraZoom(1, 0.5, false, FlxEase.expoOut);
+      }
+      else if (scriptEvent.eventData.value.houseEvent == 5)
+      {
+        getBoyfriend().playAnimation('idle-cheer');
+        getBoyfriend().idleSuffix = "-cheer";
+        getBoyfriend().danceEvery = 0;
+
+        getDad().playAnimation('idle-cheer');
+        getDad().idleSuffix = "-cheer";
+        getDad().danceEvery = 0;
+      }
+    }
+  }
+
+  /**
+   * If your stage uses additional assets not specified in the JSON,
+   * make sure to specify them like this, or they won't get cached in the loading screen.
+   */
+  function fetchAssetPaths():Array<String>
+  {
+    var results:Array<String> = super.fetchAssetPaths();
+
+    results.push(Paths.image('blazin/spooky/houses/0', "weekend1"));
+    results.push(Paths.image('blazin/spooky/houses/1', "weekend1"));
+    results.push(Paths.image('blazin/spooky/houses/2', "weekend1"));
+    results.push(Paths.image('blazin/spooky/houses/3', "weekend1"));
+    results.push(Paths.image('blazin/spooky/houses/4', "weekend1"));
+    results.push(Paths.image('blazin/spooky/houses/5', "weekend1"));
+    results.push(Paths.image('blazin/spooky/houses/6', "weekend1"));
+    results.push(Paths.image('blazin/spooky/houses/7', "weekend1"));
+    results.push(Paths.image('blazin/spooky/houses/8', "weekend1"));
+    results.push(Paths.image('blazin/spooky/houses/9', "weekend1"));
+    results.push(Paths.image('blazin/spooky/houses/10', "weekend1"));
+    results.push(Paths.image('blazin/spooky/houses/11', "weekend1"));
+    results.push(Paths.image('blazin/spooky/houses/12', "weekend1"));
+    results.push(Paths.image('blazin/spooky/houses/13', "weekend1"));
+    results.push(Paths.image('blazin/spooky/houses/14', "weekend1"));
+    results.push(Paths.image('blazin/spooky/houses/15', "weekend1"));
+    results.push(Paths.image('blazin/spooky/houses/16', "weekend1"));
+    results.push(Paths.image('blazin/spooky/houses/17', "weekend1"));
+    results.push(Paths.image('blazin/spooky/houses/18', "weekend1"));
+    results.push(Paths.image('blazin/spooky/houses/19', "weekend1"));
+    results.push(Paths.image('blazin/spooky/houses/20', "weekend1"));
+    results.push(Paths.image('blazin/spooky/houses/21', "weekend1"));
+
+    results.push(Paths.image('blazin/spooky/walkingBG/grassGround', "weekend1"));
+    results.push(Paths.image('blazin/spooky/walkingBG/graves1', "weekend1"));
+    results.push(Paths.image('blazin/spooky/walkingBG/graves2', "weekend1"));
+    results.push(Paths.image('blazin/spooky/walkingBG/skyBG', "weekend1"));
+    results.push(Paths.image('blazin/spooky/walkingBG/treeshouses', "weekend1"));
+
+    results.push(Paths.music("spooky/blazin/dillydally", "weekend1"));
+    results.push(Paths.image('blazin/spooky/Pre-BlazinCutscene', "weekend1"));
+
+    return results;
+  }
 }

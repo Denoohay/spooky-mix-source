@@ -2,15 +2,18 @@ import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import funkin.play.cutscene.dialogue.Conversation;
 
-class SenpaiSpookyConversation extends Conversation {
-	function new() {
-		super('senpai-spooky');
-	}
+class SenpaiSpookyConversation extends Conversation
+{
+  function new()
+  {
+    super('senpai-spooky');
+  }
 
   var musicStopped = false;
   var musicLowered = false;
 
-  override function showCurrentSpeaker():Void {
+  override function showCurrentSpeaker():Void
+  {
     super.showCurrentSpeaker();
 
     // Funny moment; stop the music for dramatic effect.

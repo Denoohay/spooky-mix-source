@@ -52,49 +52,52 @@ class UpdatedFreeplayText extends Module
 
   override function onUpdate(event:UpdateScriptEvent)
   {
-	super.onUpdate(event);
+    super.onUpdate(event);
 
     if (ReflectUtil.getClassNameOf(FlxG.state.subState) == "funkin.ui.freeplay.FreeplayState")
     {
-        if (FlxG.state.subState.currentFilteredSongs != null && FlxG.state.subState.grpCapsules != null)
+      if (FlxG.state.subState.currentFilteredSongs != null && FlxG.state.subState.grpCapsules != null)
+      {
+        if (addedStuff == false)
         {
-            if (addedStuff == false)
+          var songListTemp:Array<String>;
+          var songList:Array<String> = [];
+
+          var stupidNumb:Int = 1;
+
+          songListTemp = FlxG.state.subState.currentFilteredSongs;
+
+          for (i in 0...songListTemp.length - 1)
+          {
+            var stupidData:String = "" + songListTemp[stupidNumb].data;
+            var replaceString:String = StringTools.replace(StringTools.replace(stupidData, "Song(", ""), ")", "");
+
+            songList.insert(i, replaceString);
+            stupidNumb = stupidNumb + 1;
+          }
+
+          // FlxG.state.subState.ostName.text = songList;
+
+          for (i in 0...FlxG.state.subState.grpCapsules.members.length - 1)
+          {
+            if (FlxG.state.subState.currentCharacterId == 'spookymod'
+              && (songList[i - 1] == "high" || songList[i - 1] == "milf" || songList[i - 1] == "darnell" || songList[i - 1] == "lit-up"
+                || songList[i - 1] == "2hot"))
             {
-                var songListTemp:Array<String>;
-                var songList:Array<String> = [];
-
-                var stupidNumb:Int = 1;
-                
-                songListTemp = FlxG.state.subState.currentFilteredSongs;
-                
-                for (i in 0...songListTemp.length - 1)
-                {
-                    var stupidData:String = "" + songListTemp[stupidNumb].data;
-                    var replaceString:String = StringTools.replace(StringTools.replace(stupidData, "Song(", ""), ")", "");
-
-                    songList.insert(i, replaceString);
-                    stupidNumb = stupidNumb + 1;
-                }
-
-                //FlxG.state.subState.ostName.text = songList;
-
-                for (i in 0...FlxG.state.subState.grpCapsules.members.length - 1)
-                {
-                    if (FlxG.state.subState.currentCharacterId == 'spookymod' && (songList[i - 1] == "high" || songList[i - 1] == "milf" || songList[i - 1] == "darnell" || songList[i - 1] == "lit-up" || songList[i - 1] == "2hot"))
-                    {
-                        if (FlxG.state.subState.grpCapsules.members[i].newText.visible == true && FlxG.state.subState.grpCapsules.members[i].newText.frames != Paths.getSparrowAtlas('freeplay/freeplayCapsule/updated'))
-                        {
-                            FlxG.state.subState.grpCapsules.members[i].newText.frames = Paths.getSparrowAtlas('freeplay/freeplayCapsule/updated');
-                            FlxG.state.subState.grpCapsules.members[i].newText.animation.addByPrefix('updatedAnim', 'UPDATED notif', 24, true);
-                            FlxG.state.subState.grpCapsules.members[i].newText.animation.play('updatedAnim', true);
-                            FlxG.state.subState.grpCapsules.members[i].newText.x = FlxG.state.subState.grpCapsules.members[i].newText.x - 70;
-                        }
-                    }
-                }
-
-                addedStuff = true;
+              if (FlxG.state.subState.grpCapsules.members[i].newText.visible == true
+                && FlxG.state.subState.grpCapsules.members[i].newText.frames != Paths.getSparrowAtlas('freeplay/freeplayCapsule/updated'))
+              {
+                FlxG.state.subState.grpCapsules.members[i].newText.frames = Paths.getSparrowAtlas('freeplay/freeplayCapsule/updated');
+                FlxG.state.subState.grpCapsules.members[i].newText.animation.addByPrefix('updatedAnim', 'UPDATED notif', 24, true);
+                FlxG.state.subState.grpCapsules.members[i].newText.animation.play('updatedAnim', true);
+                FlxG.state.subState.grpCapsules.members[i].newText.x = FlxG.state.subState.grpCapsules.members[i].newText.x - 70;
+              }
             }
+          }
+
+          addedStuff = true;
         }
+      }
     }
   }
 }

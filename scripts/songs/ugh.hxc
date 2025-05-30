@@ -2,24 +2,27 @@ import funkin.play.song.Song;
 import funkin.play.PlayState;
 import funkin.play.cutscene.VideoCutscene;
 import funkin.save.Save;
-
 import funkin.play.PlayStatePlaylist;
 
-class UghSong extends Song {
+class UghSong extends Song
+{
   var hasPlayedCutscene:Bool;
 
-	public function new() {
-		super('ugh');
+  public function new()
+  {
+    super('ugh');
 
     hasPlayedCutscene = false;
-	}
+  }
 
-  public override function onCountdownStart(event:CountdownScriptEvent):Void {
-		super.onCountdownStart(event);
+  public override function onCountdownStart(event:CountdownScriptEvent):Void
+  {
+    super.onCountdownStart(event);
 
     if (!PlayStatePlaylist.isStoryMode) hasPlayedCutscene = true;
 
-    if (!hasPlayedCutscene) {
+    if (!hasPlayedCutscene)
+    {
       trace('Pausing countdown to play a video cutscene (`ugh`)');
 
       hasPlayedCutscene = true;
@@ -28,9 +31,10 @@ class UghSong extends Song {
 
       startVideo();
     }
-	}
+  }
 
-  function startVideo() {
+  function startVideo()
+  {
     VideoCutscene.play(Paths.videos('ughCutscene'));
   }
 
@@ -53,14 +57,18 @@ class UghSong extends Song {
 
     hasPlayedCutscene = false;
   }
-      
-    public override function listAltInstrumentalIds(difficultyId:String, variationId:String):Array<String>
-    {
-		var targetDifficulty:Null<SongDifficulty> = getDifficulty(difficultyId, variationId);
 
-		if ((difficultyId == "erect" || difficultyId == "nightmare") && (Save.instance.hasBeatenSong(this.id, ["erect"], "") || Save.instance.hasBeatenSong(this.id, ["nightmare"], ""))) return targetDifficulty?.characters?.altInstrumentals ?? [];
-		else if (variationId == "default" && Save.instance.hasBeatenSong(this.id, null, "")) return targetDifficulty?.characters?.altInstrumentals ?? [];
-		else if (Save.instance.hasBeatenSong(this.id, null, variationId)) return targetDifficulty?.characters?.altInstrumentals ?? [];
-		else return [];
-    }
+  public override function listAltInstrumentalIds(difficultyId:String, variationId:String):Array<String>
+  {
+    var targetDifficulty:Null<SongDifficulty> = getDifficulty(difficultyId, variationId);
+
+    if ((difficultyId == "erect" || difficultyId == "nightmare")
+      && (Save.instance.hasBeatenSong(this.id, ["erect"], "")
+        || Save.instance.hasBeatenSong(this.id, ["nightmare"], ""))) return targetDifficulty?.characters?.altInstrumentals ?? [];
+    else if (variationId == "default"
+      && Save.instance.hasBeatenSong(this.id, null, "")) return targetDifficulty?.characters?.altInstrumentals ?? [];
+    else if (Save.instance.hasBeatenSong(this.id, null, variationId)) return targetDifficulty?.characters?.altInstrumentals ?? [];
+    else
+      return [];
+  }
 }

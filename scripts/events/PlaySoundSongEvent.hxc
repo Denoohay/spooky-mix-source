@@ -36,35 +36,34 @@ import funkin.play.event.SongEvent;
 
 class PlaySoundSongEvent extends SongEvent
 {
-	public function new()
-	{
-		super('playSound');
-	}
+  public function new()
+  {
+    super('playSound');
+  }
 
-	public override function handleEvent(data) {}
-	
-	public function getTitle()
-	{
-		return "Play Sound";
-	}
+  public override function handleEvent(data) {}
 
-	public function getEventSchema()
-	{
-		return
-		[
-			{
-				name: "fileName",
-				title: "File Name",
-				defaultValue: "",
-				type: "string",
-				units: ".ogg"
-			},
-			{
-				name: 'volume',
-				title: 'Volume',
-				defaultValue: 1,
-				type: "float"
-			}
-		];
-	}
+  public function getTitle()
+  {
+    return "Play Sound";
+  }
+
+  public function getEventSchema()
+  {
+    return [
+      {
+        name: "fileName",
+        title: "File Name",
+        defaultValue: "",
+        type: "string",
+        units: ".ogg"
+      },
+      {
+        name: 'volume',
+        title: 'Volume',
+        defaultValue: 1,
+        type: "float"
+      }
+    ];
+  }
 }

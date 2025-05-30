@@ -13,105 +13,108 @@ import funkin.save.Save;
 
 class MallXmasSpookyStage extends Stage
 {
-	function new()
-	{
-		super('mallXmasSpooky');
-	}
+  function new()
+  {
+    super('mallXmasSpooky');
+  }
 
-	var colorShader:AdjustColorShader;
+  var colorShader:AdjustColorShader;
 
-	var isMokey:Bool = false;
+  var isMokey:Bool = false;
 
-	public override function onCountdownStart(event:CountdownScriptEvent):Void {
-		super.onCountdownStart(event);
-	}
+  public override function onCountdownStart(event:CountdownScriptEvent):Void
+  {
+    super.onCountdownStart(event);
+  }
 
-	function buildStage()
-	{
-		super.buildStage();
+  function buildStage()
+  {
+    super.buildStage();
 
-		colorShader = new AdjustColorShader();
-		
-		if (FlxG.save.data.spookyShaders != false)
-		{
-			colorShader.brightness = 3;
-			colorShader.contrast = 9;
-			colorShader.saturation = -15;
-			colorShader.hue = -8;
+    colorShader = new AdjustColorShader();
 
-			getNamedProp('christmasGlow').blend = 0;
-		}
+    if (FlxG.save.data.spookyShaders != false)
+    {
+      colorShader.brightness = 3;
+      colorShader.contrast = 9;
+      colorShader.saturation = -15;
+      colorShader.hue = -8;
 
-		if (Save.instance.hasBeatenSong(PlayState.instance.currentSong.id, null, 'spookymod') && FlxG.random.int(1, 50) == 1)
-		{
-			getNamedProp('upperBoppers').frames = Paths.getSparrowAtlas('christmas/spooky/mokey');
-			getNamedProp('upperBoppers').animation.addByPrefix('idle-mokey', 'KRIMAAAAAAAAAAAAA', 12, false);
-			getNamedProp('upperBoppers').animation.play('idle-mokey');
+      getNamedProp('christmasGlow').blend = 0;
+    }
 
-			isMokey = true;
-		}
-	}
+    if (Save.instance.hasBeatenSong(PlayState.instance.currentSong.id, null, 'spookymod') && FlxG.random.int(1, 50) == 1)
+    {
+      getNamedProp('upperBoppers').frames = Paths.getSparrowAtlas('christmas/spooky/mokey');
+      getNamedProp('upperBoppers').animation.addByPrefix('idle-mokey', 'KRIMAAAAAAAAAAAAA', 12, false);
+      getNamedProp('upperBoppers').animation.play('idle-mokey');
 
-	function onUpdate(event:UpdateScriptEvent):Void
-	{
-		super.onUpdate(event);
+      isMokey = true;
+    }
+  }
 
-		if(PlayState.instance.currentStage.getBoyfriend() != null && PlayState.instance.currentStage.getBoyfriend().shader == null)
-		{
-			PlayState.instance.currentStage.getBoyfriend().shader = colorShader;
-			PlayState.instance.currentStage.getGirlfriend().shader = colorShader;
-			PlayState.instance.currentStage.getDad().shader = colorShader;
-			getNamedProp('santa').shader = colorShader;
-			getNamedProp('bottomBoppers').shader = colorShader;
-		}
+  function onUpdate(event:UpdateScriptEvent):Void
+  {
+    super.onUpdate(event);
 
-		if (PlayState.instance.currentStage.getBoyfriend() != null && PlayState.instance.currentVariation == 'spookymod' && PlayState.instance.currentSong.id == 'eggnog')
-		{
-			PlayState.instance.currentStage.getBoyfriend().danceEvery = 2;
-			PlayState.instance.currentStage.getDad().danceEvery = 2;
-			PlayState.instance.currentStage.getGirlfriend().danceEvery = 2;
-			getNamedProp('bottomBoppers').danceEvery = 2;
-			getNamedProp('upperBoppers').danceEvery = 2;
-			getNamedProp('santa').danceEvery = 2;
-		}
+    if (PlayState.instance.currentStage.getBoyfriend() != null && PlayState.instance.currentStage.getBoyfriend().shader == null)
+    {
+      PlayState.instance.currentStage.getBoyfriend().shader = colorShader;
+      PlayState.instance.currentStage.getGirlfriend().shader = colorShader;
+      PlayState.instance.currentStage.getDad().shader = colorShader;
+      getNamedProp('santa').shader = colorShader;
+      getNamedProp('bottomBoppers').shader = colorShader;
+    }
 
-	}
+    if (PlayState.instance.currentStage.getBoyfriend() != null
+      && PlayState.instance.currentVariation == 'spookymod'
+      && PlayState.instance.currentSong.id == 'eggnog')
+    {
+      PlayState.instance.currentStage.getBoyfriend().danceEvery = 2;
+      PlayState.instance.currentStage.getDad().danceEvery = 2;
+      PlayState.instance.currentStage.getGirlfriend().danceEvery = 2;
+      getNamedProp('bottomBoppers').danceEvery = 2;
+      getNamedProp('upperBoppers').danceEvery = 2;
+      getNamedProp('santa').danceEvery = 2;
+    }
+  }
 
-	override function onGameOver(event:ScriptEvent):Void {
-		super.onGameOver(event);
-		
-		PlayState.instance.currentStage.getBoyfriend().shader = null;
-	}
+  override function onGameOver(event:ScriptEvent):Void
+  {
+    super.onGameOver(event);
 
-	override function onSongRetry(event:ScriptEvent):Void {
-		super.onSongRetry(event);
-		
-		PlayState.instance.currentStage.getBoyfriend().shader = colorShader;
-	}
+    PlayState.instance.currentStage.getBoyfriend().shader = null;
+  }
 
-	function onBeatHit(event:SongTimeScriptEvent):Void
-	{
-		super.onBeatHit(event);
+  override function onSongRetry(event:ScriptEvent):Void
+  {
+    super.onSongRetry(event);
 
-		if (isMokey == true)
-			getNamedProp('upperBoppers').animation.play('idle-mokey');
-	}
+    PlayState.instance.currentStage.getBoyfriend().shader = colorShader;
+  }
+
+  function onBeatHit(event:SongTimeScriptEvent):Void
+  {
+    super.onBeatHit(event);
+
+    if (isMokey == true) getNamedProp('upperBoppers').animation.play('idle-mokey');
+  }
 
   function onStepHit(event:SongTimeScriptEvent):Void
-	{
-		super.onStepHit(event);
-	}
+  {
+    super.onStepHit(event);
+  }
 
-	/**
-	 * If your stage uses additional assets not specified in the JSON,
-	 * make sure to specify them like this, or they won't get cached in the loading screen.
-	 */
-	function fetchAssetPaths():Array<String>
-	{
-		var results:Array<String> = super.fetchAssetPaths();
+  /**
+   * If your stage uses additional assets not specified in the JSON,
+   * make sure to specify them like this, or they won't get cached in the loading screen.
+   */
+  function fetchAssetPaths():Array<String>
+  {
+    var results:Array<String> = super.fetchAssetPaths();
 
-		results.push(Paths.image('christmas/spooky/mokey', "week5"));
+    results.push(Paths.image('christmas/spooky/mokey', "week5"));
 
-		return results;
-	}
+    return results;
+  }
 }

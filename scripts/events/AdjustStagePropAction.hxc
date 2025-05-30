@@ -38,47 +38,49 @@ import funkin.Preferences;
 
 class AdjustStagePropAction extends Module
 {
-    public function new()
+  public function new()
+  {
+    super('AdjustStagePropAction');
+  }
+
+  var defaultAlphaValues:Array<String> = [];
+  var props:Array<String> = [];
+
+  function onSongRetry(event:ScriptEvent)
+  {
+    super.onSongRetry(event);
+
+    if (props.length > 0)
     {
-        super('AdjustStagePropAction');
+      for (i in 0...props.length)
+      {
+        PlayState.instance.currentStage.getNamedProp(props[i]).alpha = defaultAlphaValues[i];
+      }
+
+      props = [];
     }
+  }
 
-    var defaultAlphaValues:Array<String> = [];
-    var props:Array<String> = [];
+  public override function onSongEvent(scriptEvent:SongEventScriptEvent)
+  {
+    super.onSongEvent(scriptEvent);
 
-    function onSongRetry(event:ScriptEvent)
+    if (scriptEvent.eventData.eventKind == "AdjustStageProp")
     {
-		super.onSongRetry(event);
-        
-        if (props.length > 0)
-        {
-            for (i in 0...props.length)
-            {
-                PlayState.instance.currentStage.getNamedProp(props[i]).alpha = defaultAlphaValues[i];
-            }
+      defaultAlphaValues.push(PlayState.instance.currentStage.getNamedProp(scriptEvent.eventData.value.propName).alpha);
+      props.push(scriptEvent.eventData.value.propName);
 
-            props = [];
-        }
+      if (scriptEvent.eventData.value.duration != 0) FlxTween.tween(PlayState.instance.currentStage.getNamedProp(scriptEvent.eventData.value.propName),
+        {alpha: scriptEvent.eventData.value.alpha}, PlayState.instance.currentStage.getNamedProp(scriptEvent.eventData.value.duration),
+        {ease: FlxEase.quadOut});
+      else
+        PlayState.instance.currentStage.getNamedProp(scriptEvent.eventData.value.propName)
+          .alpha = PlayState.instance.currentStage.getNamedProp(scriptEvent.eventData.value.alpha);
     }
+  }
 
-    public override function onSongEvent(scriptEvent:SongEventScriptEvent)
-    {
-        super.onSongEvent(scriptEvent);
-
-        if (scriptEvent.eventData.eventKind == "AdjustStageProp")
-        {
-            defaultAlphaValues.push(PlayState.instance.currentStage.getNamedProp(scriptEvent.eventData.value.propName).alpha);
-            props.push(scriptEvent.eventData.value.propName);
-
-            if (scriptEvent.eventData.value.duration != 0)
-                FlxTween.tween(PlayState.instance.currentStage.getNamedProp(scriptEvent.eventData.value.propName), {alpha: scriptEvent.eventData.value.alpha}, PlayState.instance.currentStage.getNamedProp(scriptEvent.eventData.value.duration), {ease: FlxEase.quadOut});
-            else
-                PlayState.instance.currentStage.getNamedProp(scriptEvent.eventData.value.propName).alpha = PlayState.instance.currentStage.getNamedProp(scriptEvent.eventData.value.alpha);
-        }
-    }
-
-    public function onStateChangeEnd(event:StateChangeScriptEvent)
-    {
-        props = [];
-    }
+  public function onStateChangeEnd(event:StateChangeScriptEvent)
+  {
+    props = [];
+  }
 }

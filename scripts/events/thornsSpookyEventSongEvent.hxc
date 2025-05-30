@@ -36,29 +36,28 @@ import funkin.play.event.SongEvent;
 
 class thornsSpookyEventSongEvent extends SongEvent
 {
-	public function new()
-	{
-		super('thornsSpookyEvent');
-	}
+  public function new()
+  {
+    super('thornsSpookyEvent');
+  }
 
-	public override function handleEvent(data) {}
-	
-	public function getTitle()
-	{
-		return "Thorns (Spooky Mix) Event";
-	}
+  public override function handleEvent(data) {}
 
-	public function getEventSchema()
-	{
-		return
-		[
-			{
-				name: "skyEvent",
-				title: "Sky Event",
-				defaultValue: 0,
-				type: "enum",
-				keys: ["Transition to Scrolling Sky" => 0, "Fade to Normal" => 1]
-			}
-		];
-	}
+  public function getTitle()
+  {
+    return "Thorns (Spooky Mix) Event";
+  }
+
+  public function getEventSchema()
+  {
+    return [
+      {
+        name: "skyEvent",
+        title: "Sky Event",
+        defaultValue: 0,
+        type: "enum",
+        keys: ["Transition to Scrolling Sky" => 0, "Fade to Normal" => 1]
+      }
+    ];
+  }
 }

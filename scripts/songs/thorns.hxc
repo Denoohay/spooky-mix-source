@@ -11,39 +11,41 @@ import funkin.effects.RetroCameraFade;
 import funkin.save.Save;
 import funkin.graphics.shaders.AdjustColorShader;
 
-
-class ThornsSong extends Song {
+class ThornsSong extends Song
+{
   var hasPlayedCutscene:Bool;
 
-	public function new() {
-		super('thorns');
-	}
-	
-	public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool
-    {
-        if (currentVariation == 'spookymod')
-          return !Save.instance.hasBeatenSong(this.id, null, 'spookymod');
+  public function new()
+  {
+    super('thorns');
+  }
 
-        return false;
-	}
+  public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool
+  {
+    if (currentVariation == 'spookymod') return !Save.instance.hasBeatenSong(this.id, null, 'spookymod');
 
-  public override function onCountdownStart(event:CountdownScriptEvent):Void {
-		super.onCountdownStart(event);
+    return false;
+  }
+
+  public override function onCountdownStart(event:CountdownScriptEvent):Void
+  {
+    super.onCountdownStart(event);
 
     if (!PlayStatePlaylist.isStoryMode && PlayState.instance.currentVariation != "spookymod") hasPlayedCutscene = true;
 
-    if (!hasPlayedCutscene) {
+    if (!hasPlayedCutscene)
+    {
       trace('Pausing countdown to play cutscene.');
-
 
       hasPlayedCutscene = true;
 
       startCutscene();
       event.cancel(); // CANCEL THE COUNTDOWN!
     }
-	}
+  }
 
-  function startCutscene() {
+  function startCutscene()
+  {
     trace('Hit start of song! Starting cutscene.');
 
     PlayState.instance.disableKeys = true;
@@ -55,28 +57,29 @@ class ThornsSong extends Song {
     red.color = 0xFFFF1B31;
     if (PlayState.instance.currentVariation == "spookymod")
     {
-        red.color = 0xFF9048C2;
-        red.shader = PlayState.instance.currentStage.getDad().shader;
-        if (PlayState.instance.currentStage.getDad().color == 0xFF165B) red.color = 0xFFC3355E;
-        if (PlayState.instance.currentStage.getDad().color == 0x000000) red.color = 0xFFFFFFFF;
+      red.color = 0xFF9048C2;
+      red.shader = PlayState.instance.currentStage.getDad().shader;
+      if (PlayState.instance.currentStage.getDad().color == 0xFF165B) red.color = 0xFFC3355E;
+      if (PlayState.instance.currentStage.getDad().color == 0x000000) red.color = 0xFFFFFFFF;
     }
     red.cameras = [PlayState.instance.camCutscene];
     red.alpha = 1.0;
     PlayState.instance.add(red);
 
     if (PlayState.instance.currentVariation == "spookymod") var senpaiCrazy = FunkinSprite.createSparrow(0, 0, 'weeb/senpaiSpookyCrazy');
-    else var senpaiCrazy = FunkinSprite.createSparrow(0, 0, 'weeb/senpaiCrazy');
+    else
+      var senpaiCrazy = FunkinSprite.createSparrow(0, 0, 'weeb/senpaiCrazy');
     senpaiCrazy.cameras = [PlayState.instance.camCutscene];
     senpaiCrazy.animation.addByPrefix('idle', 'Senpai Pre Explosion instance 1', 24, false);
-		senpaiCrazy.setGraphicSize(Std.int(senpaiCrazy.width * Constants.PIXEL_ART_SCALE));
+    senpaiCrazy.setGraphicSize(Std.int(senpaiCrazy.width * Constants.PIXEL_ART_SCALE));
     senpaiCrazy.antialiasing = false;
     senpaiCrazy.pixelPerfectRender = true;
     senpaiCrazy.pixelPerfectPosition = true;
 
     senpaiCrazy.scrollFactor.set();
-		senpaiCrazy.updateHitbox();
-		senpaiCrazy.screenCenter();
-		senpaiCrazy.x += senpaiCrazy.width / 5;
+    senpaiCrazy.updateHitbox();
+    senpaiCrazy.screenCenter();
+    senpaiCrazy.x += senpaiCrazy.width / 5;
 
     senpaiCrazy.alpha = 0;
 
@@ -86,9 +89,12 @@ class ThornsSong extends Song {
     new FlxTimer().start(0.3, function(timer:FlxTimer) {
       senpaiCrazy.alpha += 0.15;
 
-      if (senpaiCrazy.alpha < 1) {
+      if (senpaiCrazy.alpha < 1)
+      {
         timer.reset();
-      } else {
+      }
+      else
+      {
         senpaiCrazy.alpha = 1;
 
         // Play the actual animation.
@@ -96,7 +102,7 @@ class ThornsSong extends Song {
 
         // Play the SFX alongside it.
         trace('Playing senpai death SFX.');
-        FunkinSound.playOnce(Paths.sound('Senpai_Dies'), 1.0, function () {
+        FunkinSound.playOnce(Paths.sound('Senpai_Dies'), 1.0, function() {
           trace('Senpai death SFX done.');
           // Called when the sound completes. Clean up the cutscene here.
           // Hard cut to the cutscene.
@@ -105,16 +111,13 @@ class ThornsSong extends Song {
           RetroCameraFade.fadeBlack(PlayState.instance.camCutscene, 6, 1.4);
           RetroCameraFade.fadeBlack(PlayState.instance.camGame, 6, 1.4);
           new FlxTimer().start(1.6, _ -> {
-
             startDialogue();
-
           });
           // PlayState.instance.camCutscene.fade(0xFFEEEEEE, 0.8, true);
         });
 
         // Fade to white 3.2 seconds into the cutscene.
-        new FlxTimer().start(3.2, function(deadTime:FlxTimer)
-        {
+        new FlxTimer().start(3.2, function(deadTime:FlxTimer) {
           RetroCameraFade.fadeWhite(PlayState.instance.camCutscene, 8, 1.4);
           new FlxTimer().start(1.4, function(timer:FlxTimer) {
             red.color = 0xFFFFFFFF;
@@ -130,11 +133,13 @@ class ThornsSong extends Song {
     });
   }
 
-  function startDialogue() {
+  function startDialogue()
+  {
     PlayState.instance.disableKeys = false;
     if (PlayState.instance.currentVariation == "pico") PlayState.instance.startConversation("thorns-pico");
     else if (PlayState.instance.currentVariation == "spookymod") PlayState.instance.startConversation("thorns-spooky");
-    else PlayState.instance.startConversation("thorns");
+    else
+      PlayState.instance.startConversation("thorns");
   }
 
   /**
@@ -157,19 +162,23 @@ class ThornsSong extends Song {
     hasPlayedCutscene = false;
   }
 
-  public override function onDialogueEnd() {
+  public override function onDialogueEnd()
+  {
     // We may need to wait for the outro to play.
     Countdown.performCountdown();
-
-
   }
-    public override function listAltInstrumentalIds(difficultyId:String, variationId:String):Array<String>
-    {
-		var targetDifficulty:Null<SongDifficulty> = getDifficulty(difficultyId, variationId);
 
-		if ((difficultyId == "erect" || difficultyId == "nightmare") && (Save.instance.hasBeatenSong(this.id, ["erect"], "") || Save.instance.hasBeatenSong(this.id, ["nightmare"], ""))) return targetDifficulty?.characters?.altInstrumentals ?? [];
-		else if (variationId == "default" && Save.instance.hasBeatenSong(this.id, null, "")) return targetDifficulty?.characters?.altInstrumentals ?? [];
-		else if (Save.instance.hasBeatenSong(this.id, null, variationId)) return targetDifficulty?.characters?.altInstrumentals ?? [];
-		else return [];
-    }
+  public override function listAltInstrumentalIds(difficultyId:String, variationId:String):Array<String>
+  {
+    var targetDifficulty:Null<SongDifficulty> = getDifficulty(difficultyId, variationId);
+
+    if ((difficultyId == "erect" || difficultyId == "nightmare")
+      && (Save.instance.hasBeatenSong(this.id, ["erect"], "")
+        || Save.instance.hasBeatenSong(this.id, ["nightmare"], ""))) return targetDifficulty?.characters?.altInstrumentals ?? [];
+    else if (variationId == "default"
+      && Save.instance.hasBeatenSong(this.id, null, "")) return targetDifficulty?.characters?.altInstrumentals ?? [];
+    else if (Save.instance.hasBeatenSong(this.id, null, variationId)) return targetDifficulty?.characters?.altInstrumentals ?? [];
+    else
+      return [];
+  }
 }

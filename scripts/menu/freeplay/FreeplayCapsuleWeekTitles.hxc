@@ -38,40 +38,40 @@ class FreeplayCapsuleWeekTitles extends Module
 
   override function onUpdate(event:UpdateScriptEvent)
   {
-	super.onUpdate(event);
+    super.onUpdate(event);
 
     if (ReflectUtil.getClassNameOf(FlxG.state.subState) == "funkin.ui.freeplay.FreeplayState")
     {
-        if (FlxG.state.subState.currentFilteredSongs != null && FlxG.state.subState.grpCapsules != null)
+      if (FlxG.state.subState.currentFilteredSongs != null && FlxG.state.subState.grpCapsules != null)
+      {
+        var songListTemp:Array<String>;
+        var songList:Array<String> = [];
+
+        var stupidNumb:Int = 1;
+
+        songListTemp = FlxG.state.subState.currentFilteredSongs;
+
+        for (i in 0...songListTemp.length - 1)
         {
-            var songListTemp:Array<String>;
-            var songList:Array<String> = [];
+          var stupidData:String = "" + songListTemp[stupidNumb].data;
+          var replaceString:String = StringTools.replace(StringTools.replace(stupidData, "Song(", ""), ")", "");
 
-            var stupidNumb:Int = 1;
-                
-            songListTemp = FlxG.state.subState.currentFilteredSongs;
-                
-            for (i in 0...songListTemp.length - 1)
-            {
-                var stupidData:String = "" + songListTemp[stupidNumb].data;
-                var replaceString:String = StringTools.replace(StringTools.replace(stupidData, "Song(", ""), ")", "");
-
-                songList.insert(i, replaceString);
-                stupidNumb = stupidNumb + 1;
-            }
-
-            //FlxG.state.subState.ostName.text = songList;
-
-            for (i in 0...FlxG.state.subState.grpCapsules.members.length - 1)
-            {
-                if (songList[i - 1] == "tutorial")
-                {
-                    FlxG.state.subState.grpCapsules.members[i].weekType.animation.addByPrefix('TUTORIAL', 'TUTORIAL text instance 1', 24, false);
-                    FlxG.state.subState.grpCapsules.members[i].weekType.animation.play('TUTORIAL', true);
-                    FlxG.state.subState.grpCapsules.members[i].weekType.visible = true;
-                }
-            }
+          songList.insert(i, replaceString);
+          stupidNumb = stupidNumb + 1;
         }
+
+        // FlxG.state.subState.ostName.text = songList;
+
+        for (i in 0...FlxG.state.subState.grpCapsules.members.length - 1)
+        {
+          if (songList[i - 1] == "tutorial")
+          {
+            FlxG.state.subState.grpCapsules.members[i].weekType.animation.addByPrefix('TUTORIAL', 'TUTORIAL text instance 1', 24, false);
+            FlxG.state.subState.grpCapsules.members[i].weekType.animation.play('TUTORIAL', true);
+            FlxG.state.subState.grpCapsules.members[i].weekType.visible = true;
+          }
+        }
+      }
     }
   }
 }

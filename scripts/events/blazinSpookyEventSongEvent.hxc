@@ -36,29 +36,35 @@ import funkin.play.event.SongEvent;
 
 class BlazinSpookyEventSongEvent extends SongEvent
 {
-	public function new()
-	{
-		super('blazinSpookyEvent');
-	}
+  public function new()
+  {
+    super('blazinSpookyEvent');
+  }
 
-	public override function handleEvent(data) {}
-	
-	public function getTitle()
-	{
-		return "Blazin' (Spooky Mix) Event";
-	}
+  public override function handleEvent(data) {}
 
-	public function getEventSchema()
-	{
-		return
-		[
-			{
-				name: "houseEvent",
-				title: "House Event",
-				defaultValue: 0,
-				type: "enum",
-				keys: ["Move to Next House" => 0, "Open Door" => 1, "Close Door" => 2, "Move Strumline" => 3, "Open Door (No Cheer)" => 4, "Change to Cheer Idle" => 5]
-			}
-		];
-	}
+  public function getTitle()
+  {
+    return "Blazin' (Spooky Mix) Event";
+  }
+
+  public function getEventSchema()
+  {
+    return [
+      {
+        name: "houseEvent",
+        title: "House Event",
+        defaultValue: 0,
+        type: "enum",
+        keys: [
+          "Move to Next House" => 0,
+          "Open Door" => 1,
+          "Close Door" => 2,
+          "Move Strumline" => 3,
+          "Open Door (No Cheer)" => 4,
+          "Change to Cheer Idle" => 5
+        ]
+      }
+    ];
+  }
 }

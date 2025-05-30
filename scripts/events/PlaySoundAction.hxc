@@ -38,20 +38,19 @@ import funkin.Preferences;
 
 class PlaySoundAction extends Module
 {
-    //made by Denoohay for FNF: SPOOKY MIX
+  // made by Denoohay for FNF: SPOOKY MIX
+  public function new()
+  {
+    super('PlaySoundAction');
+  }
 
-    public function new()
+  public override function onSongEvent(scriptEvent:SongEventScriptEvent)
+  {
+    super.onSongEvent(scriptEvent);
+
+    if (scriptEvent.eventData.eventKind == "playSound")
     {
-        super('PlaySoundAction');
+      FunkinSound.playOnce(Paths.sound(scriptEvent.eventData.value.fileName), scriptEvent.eventData.value.volume);
     }
-
-    public override function onSongEvent(scriptEvent:SongEventScriptEvent)
-    {
-        super.onSongEvent(scriptEvent);
-
-        if (scriptEvent.eventData.eventKind == "playSound")
-        {
-            FunkinSound.playOnce(Paths.sound(scriptEvent.eventData.value.fileName), scriptEvent.eventData.value.volume);
-        }
-    }
+  }
 }

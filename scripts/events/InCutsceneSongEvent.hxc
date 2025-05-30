@@ -36,34 +36,33 @@ import funkin.play.event.SongEvent;
 
 class InCutsceneSongEvent extends SongEvent
 {
-	public function new()
-	{
-		super('InCutscene');
-	}
+  public function new()
+  {
+    super('InCutscene');
+  }
 
-	public override function handleEvent(data) {}
-	
-	public function getTitle()
-	{
-		return "In Cutscene";
-	}
+  public override function handleEvent(data) {}
 
-	public function getEventSchema()
-	{
-		return
-		[
-			{
-				name: "pressNotes",
-				title: "Prevent note pressing and game overs",
-				defaultValue: true,
-				type: "bool"
-			},
-			{
-				name: "pause",
-				title: "Prevent pausing",
-				defaultValue: true,
-				type: "bool"
-			}
-		];
-	}
+  public function getTitle()
+  {
+    return "In Cutscene";
+  }
+
+  public function getEventSchema()
+  {
+    return [
+      {
+        name: "pressNotes",
+        title: "Prevent note pressing and game overs",
+        defaultValue: true,
+        type: "bool"
+      },
+      {
+        name: "pause",
+        title: "Prevent pausing",
+        defaultValue: true,
+        type: "bool"
+      }
+    ];
+  }
 }

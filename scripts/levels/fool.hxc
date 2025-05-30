@@ -4,18 +4,21 @@ import flixel.FlxSprite;
 
 class FoolLevel extends Level
 {
-	function new()
-	{
-		super('fool');
-	}
+  function new()
+  {
+    super('fool');
+  }
 
-  override function isUnlocked():Bool {
+  override function isUnlocked():Bool
+  {
     return true;
   }
 
   override function getSongDisplayNames(difficultyId:String):Array<String>
   {
-    if (Save.instance.hasBeatenSong('ooga-boogey', ['easy'], '') || Save.instance.hasBeatenSong('ooga-boogey', ['normal'], '') || Save.instance.hasBeatenSong('ooga-boogey', ['hard'], ''))
+    if (Save.instance.hasBeatenSong('ooga-boogey', ['easy'], '')
+      || Save.instance.hasBeatenSong('ooga-boogey', ['normal'], '')
+      || Save.instance.hasBeatenSong('ooga-boogey', ['hard'], ''))
     {
       return ["Ooga Boogey"];
     }
@@ -24,16 +27,18 @@ class FoolLevel extends Level
       return ["???"];
     }
   }
-  
+
   override function getTitle():String
   {
-    if (Save.instance.hasBeatenSong('ooga-boogey', ['easy'], '') || Save.instance.hasBeatenSong('ooga-boogey', ['normal'], '') || Save.instance.hasBeatenSong('ooga-boogey', ['hard'], ''))
+    if (Save.instance.hasBeatenSong('ooga-boogey', ['easy'], '')
+      || Save.instance.hasBeatenSong('ooga-boogey', ['normal'], '')
+      || Save.instance.hasBeatenSong('ooga-boogey', ['hard'], ''))
     {
-        return "YOU FOOL";
+      return "YOU FOOL";
     }
     else
     {
-        return _data.name;
+      return _data.name;
     }
   }
 
@@ -41,13 +46,15 @@ class FoolLevel extends Level
   {
     var result:FlxSprite = new FlxSprite().loadGraphic(Paths.image(_data.titleAsset));
 
-    if (Save.instance.hasBeatenSong('ooga-boogey', ['easy'], '') || Save.instance.hasBeatenSong('ooga-boogey', ['normal'], '') || Save.instance.hasBeatenSong('ooga-boogey', ['hard'], ''))
+    if (Save.instance.hasBeatenSong('ooga-boogey', ['easy'], '')
+      || Save.instance.hasBeatenSong('ooga-boogey', ['normal'], '')
+      || Save.instance.hasBeatenSong('ooga-boogey', ['hard'], ''))
     {
-        result.loadGraphic(Paths.image('storymenu/titles/fool2'));
+      result.loadGraphic(Paths.image('storymenu/titles/fool2'));
     }
     else
     {
-        return result;
+      return result;
     }
   }
 }
