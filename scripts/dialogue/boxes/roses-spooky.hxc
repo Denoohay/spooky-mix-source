@@ -1,8 +1,5 @@
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
 import funkin.play.cutscene.dialogue.ConversationState;
 import funkin.play.cutscene.dialogue.DialogueBox;
-import funkin.audio.FunkinSound;
 
 class RosesSpookyDialogueBox extends DialogueBox
 {
@@ -46,11 +43,6 @@ class RosesSpookyDialogueBox extends DialogueBox
     super.onTypingComplete();
   }
 
-  public function onDialogueStart(event:DialogueScriptEvent):Void
-  {
-    super.onDialogueStart(event);
-  }
-
   public function onDialogueLine(event:DialogueScriptEvent):Void
   {
     // Override the default box animation behavior by switching the state
@@ -69,10 +61,5 @@ class RosesSpookyDialogueBox extends DialogueBox
     this.textDisplay.visible = false;
 
     playAnimation('exit', false);
-  }
-
-  override function onDestroy(event:ScriptEvent)
-  {
-    super.onDestroy(event);
   }
 }
