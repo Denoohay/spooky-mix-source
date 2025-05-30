@@ -1,24 +1,11 @@
 import funkin.play.character.MultiSparrowCharacter;
-import flixel.FlxG;
-import flixel.util.FlxTimer;
-import funkin.play.PlayState;
-import funkin.play.PauseSubState;
-import funkin.graphics.FunkinSprite;
-import funkin.play.character.SparrowCharacter;
 import funkin.play.character.CharacterType;
-import funkin.play.GameOverSubState;
-import StringTools;
 
 class SkidOpponentCharacter extends MultiSparrowCharacter
 {
   function new()
   {
     super('skid-opponent');
-  }
-
-  function onCreate(event:ScriptEvent)
-  {
-    super.onCreate(event);
   }
 
   function onNoteHit(event:HitNoteScriptEvent)
@@ -40,10 +27,5 @@ class SkidOpponentCharacter extends MultiSparrowCharacter
           this.playSingAnimation(event.note.noteData.getDirection(), false);
       }
     }
-  }
-
-  function playAnimation(name:String, restart:Bool, ignoreOther:Bool)
-  {
-    super.playAnimation(name, restart, ignoreOther);
   }
 }
