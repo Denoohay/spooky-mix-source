@@ -1,26 +1,11 @@
 import funkin.PlayerSettings;
 import funkin.modding.module.Module;
-import funkin.modding.events.ScriptEvent;
-import funkin.modding.base.ScriptedMusicBeatSubState;
-import funkin.modding.base.ScriptedFlxRuntimeShader;
-import funkin.modding.base.ScriptedMusicBeatState;
 import funkin.util.ReflectUtil;
 import flixel.FlxG;
 import funkin.util.Constants;
-import StringTools;
-import funkin.save.Save;
 import funkin.ui.options.OptionsState;
-import funkin.ui.options.PreferencesMenu;
 import funkin.audio.FunkinSound;
-import funkin.ui.options.items.EnumPreferenceItem;
-import funkin.ui.freeplay.FreeplayState;
 import flixel.FlxSprite;
-import funkin.ui.title.TitleState;
-import funkin.ui.mainmenu.MainMenuState;
-import flixel.text.FlxText;
-import flixel.util.FlxTimer;
-import flixel.sound.FlxSoundGroup;
-import funkin.ui.charSelect.CharSelectSubState;
 
 class SpookyMenuOption extends Module
 {

@@ -1,17 +1,8 @@
-import funkin.PlayerSettings;
 import funkin.modding.module.Module;
-import funkin.modding.events.ScriptEvent;
-import funkin.modding.base.ScriptedMusicBeatSubState;
-import funkin.modding.base.ScriptedFlxRuntimeShader;
-import funkin.modding.base.ScriptedMusicBeatState;
 import funkin.util.ReflectUtil;
 import flixel.FlxG;
-import funkin.util.Constants;
-import StringTools;
 import funkin.save.Save;
 import funkin.ui.options.OptionsState;
-import funkin.audio.FunkinSound;
-import funkin.ui.options.items.EnumPreferenceItem;
 import funkin.ui.freeplay.FreeplayState;
 import funkin.ui.mainmenu.MainMenuState;
 import haxe.Json;
