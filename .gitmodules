@@ -1,0 +1,3 @@
+[submodule "ProjectFiles"]
+	path = SpookyMix.ProjectFiles
+	url = https://github.com/Denoohay/SpookyMix.ProjectFiles.git
