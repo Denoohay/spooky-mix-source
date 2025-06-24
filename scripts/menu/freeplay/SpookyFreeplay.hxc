@@ -1,32 +1,8 @@
-import funkin.ui.freeplay.FreeplayState;
-import funkin.ui.freeplay.CapsuleOptionsMenu;
-import flixel.FlxCamera;
-import flixel.math.FlxMath;
-import flixel.FlxSprite;
-import flixel.math.FlxAngle;
-import flixel.math.FlxPoint;
-import flixel.text.FlxText;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
-import flixel.util.FlxSpriteUtil;
 import flixel.util.FlxTimer;
-import funkin.graphics.adobeanimate.FlxAtlasSprite;
-import funkin.graphics.FunkinSprite;
-import funkin.ui.freeplay.charselect.PlayableCharacter;
-import funkin.ui.MusicBeatSubState;
-import funkin.graphics.shaders.AdjustColorShader;
-import flixel.addons.display.FlxTiledSprite;
-import flixel.addons.display.FlxBackdrop;
-import funkin.PlayerSettings;
 import funkin.modding.module.Module;
-import funkin.modding.events.ScriptEvent;
-import funkin.modding.base.ScriptedMusicBeatSubState;
-import funkin.modding.base.ScriptedFlxRuntimeShader;
-import funkin.modding.base.ScriptedMusicBeatState;
 import funkin.util.ReflectUtil;
 import flixel.FlxG;
 import funkin.audio.FunkinSound;
-import funkin.save.Save;
 import StringTools;
 
 class SpookyFreeplay extends Module
@@ -52,72 +28,79 @@ class SpookyFreeplay extends Module
 
   override function onUpdate(event:UpdateScriptEvent)
   {
-	super.onUpdate(event);
+    super.onUpdate(event);
 
     if (ReflectUtil.getClassNameOf(FlxG.state.subState) == "funkin.ui.freeplay.FreeplayState")
     {
-        if (FlxG.state.subState.currentCharacterId != 'bf' && FlxG.state.subState.currentCharacterId != 'pico' && FlxG.state.subState.ostName.text == "OFFICIAL OST")
+      if (FlxG.state.subState.currentCharacterId != 'bf'
+        && FlxG.state.subState.currentCharacterId != 'pico'
+        && FlxG.state.subState.ostName.text == "OFFICIAL OST")
+      {
+        FlxG.state.subState.ostName.text = "UNOFFICIAL SOUNDTRACK";
+      }
+
+      if (FlxG.state.subState.currentCharacterId == 'spookymod')
+      {
+        if (FlxG.state.subState.curSelected == 1
+          && FlxG.state.subState.dj.getCurrentAnimation() != 'Spooky dj intro'
+          && playedTutorialPreview == false)
         {
-            FlxG.state.subState.ostName.text = "UNOFFICIAL SOUNDTRACK";
+          new FlxTimer().start(0.1, _ -> {
+            FunkinSound.playMusic('tutorialInstPreview',
+              {
+                startingVolume: 0.0,
+                overrideExisting: true,
+                restartTrack: false,
+                mapTimeChanges: false,
+                onLoad: function() {
+                  FlxG.sound.music.fadeIn(2, 0, 0.8);
+                  playedTutorialPreview = true;
+                }
+              });
+          });
         }
-        
-        if (FlxG.state.subState.currentCharacterId == 'spookymod')
+        else if (FlxG.state.subState.curSelected != 1)
         {
-             if (FlxG.state.subState.curSelected == 1 && FlxG.state.subState.dj.getCurrentAnimation() != 'Spooky dj intro' && playedTutorialPreview == false)
-             {                
-                new FlxTimer().start(0.1, _ -> {
-                    FunkinSound.playMusic('tutorialInstPreview',
-                    {
-                        startingVolume: 0.0,
-                        overrideExisting: true,
-                        restartTrack: false,
-                        mapTimeChanges: false,
-                        onLoad: function() {
-                            FlxG.sound.music.fadeIn(2, 0, 0.8);
-                            playedTutorialPreview = true;
-                        }
-                    });
-                });
-             }
-             else if (FlxG.state.subState.curSelected != 1)
-             {
-                 playedTutorialPreview = false;
-             }
+          playedTutorialPreview = false;
+        }
+      }
+
+      if (FlxG.state.subState.capsuleOptionsMenu != null)
+      {
+        if (FlxG.state.subState.capsuleOptionsMenu.currentInstrumental.text == "Spookymod")
+        {
+          FlxG.state.subState.capsuleOptionsMenu.currentInstrumental.text = "Spooky";
         }
 
-        if (FlxG.state.subState.capsuleOptionsMenu != null)
+        if (StringTools.startsWith(FlxG.state.subState.capsuleOptionsMenu.currentInstrumental.text, "Spookymod-")
+          && StringTools.endsWith(FlxG.state.subState.capsuleOptionsMenu.currentInstrumental.text, "cut"))
         {
-            if (FlxG.state.subState.capsuleOptionsMenu.currentInstrumental.text == "Spookymod")
-            {
-                FlxG.state.subState.capsuleOptionsMenu.currentInstrumental.text = "Spooky";
-            }
-            
-            if (StringTools.startsWith(FlxG.state.subState.capsuleOptionsMenu.currentInstrumental.text, "Spookymod-") && StringTools.endsWith(FlxG.state.subState.capsuleOptionsMenu.currentInstrumental.text, "cut"))
-            {
-                FlxG.state.subState.capsuleOptionsMenu.currentInstrumental.text = "Spooky";
-            }
-            else if (StringTools.startsWith(FlxG.state.subState.capsuleOptionsMenu.currentInstrumental.text, "Pico-") && StringTools.endsWith(FlxG.state.subState.capsuleOptionsMenu.currentInstrumental.text, "cut"))
-            {
-                FlxG.state.subState.capsuleOptionsMenu.currentInstrumental.text = "Pico";
-            }
-            else if (StringTools.startsWith(FlxG.state.subState.capsuleOptionsMenu.currentInstrumental.text, "Bf-") && StringTools.endsWith(FlxG.state.subState.capsuleOptionsMenu.currentInstrumental.text, "cut"))
-            {
-                FlxG.state.subState.capsuleOptionsMenu.currentInstrumental.text = "Bf";
-            }
-            else if (StringTools.endsWith(FlxG.state.subState.capsuleOptionsMenu.currentInstrumental.text.toLowerCase(), "cut"))
-            {
-                FlxG.state.subState.capsuleOptionsMenu.currentInstrumental.text = "Default";
-            }
+          FlxG.state.subState.capsuleOptionsMenu.currentInstrumental.text = "Spooky";
         }
+        else if (StringTools.startsWith(FlxG.state.subState.capsuleOptionsMenu.currentInstrumental.text, "Pico-")
+          && StringTools.endsWith(FlxG.state.subState.capsuleOptionsMenu.currentInstrumental.text, "cut"))
+        {
+          FlxG.state.subState.capsuleOptionsMenu.currentInstrumental.text = "Pico";
+        }
+        else if (StringTools.startsWith(FlxG.state.subState.capsuleOptionsMenu.currentInstrumental.text, "Bf-")
+          && StringTools.endsWith(FlxG.state.subState.capsuleOptionsMenu.currentInstrumental.text, "cut"))
+        {
+          FlxG.state.subState.capsuleOptionsMenu.currentInstrumental.text = "Bf";
+        }
+        else if (StringTools.endsWith(FlxG.state.subState.capsuleOptionsMenu.currentInstrumental.text.toLowerCase(), "cut"))
+        {
+          FlxG.state.subState.capsuleOptionsMenu.currentInstrumental.text = "Default";
+        }
+      }
 
-        if (FlxG.state.subState.curSelected == 0)
-        {
-            FlxG.state.subState.albumRoll.alpha = 0;
-        }
-        else
-        {
-            FlxG.state.subState.albumRoll.alpha = 1;
-        }
+      if (FlxG.state.subState.curSelected == 0)
+      {
+        FlxG.state.subState.albumRoll.alpha = 0;
+      }
+      else
+      {
+        FlxG.state.subState.albumRoll.alpha = 1;
+      }
     }
   }
 }

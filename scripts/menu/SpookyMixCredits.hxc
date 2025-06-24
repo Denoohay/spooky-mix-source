@@ -1,55 +1,17 @@
-import funkin.ui.freeplay.FreeplayState;
-import funkin.ui.mainmenu.MainMenuState;
 import funkin.ui.credits.CreditsState;
 import funkin.ui.credits.CreditsDataHandler;
-import funkin.ui.credits.CreditsDataMacro;
-import flixel.FlxCamera;
-import flixel.math.FlxMath;
-import flixel.FlxSprite;
 import funkin.modding.base.ScriptedFlxSpriteGroup;
-import flixel.math.FlxAngle;
-import flixel.math.FlxPoint;
 import flixel.text.FlxText;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
-import flixel.util.FlxSpriteUtil;
-import flixel.util.FlxTimer;
-import funkin.util.Constants;
-import funkin.graphics.adobeanimate.FlxAtlasSprite;
-import funkin.graphics.FunkinSprite;
-import funkin.ui.freeplay.charselect.PlayableCharacter;
-import funkin.ui.MusicBeatSubState;
-import funkin.graphics.shaders.AdjustColorShader;
-import flixel.addons.display.FlxTiledSprite;
-import flixel.addons.display.FlxBackdrop;
-import funkin.PlayerSettings;
 import funkin.modding.module.Module;
-import funkin.modding.events.ScriptEvent;
-import funkin.modding.base.ScriptedMusicBeatSubState;
-import funkin.modding.base.ScriptedFlxRuntimeShader;
-import funkin.modding.base.ScriptedMusicBeatState;
 import funkin.util.ReflectUtil;
 import flixel.FlxG;
-import funkin.util.WindowUtil;
-import funkin.Preferences;
-import funkin.audio.FunkinSound;
-import haxe.macro.Context;
-import funkin.Assets;
-import openfl.Assets;
-import openfl.utils.Assets;
-import openfl.events.Event;
-import openfl.events.IOErrorEvent;
-import openfl.geom.Rectangle;
-import openfl.net.FileReference;
-import StringTools;
-import haxe.format.JsonParser;
 
 class SpookyMixCredits extends Module
 {
   var removedBaseCredits:Bool = false;
   var addedNewCredits:Bool = false;
   var y:Float = 0;
-  
+
   var scrollPaused:Bool = false;
   var canScrollUp:Bool = false;
   var pausedText:FlxText;
@@ -90,20 +52,20 @@ class SpookyMixCredits extends Module
   {
     if (entryType == "header")
     {
-        var header = FlxG.state.buildCreditsLine(text, y, true);
-        header.bold = true;
-        creditsGroupScriped.add(header);
-        FlxG.state.creditsGroup.add(header);
-        y += CREDITS_HEADER_FONT_SIZE + (header.textField.numLines * CREDITS_HEADER_FONT_SIZE);
+      var header = FlxG.state.buildCreditsLine(text, y, true);
+      header.bold = true;
+      creditsGroupScriped.add(header);
+      FlxG.state.creditsGroup.add(header);
+      y += CREDITS_HEADER_FONT_SIZE + (header.textField.numLines * CREDITS_HEADER_FONT_SIZE);
     }
     else
     {
-        var entry = FlxG.state.buildCreditsLine(text, y, false);
-        creditsGroupScriped.add(entry);
-        FlxG.state.creditsGroup.add(entry);
-        y += CREDITS_FONT_SIZE * entry.textField.numLines;
+      var entry = FlxG.state.buildCreditsLine(text, y, false);
+      creditsGroupScriped.add(entry);
+      FlxG.state.creditsGroup.add(entry);
+      y += CREDITS_FONT_SIZE * entry.textField.numLines;
     }
-        
+
     if (sectionEnd == true) y += CREDITS_FONT_SIZE * 2.5;
   }
 
@@ -114,201 +76,201 @@ class SpookyMixCredits extends Module
 
   override function onUpdate(event:UpdateScriptEvent)
   {
-	super.onUpdate(event);
-    
+    super.onUpdate(event);
+
     if (ReflectUtil.getClassNameOf(FlxG.state) == "funkin.ui.credits.CreditsState")
     {
-        if (removedBaseCredits == false)
+      if (removedBaseCredits == false)
+      {
+        for (i in 0...FlxG.state.creditsGroup.members.length)
         {
-            for (i in 0...FlxG.state.creditsGroup.members.length)
+          FlxG.state.remove(FlxG.state.creditsGroup.members[i]);
+          FlxG.state.creditsGroup.members[i] = null;
+
+          if (i == FlxG.state.creditsGroup.members.length - 1)
+          {
+            removedBaseCredits = true;
+          }
+        }
+      }
+
+      if (removedBaseCredits == true && addedNewCredits == false)
+      {
+        CreditsState.CREDITS_SCROLL_BASE_SPEED = 0;
+        CreditsState.CREDITS_SCROLL_FAST_SPEED = 0;
+
+        creditsGroupScriped = new ScriptedFlxSpriteGroup();
+        creditsGroupScriped.x = FlxG.state.SCREEN_PAD;
+        creditsGroupScriped.y = 0;
+
+        canScrollUp = false;
+
+        pausedText = new FlxText(-10, 10, FlxG.width, 'PAUSED');
+        pausedText.setFormat(Paths.font('vcr.ttf'), 60, 0xFFFFFFFF, "right");
+        pausedText.scrollFactor.set(0, 0);
+        pausedText.visible = false;
+        FlxG.state.add(pausedText);
+
+        var upDownText = new FlxText(-10, 670, FlxG.width, 'UP/DOWN to Navigate');
+        upDownText.setFormat(Paths.font('vcr.ttf'), 20, 0xFFFFFFFF, "right");
+        upDownText.scrollFactor.set(0, 0);
+        upDownText.alpha = 0.4;
+        FlxG.state.add(upDownText);
+
+        var howToPauseText = new FlxText(-10, 695, FlxG.width, 'SPACE/ENTER to Pause');
+        howToPauseText.setFormat(Paths.font('vcr.ttf'), 20, 0xFFFFFFFF, "right");
+        howToPauseText.scrollFactor.set(0, 0);
+        howToPauseText.alpha = 0.4;
+        FlxG.state.add(howToPauseText);
+
+        addModCredit("Friday Night Funkin': Spooky Mix", "header", true);
+
+        addModCredit("Direction", "header");
+        addModCredit("Denoohay", "body", true);
+
+        addModCredit("Artists", "header");
+        addModCredit("Denoohay", "body");
+        addModCredit("givemethesalt", "body");
+        addModCredit("Andrewman_19", "body");
+        addModCredit("LeGooey", "body");
+        addModCredit("swagsalt", "body", true);
+
+        addModCredit("Pixel Art", "header");
+        addModCredit("Official_NO", "body");
+        addModCredit("LeGooey (Ooga Booga Freeplay Icon)", "body");
+        addModCredit("Denoohay (Week 6 Dialogue Portraits)", "body", true);
+
+        addModCredit("Music Production", "header");
+        addModCredit("RubyyyButCool", "body");
+        addModCredit("Andrewman_19", "body");
+        addModCredit("LeGooey", "body");
+        addModCredit("swagsalt", "body");
+        addModCredit("Clarky_Dev", "body");
+        addModCredit("LimeIsHere", "body");
+        addModCredit("ChuckySkullHead", "body");
+        addModCredit("eden_essence", "body");
+        addModCredit("Jotacast", "body");
+        addModCredit("Y_F_MUS", "body");
+        addModCredit("SBMB", "body");
+        addModCredit("Vaderlings", "body");
+        addModCredit("Rofos", "body");
+        addModCredit("QuasarXP", "body");
+        addModCredit("SolarDTM", "body");
+        addModCredit("KrakenPower", "body");
+        addModCredit("RandoHorn", "body");
+        addModCredit("alwk", "body");
+        addModCredit("Rareblin", "body");
+        addModCredit("givemethesalt", "body");
+        addModCredit("Thrick", "body", true);
+
+        addModCredit("Voice Acting", "header");
+        addModCredit("RubyyyButCool (Voice of Moloch and Monster)", "body");
+        addModCredit("Andrewman_19 (Voice of Leanman)", "body");
+        addModCredit("LeGooey (Voice of Stoutman)", "body");
+        addModCredit("Clarky_Dev (Darnell Spooky Mix Lyrics)", "body");
+        addModCredit("swagsalt (Blazin' Spooky Mix Lyrics)", "body", true);
+
+        addModCredit("Programming", "header");
+        addModCredit("Denoohay", "body");
+        addModCredit("LeGooey", "body", true);
+
+        addModCredit("Song Charting", "header");
+        addModCredit("LimeIsHere", "body");
+        addModCredit("RubyyyButCool", "body");
+        addModCredit("LeGooey", "body");
+        addModCredit("ChuckySkullHead", "body");
+        addModCredit("Clarky_Dev", "body");
+        addModCredit("swagsalt", "body");
+        addModCredit("Jotacast", "body");
+        addModCredit("givemethesalt", "body");
+        addModCredit("Denoohay", "body", true);
+
+        addModCredit("---------------------------------------", "header", true);
+
+        // re-adds in base game Funkin credits
+        for (entry in CreditsDataHandler.CREDITS_DATA.entries)
+        {
+          if (entry.header != null)
+          {
+            var header = FlxG.state.buildCreditsLine(entry.header, y, true);
+            header.bold = true;
+            creditsGroupScriped.add(header);
+            FlxG.state.creditsGroup.add(header);
+            y += CREDITS_HEADER_FONT_SIZE + (header.textField.numLines * CREDITS_HEADER_FONT_SIZE);
+          }
+
+          for (line in entry.body)
+          {
+            var entry = FlxG.state.buildCreditsLine(line.line, y, false);
+            creditsGroupScriped.add(entry);
+            FlxG.state.creditsGroup.add(entry);
+            y += CREDITS_FONT_SIZE * entry.textField.numLines;
+          }
+
+          if (entry.appendBackers)
+          {
+            var backers = CreditsDataHandler.fetchBackerEntries();
+            for (backer in backers)
             {
-                FlxG.state.remove(FlxG.state.creditsGroup.members[i]);
-                FlxG.state.creditsGroup.members[i] = null;
-
-                if (i == FlxG.state.creditsGroup.members.length - 1)
-                {
-                    removedBaseCredits = true;
-                }
+              creditsGroupScriped.add(FlxG.state.buildCreditsLine(backer, y, false));
+              FlxG.state.creditsGroup.add(FlxG.state.buildCreditsLine(backer, y, false));
+              y += CREDITS_FONT_SIZE;
             }
+          }
+
+          // Padding between each role.
+          y += CREDITS_FONT_SIZE * 2.5;
         }
 
-        if (removedBaseCredits == true && addedNewCredits == false)
-        {
-            CreditsState.CREDITS_SCROLL_BASE_SPEED = 0;
-            CreditsState.CREDITS_SCROLL_FAST_SPEED = 0;
+        FunkinSound.playMusic('breakfast-spooky',
+          {
+            startingVolume: 0.8,
+            overrideExisting: true,
+            restartTrack: true,
+            loop: true
+          });
 
-            creditsGroupScriped = new ScriptedFlxSpriteGroup();
-            creditsGroupScriped.x = FlxG.state.SCREEN_PAD;
-            creditsGroupScriped.y = 0;
+        addedNewCredits = true;
+      }
 
-            canScrollUp = false;
+      if (creditsGroupScriped.y <= -360)
+      {
+        canScrollUp = true;
+      }
 
-            pausedText = new FlxText(-10, 10, FlxG.width, 'PAUSED');
-            pausedText.setFormat(Paths.font('vcr.ttf'), 60, 0xFFFFFFFF, "right");
-            pausedText.scrollFactor.set(0, 0);
-            pausedText.visible = false;
-			FlxG.state.add(pausedText);
+      if (FlxG.keys.pressed.DOWN)
+      {
+        // Move the whole group.
+        scrollPaused = false;
+        pausedText.visible = false;
+        creditsGroupScriped.y -= CREDITS_SCROLL_FAST_SPEED * event.elapsed;
+      }
+      else if (FlxG.keys.pressed.UP && creditsGroupScriped.y <= -360 && canScrollUp == true)
+      {
+        scrollPaused = false;
+        pausedText.visible = false;
+        creditsGroupScriped.y += CREDITS_SCROLL_FAST_SPEED * event.elapsed;
+      }
+      else if (canScrollUp == false && scrollPaused != true)
+      {
+        pausedText.visible = false;
+        creditsGroupScriped.y -= CREDITS_SCROLL_BASE_SPEED * event.elapsed;
+      }
+      else if (!FlxG.keys.pressed.UP && canScrollUp == true && scrollPaused != true)
+      {
+        pausedText.visible = false;
+        creditsGroupScriped.y -= CREDITS_SCROLL_BASE_SPEED * event.elapsed;
+      }
 
-            var upDownText = new FlxText(-10, 670, FlxG.width, 'UP/DOWN to Navigate');
-            upDownText.setFormat(Paths.font('vcr.ttf'), 20, 0xFFFFFFFF, "right");
-            upDownText.scrollFactor.set(0, 0);
-            upDownText.alpha = 0.4;
-            FlxG.state.add(upDownText);
-
-            var howToPauseText = new FlxText(-10, 695, FlxG.width, 'SPACE/ENTER to Pause');
-            howToPauseText.setFormat(Paths.font('vcr.ttf'), 20, 0xFFFFFFFF, "right");
-            howToPauseText.scrollFactor.set(0, 0);
-            howToPauseText.alpha = 0.4;
-            FlxG.state.add(howToPauseText);
-
-            addModCredit("Friday Night Funkin': Spooky Mix", "header", true);
-
-            addModCredit("Direction", "header");
-                addModCredit("Denoohay", "body", true);
-
-            addModCredit("Artists", "header");
-                addModCredit("Denoohay", "body");
-                addModCredit("givemethesalt", "body");
-                addModCredit("Andrewman_19", "body");
-                addModCredit("LeGooey", "body");
-                addModCredit("swagsalt", "body", true);
-                
-            addModCredit("Pixel Art", "header");
-                addModCredit("Official_NO", "body");
-                addModCredit("LeGooey (Ooga Booga Freeplay Icon)", "body");
-                addModCredit("Denoohay (Week 6 Dialogue Portraits)", "body", true);
-
-            addModCredit("Music Production", "header");
-                addModCredit("RubyyyButCool", "body");
-                addModCredit("Andrewman_19", "body");
-                addModCredit("LeGooey", "body");
-                addModCredit("swagsalt", "body");
-                addModCredit("Clarky_Dev", "body");
-                addModCredit("LimeIsHere", "body");
-                addModCredit("ChuckySkullHead", "body");
-                addModCredit("eden_essence", "body");
-                addModCredit("Jotacast", "body");
-                addModCredit("Y_F_MUS", "body");
-                addModCredit("SBMB", "body");
-                addModCredit("Vaderlings", "body");
-                addModCredit("Rofos", "body");
-                addModCredit("QuasarXP", "body");
-                addModCredit("SolarDTM", "body");
-                addModCredit("KrakenPower", "body");
-                addModCredit("RandoHorn", "body");
-                addModCredit("alwk", "body");
-                addModCredit("Rareblin", "body");
-                addModCredit("givemethesalt", "body");
-                addModCredit("Thrick", "body", true);
-
-            addModCredit("Voice Acting", "header");
-                addModCredit("RubyyyButCool (Voice of Moloch and Monster)", "body");
-                addModCredit("Andrewman_19 (Voice of Leanman)", "body");
-                addModCredit("LeGooey (Voice of Stoutman)", "body");
-                addModCredit("Clarky_Dev (Darnell Spooky Mix Lyrics)", "body");
-                addModCredit("swagsalt (Blazin' Spooky Mix Lyrics)", "body", true);
-
-            addModCredit("Programming", "header");
-                addModCredit("Denoohay", "body");
-                addModCredit("LeGooey", "body", true);
-
-            addModCredit("Song Charting", "header");
-                addModCredit("LimeIsHere", "body");
-                addModCredit("RubyyyButCool", "body");
-                addModCredit("LeGooey", "body");
-                addModCredit("ChuckySkullHead", "body");
-                addModCredit("Clarky_Dev", "body");
-                addModCredit("swagsalt", "body");
-                addModCredit("Jotacast", "body");
-                addModCredit("givemethesalt", "body");
-                addModCredit("Denoohay", "body", true);
-
-            addModCredit("---------------------------------------", "header", true);
-
-            //re-adds in base game Funkin credits
-            for (entry in CreditsDataHandler.CREDITS_DATA.entries)
-            {
-              if (entry.header != null)
-              {
-                var header = FlxG.state.buildCreditsLine(entry.header, y, true);
-                header.bold = true;
-                creditsGroupScriped.add(header);
-                FlxG.state.creditsGroup.add(header);
-                y += CREDITS_HEADER_FONT_SIZE + (header.textField.numLines * CREDITS_HEADER_FONT_SIZE);
-              }
-
-              for (line in entry.body)
-              {
-                var entry = FlxG.state.buildCreditsLine(line.line, y, false);
-                creditsGroupScriped.add(entry);
-                FlxG.state.creditsGroup.add(entry);
-                y += CREDITS_FONT_SIZE * entry.textField.numLines;
-              }
-
-              if (entry.appendBackers)
-              {
-                var backers = CreditsDataHandler.fetchBackerEntries();
-                for (backer in backers)
-                {
-                  creditsGroupScriped.add(FlxG.state.buildCreditsLine(backer, y, false));
-                  FlxG.state.creditsGroup.add(FlxG.state.buildCreditsLine(backer, y, false));
-                  y += CREDITS_FONT_SIZE;
-                }
-              }
-
-              // Padding between each role.
-              y += CREDITS_FONT_SIZE * 2.5;
-            }
-
-            FunkinSound.playMusic('breakfast-spooky',
-              {
-                startingVolume: 0.8,
-                overrideExisting: true,
-                restartTrack: true,
-                loop: true
-              });
-
-            addedNewCredits = true;
-        }
-        
-        if (creditsGroupScriped.y <= -360)
-        {
-            canScrollUp = true;
-        }
-
-        if (FlxG.keys.pressed.DOWN)
-        {
-            // Move the whole group.
-            scrollPaused = false;
-            pausedText.visible = false;
-            creditsGroupScriped.y -= CREDITS_SCROLL_FAST_SPEED * event.elapsed;
-        }
-        else if (FlxG.keys.pressed.UP && creditsGroupScriped.y <= -360 && canScrollUp == true)
-        {
-            scrollPaused = false;
-            pausedText.visible = false;
-            creditsGroupScriped.y += CREDITS_SCROLL_FAST_SPEED * event.elapsed;
-        }
-        else if (canScrollUp == false && scrollPaused != true)
-        {
-            pausedText.visible = false;
-            creditsGroupScriped.y -= CREDITS_SCROLL_BASE_SPEED * event.elapsed;
-        }
-        else if (!FlxG.keys.pressed.UP && canScrollUp == true && scrollPaused != true)
-        {
-            pausedText.visible = false;
-            creditsGroupScriped.y -= CREDITS_SCROLL_BASE_SPEED * event.elapsed;
-        }
-
-        if (PlayerSettings.player1.controls.BACK || hasEnded())
-        {
-          FlxG.state.exit();
-        }
-        else if (FlxG.keys.justPressed.SPACE || FlxG.keys.justPressed.ENTER)
-        {
-          pausedText.visible = true;
-          scrollPaused = !scrollPaused;
-        }
+      if (PlayerSettings.player1.controls.BACK || hasEnded())
+      {
+        FlxG.state.exit();
+      }
+      else if (FlxG.keys.justPressed.SPACE || FlxG.keys.justPressed.ENTER)
+      {
+        pausedText.visible = true;
+        scrollPaused = !scrollPaused;
+      }
     }
   }
 }

@@ -1,83 +1,86 @@
 import flixel.FlxG;
-import funkin.play.character.PackerCharacter;
 import funkin.play.character.SparrowCharacter;
 import funkin.play.PlayState;
-import flixel.addons.effects.FlxTrail;
 import funkin.effects.FunkTrail;
 import funkin.graphics.shaders.AdjustColorShader;
 import funkin.save.Save;
 
-class SpiritSpookyCharacter extends SparrowCharacter {
-	function new() {
-		super('spirit-spooky');
-	}
+class SpiritSpookyCharacter extends SparrowCharacter
+{
+  function new()
+  {
+    super('spirit-spooky');
+  }
 
-	var blood:AdjustColorShader;
-	var broken:AdjustColorShader;
+  var blood:AdjustColorShader;
+  var broken:AdjustColorShader;
 
-	function onCreate(event:ScriptEvent) {
-		super.onCreate(event);
-		
-		blood = new AdjustColorShader();
-		broken = new AdjustColorShader();
-		
-		if (FlxG.save.data.spookyShaders != false)
-		{
-			blood.brightness = -10;
-			blood.contrast = 0;
-			blood.saturation = 0;
-			blood.hue = 60;
+  function onCreate(event:ScriptEvent)
+  {
+    super.onCreate(event);
 
-			broken.brightness = 10;
-			broken.contrast = 100;
-			broken.saturation = -100;
-			broken.hue = 0;
-		}
-		
-		var isWeird:Int;
-		var isBroken:Int;
+    blood = new AdjustColorShader();
+    broken = new AdjustColorShader();
 
-		this.pixelPerfectRender = true;
-		this.pixelPerfectPosition = true;
+    if (FlxG.save.data.spookyShaders != false)
+    {
+      blood.brightness = -10;
+      blood.contrast = 0;
+      blood.saturation = 0;
+      blood.hue = 60;
 
-		isWeird = FlxG.random.int(1, 50);
-		
-		if (isWeird == 1 && Save.instance.hasBeatenSong("thorns", null, 'spookymod'))
-		{
-			isBroken = FlxG.random.int(1, 8);
-			
-			if (FlxG.save.data.spookyShaders != false)
-			{
-				if (isBroken == 1)
-					this.shader = broken;
-				else
-					this.shader = blood;
-			}
-			else
-			{
-				if (isBroken == 1)
-					this.color = 0x000000;
-				else
-					this.color = 0xFF165B;
-			}
-		}
-		else
-		{
-			// Weird workaround because `this` is a PolymodScriptClass and not a ScriptedPackerCharacter.
-			var evilTrail = new FunkTrail(this.superClass, null, 4, 24, 0.3, 0.069);
+      broken.brightness = 10;
+      broken.contrast = 100;
+      broken.saturation = -100;
+      broken.hue = 0;
+    }
 
-			// Go behind Spirit.
-			evilTrail.zIndex = 190;
-			addToStage(evilTrail);
-		}
-	}
+    var isWeird:Int;
+    var isBroken:Int;
 
-	function addToStage(sprite:FlxSprite) {
-		if (this.debug) {
-			// We are in the chart editor or something.
-			FlxG.stage.add(sprite);
-		} else {
-			PlayState.instance.currentStage.add(sprite);
-		}
-	}
+    this.pixelPerfectRender = true;
+    this.pixelPerfectPosition = true;
+
+    isWeird = FlxG.random.int(1, 50);
+
+    if (isWeird == 1 && Save.instance.hasBeatenSong("thorns", null, 'spookymod'))
+    {
+      isBroken = FlxG.random.int(1, 8);
+
+      if (FlxG.save.data.spookyShaders != false)
+      {
+        if (isBroken == 1) this.shader = broken;
+        else
+          this.shader = blood;
+      }
+      else
+      {
+        if (isBroken == 1) this.color = 0x000000;
+        else
+          this.color = 0xFF165B;
+      }
+    }
+    else
+    {
+      // Weird workaround because `this` is a PolymodScriptClass and not a ScriptedPackerCharacter.
+      var evilTrail = new FunkTrail(this.superClass, null, 4, 24, 0.3, 0.069);
+
+      // Go behind Spirit.
+      evilTrail.zIndex = 190;
+      addToStage(evilTrail);
+    }
+  }
+
+  function addToStage(sprite:FlxSprite)
+  {
+    if (this.debug)
+    {
+      // We are in the chart editor or something.
+      FlxG.stage.add(sprite);
+    }
+    else
+    {
+      PlayState.instance.currentStage.add(sprite);
+    }
+  }
 }

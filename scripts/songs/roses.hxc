@@ -11,39 +11,46 @@ import funkin.save.Save;
 import flixel.tweens.FlxEase;
 import funkin.ui.options.PreferencesMenu;
 
-class RosesSong extends Song {
+class RosesSong extends Song
+{
   var hasPlayedCutscene:Bool;
 
-	public function new() {
-		super('roses');
-	}
+  public function new()
+  {
+    super('roses');
+  }
 
-	public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool
-    {
-        if (currentVariation == 'spookymod')
-          return !Save.instance.hasBeatenSong(this.id, null, 'spookymod');
+  public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool
+  {
+    if (currentVariation == 'spookymod') return !Save.instance.hasBeatenSong(this.id, null, 'spookymod');
 
-        return false;
-	}
+    return false;
+  }
 
-    public override function listAltInstrumentalIds(difficultyId:String, variationId:String):Array<String>
-    {
-		var targetDifficulty:Null<SongDifficulty> = getDifficulty(difficultyId, variationId);
+  public override function listAltInstrumentalIds(difficultyId:String, variationId:String):Array<String>
+  {
+    var targetDifficulty:Null<SongDifficulty> = getDifficulty(difficultyId, variationId);
 
-		if ((difficultyId == "erect" || difficultyId == "nightmare") && (Save.instance.hasBeatenSong(this.id, ["erect"], "") || Save.instance.hasBeatenSong(this.id, ["nightmare"], ""))) return targetDifficulty?.characters?.altInstrumentals ?? [];
-		else if (variationId == "default" && Save.instance.hasBeatenSong(this.id, null, "")) return targetDifficulty?.characters?.altInstrumentals ?? [];
-		else if (Save.instance.hasBeatenSong(this.id, null, variationId)) return targetDifficulty?.characters?.altInstrumentals ?? [];
-		else return [];
-    }
+    if ((difficultyId == "erect" || difficultyId == "nightmare")
+      && (Save.instance.hasBeatenSong(this.id, ["erect"], "")
+        || Save.instance.hasBeatenSong(this.id, ["nightmare"], ""))) return targetDifficulty?.characters?.altInstrumentals ?? [];
+    else if (variationId == "default"
+      && Save.instance.hasBeatenSong(this.id, null, "")) return targetDifficulty?.characters?.altInstrumentals ?? [];
+    else if (Save.instance.hasBeatenSong(this.id, null, variationId)) return targetDifficulty?.characters?.altInstrumentals ?? [];
+    else
+      return [];
+  }
 
-  public override function onCountdownStart(event:CountdownScriptEvent):Void {
-		super.onCountdownStart(event);
+  public override function onCountdownStart(event:CountdownScriptEvent):Void
+  {
+    super.onCountdownStart(event);
     trace('Started countdown for Roses...');
 
     // Skip the cutscene on the normal variation if we are in Freeplay.
     if (PlayState.instance.currentVariation == 'default' && !PlayStatePlaylist.isStoryMode) hasPlayedCutscene = true;
 
-    if (!hasPlayedCutscene) {
+    if (!hasPlayedCutscene)
+    {
       trace('Pausing countdown to play cutscene.');
 
       hasPlayedCutscene = true;
@@ -60,9 +67,10 @@ class RosesSong extends Song {
 
       startDialogue();
     }
-	}
+  }
 
-  function startDialogue() {
+  function startDialogue()
+  {
     var targetDialogue = 'roses';
 
     if (PlayState.instance.currentVariation == 'pico') targetDialogue += "-pico";
@@ -93,13 +101,14 @@ class RosesSong extends Song {
     hasPlayedCutscene = false;
   }
 
-	function onBeatHit(event:SongTimeScriptEvent)
+  function onBeatHit(event:SongTimeScriptEvent)
   {
     // When overriding onBeatHit, make sure to call super.onBeatHit,
     // otherwise boppers will not work.
     super.onBeatHit(event);
 
-    if (event.beat == 180 && PlayStatePlaylist.isStoryMode) {
+    if (event.beat == 180 && PlayStatePlaylist.isStoryMode)
+    {
       trace('Hit end of song! Starting outro.');
 
       PlayState.instance.camCutscene.visible = true;
@@ -114,7 +123,8 @@ class RosesSong extends Song {
     }
   }
 
-  public override function onDialogueEnd() {
+  public override function onDialogueEnd()
+  {
     // We may need to wait for the outro to play.
     Countdown.performCountdown();
   }

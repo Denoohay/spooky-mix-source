@@ -1,43 +1,20 @@
-import funkin.play.ResultState;
 import funkin.play.PlayState;
 import funkin.play.PlayStatePlaylist;
 import funkin.data.song.SongRegistry;
 import funkin.ui.transition.LoadingState;
-import flixel.FlxCamera;
-import flixel.math.FlxMath;
-import flixel.FlxSprite;
-import flixel.math.FlxAngle;
-import flixel.math.FlxPoint;
-import flixel.text.FlxText;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
-import flixel.util.FlxSpriteUtil;
-import flixel.util.FlxTimer;
-import funkin.graphics.adobeanimate.FlxAtlasSprite;
-import funkin.graphics.FunkinSprite;
-import funkin.ui.freeplay.charselect.PlayableCharacter;
 import funkin.ui.MusicBeatSubState;
-import funkin.graphics.shaders.AdjustColorShader;
-import flixel.addons.display.FlxTiledSprite;
-import flixel.addons.display.FlxBackdrop;
 import funkin.PlayerSettings;
 import funkin.modding.module.Module;
-import funkin.modding.events.ScriptEvent;
-import funkin.modding.base.ScriptedMusicBeatSubState;
-import funkin.modding.base.ScriptedFlxRuntimeShader;
-import funkin.modding.base.ScriptedMusicBeatState;
 import funkin.util.ReflectUtil;
 import flixel.FlxG;
 import funkin.audio.FunkinSound;
-import funkin.util.Constants;
-import StringTools;
 import funkin.save.Save;
 
 class MonsterResultsTransition extends Module
 {
   var accepted:Bool = false;
   var enteredSong:Bool = false;
-  
+
   var hasStoredVolume:Bool = false;
   var storedVolume:Float = 1;
 
@@ -60,131 +37,134 @@ class MonsterResultsTransition extends Module
 
   override function onUpdate(event:UpdateScriptEvent)
   {
-	super.onUpdate(event);
+    super.onUpdate(event);
 
     if (ReflectUtil.getClassNameOf(FlxG.state.subState) == "funkin.play.ResultState")
     {
-        if (!Save.instance.hasBeatenSong('monster', null, 'spookymod') && FlxG.state.subState.params.songId.toLowerCase() == 'south' && PlayState.instance.currentVariation == 'spookymod')
+      if (!Save.instance.hasBeatenSong('monster', null, 'spookymod')
+        && FlxG.state.subState.params.songId.toLowerCase() == 'south'
+        && PlayState.instance.currentVariation == 'spookymod')
+      {
+        switchToMonsterSong = 'monster';
+      }
+      else if (!Save.instance.hasBeatenSong('winter-horrorland', null, 'spookymod')
+        && FlxG.state.subState.params.songId.toLowerCase() == 'eggnog'
+        && PlayState.instance.currentVariation == 'spookymod')
+      {
+        switchToMonsterSong = 'winter-horrorland';
+      }
+
+      if (PlayerSettings.player1.controls.PAUSE && switchToMonsterSong != "")
+      {
+        enteredSong = false;
+
+        if (FlxG.state.subState.introMusicAudio != null)
         {
-            switchToMonsterSong = 'monster';
-        }
-        else if (!Save.instance.hasBeatenSong('winter-horrorland', null, 'spookymod') && FlxG.state.subState.params.songId.toLowerCase() == 'eggnog' && PlayState.instance.currentVariation == 'spookymod')
-        {
-            switchToMonsterSong = 'winter-horrorland';
-        }
-
-        if (PlayerSettings.player1.controls.PAUSE && switchToMonsterSong != "")
-        {
-            enteredSong = false;
-
-            if (FlxG.state.subState.introMusicAudio != null)
-            {
-                FlxG.state.subState.introMusicAudio.stop();
-            }
-
-            if (FlxG.sound.music != null)
-            {
-                FlxG.sound.music.stop();
-            }
-
-            FlxG.state.subState.cameraEverything.alpha = 0;
-            FlxG.state.subState.cameraBG.alpha = 0;
-            FlxG.state.subState.cameraScroll.alpha = 0;
-
-            accepted = true;
+          FlxG.state.subState.introMusicAudio.stop();
         }
 
-        if (accepted == true)
+        if (FlxG.sound.music != null)
         {
-            if (FlxG.sound.music != null)
-            {
-                FlxG.sound.music.volume = 0;
-                FlxG.sound.music.stop();
-            }
-            if (FlxG.sound != null)
-            {
-                if (hasStoredVolume == false) storedVolume = FlxG.sound.volume;
-                hasStoredVolume = true;
-                FlxG.sound.volume = 0;
-            }
-
-            FlxG.switchState(new funkin.ui.freeplay.FreeplayState());
+          FlxG.sound.music.stop();
         }
+
+        FlxG.state.subState.cameraEverything.alpha = 0;
+        FlxG.state.subState.cameraBG.alpha = 0;
+        FlxG.state.subState.cameraScroll.alpha = 0;
+
+        accepted = true;
+      }
+
+      if (accepted == true)
+      {
+        if (FlxG.sound.music != null)
+        {
+          FlxG.sound.music.volume = 0;
+          FlxG.sound.music.stop();
+        }
+        if (FlxG.sound != null)
+        {
+          if (hasStoredVolume == false) storedVolume = FlxG.sound.volume;
+          hasStoredVolume = true;
+          FlxG.sound.volume = 0;
+        }
+
+        FlxG.switchState(new funkin.ui.freeplay.FreeplayState());
+      }
     }
 
     if (ReflectUtil.getClassNameOf(FlxG.state) == "funkin.ui.freeplay.FreeplayState")
     {
-        if (accepted == true)
+      if (accepted == true)
+      {
+        if (FlxG.sound.music != null)
         {
-            if (FlxG.sound.music != null)
-            {
-                FlxG.sound.music.volume = 0;
-                FlxG.sound.music.stop();
-            }
-            if (FlxG.sound != null)
-            {
-                FlxG.sound.volume = 0;
-            }
-
-            FlxG.state.funnyCam.alpha = 0;
-            FlxG.state.rankCamera.alpha = 0;
-
-            if (enteredSong == false)
-            {
-                FlxG.state.busy = true;
-                FlxG.state.letterSort.inputEnabled = false;
-                
-                PlayStatePlaylist.isStoryMode = false;
-                
-                var targetSongId:String = switchToMonsterSong;
-                var targetSongNullable:Null<Song> = SongRegistry.instance.fetchEntry(targetSongId);
-                var targetSong:Song = targetSongNullable;
-                var targetVariation:Null<String> = 'spookymod';
-
-                var targetDifficulty:Null<SongDifficulty> = targetSong.getDifficulty(FlxG.state.currentDifficulty, FlxG.state.currentVariation);
-
-                var targetInstId:String = "spookymod";
-
-                new FlxTimer().start(1, _ ->
-                {
-                    hasStoredVolume = false;
-                    enteredSong = true;
-                    accepted = false;
-
-                    if (switchToMonsterSong == 'monster')
-                    {
-                        FlxG.state.curSelected = 7;
-                    }
-                    else if (switchToMonsterSong == 'winter-horrorland')
-                    {
-                        if (Save.instance.hasBeatenSong('south', null, 'spookymod'))
-                        {
-                            FlxG.state.curSelected = 14;
-                        }
-                        else
-                        {
-                            FlxG.state.curSelected = 13;
-                        }
-                    }
-                    FlxG.state.changeSelection();
-                    switchToMonsterSong = "";
-
-                    FunkinSound.emptyPartialQueue();
-                    
-                    FlxG.sound.volume = storedVolume;
-
-                    LoadingState.loadPlayState(
-                    {
-                        targetSong: targetSong,
-                        targetDifficulty: FlxG.state.currentDifficulty,
-                        targetVariation: targetVariation,
-                        targetInstrumental: targetInstId,
-                        practiceMode: false,
-                        minimalMode: false,
-                    }, true);
-                });
-            }
+          FlxG.sound.music.volume = 0;
+          FlxG.sound.music.stop();
         }
+        if (FlxG.sound != null)
+        {
+          FlxG.sound.volume = 0;
+        }
+
+        FlxG.state.funnyCam.alpha = 0;
+        FlxG.state.rankCamera.alpha = 0;
+
+        if (enteredSong == false)
+        {
+          FlxG.state.busy = true;
+          FlxG.state.letterSort.inputEnabled = false;
+
+          PlayStatePlaylist.isStoryMode = false;
+
+          var targetSongId:String = switchToMonsterSong;
+          var targetSongNullable:Null<Song> = SongRegistry.instance.fetchEntry(targetSongId);
+          var targetSong:Song = targetSongNullable;
+          var targetVariation:Null<String> = 'spookymod';
+
+          var targetDifficulty:Null<SongDifficulty> = targetSong.getDifficulty(FlxG.state.currentDifficulty, FlxG.state.currentVariation);
+
+          var targetInstId:String = "spookymod";
+
+          new FlxTimer().start(1, _ -> {
+            hasStoredVolume = false;
+            enteredSong = true;
+            accepted = false;
+
+            if (switchToMonsterSong == 'monster')
+            {
+              FlxG.state.curSelected = 7;
+            }
+            else if (switchToMonsterSong == 'winter-horrorland')
+            {
+              if (Save.instance.hasBeatenSong('south', null, 'spookymod'))
+              {
+                FlxG.state.curSelected = 14;
+              }
+              else
+              {
+                FlxG.state.curSelected = 13;
+              }
+            }
+            FlxG.state.changeSelection();
+            switchToMonsterSong = "";
+
+            FunkinSound.emptyPartialQueue();
+
+            FlxG.sound.volume = storedVolume;
+
+            LoadingState.loadPlayState(
+              {
+                targetSong: targetSong,
+                targetDifficulty: FlxG.state.currentDifficulty,
+                targetVariation: targetVariation,
+                targetInstrumental: targetInstId,
+                practiceMode: false,
+                minimalMode: false,
+              }, true);
+          });
+        }
+      }
     }
   }
 }

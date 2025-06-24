@@ -1,49 +1,34 @@
-import funkin.PlayerSettings;
 import funkin.modding.module.Module;
-import funkin.modding.events.ScriptEvent;
-import funkin.modding.base.ScriptedMusicBeatSubState;
-import funkin.modding.base.ScriptedFlxRuntimeShader;
-import funkin.modding.base.ScriptedMusicBeatState;
-import funkin.util.ReflectUtil;
 import flixel.FlxG;
-import funkin.util.Constants;
-import StringTools;
-import funkin.save.Save;
-import funkin.ui.options.OptionsState;
-import funkin.audio.FunkinSound;
-import funkin.ui.options.items.CheckboxPreferenceItem;
-import funkin.ui.freeplay.FreeplayState;
-import funkin.ui.mainmenu.MainMenuState;
-import haxe.Json;
 
 class SpookyShadersOption extends Module
 {
-    public function new()
-    {
-        super('SpookyShadersOption');
-    }
-    
-     override function onUpdate(event:UpdateScriptEvent)
-    {
-	    super.onUpdate(event);
-        
-        if (FlxG.save.data.spookyShaders != false && FlxG.save.data.spookyShaders != true)
-            FlxG.save.data.spookyShaders = true;
-    }
+  public function new()
+  {
+    super('SpookyShadersOption');
+  }
 
-    public function onStateChangeEnd(event:StateChangeScriptEvent)
-    {
-        if(Std.isOfType(event.targetState, OptionsState))
-        {
-            if (event.targetState.optionsCodex.pages.get("preferences") != null) 
-            {
-                event.targetState.optionsCodex.pages.get("preferences").createPrefItemCheckbox('Spooky Shaders', "If disabled, Spooky Mix stages will not use shaders or blend modes.(warning, unchecking makes the mod look like doo doo)", function(value:Bool):Void
-                {
-                    FlxG.save.data.spookyShaders = value;
-                    FlxG.save.data.flush;
-                }, FlxG.save.data.spookyShaders);
-            }
-        }
-    }
+  override function onUpdate(event:UpdateScriptEvent)
+  {
+    super.onUpdate(event);
 
+    if (FlxG.save.data.spookyShaders != false && FlxG.save.data.spookyShaders != true) FlxG.save.data.spookyShaders = true;
+  }
+
+  public function onStateChangeEnd(event:StateChangeScriptEvent)
+  {
+    if (Std.isOfType(event.targetState, OptionsState))
+    {
+      if (event.targetState.optionsCodex.pages.get("preferences") != null)
+      {
+        event.targetState.optionsCodex.pages.get("preferences")
+          .createPrefItemCheckbox('Spooky Shaders',
+            "If disabled, Spooky Mix stages will not use shaders or blend modes.(warning, unchecking makes the mod look like doo doo)",
+            function(value:Bool):Void {
+              FlxG.save.data.spookyShaders = value;
+              FlxG.save.data.flush;
+            }, FlxG.save.data.spookyShaders);
+      }
+    }
+  }
 }

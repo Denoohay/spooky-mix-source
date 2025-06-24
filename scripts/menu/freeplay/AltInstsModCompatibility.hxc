@@ -1,40 +1,14 @@
-import funkin.ui.freeplay.FreeplayState;
-import funkin.ui.freeplay.CapsuleOptionsMenu;
-import flixel.FlxCamera;
-import flixel.math.FlxMath;
-import flixel.FlxSprite;
-import flixel.math.FlxAngle;
-import flixel.math.FlxPoint;
-import flixel.text.FlxText;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
-import flixel.util.FlxSpriteUtil;
-import flixel.util.FlxTimer;
-import funkin.graphics.adobeanimate.FlxAtlasSprite;
-import funkin.graphics.FunkinSprite;
-import funkin.ui.freeplay.charselect.PlayableCharacter;
-import funkin.ui.MusicBeatSubState;
-import funkin.graphics.shaders.AdjustColorShader;
-import flixel.addons.display.FlxTiledSprite;
-import flixel.addons.display.FlxBackdrop;
-import funkin.PlayerSettings;
 import funkin.modding.module.Module;
-import funkin.modding.events.ScriptEvent;
-import funkin.modding.base.ScriptedMusicBeatSubState;
-import funkin.modding.base.ScriptedFlxRuntimeShader;
-import funkin.modding.base.ScriptedMusicBeatState;
 import funkin.util.ReflectUtil;
 import flixel.FlxG;
-import funkin.audio.FunkinSound;
 import funkin.save.Save;
 import funkin.play.song.Song;
 import funkin.data.song.SongRegistry;
-import funkin.ui.freeplay.SongMenuItem;
 import StringTools;
 
 class AltInstsModCompatibility extends Module
 {
-  //Made by Denoohay for Spooky Mix hyuk hyuk hyuk
+  // Made by Denoohay for Spooky Mix hyuk hyuk hyuk
   var addedInsts:Bool = false;
 
   public function new()
@@ -56,170 +30,186 @@ class AltInstsModCompatibility extends Module
 
   override function onUpdate(event:UpdateScriptEvent)
   {
-	super.onUpdate(event);
+    super.onUpdate(event);
 
     if (ReflectUtil.getClassNameOf(FlxG.state.subState) == "funkin.ui.freeplay.FreeplayState")
     {
-        if (FlxG.state.subState.capsuleOptionsMenu != null)
+      if (FlxG.state.subState.capsuleOptionsMenu != null)
+      {
+        if (addedInsts == false)
         {
-            if (addedInsts == false)
-            {   
-                /*
-                if (FlxG.state.subState.currentCharacterId != 'bf' && FlxG.state.subState.currentCharacterId != 'pico')
-                {
-                    for (i in 0...Save.instance.data.unlocks.charactersSeen.length)
-                    {
-                        if (FlxG.state.subState.currentCharacterId != Save.instance.data.unlocks.charactersSeen.members[i] && Assets.exists("data/songs/" + PlayState.instance.currentSong.id + "/" + PlayState.instance.currentSong.id + "-metadata-" + Save.instance.data.unlocks.charactersSeen.members[i] + ".json"))
-                        FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.insert(FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.length, Save.instance.data.unlocks.charactersSeen.members[i]);
-                    }
-                }
-                */
+          /*
+            if (FlxG.state.subState.currentCharacterId != 'bf' && FlxG.state.subState.currentCharacterId != 'pico')
+            {
+              for (i in 0...Save.instance.data.unlocks.charactersSeen.length)
+              {
+                if (FlxG.state.subState.currentCharacterId != Save.instance.data.unlocks.charactersSeen.members[i] && Assets.exists("data/songs/" + PlayState.instance.currentSong.id + "/" + PlayState.instance.currentSong.id + "-metadata-" + Save.instance.data.unlocks.charactersSeen.members[i] + ".json"))
+                FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.insert(FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.length, Save.instance.data.unlocks.charactersSeen.members[i]);
+              }
+            }
+           */
 
-                //all this just to get the list of filtered song names
-                var songListTemp:Array<String>;
-                var songList:Array<String> = [];
+          // all this just to get the list of filtered song names
+          var songListTemp:Array<String>;
+          var songList:Array<String> = [];
 
-                var stupidNumb:Int = 1;
-                
-                songListTemp = FlxG.state.subState.currentFilteredSongs;
-                
-                for (i in 0...songListTemp.length - 1)
-                {
-                    var stupidData:String = "" + songListTemp[stupidNumb].data;
-                    var replaceString:String = StringTools.replace(StringTools.replace(stupidData, "Song(", ""), ")", "");
+          var stupidNumb:Int = 1;
 
-                    songList.insert(i, replaceString);
-                    stupidNumb = stupidNumb + 1;
-                }
+          songListTemp = FlxG.state.subState.currentFilteredSongs;
 
-                var targetSongId:String = songList[FlxG.state.subState.curSelected - 1];
-                var targetSongNullable:Null<Song> = SongRegistry.instance.fetchEntry(targetSongId);
-                var targetSong:Song = targetSongNullable;
+          for (i in 0...songListTemp.length - 1)
+          {
+            var stupidData:String = "" + songListTemp[stupidNumb].data;
+            var replaceString:String = StringTools.replace(StringTools.replace(stupidData, "Song(", ""), ")", "");
 
-                var targetDifficulty:Null<SongDifficulty>;
-                
-                targetDifficulty = targetSong.getDifficulty(FlxG.state.currentDifficulty, FlxG.state.subState.currentVariation);
-                
-                var metadataInstList:Array<String> = targetDifficulty?.characters?.altInstrumentals ?? [];
+            songList.insert(i, replaceString);
+            stupidNumb = stupidNumb + 1;
+          }
 
-//FlxG.state.subState.currentVariation == "default"
+          var targetSongId:String = songList[FlxG.state.subState.curSelected - 1];
+          var targetSongNullable:Null<Song> = SongRegistry.instance.fetchEntry(targetSongId);
+          var targetSong:Song = targetSongNullable;
 
-                //if (FlxG.state.subState.currentCharacterId != 'bf')
-                for (i in 0...FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.length)
-                {
-                    if (FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains(metadataInstList[i]))
-                    {
-                    }
-                    else
-                    {
-                        FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.insert(FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.length, metadataInstList[i]);
-                    }
+          var targetDifficulty:Null<SongDifficulty>;
 
-                    if (FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains(null))
-                    {
-                        FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.remove(null);
-                    }
-                }
+          targetDifficulty = targetSong.getDifficulty(FlxG.state.currentDifficulty, FlxG.state.subState.currentVariation);
 
-                //THIS SUCKSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS I'll make it better later
-                for (i in 0...Save.instance.data.unlocks.charactersSeen.length)
-                {
-                    if (Assets.exists("data/songs/" + songList[FlxG.state.subState.curSelected - 1] + "/" + songList[FlxG.state.subState.curSelected - 1] + "-metadata-" + Save.instance.data.unlocks.charactersSeen[i] + ".json") && !FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains(Save.instance.data.unlocks.charactersSeen[i]))
-                    {
-                        FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.insert(FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.length, Save.instance.data.unlocks.charactersSeen[i]);
-                      
-                        if (FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("spookymod-cut") && FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("spookymod"))
-                        {
-                            FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.remove('spookymod');
-                        }
-                        if (FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("pico-cut") && FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("pico"))
-                        {
-                            FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.remove('pico');
-                        }
-                        if (FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("bf-cut") && FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("bf"))
-                        {
-                            FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.remove('bf');
-                        }
+          var metadataInstList:Array<String> = targetDifficulty?.characters?.altInstrumentals ?? [];
 
-                        if (FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("bfcut") && FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains(""))
-                        {
-                            FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.remove('');
-                        }
-                        if (FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("picocut") && FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains(""))
-                        {
-                            FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.remove('');
-                        }
-                        if (FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("spookycut") && FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains(""))
-                        {
-                            FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.remove('');
-                        }
-                        if (FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("pico-defaultcut") && FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("pico"))
-                        {
-                            FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.remove('pico');
-                        }
-                        if (FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("pico-spookycut") && FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("pico"))
-                        {
-                            FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.remove('pico');
-                        }
-                        if (FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("pico-bfcut") && FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("pico"))
-                        {
-                            FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.remove('pico');
-                        }
-                        if (FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("spookymod-defaultcut") && FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("spookymod"))
-                        {
-                            FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.remove('spookymod');
-                        }
-                        if (FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("spookymod-picocut") && FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("spookymod"))
-                        {
-                            FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.remove('spookymod');
-                        }
-                        if (FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("spookymod-bfcut") && FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("spookymod"))
-                        {
-                            FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.remove('spookymod');
-                        }
-                        if (FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("bf-picocut") && FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("bf"))
-                        {
-                            FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.remove('bf');
-                        }
-                        if (FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("bf-spookycut") && FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("bf"))
-                        {
-                            FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.remove('bf');
-                        }
-                        if (FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("bf-defaultcut") && FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("bf"))
-                        {
-                            FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.remove('bf');
-                        }
+          // FlxG.state.subState.currentVariation == "default"
 
-                        if (FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("cut") && FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains(""))
-                        {
-                            FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.remove('');
-                        }
-                    
-                    }
-                }
-
-                if (songList[FlxG.state.subState.curSelected - 1] == "ugh" && FlxG.state.subState.currentVariation == "spookymod")
-                {
-                    FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.remove('');
-                    FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.insert(FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.length, "cut");
-                }
-
-                //IN THE FUTURE, MAKE IT SO IF THE REMIX BPMs ARE DIFFERENT, IT WON'T INCLUDE THE ALT INST
-                if ((songList[FlxG.state.subState.curSelected - 1] == "eggnog" || songList[FlxG.state.subState.curSelected - 1] == "philly-nice") && FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("spookymod"))
-                {
-                    FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.remove('spookymod');
-                }
-
-                //FlxG.state.subState.ostName.text = FlxG.state.subState.capsuleOptionsMenu.instrumentalIds;
-
-                addedInsts = true;
+          // if (FlxG.state.subState.currentCharacterId != 'bf')
+          for (i in 0...FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.length)
+          {
+            if (FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains(metadataInstList[i])) {}
+            else
+            {
+              FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.insert(FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.length, metadataInstList[i]);
             }
 
+            if (FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains(null))
+            {
+              FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.remove(null);
+            }
+          }
+
+          // THIS SUCKSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS I'll make it better later
+          for (i in 0...Save.instance.data.unlocks.charactersSeen.length)
+          {
+            if (Assets.exists("data/songs/" + songList[FlxG.state.subState.curSelected - 1] + "/" + songList[FlxG.state.subState.curSelected - 1]
+              + "-metadata-" + Save.instance.data.unlocks.charactersSeen[i] + ".json")
+              && !FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains(Save.instance.data.unlocks.charactersSeen[i]))
+            {
+              FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.insert(FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.length,
+                Save.instance.data.unlocks.charactersSeen[i]);
+
+              if (FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("spookymod-cut")
+                && FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("spookymod"))
+              {
+                FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.remove('spookymod');
+              }
+              if (FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("pico-cut")
+                && FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("pico"))
+              {
+                FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.remove('pico');
+              }
+              if (FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("bf-cut")
+                && FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("bf"))
+              {
+                FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.remove('bf');
+              }
+
+              if (FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("bfcut")
+                && FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains(""))
+              {
+                FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.remove('');
+              }
+              if (FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("picocut")
+                && FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains(""))
+              {
+                FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.remove('');
+              }
+              if (FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("spookycut")
+                && FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains(""))
+              {
+                FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.remove('');
+              }
+              if (FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("pico-defaultcut")
+                && FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("pico"))
+              {
+                FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.remove('pico');
+              }
+              if (FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("pico-spookycut")
+                && FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("pico"))
+              {
+                FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.remove('pico');
+              }
+              if (FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("pico-bfcut")
+                && FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("pico"))
+              {
+                FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.remove('pico');
+              }
+              if (FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("spookymod-defaultcut")
+                && FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("spookymod"))
+              {
+                FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.remove('spookymod');
+              }
+              if (FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("spookymod-picocut")
+                && FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("spookymod"))
+              {
+                FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.remove('spookymod');
+              }
+              if (FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("spookymod-bfcut")
+                && FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("spookymod"))
+              {
+                FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.remove('spookymod');
+              }
+              if (FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("bf-picocut")
+                && FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("bf"))
+              {
+                FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.remove('bf');
+              }
+              if (FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("bf-spookycut")
+                && FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("bf"))
+              {
+                FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.remove('bf');
+              }
+              if (FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("bf-defaultcut")
+                && FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("bf"))
+              {
+                FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.remove('bf');
+              }
+
+              if (FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("cut")
+                && FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains(""))
+              {
+                FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.remove('');
+              }
+            }
+          }
+
+          if (songList[FlxG.state.subState.curSelected - 1] == "ugh" && FlxG.state.subState.currentVariation == "spookymod")
+          {
+            FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.remove('');
+            FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.insert(FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.length, "cut");
+          }
+
+          // IN THE FUTURE, MAKE IT SO IF THE REMIX BPMs ARE DIFFERENT, IT WON'T INCLUDE THE ALT INST
+          if ((songList[FlxG.state.subState.curSelected - 1] == "eggnog" || songList[FlxG.state.subState.curSelected - 1] == "philly-nice")
+            && FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.contains("spookymod"))
+          {
+            FlxG.state.subState.capsuleOptionsMenu.instrumentalIds.remove('spookymod');
+          }
+
+          // FlxG.state.subState.ostName.text = FlxG.state.subState.capsuleOptionsMenu.instrumentalIds;
+
+          addedInsts = true;
         }
-        else
-        {
-            addedInsts = false;
-        }
+      }
+      else
+      {
+        addedInsts = false;
+      }
     }
   }
 }

@@ -19,245 +19,249 @@ import funkin.save.Save;
 
 class SchoolEvilSpookyStage extends Stage
 {
-	function new()
-	{
-		super('schoolEvilSpooky');
-	}
+  function new()
+  {
+    super('schoolEvilSpooky');
+  }
 
-	var opponentX:Float = 0;
-	var opponentY:Float = 0;
+  var opponentX:Float = 0;
+  var opponentY:Float = 0;
 
-	var spiritMoves:Bool = false;
+  var spiritMoves:Bool = false;
 
-	var spiritSpeed:Float = 1;
+  var spiritSpeed:Float = 1;
 
-	var wiggle:FlxRuntimeShader = null;
-		
-	var scrollingSky:FlxBackdrop;
-	var skyFlash:FlxSprite;
+  var wiggle:FlxRuntimeShader = null;
 
-	override function buildStage()
-	{
-		super.buildStage();
-		
-		wiggle = new WiggleEffectRuntime(2, 30, 0.012, WiggleEffectType.DREAMY);
+  var scrollingSky:FlxBackdrop;
+  var skyFlash:FlxSprite;
 
-		if (FlxG.save.data.spookyShaders != false) getNamedProp('evilSchoolBG').shader = wiggle;
-		
-		scrollingSky = new FlxBackdrop(Paths.image('weeb/spooky/evilSky'), 0x10);
-		scrollingSky.setPosition(getNamedProp('evilSchoolBG').x + 774, getNamedProp('evilSchoolBG').y);
-		scrollingSky.scrollFactor.set(1, 1);
-		scrollingSky.zIndex = 10;
-		scrollingSky.alpha = 0;
-		scrollingSky.velocity.y = 0;
-		scrollingSky.scale.set(6, 6);
-		scrollingSky.antialiasing = false;
-		scrollingSky.pixelPerfectRender = true;
-		scrollingSky.pixelPerfectPosition = true;
-		PlayState.instance.currentStage.add(scrollingSky);
+  override function buildStage()
+  {
+    super.buildStage();
 
-		skyFlash = new FlxSprite(-300, -300).makeGraphic(FlxG.width * 2, FlxG.height * 2, 0xFFB26B7F);
-		skyFlash.scrollFactor.set(1, 1);
-		skyFlash.alpha = 0;
-		skyFlash.zIndex = 1000;
-		if (FlxG.save.data.spookyShaders != false)
-			skyFlash.blend = 0;
-		else
-			skyFlash.color = 0xFFFFFFFF;
-		PlayState.instance.currentStage.add(skyFlash);
-		PlayState.instance.currentStage.refresh(); // Apply z-index.
-		
-		getNamedProp('evilSchoolBG').loadGraphic(Paths.image('weeb/spooky/evilSchoolChopped'));
+    wiggle = new WiggleEffectRuntime(2, 30, 0.012, WiggleEffectType.DREAMY);
 
-		if (FlxG.random.int(1, 20) == 1 && Save.instance.hasBeatenSong(PlayState.instance.currentSong.id, null, 'spookymod'))
-			getNamedProp('evilSchoolBG').loadGraphic(Paths.image('weeb/spooky/evilSchoolWierd'));
+    if (FlxG.save.data.spookyShaders != false) getNamedProp('evilSchoolBG').shader = wiggle;
 
-		spiritMoves = false;
-	}
-	
-	override function addCharacter(character:BaseCharacter, charType:CharacterType):Void {
-		// Apply the shader automatically to each character as it gets added.
-		super.addCharacter(character, charType);
-		if (FlxG.save.data.spookyShaders != false)
-		{
-			trace('Applied stage shader to ' + character.characterName);
+    scrollingSky = new FlxBackdrop(Paths.image('weeb/spooky/evilSky'), 0x10);
+    scrollingSky.setPosition(getNamedProp('evilSchoolBG').x + 774, getNamedProp('evilSchoolBG').y);
+    scrollingSky.scrollFactor.set(1, 1);
+    scrollingSky.zIndex = 10;
+    scrollingSky.alpha = 0;
+    scrollingSky.velocity.y = 0;
+    scrollingSky.scale.set(6, 6);
+    scrollingSky.antialiasing = false;
+    scrollingSky.pixelPerfectRender = true;
+    scrollingSky.pixelPerfectPosition = true;
+    PlayState.instance.currentStage.add(scrollingSky);
 
-			var rim = new DropShadowShader();
-			rim.color = 0xFF2B0F5E;
-			rim.antialiasAmt = 0;
-			rim.distance = 5;
+    skyFlash = new FlxSprite(-300, -300).makeGraphic(FlxG.width * 2, FlxG.height * 2, 0xFFB26B7F);
+    skyFlash.scrollFactor.set(1, 1);
+    skyFlash.alpha = 0;
+    skyFlash.zIndex = 1000;
+    if (FlxG.save.data.spookyShaders != false) skyFlash.blend = 0;
+    else
+      skyFlash.color = 0xFFFFFFFF;
+    PlayState.instance.currentStage.add(skyFlash);
+    PlayState.instance.currentStage.refresh(); // Apply z-index.
 
-			switch(charType){
-				case CharacterType.BF:
-			
-					rim.angle = 180;
-					rim.setAdjustColor(-100, -30, 10, -30); //b, h, c, s
-					rim.attachedSprite = character;
-					character.shader = rim;
+    getNamedProp('evilSchoolBG').loadGraphic(Paths.image('weeb/spooky/evilSchoolChopped'));
 
-					character.animation.onFrameChange.add(function() {
-						if (getBoyfriend() != null)
-						{
-      						rim.updateFrameInfo(getBoyfriend().frame);
-						}
-    				});
+    if (FlxG.random.int(1, 20) == 1
+      && Save.instance.hasBeatenSong(PlayState.instance.currentSong.id, null,
+        'spookymod')) getNamedProp('evilSchoolBG').loadGraphic(Paths.image('weeb/spooky/evilSchoolWierd'));
 
-				case CharacterType.GF:
-					rim.angle = 180;
-					rim.setAdjustColor(-120, -30, 20, 0); //b, h, c, s
-					rim.threshold = 0.4;
-					rim.attachedSprite = character;
-					character.shader = rim;
+    spiritMoves = false;
+  }
 
-					character.animation.onFrameChange.add(function() {
-						if (getGirlfriend() != null)
-						{
-      						rim.updateFrameInfo(getGirlfriend().frame);
-						}
-    				});
-
-				case CharacterType.DAD:
-					if (getDad().shader != null)
-					{
-						if (getDad().shader.contrast == 100)
-						{
-							getBoyfriend().shader.color = 0xFF5B5B5B;
-							getGirlfriend().shader.color = 0xFF5B5B5B;
-						}
-						if (getDad().shader.hue == 60)
-						{
-							getBoyfriend().shader.color = 0xFF590E1E;
-							getGirlfriend().shader.color = 0xFF590E1E;
-						}
-					}
-
-				default:
-			}
-		}
-
-	}
-	
-	var randomNumber:Int;
-
-	function onNoteHit(event:HitNoteScriptEvent)
-	{
-		if (!event.note.noteData.getMustHitNote()) spiritMoves = true;
-	}
-
-	override function onSongRetry(event:ScriptEvent):Void {
-		super.onSongRetry(event);
-		
-		if (FlxG.save.data.spookyShaders != false)
-		{
-			if (getDad().shader.contrast == 100) getBoyfriend().shader.color = 0xFF5B5B5B;
-			if (getDad().shader.hue == 60) getBoyfriend().shader.color = 0xFF590E1E;
-		}
-		else
-		{
-			getBoyfriend().color = 0x8E6C6C;
-		}
-		
-		scrollingSky.velocity.y = 0;
-		scrollingSky.alpha = 0;
-		skyFlash.alpha = 0;
-		spiritSpeed = 1;
-	}
-
-	override function onGameOver(event:ScriptEvent):Void {
-		super.onGameOver(event);
-		
-		if (FlxG.save.data.spookyShaders != false)
-			getBoyfriend().shader = null;
-		else
-			getBoyfriend().color = 0xFFFFFF;
-	}
-	
-	var _timer:Float = 0;
-
-	override function onUpdate(event:UpdateScriptEvent) {
-		super.onUpdate(event);
-		_timer += event.elapsed;
-
-		if (wiggle != null) {
-			wiggle.update(event.elapsed);
-		}
-
-		if (getDad() != null)
-		{
-			PlayState.instance.iconP2.shader = getDad().shader;
-			PlayState.instance.iconP2.color = getDad().color;
-
-			if (spiritMoves == true)
-			{
-				if (opponentX == 0)
-				{
-					opponentX = getDad().x;
-					opponentY = getDad().y;
-				}
-
-				getDad().x = opponentX + (Math.sin(_timer*(1 * spiritSpeed))*50);
-				getDad().y = opponentY + (Math.sin(_timer*(0.5 * spiritSpeed))*-30);
-			}
-		}
-
-		if (FlxG.save.data.spookyShaders != false){}
-		else
-		{
-			if(getBoyfriend() != null)
-			{
-				getBoyfriend().color = 0x8E6C6C;
-				getGirlfriend().color = 0x8E6C6C;
-			}
-		}
-	}
-
-    public override function onSongEvent(scriptEvent:SongEventScriptEvent)
+  override function addCharacter(character:BaseCharacter, charType:CharacterType):Void
+  {
+    // Apply the shader automatically to each character as it gets added.
+    super.addCharacter(character, charType);
+    if (FlxG.save.data.spookyShaders != false)
     {
-        super.onSongEvent(scriptEvent);
+      trace('Applied stage shader to ' + character.characterName);
 
-        if (scriptEvent.eventData.eventKind == "thornsSpookyEvent")
-        {
-            if (scriptEvent.eventData.value.skyEvent == 0)
-			{
-				scrollingSky.shader = getDad().shader;
-				scrollingSky.color = getDad().color;
-				scrollingSky.alpha = 1;
-				scrollingSky.velocity.y = -1200;
-				spiritSpeed = 3;
+      var rim = new DropShadowShader();
+      rim.color = 0xFF2B0F5E;
+      rim.antialiasAmt = 0;
+      rim.distance = 5;
 
-				skyFlash.alpha = 1;
-				FlxTween.tween(skyFlash, {alpha: 0}, 1);
-			}
-			else if (scriptEvent.eventData.value.skyEvent == 1)
-			{
-				FlxTween.tween(scrollingSky, {alpha: 0}, 2);
+      switch (charType)
+      {
+        case CharacterType.BF:
+          rim.angle = 180;
+          rim.setAdjustColor(-100, -30, 10, -30); // b, h, c, s
+          rim.attachedSprite = character;
+          character.shader = rim;
 
-				new FlxTimer().start(2, _ -> {
-					scrollingSky.velocity.y = 0;
-				});
+          character.animation.onFrameChange.add(function() {
+            if (getBoyfriend() != null)
+            {
+              rim.updateFrameInfo(getBoyfriend().frame);
+            }
+          });
 
-				spiritSpeed = 1;
-			}
-        }
+        case CharacterType.GF:
+          rim.angle = 180;
+          rim.setAdjustColor(-120, -30, 20, 0); // b, h, c, s
+          rim.threshold = 0.4;
+          rim.attachedSprite = character;
+          character.shader = rim;
+
+          character.animation.onFrameChange.add(function() {
+            if (getGirlfriend() != null)
+            {
+              rim.updateFrameInfo(getGirlfriend().frame);
+            }
+          });
+
+        case CharacterType.DAD:
+          if (getDad().shader != null)
+          {
+            if (getDad().shader.contrast == 100)
+            {
+              getBoyfriend().shader.color = 0xFF5B5B5B;
+              getGirlfriend().shader.color = 0xFF5B5B5B;
+            }
+            if (getDad().shader.hue == 60)
+            {
+              getBoyfriend().shader.color = 0xFF590E1E;
+              getGirlfriend().shader.color = 0xFF590E1E;
+            }
+          }
+
+        default:
+      }
+    }
+  }
+
+  var randomNumber:Int;
+
+  function onNoteHit(event:HitNoteScriptEvent)
+  {
+    if (!event.note.noteData.getMustHitNote()) spiritMoves = true;
+  }
+
+  override function onSongRetry(event:ScriptEvent):Void
+  {
+    super.onSongRetry(event);
+
+    if (FlxG.save.data.spookyShaders != false)
+    {
+      if (getDad().shader.contrast == 100) getBoyfriend().shader.color = 0xFF5B5B5B;
+      if (getDad().shader.hue == 60) getBoyfriend().shader.color = 0xFF590E1E;
+    }
+    else
+    {
+      getBoyfriend().color = 0x8E6C6C;
     }
 
-	function kill() {
-		super.kill();
-		wiggle = null;
-	}
+    scrollingSky.velocity.y = 0;
+    scrollingSky.alpha = 0;
+    skyFlash.alpha = 0;
+    spiritSpeed = 1;
+  }
 
-	/**
-	 * If your stage uses additional assets not specified in the JSON,
-	 * make sure to specify them like this, or they won't get cached in the loading screen.
-	 */
-	function fetchAssetPaths():Array<String>
-	{
-		var results:Array<String> = super.fetchAssetPaths();
-		
-		results.push(Paths.image('weeb/spooky/evilSchoolChopped'));
-		results.push(Paths.image('weeb/spooky/evilSchoolWierd'));
-		results.push(Paths.image('weeb/spooky/evilSky'));
+  override function onGameOver(event:ScriptEvent):Void
+  {
+    super.onGameOver(event);
 
-		return results;
-	}
+    if (FlxG.save.data.spookyShaders != false) getBoyfriend().shader = null;
+    else
+      getBoyfriend().color = 0xFFFFFF;
+  }
+
+  var _timer:Float = 0;
+
+  override function onUpdate(event:UpdateScriptEvent)
+  {
+    super.onUpdate(event);
+    _timer += event.elapsed;
+
+    if (wiggle != null)
+    {
+      wiggle.update(event.elapsed);
+    }
+
+    if (getDad() != null)
+    {
+      PlayState.instance.iconP2.shader = getDad().shader;
+      PlayState.instance.iconP2.color = getDad().color;
+
+      if (spiritMoves == true)
+      {
+        if (opponentX == 0)
+        {
+          opponentX = getDad().x;
+          opponentY = getDad().y;
+        }
+
+        getDad().x = opponentX + (Math.sin(_timer * (1 * spiritSpeed)) * 50);
+        getDad().y = opponentY + (Math.sin(_timer * (0.5 * spiritSpeed)) * -30);
+      }
+    }
+
+    if (FlxG.save.data.spookyShaders != false) {}
+    else
+    {
+      if (getBoyfriend() != null)
+      {
+        getBoyfriend().color = 0x8E6C6C;
+        getGirlfriend().color = 0x8E6C6C;
+      }
+    }
+  }
+
+  public override function onSongEvent(scriptEvent:SongEventScriptEvent)
+  {
+    super.onSongEvent(scriptEvent);
+
+    if (scriptEvent.eventData.eventKind == "thornsSpookyEvent")
+    {
+      if (scriptEvent.eventData.value.skyEvent == 0)
+      {
+        scrollingSky.shader = getDad().shader;
+        scrollingSky.color = getDad().color;
+        scrollingSky.alpha = 1;
+        scrollingSky.velocity.y = -1200;
+        spiritSpeed = 3;
+
+        skyFlash.alpha = 1;
+        FlxTween.tween(skyFlash, {alpha: 0}, 1);
+      }
+      else if (scriptEvent.eventData.value.skyEvent == 1)
+      {
+        FlxTween.tween(scrollingSky, {alpha: 0}, 2);
+
+        new FlxTimer().start(2, _ -> {
+          scrollingSky.velocity.y = 0;
+        });
+
+        spiritSpeed = 1;
+      }
+    }
+  }
+
+  function kill()
+  {
+    super.kill();
+    wiggle = null;
+  }
+
+  /**
+   * If your stage uses additional assets not specified in the JSON,
+   * make sure to specify them like this, or they won't get cached in the loading screen.
+   */
+  function fetchAssetPaths():Array<String>
+  {
+    var results:Array<String> = super.fetchAssetPaths();
+
+    results.push(Paths.image('weeb/spooky/evilSchoolChopped'));
+    results.push(Paths.image('weeb/spooky/evilSchoolWierd'));
+    results.push(Paths.image('weeb/spooky/evilSky'));
+
+    return results;
+  }
 }

@@ -1,38 +1,9 @@
-import funkin.ui.charSelect.CharSelectSubState;
-import funkin.ui.charSelect.CharSelectGF;
-import funkin.ui.charSelect.Nametag;
-import funkin.ui.mainmenu.MainMenuState;
-import flixel.FlxCamera;
-import flixel.math.FlxMath;
-import flixel.FlxSprite;
-import flixel.math.FlxAngle;
-import flixel.math.FlxPoint;
-import flixel.text.FlxText;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
-import flixel.util.FlxSpriteUtil;
-import flixel.util.FlxTimer;
-import funkin.util.Constants;
-import funkin.graphics.adobeanimate.FlxAtlasSprite;
-import funkin.graphics.FunkinSprite;
-import funkin.ui.freeplay.charselect.PlayableCharacter;
-import funkin.ui.MusicBeatSubState;
-import funkin.graphics.shaders.AdjustColorShader;
-import flixel.addons.display.FlxTiledSprite;
-import flixel.addons.display.FlxBackdrop;
-import funkin.PlayerSettings;
 import funkin.modding.module.Module;
-import funkin.modding.events.ScriptEvent;
-import funkin.modding.base.ScriptedMusicBeatSubState;
-import funkin.modding.base.ScriptedFlxRuntimeShader;
-import funkin.modding.base.ScriptedMusicBeatState;
 import funkin.util.ReflectUtil;
 import flixel.FlxG;
-import funkin.util.WindowUtil;
-import funkin.Preferences;
 
 class SpookyCharSelectScreen extends Module
-{  
+{
   public function new()
   {
     super('SpookyCharSelectScreen');
@@ -40,22 +11,21 @@ class SpookyCharSelectScreen extends Module
 
   override function onUpdate(event:UpdateScriptEvent)
   {
-	super.onUpdate(event);
+    super.onUpdate(event);
 
     if (ReflectUtil.getClassNameOf(FlxG.state) == "funkin.ui.charSelect.CharSelectSubState")
     {
-        if (FlxG.state.gfChill != null)
+      if (FlxG.state.gfChill != null)
+      {
+        if (FlxG.state.curChar == 'spookymod')
         {
-            if (FlxG.state.curChar == 'spookymod')
-            {
-                FlxG.state.gfChill.danceEvery = 1;
-            }
-            else
-            {
-                FlxG.state.gfChill.danceEvery = 2;
-            }
+          FlxG.state.gfChill.danceEvery = 1;
         }
+        else
+        {
+          FlxG.state.gfChill.danceEvery = 2;
+        }
+      }
     }
-
   }
 }

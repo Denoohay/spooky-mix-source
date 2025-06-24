@@ -24,727 +24,729 @@ import funkin.Conductor;
 
 class TankmanBattlefieldSpookyStage extends Stage
 {
-	var boyfriendCameraPosX:Float;
-	var boyfriendCameraPosY:Float;
-	var girlfriendCameraPosX:Float;
-	var girlfriendCameraPosY:Float;
-	var dadCameraPosX:Float;
-	var dadCameraPosY:Float;
-
-	var gotCameraPos:Bool = false;
-
-	var stageTint:AdjustColorShader;
-
-	var weirdGuyTint:AdjustColorShader;
-	var weirdPlayerTint:AdjustColorShader;
-
-	var mainWeirdTint:AdjustColorShader;
-	var weirdMoonTint:AdjustColorShader;
-	var weirdSmokeTint:AdjustColorShader;
-	var weirdMountainsTint:AdjustColorShader;
-	var weirdSkyTint:AdjustColorShader;
-
-	var notzardy:FlxAtlasSprite;
-	var windmill:FlxAtlasSprite;
-
-	var hasPlayedInGameCutscene:Bool = false;
-	var hasPlayedCutscene:Bool = false;
-	var cutsceneSkipped:Bool = false;
-	var canSkipCutscene:Bool = false;
-	var cutsceneMusic:FunkinSound;
-
-	var mistBack:FlxBackdrop;
-	var mistFront:FlxBackdrop;
-
-	var switchedToMonster:Bool = false;
-
-	var spookyDanceCutscene:Bool = true;
-	var tankmanDanceCutscene:Bool = true;
-
-	var skittlesFallen:Bool = false;
-	var skittlesChance:Int;
-	
-	function new()
-	{
-		super('tankmanBattlefieldSpooky');
-	}
-
-	/**
-	* Replay the cutscene after leaving the song.
-	*/
-	function onCreate(event:ScriptEvent):Void
-	{
-	super.onCreate(event);
-
-		hasPlayedInGameCutscene = false;
-		hasPlayedCutscene = false;
-		cutsceneSkipped = false;
-		canSkipCutscene = false;
-		skittlesFallen = false;
-	}
-
-	public override function onCountdownStart(event:CountdownScriptEvent):Void {
-		super.onCountdownStart(event);
-
-		if(!hasPlayedInGameCutscene && (getGirlfriend().characterId == 'moloch-stress' || getGirlfriend().characterId == 'moloch-tankmen') && PlayState.instance.currentSong.id.toLowerCase() == "stress")
-		{
-		  trace('Pausing countdown to play in game cutscene');
-
-		  hasPlayedInGameCutscene = true;
-
-		  event.cancel(); // CANCEL THE COUNTDOWN!
-
-		  PlayState.instance.camHUD.visible = false;
-		  stressCutscene();
-		}
-		else
-		{
-			hasPlayedInGameCutscene = true;
-			hasPlayedCutscene = true;
-			cutsceneSkipped = true;
-	 	 	canSkipCutscene = true;
-		}
-	}
-
-	var molochKillsThem:ScriptedFlxAtlasSprite;
-	var skipText:FlxText;
-
-	function stressCutscene()
-	{
-		PlayState.instance.isInCutscene = true;
-
-		skipText = new FlxText(936, 618, 0, 'Skip [ ' + PlayState.instance.controls.getDialogueNameFromToken("CUTSCENE_ADVANCE", true) + ' ]', 20);
-		skipText.setFormat(Paths.font('vcr.ttf'), 40, 0xFFFFFFFF, "right", FlxTextBorderStyle.OUTLINE, 0xFF000000);
-		skipText.scrollFactor.set();
-		skipText.borderSize = 2;
-		skipText.alpha = 0;
-		add(skipText);
-
-		skipText.cameras = [PlayState.instance.camCutscene];
-
-		molochKillsThem = new FlxAtlasSprite(776, 288, Paths.animateAtlas("spooky/cutscene/MolochKillin", "week7"));
-		molochKillsThem.zIndex = getGirlfriend().zIndex - 1;
-		molochKillsThem.shader = stageTint;
-		molochKillsThem.color = 0xE8FFF0;
-		molochKillsThem.scale.set(0.7, 0.7);
-		PlayState.instance.currentStage.add(molochKillsThem);
-
-		PlayState.instance.currentStage.refresh();
-
-		getGirlfriend().visible = false;
-		
-		PlayState.instance.resetCamera(false, true);
-		
-		cutsceneMusic = FunkinSound.load(Paths.sound("cutscene/stress/cutsceneSongSpook"), true);
-
-		//tween telports camera to position. follow point needs to be set to stay in place
-		PlayState.instance.currentCameraZoom = 1.1;
-		
-		girlfriendCameraPosX = getGirlfriend().cameraFocusPoint.x;
-		girlfriendCameraPosY = getGirlfriend().cameraFocusPoint.y;
-		FlxG.camera.focusOn(new FlxPoint(girlfriendCameraPosX, girlfriendCameraPosY));
-		PlayState.instance.cameraFollowPoint.setPosition(girlfriendCameraPosX, girlfriendCameraPosY);
-		
-		if (hasPlayedCutscene != true)
-		{
-			PlayState.instance.camCutscene.fade(0xFF000000, 0.5, true, null, true);
-
-			new FlxTimer().start(0.5, _ -> {
-			if (hasPlayedCutscene != true)
-			{
-				molochKillsThem.anim.play("");
-				cutsceneMusic.play(false);
-			}
-
-			
-//man what kinda bozo would add all this stuff? nerd! ...wait thats me-    -gooey
-
- 			new FlxTimer().start(2/24, _ -> {
-					if (cutsceneSkipped == false)
-				{
-     			 cutsceneSoundEffect = FunkinSound.load(Paths.sound('cutscene/stress/spookyCock'), 1.0, false, true, true);
-				}
- 			   });
-			new FlxTimer().start(40/24, _ -> {
-				if (cutsceneSkipped == false)
-				{
-     			 cutsceneSoundEffect = FunkinSound.load(Paths.sound('cutscene/stress/360noScope'), 1.0, false, true, true);
-				}
- 			   });
-					new FlxTimer().start(178/24, _ -> {
-				if (cutsceneSkipped == false)
-				{
-     			 cutsceneSoundEffect = FunkinSound.load(Paths.sound('cutscene/stress/molochIsPISSED'), 1.0, false, true, true);
-				}
- 			   });
-			   	new FlxTimer().start(180/24, _ -> {
-				if (cutsceneSkipped == false)
-				{
-				 	PlayState.instance.tweenCameraToPosition(girlfriendCameraPosX,girlfriendCameraPosY - 50, 3, FlxEase.smoothStepInOut);
-				    PlayState.instance.tweenCameraZoom(1.2, 3, true, FlxEase.smoothStepInOut);
-				}
- 			   });
-			   		new FlxTimer().start(245/24, _ -> {
-				if (cutsceneSkipped == false)
-				{
-				    PlayState.instance.tweenCameraZoom(1, 0.5, true, FlxEase.expoOut);
-				}
- 			   });
-			   		new FlxTimer().start(314/24, _ -> {
-				if (cutsceneSkipped == false)
-				{
-				 	PlayState.instance.tweenCameraToPosition(girlfriendCameraPosX,girlfriendCameraPosY, 0.5, FlxEase.expoOut);
-				    PlayState.instance.tweenCameraZoom(0.9, 3, true, FlxEase.expoOut);
-				}
- 			   });
-			   		new FlxTimer().start(400/24, _ -> {
-				if (cutsceneSkipped == false)
-				{
-					PlayState.instance.camCutscene.fade(0xFF000000, 0, false, null, true);
-				}
- 			   });
-			
-
-
-				new FlxTimer().start(18, _ -> {
-					if (hasPlayedCutscene != true)
-					{
-						PlayState.instance.camCutscene.fade(0xFF000000, 0.5, true, null, true);
-						PlayState.instance.startCountdown();
-						PlayState.instance.isInCutscene = false;
-								
-						FlxTween.tween(skipText, {alpha: 0}, 0.5, {ease: FlxEase.quadOut});
-						molochKillsThem.visible = false;
-						getGirlfriend().visible = true;
-
-						hasPlayedCutscene = true;
-					}
-				});
-			});
-		}
-	}
-
-	function skipCutscene(){
-		PlayState.instance.isInCutscene = false;
-		cutsceneSkipped = true;
-		hasPlayedCutscene = true;
-		PlayState.instance.camCutscene.fade(0xFF000000, 0.5, false, null, true);
-
-		new FlxTimer().start(0.5, _ -> {
-			hasPlayedCutscene = true;
-			PlayState.instance.justUnpaused = true;
-			PlayState.instance.camCutscene.fade(0xFF000000, 0.5, true, null, true);
-
-			cutsceneMusic.stop();
-			cutsceneSoundEffect.stop();
-			
-			PlayState.instance.cancelAllCameraTweens();
-			PlayState.instance.currentCameraZoom = 0.9;
-			FlxG.camera.focusOn(new FlxPoint(girlfriendCameraPosX, girlfriendCameraPosY));
-			PlayState.instance.cameraFollowPoint.setPosition(girlfriendCameraPosX, girlfriendCameraPosY);
-
-			PlayState.instance.startCountdown();
-
-			skipText.visible = false;
-			molochKillsThem.visible = false;
-			getGirlfriend().visible = true;
-		});
-
-	}
-
-	override function buildStage()
-	{
-		super.buildStage();
-
-		switchedToMonster = false;
-
-		stageTint = new AdjustColorShader();
-		
-		if (FlxG.save.data.spookyShaders != false)
-		{
-			stageTint.brightness = -15;
-			stageTint.saturation = -15;
-		}
-		
-		getNamedProp('moon').shader = stageTint;
-		getNamedProp('tankSky').shader = stageTint;
-		getNamedProp('bottomLighting').shader = stageTint;
-		getNamedProp('tankMountains').shader = stageTint;
-		getNamedProp('tankBuildings').shader = stageTint;
-		getNamedProp('tankRuins').shader = stageTint;
-		getNamedProp('clouds').shader = stageTint;
-		getNamedProp('smokeLeft').shader = stageTint;
-		getNamedProp('smokeRight').shader = stageTint;
-		getNamedProp('watchtower').shader = stageTint;
-		getNamedProp('tankRolling').shader = stageTint;
-		getNamedProp('tankGround').shader = stageTint;
-		getNamedProp('tankmanAudience0').shader = stageTint;
-		getNamedProp('tankmanAudience2').shader = stageTint;
-		getNamedProp('tankmanAudience3').shader = stageTint;
-		getNamedProp('tankmanAudience4').shader = stageTint;
-		getNamedProp('tankmanAudience5').shader = stageTint;
-		getNamedProp('tankmanAudience1').shader = stageTint;
-
-		getNamedProp('weirdGlow').visible = false;
-		
-		if (FlxG.save.data.spookyShaders != false) getNamedProp('weirdGlow').blend = 0;
-
-		scarecrow = new FlxAtlasSprite(1300, 220, Paths.animateAtlas("spooky/scarecrow", "week7"));
-		scarecrow.anim.play("");
-		scarecrow.anim.onComplete.add(function() {
-		  scarecrow.anim.play("");
-		});
-		scarecrow.scrollFactor.set(0.8, 0.8);
-		scarecrow.zIndex = 39;
-		//scarecrow.shader = stageTint;
-		PlayState.instance.currentStage.add(scarecrow);
-
-		windmill = new FlxAtlasSprite(900, -200, Paths.animateAtlas("spooky/windmill", "week7"));
-		windmill.anim.play("");
-		windmill.anim.onComplete.add(function() {
-		  windmill.anim.play("");
-		});
-		windmill.scrollFactor.set(0.1, 0.1);
-		windmill.zIndex = 10;
-		windmill.shader = stageTint;
-		PlayState.instance.currentStage.add(windmill);
-
-		// Give the clouds a random position, and a velocity to make them move.
-		var clouds = getNamedProp('clouds');
-		clouds.active = true;
-		clouds.x = FlxG.random.int(-700, -100);
-		clouds.y = FlxG.random.int(-20, 20);
-		clouds.velocity.x = FlxG.random.float(5, 15);
-
-		tankAngle = FlxG.random.int(-90, 45);
-		tankSpeed = FlxG.random.float(5, 7);
-
-		if (FlxG.save.data.spookyShaders != false) getNamedProp('bottomLighting').blend = 0;
-
-		gotCameraPos = false;
-
-		mistBack = new FlxBackdrop(Paths.image('spooky/redMist'), 0x01);
-		mistBack.setPosition(0, 100);
-		mistBack.scrollFactor.set(0.7, 0.7);
-		mistBack.zIndex = 39;
-		if (FlxG.save.data.spookyShaders != false) mistBack.blend = 0;
-		mistBack.alpha = 0.6;
-		mistBack.velocity.x = 0;
-		mistBack.visible = false;
-
-		PlayState.instance.currentStage.add(mistBack);
-
-		mistFront = new FlxBackdrop(Paths.image('spooky/redMist'), 0x01);
-		mistFront.setPosition(0, 500);
-		mistFront.scrollFactor.set(1.3, 1.3);
-		mistFront.zIndex = 2999;
-		if (FlxG.save.data.spookyShaders != false) mistFront.blend = 0;
-		mistFront.alpha = 1;
-		mistFront.flipX = true;
-		mistFront.velocity.x = 0;
-		mistFront.visible = false;
-
-		PlayState.instance.currentStage.add(mistFront);
-		PlayState.instance.currentStage.refresh(); // Apply z-index.
-
-		weirdPlayerTint = new AdjustColorShader();
-		weirdGuyTint = new AdjustColorShader();
-
-		if (FlxG.save.data.spookyShaders != false)
-		{
-			weirdPlayerTint.brightness = -88;
-			weirdPlayerTint.contrast = -1;
-			weirdPlayerTint.saturation = -2;
-			weirdPlayerTint.hue = -40;
-
-			weirdGuyTint.brightness = -62;
-			weirdGuyTint.contrast = -16;
-			weirdGuyTint.saturation = 0;
-			weirdGuyTint.hue = -28;
-		}
-
-		mainWeirdTint = new AdjustColorShader();
-		weirdMoonTint = new AdjustColorShader();
-		weirdSmokeTint = new AdjustColorShader();
-		weirdMountainsTint = new AdjustColorShader();
-		weirdSkyTint = new AdjustColorShader();
-		
-		if (FlxG.save.data.spookyShaders != false)
-		{
-			mainWeirdTint.brightness = -74;
-			mainWeirdTint.contrast = 0;
-			mainWeirdTint.saturation = 44;
-			mainWeirdTint.hue = -137;
-
-			weirdMoonTint.brightness = -100;
-			weirdMoonTint.contrast = 14;
-			weirdMoonTint.saturation = 42;
-			weirdMoonTint.hue = -76;
-
-			weirdSmokeTint.brightness = -79;
-			weirdSmokeTint.contrast = 0;
-			weirdSmokeTint.saturation = 92;
-			weirdSmokeTint.hue = -151;
-
-			weirdMountainsTint.brightness = -71;
-			weirdMountainsTint.contrast = -16;
-			weirdMountainsTint.saturation = 43;
-			weirdMountainsTint.hue = -143;
-
-			weirdSkyTint.brightness = -82;
-			weirdSkyTint.contrast = -14;
-			weirdSkyTint.saturation = 30;
-			weirdSkyTint.hue = -128;
-		}
-
-		skittlesChance = FlxG.random.int(1, 10);
-	}
-
-	var _timer:Float = 0;
-
-	function onUpdate(event:UpdateScriptEvent):Void
-	{
-		super.onUpdate(event);
-		moveTank(event.elapsed);
-
-		if (getDad().idleSuffix == '-spooky' && getDad().danceEvery != 1) getDad().danceEvery = 1;
-
-		//skittles falling
-		if (FlxG.sound?.music?.time >= (FlxG.sound?.music?.length / 2) && skittlesFallen == false && PlayState.instance.cameraFollowPoint.x == dadCameraPosX && PlayState.instance.cameraFollowPoint.y == dadCameraPosY && skittlesChance == 1)
-		{
-			skittlesFallen = true;
-
-			getNamedProp('watchtower').idleSuffix = '-fallEvent';
-			getNamedProp('watchtower').danceEvery = 1000000000000;
-
-			new FlxTimer().start(4.3333, function(tmr)
-			{
-				getNamedProp('watchtower').idleSuffix = '';
-				getNamedProp('watchtower').danceEvery = 1;
-			});
-		}
-
-		if (getBoyfriend() != null && hasPlayedCutscene != true && spookyDanceCutscene == true) 
-		{
-			getBoyfriend().dance();
-
-			spookyDanceCutscene = false;
-
-			new FlxTimer().start(0.5, _ -> {
-				spookyDanceCutscene = true;
- 			   });
-		}
-
-		if (getDad() != null && hasPlayedCutscene != true && tankmanDanceCutscene == true) 
-		{
-			getDad().dance();
-
-			tankmanDanceCutscene = false;
-
-			new FlxTimer().start(1, _ -> {
-				tankmanDanceCutscene = true;
- 			   });
-		}
-		
-		_timer += event.elapsed;
-		mistBack.y = 100 - (Math.sin(_timer*0.35)*70);
-		mistFront.y = 500 + (Math.sin(_timer*0.3)*80);
-
-		if (PlayState.instance.controls.CUTSCENE_ADVANCE && cutsceneSkipped == false)
-		{
-			if(canSkipCutscene == false)
-			{
-				trace('cant skip yet!');
-				FlxTween.tween(skipText, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
-				new FlxTimer().start(0.5, _ -> {
-					canSkipCutscene = true;
-					trace('can skip!');
-				});
-			}
-		}
-		
-		if (PlayState.instance.iconP2.characterId == 'monster' && switchedToMonster == false)
-		{
-			if (FlxG.save.data.spookyShaders != false) 
-			{
-				getNamedProp('moon').shader = weirdMoonTint;
-				getNamedProp('tankSky').shader = weirdSkyTint;
-
-				getNamedProp('tankMountains').shader = weirdMountainsTint;
-
-				getNamedProp('clouds').shader = weirdSmokeTint;
-				getNamedProp('smokeLeft').shader = weirdSmokeTint;
-				getNamedProp('smokeRight').shader = weirdSmokeTint;
-
-				getNamedProp('tankBuildings').shader = mainWeirdTint;
-				getNamedProp('tankRuins').shader = mainWeirdTint;
-				getNamedProp('watchtower').shader = mainWeirdTint;
-				getNamedProp('tankGround').shader = mainWeirdTint;
-				windmill.shader = mainWeirdTint;
-
-				getNamedProp('weirdGlow').visible = true;
-			}
-			else
-			{
-				getNamedProp('moon').color = 0xFFFF0000;
-				getNamedProp('tankSky').color = 0xFFFF0000;
-
-				getNamedProp('tankMountains').color = 0xFFFF0000;
-
-				getNamedProp('clouds').color = 0xFFFF0000;
-				getNamedProp('smokeLeft').color = 0xFFFF0000;
-				getNamedProp('smokeRight').color = 0xFFFF0000;
-
-				getNamedProp('tankBuildings').color = 0xFFFF0000;
-				getNamedProp('tankRuins').color = 0xFFFF0000;
-				getNamedProp('watchtower').color = 0xFFFF0000;
-				getNamedProp('tankGround').color = 0xFFFF0000;
-				windmill.color = 0xFFFF0000;
-			}
-			
-			getNamedProp('tankGround').loadGraphic(Paths.image('spooky/tankGroundWeird'));
-			getNamedProp('watchtower').idleSuffix = '-weird';
-			
-			scarecrow.alpha = 0;
-			getNamedProp('tankRolling').alpha = 0;
-			getNamedProp('bottomLighting').visible = false;
-			
-			mistBack.visible = true;
-			mistFront.visible = true;
-			mistBack.velocity.x = -172;
-			mistFront.velocity.x = 172;
-			
-			if (FlxG.save.data.spookyShaders != false) 
-			{
-				getBoyfriend().shader = weirdPlayerTint;
-				getBoyfriend().color = 0xFFFFFF;
-
-				getDad().shader = weirdGuyTint;
-				getDad().color = 0xFFFFFF;
-			}
-			else
-			{
-				getBoyfriend().color = 0xFFA8B3;
-				getDad().color = 0xFFA8B3;
-			}
-
-
-			getGirlfriend().alpha = 0;
-
-			switchedToMonster = true;
-		}
-
-		if(PlayState.instance.controls.CUTSCENE_ADVANCE && cutsceneSkipped == false && canSkipCutscene == true)
-		{
-			hasPlayedCutscene = true;
-			skipCutscene();
-			trace('skipped');
-		}
-		
-		//extra stuff to correct the offsets getting screwed up from the sprites being scaled down
-		if (getBoyfriend() != null && getGirlfriend() != null && getDad() != null)
-		{
-			
-			if (PlayState.instance.currentStage.getBoyfriend().shader == null)
-			{
-				PlayState.instance.currentStage.getBoyfriend().shader = stageTint;
-				PlayState.instance.currentStage.getBoyfriend().color = 0xE8FFF0;
-				getGirlfriend().shader = stageTint;
-				getGirlfriend().color = 0xE8FFF0;
-				PlayState.instance.currentStage.getDad().shader = stageTint;
-				PlayState.instance.currentStage.getDad().color = 0xE8FFF0;
-			}
-
-			if (gotCameraPos == false)
-			{
-				boyfriendCameraPosX = getBoyfriend().cameraFocusPoint.x;
-				boyfriendCameraPosY = getBoyfriend().cameraFocusPoint.y;
-				girlfriendCameraPosX = getGirlfriend().cameraFocusPoint.x;
-				girlfriendCameraPosY = getGirlfriend().cameraFocusPoint.y;
-				dadCameraPosX = getDad().cameraFocusPoint.x;
-				dadCameraPosY = getDad().cameraFocusPoint.y;
-
-				gotCameraPos = true;
-			}
-			
-			getBoyfriend().y = 400;
-			getDad().y = 390;
-
-			getGirlfriend().x = 350;
-			getGirlfriend().y = 120;
-			//getGirlfriend().alpha = 0;
-
-			if (switchedToMonster == true)
-			{
-				getBoyfriend().x = 940;
-				getDad().x = 190;
-
-				getBoyfriend().cameraFocusPoint.x = boyfriendCameraPosX -100;
-			}
-			else
-			{
-				getBoyfriend().x = 1100;
-				getDad().x = 50;
-
-				getBoyfriend().cameraFocusPoint.x = boyfriendCameraPosX;
-			}
-			getDad().cameraFocusPoint.x = dadCameraPosX;
-			getDad().cameraFocusPoint.y = dadCameraPosY;
-			getBoyfriend().cameraFocusPoint.y = boyfriendCameraPosY;
-			getGirlfriend().cameraFocusPoint.x = girlfriendCameraPosX;
-			getGirlfriend().cameraFocusPoint.y = girlfriendCameraPosY;
-		}
-	}
-
-	var tankMoving:Bool = false;
-	var tankAngle:Float = FlxG.random.int(-90, 45);
-	var tankSpeed:Float = FlxG.random.float(5, 7);
-	var tankX:Float = 540;
-
-	function onBeatHit(event:SongTimeScriptEvent):Void
-	{
-		super.onBeatHit(event);
-	}
-
-	function moveTank(elapsed:Float):Void
-	{
-		var daAngleOffset:Float = 1;
-		tankAngle += elapsed * tankSpeed;
-
-		var tankRolling = getNamedProp('tankRolling');
-		tankRolling.angle = tankAngle - 90 + 15;
-		tankRolling.x = tankX + Math.cos(FlxAngle.asRadians((tankAngle * daAngleOffset) + 180)) * 1500;
-		tankRolling.y = 1350 + Math.sin(FlxAngle.asRadians((tankAngle * daAngleOffset) + 180)) * 1100;
-	}
-
-	function onSongRetry(event:ScriptEvent)
-	{
-		super.onSongRetry(event);
-		
-        PlayState.instance.camHUD.alpha = 1;
-		
-		// resets the clouds!
-		var clouds = getNamedProp('clouds');
-		clouds.active = true;
-		clouds.x = FlxG.random.int(-700, -100);
-		clouds.y = FlxG.random.int(-20, 20);
-		clouds.velocity.x = FlxG.random.float(5, 15);
-		
-		getDad().danceEvery = 4;
-		getDad().idleSuffix = '';
-			
-		getNamedProp('watchtower').idleSuffix = '';
-		getNamedProp('watchtower').danceEvery = 1;
-		getNamedProp('watchtower').animation.play('idle');
-		skittlesFallen = false;
-		skittlesChance = FlxG.random.int(1, 10);
-
-		if (switchedToMonster == true)
-		{
-			getDad().scale.set(0.7, 0.7);
-			
-			if (FlxG.save.data.spookyShaders != false) 
-			{
-				getNamedProp('moon').shader = stageTint;
-				getNamedProp('tankSky').shader = stageTint;
-
-				getNamedProp('tankMountains').shader = stageTint;
-
-				getNamedProp('clouds').shader = stageTint;
-				getNamedProp('smokeLeft').shader = stageTint;
-				getNamedProp('smokeRight').shader = stageTint;
-
-				getNamedProp('tankBuildings').shader = stageTint;
-				getNamedProp('tankRuins').shader = stageTint;
-				getNamedProp('watchtower').shader = stageTint;
-				getNamedProp('tankGround').shader = stageTint;
-				windmill.shader = stageTint;
-			}
-			else
-			{
-				getNamedProp('moon').color = 0xFFFFFFFF;
-				getNamedProp('tankSky').color = 0xFFFFFFFF;
-
-				getNamedProp('tankMountains').color = 0xFFFFFFFF;
-
-				getNamedProp('clouds').color = 0xFFFFFFFF;
-				getNamedProp('smokeLeft').color = 0xFFFFFFFF;
-				getNamedProp('smokeRight').color = 0xFFFFFFFF;
-
-				getNamedProp('tankBuildings').color = 0xFFFFFFFF;
-				getNamedProp('tankRuins').color = 0xFFFFFFFF;
-				getNamedProp('watchtower').color = 0xFFFFFFFF;
-				getNamedProp('tankGround').color = 0xFFFFFFFF;
-				windmill.color = 0xFFFFFFFF;
-			}
-			getNamedProp('tankGround').loadGraphic(Paths.image('spooky/tankGround'));
-
-			scarecrow.alpha = 1;
-			getNamedProp('tankRolling').alpha = 1;
-			getNamedProp('tankmanAudience0').alpha = 1;
-			getNamedProp('tankmanAudience2').alpha = 1;
-			getNamedProp('tankmanAudience3').alpha = 1;
-			getNamedProp('tankmanAudience4').alpha = 1;
-			getNamedProp('tankmanAudience5').alpha = 1;
-			getNamedProp('tankmanAudience1').alpha = 1;
-
-			getNamedProp('bottomLighting').visible = true;
-			getNamedProp('weirdGlow').visible = false;
-			
-			mistBack.visible = false;
-			mistFront.visible = false;
-			mistBack.velocity.x = 0;
-			mistFront.velocity.x = 0;
-
-			getBoyfriend().shader = stageTint;
-			getBoyfriend().color = 0xE8FFF0;
-
-			getDad().shader = stageTint;
-			getDad().color = 0xE8FFF0;
-
-			getGirlfriend().alpha = 1;
-
-			switchedToMonster = false;
-		}
-	}
-
-	override function onGameOver(event:ScriptEvent):Void {
-		super.onGameOver(event);
-
-		PlayState.instance.currentStage.getBoyfriend().shader = null;
-		PlayState.instance.currentStage.getBoyfriend().color = 0xFFFFFF;
-
-        PlayState.instance.iconP2.characterId = 'tankman-spooky';
-        PlayState.instance.iconP2.loadCharacter(PlayState.instance.iconP2.characterId);
-	}
-
-    public override function onSongEvent(scriptEvent:SongEventScriptEvent)
+  var boyfriendCameraPosX:Float;
+  var boyfriendCameraPosY:Float;
+  var girlfriendCameraPosX:Float;
+  var girlfriendCameraPosY:Float;
+  var dadCameraPosX:Float;
+  var dadCameraPosY:Float;
+
+  var gotCameraPos:Bool = false;
+
+  var stageTint:AdjustColorShader;
+
+  var weirdGuyTint:AdjustColorShader;
+  var weirdPlayerTint:AdjustColorShader;
+
+  var mainWeirdTint:AdjustColorShader;
+  var weirdMoonTint:AdjustColorShader;
+  var weirdSmokeTint:AdjustColorShader;
+  var weirdMountainsTint:AdjustColorShader;
+  var weirdSkyTint:AdjustColorShader;
+
+  var notzardy:FlxAtlasSprite;
+  var windmill:FlxAtlasSprite;
+
+  var hasPlayedInGameCutscene:Bool = false;
+  var hasPlayedCutscene:Bool = false;
+  var cutsceneSkipped:Bool = false;
+  var canSkipCutscene:Bool = false;
+  var cutsceneMusic:FunkinSound;
+
+  var mistBack:FlxBackdrop;
+  var mistFront:FlxBackdrop;
+
+  var switchedToMonster:Bool = false;
+
+  var spookyDanceCutscene:Bool = true;
+  var tankmanDanceCutscene:Bool = true;
+
+  var skittlesFallen:Bool = false;
+  var skittlesChance:Int;
+
+  function new()
+  {
+    super('tankmanBattlefieldSpooky');
+  }
+
+  /**
+   * Replay the cutscene after leaving the song.
+   */
+  function onCreate(event:ScriptEvent):Void
+  {
+    super.onCreate(event);
+
+    hasPlayedInGameCutscene = false;
+    hasPlayedCutscene = false;
+    cutsceneSkipped = false;
+    canSkipCutscene = false;
+    skittlesFallen = false;
+  }
+
+  public override function onCountdownStart(event:CountdownScriptEvent):Void
+  {
+    super.onCountdownStart(event);
+
+    if (!hasPlayedInGameCutscene
+      && (getGirlfriend().characterId == 'moloch-stress' || getGirlfriend().characterId == 'moloch-tankmen')
+      && PlayState.instance.currentSong.id.toLowerCase() == "stress")
     {
-        super.onSongEvent(scriptEvent);
+      trace('Pausing countdown to play in game cutscene');
 
-        if (scriptEvent.eventData.eventKind == "changeIdleSuffix")
+      hasPlayedInGameCutscene = true;
+
+      event.cancel(); // CANCEL THE COUNTDOWN!
+
+      PlayState.instance.camHUD.visible = false;
+      stressCutscene();
+    }
+    else
+    {
+      hasPlayedInGameCutscene = true;
+      hasPlayedCutscene = true;
+      cutsceneSkipped = true;
+      canSkipCutscene = true;
+    }
+  }
+
+  var molochKillsThem:ScriptedFlxAtlasSprite;
+  var skipText:FlxText;
+
+  function stressCutscene()
+  {
+    PlayState.instance.isInCutscene = true;
+
+    skipText = new FlxText(936, 618, 0, 'Skip [ ' + PlayState.instance.controls.getDialogueNameFromToken("CUTSCENE_ADVANCE", true) + ' ]', 20);
+    skipText.setFormat(Paths.font('vcr.ttf'), 40, 0xFFFFFFFF, "right", FlxTextBorderStyle.OUTLINE, 0xFF000000);
+    skipText.scrollFactor.set();
+    skipText.borderSize = 2;
+    skipText.alpha = 0;
+    add(skipText);
+
+    skipText.cameras = [PlayState.instance.camCutscene];
+
+    molochKillsThem = new FlxAtlasSprite(776, 288, Paths.animateAtlas("spooky/cutscene/MolochKillin", "week7"));
+    molochKillsThem.zIndex = getGirlfriend().zIndex - 1;
+    molochKillsThem.shader = stageTint;
+    molochKillsThem.color = 0xE8FFF0;
+    molochKillsThem.scale.set(0.7, 0.7);
+    PlayState.instance.currentStage.add(molochKillsThem);
+
+    PlayState.instance.currentStage.refresh();
+
+    getGirlfriend().visible = false;
+
+    PlayState.instance.resetCamera(false, true);
+
+    cutsceneMusic = FunkinSound.load(Paths.sound("cutscene/stress/cutsceneSongSpook"), true);
+
+    // tween telports camera to position. follow point needs to be set to stay in place
+    PlayState.instance.currentCameraZoom = 1.1;
+
+    girlfriendCameraPosX = getGirlfriend().cameraFocusPoint.x;
+    girlfriendCameraPosY = getGirlfriend().cameraFocusPoint.y;
+    FlxG.camera.focusOn(new FlxPoint(girlfriendCameraPosX, girlfriendCameraPosY));
+    PlayState.instance.cameraFollowPoint.setPosition(girlfriendCameraPosX, girlfriendCameraPosY);
+
+    if (hasPlayedCutscene != true)
+    {
+      PlayState.instance.camCutscene.fade(0xFF000000, 0.5, true, null, true);
+
+      new FlxTimer().start(0.5, _ -> {
+        if (hasPlayedCutscene != true)
         {
-			getDad().idleSuffix = '-spooky';
-			getDad().danceEvery = 1;
+          molochKillsThem.anim.play("");
+          cutsceneMusic.play(false);
         }
+
+        // man what kinda bozo would add all this stuff? nerd! ...wait thats me-    -gooey
+
+        new FlxTimer().start(2 / 24, _ -> {
+          if (cutsceneSkipped == false)
+          {
+            cutsceneSoundEffect = FunkinSound.load(Paths.sound('cutscene/stress/spookyCock'), 1.0, false, true, true);
+          }
+        });
+        new FlxTimer().start(40 / 24, _ -> {
+          if (cutsceneSkipped == false)
+          {
+            cutsceneSoundEffect = FunkinSound.load(Paths.sound('cutscene/stress/360noScope'), 1.0, false, true, true);
+          }
+        });
+        new FlxTimer().start(178 / 24, _ -> {
+          if (cutsceneSkipped == false)
+          {
+            cutsceneSoundEffect = FunkinSound.load(Paths.sound('cutscene/stress/molochIsPISSED'), 1.0, false, true, true);
+          }
+        });
+        new FlxTimer().start(180 / 24, _ -> {
+          if (cutsceneSkipped == false)
+          {
+            PlayState.instance.tweenCameraToPosition(girlfriendCameraPosX, girlfriendCameraPosY - 50, 3, FlxEase.smoothStepInOut);
+            PlayState.instance.tweenCameraZoom(1.2, 3, true, FlxEase.smoothStepInOut);
+          }
+        });
+        new FlxTimer().start(245 / 24, _ -> {
+          if (cutsceneSkipped == false)
+          {
+            PlayState.instance.tweenCameraZoom(1, 0.5, true, FlxEase.expoOut);
+          }
+        });
+        new FlxTimer().start(314 / 24, _ -> {
+          if (cutsceneSkipped == false)
+          {
+            PlayState.instance.tweenCameraToPosition(girlfriendCameraPosX, girlfriendCameraPosY, 0.5, FlxEase.expoOut);
+            PlayState.instance.tweenCameraZoom(0.9, 3, true, FlxEase.expoOut);
+          }
+        });
+        new FlxTimer().start(400 / 24, _ -> {
+          if (cutsceneSkipped == false)
+          {
+            PlayState.instance.camCutscene.fade(0xFF000000, 0, false, null, true);
+          }
+        });
+
+        new FlxTimer().start(18, _ -> {
+          if (hasPlayedCutscene != true)
+          {
+            PlayState.instance.camCutscene.fade(0xFF000000, 0.5, true, null, true);
+            PlayState.instance.startCountdown();
+            PlayState.instance.isInCutscene = false;
+
+            FlxTween.tween(skipText, {alpha: 0}, 0.5, {ease: FlxEase.quadOut});
+            molochKillsThem.visible = false;
+            getGirlfriend().visible = true;
+
+            hasPlayedCutscene = true;
+          }
+        });
+      });
+    }
+  }
+
+  function skipCutscene()
+  {
+    PlayState.instance.isInCutscene = false;
+    cutsceneSkipped = true;
+    hasPlayedCutscene = true;
+    PlayState.instance.camCutscene.fade(0xFF000000, 0.5, false, null, true);
+
+    new FlxTimer().start(0.5, _ -> {
+      hasPlayedCutscene = true;
+      PlayState.instance.justUnpaused = true;
+      PlayState.instance.camCutscene.fade(0xFF000000, 0.5, true, null, true);
+
+      cutsceneMusic.stop();
+      cutsceneSoundEffect.stop();
+
+      PlayState.instance.cancelAllCameraTweens();
+      PlayState.instance.currentCameraZoom = 0.9;
+      FlxG.camera.focusOn(new FlxPoint(girlfriendCameraPosX, girlfriendCameraPosY));
+      PlayState.instance.cameraFollowPoint.setPosition(girlfriendCameraPosX, girlfriendCameraPosY);
+
+      PlayState.instance.startCountdown();
+
+      skipText.visible = false;
+      molochKillsThem.visible = false;
+      getGirlfriend().visible = true;
+    });
+  }
+
+  override function buildStage()
+  {
+    super.buildStage();
+
+    switchedToMonster = false;
+
+    stageTint = new AdjustColorShader();
+
+    if (FlxG.save.data.spookyShaders != false)
+    {
+      stageTint.brightness = -15;
+      stageTint.saturation = -15;
     }
 
-	/**
-	 * If your stage uses additional assets not specified in the JSON,
-	 * make sure to specify them like this, or they won't get cached in the loading screen.
-	 */
-	function fetchAssetPaths():Array<String>
-	{
-		var results:Array<String> = super.fetchAssetPaths();
-		
-		results.push(Paths.sound("cutscene/stress/weirdAppearsSound"));
-		results.push(Paths.sound("cutscene/stress/cutsceneSongSpook"));
-		results.push(Paths.sound("cutscene/stress/spookyCock"));
-		results.push(Paths.sound("cutscene/stress/360noScope"));
-		results.push(Paths.sound("cutscene/stress/molochIsPISSED"));
-		results.push(Paths.animateAtlas("spooky/cutscene/MolochKillin", "week7"));
-		results.push(Paths.animateAtlas("spooky/redMist", "week7"));
+    getNamedProp('moon').shader = stageTint;
+    getNamedProp('tankSky').shader = stageTint;
+    getNamedProp('bottomLighting').shader = stageTint;
+    getNamedProp('tankMountains').shader = stageTint;
+    getNamedProp('tankBuildings').shader = stageTint;
+    getNamedProp('tankRuins').shader = stageTint;
+    getNamedProp('clouds').shader = stageTint;
+    getNamedProp('smokeLeft').shader = stageTint;
+    getNamedProp('smokeRight').shader = stageTint;
+    getNamedProp('watchtower').shader = stageTint;
+    getNamedProp('tankRolling').shader = stageTint;
+    getNamedProp('tankGround').shader = stageTint;
+    getNamedProp('tankmanAudience0').shader = stageTint;
+    getNamedProp('tankmanAudience2').shader = stageTint;
+    getNamedProp('tankmanAudience3').shader = stageTint;
+    getNamedProp('tankmanAudience4').shader = stageTint;
+    getNamedProp('tankmanAudience5').shader = stageTint;
+    getNamedProp('tankmanAudience1').shader = stageTint;
 
-		return results;
-	}
+    getNamedProp('weirdGlow').visible = false;
+
+    if (FlxG.save.data.spookyShaders != false) getNamedProp('weirdGlow').blend = 0;
+
+    scarecrow = new FlxAtlasSprite(1300, 220, Paths.animateAtlas("spooky/scarecrow", "week7"));
+    scarecrow.anim.play("");
+    scarecrow.anim.onComplete.add(function() {
+      scarecrow.anim.play("");
+    });
+    scarecrow.scrollFactor.set(0.8, 0.8);
+    scarecrow.zIndex = 39;
+    // scarecrow.shader = stageTint;
+    PlayState.instance.currentStage.add(scarecrow);
+
+    windmill = new FlxAtlasSprite(900, -200, Paths.animateAtlas("spooky/windmill", "week7"));
+    windmill.anim.play("");
+    windmill.anim.onComplete.add(function() {
+      windmill.anim.play("");
+    });
+    windmill.scrollFactor.set(0.1, 0.1);
+    windmill.zIndex = 10;
+    windmill.shader = stageTint;
+    PlayState.instance.currentStage.add(windmill);
+
+    // Give the clouds a random position, and a velocity to make them move.
+    var clouds = getNamedProp('clouds');
+    clouds.active = true;
+    clouds.x = FlxG.random.int(-700, -100);
+    clouds.y = FlxG.random.int(-20, 20);
+    clouds.velocity.x = FlxG.random.float(5, 15);
+
+    tankAngle = FlxG.random.int(-90, 45);
+    tankSpeed = FlxG.random.float(5, 7);
+
+    if (FlxG.save.data.spookyShaders != false) getNamedProp('bottomLighting').blend = 0;
+
+    gotCameraPos = false;
+
+    mistBack = new FlxBackdrop(Paths.image('spooky/redMist'), 0x01);
+    mistBack.setPosition(0, 100);
+    mistBack.scrollFactor.set(0.7, 0.7);
+    mistBack.zIndex = 39;
+    if (FlxG.save.data.spookyShaders != false) mistBack.blend = 0;
+    mistBack.alpha = 0.6;
+    mistBack.velocity.x = 0;
+    mistBack.visible = false;
+
+    PlayState.instance.currentStage.add(mistBack);
+
+    mistFront = new FlxBackdrop(Paths.image('spooky/redMist'), 0x01);
+    mistFront.setPosition(0, 500);
+    mistFront.scrollFactor.set(1.3, 1.3);
+    mistFront.zIndex = 2999;
+    if (FlxG.save.data.spookyShaders != false) mistFront.blend = 0;
+    mistFront.alpha = 1;
+    mistFront.flipX = true;
+    mistFront.velocity.x = 0;
+    mistFront.visible = false;
+
+    PlayState.instance.currentStage.add(mistFront);
+    PlayState.instance.currentStage.refresh(); // Apply z-index.
+
+    weirdPlayerTint = new AdjustColorShader();
+    weirdGuyTint = new AdjustColorShader();
+
+    if (FlxG.save.data.spookyShaders != false)
+    {
+      weirdPlayerTint.brightness = -88;
+      weirdPlayerTint.contrast = -1;
+      weirdPlayerTint.saturation = -2;
+      weirdPlayerTint.hue = -40;
+
+      weirdGuyTint.brightness = -62;
+      weirdGuyTint.contrast = -16;
+      weirdGuyTint.saturation = 0;
+      weirdGuyTint.hue = -28;
+    }
+
+    mainWeirdTint = new AdjustColorShader();
+    weirdMoonTint = new AdjustColorShader();
+    weirdSmokeTint = new AdjustColorShader();
+    weirdMountainsTint = new AdjustColorShader();
+    weirdSkyTint = new AdjustColorShader();
+
+    if (FlxG.save.data.spookyShaders != false)
+    {
+      mainWeirdTint.brightness = -74;
+      mainWeirdTint.contrast = 0;
+      mainWeirdTint.saturation = 44;
+      mainWeirdTint.hue = -137;
+
+      weirdMoonTint.brightness = -100;
+      weirdMoonTint.contrast = 14;
+      weirdMoonTint.saturation = 42;
+      weirdMoonTint.hue = -76;
+
+      weirdSmokeTint.brightness = -79;
+      weirdSmokeTint.contrast = 0;
+      weirdSmokeTint.saturation = 92;
+      weirdSmokeTint.hue = -151;
+
+      weirdMountainsTint.brightness = -71;
+      weirdMountainsTint.contrast = -16;
+      weirdMountainsTint.saturation = 43;
+      weirdMountainsTint.hue = -143;
+
+      weirdSkyTint.brightness = -82;
+      weirdSkyTint.contrast = -14;
+      weirdSkyTint.saturation = 30;
+      weirdSkyTint.hue = -128;
+    }
+
+    skittlesChance = FlxG.random.int(1, 10);
+  }
+
+  var _timer:Float = 0;
+
+  function onUpdate(event:UpdateScriptEvent):Void
+  {
+    super.onUpdate(event);
+    moveTank(event.elapsed);
+
+    if (getDad().idleSuffix == '-spooky' && getDad().danceEvery != 1) getDad().danceEvery = 1;
+
+    // skittles falling
+    if (FlxG.sound?.music?.time >= (FlxG.sound?.music?.length / 2)
+      && skittlesFallen == false
+      && PlayState.instance.cameraFollowPoint.x == dadCameraPosX
+      && PlayState.instance.cameraFollowPoint.y == dadCameraPosY
+      && skittlesChance == 1)
+    {
+      skittlesFallen = true;
+
+      getNamedProp('watchtower').idleSuffix = '-fallEvent';
+      getNamedProp('watchtower').danceEvery = 1000000000000;
+
+      new FlxTimer().start(4.3333, function(tmr) {
+        getNamedProp('watchtower').idleSuffix = '';
+        getNamedProp('watchtower').danceEvery = 1;
+      });
+    }
+
+    if (getBoyfriend() != null && hasPlayedCutscene != true && spookyDanceCutscene == true)
+    {
+      getBoyfriend().dance();
+
+      spookyDanceCutscene = false;
+
+      new FlxTimer().start(0.5, _ -> {
+        spookyDanceCutscene = true;
+      });
+    }
+
+    if (getDad() != null && hasPlayedCutscene != true && tankmanDanceCutscene == true)
+    {
+      getDad().dance();
+
+      tankmanDanceCutscene = false;
+
+      new FlxTimer().start(1, _ -> {
+        tankmanDanceCutscene = true;
+      });
+    }
+
+    _timer += event.elapsed;
+    mistBack.y = 100 - (Math.sin(_timer * 0.35) * 70);
+    mistFront.y = 500 + (Math.sin(_timer * 0.3) * 80);
+
+    if (PlayState.instance.controls.CUTSCENE_ADVANCE && cutsceneSkipped == false)
+    {
+      if (canSkipCutscene == false)
+      {
+        trace('cant skip yet!');
+        FlxTween.tween(skipText, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
+        new FlxTimer().start(0.5, _ -> {
+          canSkipCutscene = true;
+          trace('can skip!');
+        });
+      }
+    }
+
+    if (PlayState.instance.iconP2.characterId == 'monster' && switchedToMonster == false)
+    {
+      if (FlxG.save.data.spookyShaders != false)
+      {
+        getNamedProp('moon').shader = weirdMoonTint;
+        getNamedProp('tankSky').shader = weirdSkyTint;
+
+        getNamedProp('tankMountains').shader = weirdMountainsTint;
+
+        getNamedProp('clouds').shader = weirdSmokeTint;
+        getNamedProp('smokeLeft').shader = weirdSmokeTint;
+        getNamedProp('smokeRight').shader = weirdSmokeTint;
+
+        getNamedProp('tankBuildings').shader = mainWeirdTint;
+        getNamedProp('tankRuins').shader = mainWeirdTint;
+        getNamedProp('watchtower').shader = mainWeirdTint;
+        getNamedProp('tankGround').shader = mainWeirdTint;
+        windmill.shader = mainWeirdTint;
+
+        getNamedProp('weirdGlow').visible = true;
+      }
+      else
+      {
+        getNamedProp('moon').color = 0xFFFF0000;
+        getNamedProp('tankSky').color = 0xFFFF0000;
+
+        getNamedProp('tankMountains').color = 0xFFFF0000;
+
+        getNamedProp('clouds').color = 0xFFFF0000;
+        getNamedProp('smokeLeft').color = 0xFFFF0000;
+        getNamedProp('smokeRight').color = 0xFFFF0000;
+
+        getNamedProp('tankBuildings').color = 0xFFFF0000;
+        getNamedProp('tankRuins').color = 0xFFFF0000;
+        getNamedProp('watchtower').color = 0xFFFF0000;
+        getNamedProp('tankGround').color = 0xFFFF0000;
+        windmill.color = 0xFFFF0000;
+      }
+
+      getNamedProp('tankGround').loadGraphic(Paths.image('spooky/tankGroundWeird'));
+      getNamedProp('watchtower').idleSuffix = '-weird';
+
+      scarecrow.alpha = 0;
+      getNamedProp('tankRolling').alpha = 0;
+      getNamedProp('bottomLighting').visible = false;
+
+      mistBack.visible = true;
+      mistFront.visible = true;
+      mistBack.velocity.x = -172;
+      mistFront.velocity.x = 172;
+
+      if (FlxG.save.data.spookyShaders != false)
+      {
+        getBoyfriend().shader = weirdPlayerTint;
+        getBoyfriend().color = 0xFFFFFF;
+
+        getDad().shader = weirdGuyTint;
+        getDad().color = 0xFFFFFF;
+      }
+      else
+      {
+        getBoyfriend().color = 0xFFA8B3;
+        getDad().color = 0xFFA8B3;
+      }
+
+      getGirlfriend().alpha = 0;
+
+      switchedToMonster = true;
+    }
+
+    if (PlayState.instance.controls.CUTSCENE_ADVANCE && cutsceneSkipped == false && canSkipCutscene == true)
+    {
+      hasPlayedCutscene = true;
+      skipCutscene();
+      trace('skipped');
+    }
+
+    // extra stuff to correct the offsets getting screwed up from the sprites being scaled down
+    if (getBoyfriend() != null && getGirlfriend() != null && getDad() != null)
+    {
+      if (PlayState.instance.currentStage.getBoyfriend().shader == null)
+      {
+        PlayState.instance.currentStage.getBoyfriend().shader = stageTint;
+        PlayState.instance.currentStage.getBoyfriend().color = 0xE8FFF0;
+        getGirlfriend().shader = stageTint;
+        getGirlfriend().color = 0xE8FFF0;
+        PlayState.instance.currentStage.getDad().shader = stageTint;
+        PlayState.instance.currentStage.getDad().color = 0xE8FFF0;
+      }
+
+      if (gotCameraPos == false)
+      {
+        boyfriendCameraPosX = getBoyfriend().cameraFocusPoint.x;
+        boyfriendCameraPosY = getBoyfriend().cameraFocusPoint.y;
+        girlfriendCameraPosX = getGirlfriend().cameraFocusPoint.x;
+        girlfriendCameraPosY = getGirlfriend().cameraFocusPoint.y;
+        dadCameraPosX = getDad().cameraFocusPoint.x;
+        dadCameraPosY = getDad().cameraFocusPoint.y;
+
+        gotCameraPos = true;
+      }
+
+      getBoyfriend().y = 400;
+      getDad().y = 390;
+
+      getGirlfriend().x = 350;
+      getGirlfriend().y = 120;
+      // getGirlfriend().alpha = 0;
+
+      if (switchedToMonster == true)
+      {
+        getBoyfriend().x = 940;
+        getDad().x = 190;
+
+        getBoyfriend().cameraFocusPoint.x = boyfriendCameraPosX - 100;
+      }
+      else
+      {
+        getBoyfriend().x = 1100;
+        getDad().x = 50;
+
+        getBoyfriend().cameraFocusPoint.x = boyfriendCameraPosX;
+      }
+      getDad().cameraFocusPoint.x = dadCameraPosX;
+      getDad().cameraFocusPoint.y = dadCameraPosY;
+      getBoyfriend().cameraFocusPoint.y = boyfriendCameraPosY;
+      getGirlfriend().cameraFocusPoint.x = girlfriendCameraPosX;
+      getGirlfriend().cameraFocusPoint.y = girlfriendCameraPosY;
+    }
+  }
+
+  var tankMoving:Bool = false;
+  var tankAngle:Float = FlxG.random.int(-90, 45);
+  var tankSpeed:Float = FlxG.random.float(5, 7);
+  var tankX:Float = 540;
+
+  function onBeatHit(event:SongTimeScriptEvent):Void
+  {
+    super.onBeatHit(event);
+  }
+
+  function moveTank(elapsed:Float):Void
+  {
+    var daAngleOffset:Float = 1;
+    tankAngle += elapsed * tankSpeed;
+
+    var tankRolling = getNamedProp('tankRolling');
+    tankRolling.angle = tankAngle - 90 + 15;
+    tankRolling.x = tankX + Math.cos(FlxAngle.asRadians((tankAngle * daAngleOffset) + 180)) * 1500;
+    tankRolling.y = 1350 + Math.sin(FlxAngle.asRadians((tankAngle * daAngleOffset) + 180)) * 1100;
+  }
+
+  function onSongRetry(event:ScriptEvent)
+  {
+    super.onSongRetry(event);
+
+    PlayState.instance.camHUD.alpha = 1;
+
+    // resets the clouds!
+    var clouds = getNamedProp('clouds');
+    clouds.active = true;
+    clouds.x = FlxG.random.int(-700, -100);
+    clouds.y = FlxG.random.int(-20, 20);
+    clouds.velocity.x = FlxG.random.float(5, 15);
+
+    getDad().danceEvery = 4;
+    getDad().idleSuffix = '';
+
+    getNamedProp('watchtower').idleSuffix = '';
+    getNamedProp('watchtower').danceEvery = 1;
+    getNamedProp('watchtower').animation.play('idle');
+    skittlesFallen = false;
+    skittlesChance = FlxG.random.int(1, 10);
+
+    if (switchedToMonster == true)
+    {
+      getDad().scale.set(0.7, 0.7);
+
+      if (FlxG.save.data.spookyShaders != false)
+      {
+        getNamedProp('moon').shader = stageTint;
+        getNamedProp('tankSky').shader = stageTint;
+
+        getNamedProp('tankMountains').shader = stageTint;
+
+        getNamedProp('clouds').shader = stageTint;
+        getNamedProp('smokeLeft').shader = stageTint;
+        getNamedProp('smokeRight').shader = stageTint;
+
+        getNamedProp('tankBuildings').shader = stageTint;
+        getNamedProp('tankRuins').shader = stageTint;
+        getNamedProp('watchtower').shader = stageTint;
+        getNamedProp('tankGround').shader = stageTint;
+        windmill.shader = stageTint;
+      }
+      else
+      {
+        getNamedProp('moon').color = 0xFFFFFFFF;
+        getNamedProp('tankSky').color = 0xFFFFFFFF;
+
+        getNamedProp('tankMountains').color = 0xFFFFFFFF;
+
+        getNamedProp('clouds').color = 0xFFFFFFFF;
+        getNamedProp('smokeLeft').color = 0xFFFFFFFF;
+        getNamedProp('smokeRight').color = 0xFFFFFFFF;
+
+        getNamedProp('tankBuildings').color = 0xFFFFFFFF;
+        getNamedProp('tankRuins').color = 0xFFFFFFFF;
+        getNamedProp('watchtower').color = 0xFFFFFFFF;
+        getNamedProp('tankGround').color = 0xFFFFFFFF;
+        windmill.color = 0xFFFFFFFF;
+      }
+      getNamedProp('tankGround').loadGraphic(Paths.image('spooky/tankGround'));
+
+      scarecrow.alpha = 1;
+      getNamedProp('tankRolling').alpha = 1;
+      getNamedProp('tankmanAudience0').alpha = 1;
+      getNamedProp('tankmanAudience2').alpha = 1;
+      getNamedProp('tankmanAudience3').alpha = 1;
+      getNamedProp('tankmanAudience4').alpha = 1;
+      getNamedProp('tankmanAudience5').alpha = 1;
+      getNamedProp('tankmanAudience1').alpha = 1;
+
+      getNamedProp('bottomLighting').visible = true;
+      getNamedProp('weirdGlow').visible = false;
+
+      mistBack.visible = false;
+      mistFront.visible = false;
+      mistBack.velocity.x = 0;
+      mistFront.velocity.x = 0;
+
+      getBoyfriend().shader = stageTint;
+      getBoyfriend().color = 0xE8FFF0;
+
+      getDad().shader = stageTint;
+      getDad().color = 0xE8FFF0;
+
+      getGirlfriend().alpha = 1;
+
+      switchedToMonster = false;
+    }
+  }
+
+  override function onGameOver(event:ScriptEvent):Void
+  {
+    super.onGameOver(event);
+
+    PlayState.instance.currentStage.getBoyfriend().shader = null;
+    PlayState.instance.currentStage.getBoyfriend().color = 0xFFFFFF;
+
+    PlayState.instance.iconP2.characterId = 'tankman-spooky';
+    PlayState.instance.iconP2.loadCharacter(PlayState.instance.iconP2.characterId);
+  }
+
+  public override function onSongEvent(scriptEvent:SongEventScriptEvent)
+  {
+    super.onSongEvent(scriptEvent);
+
+    if (scriptEvent.eventData.eventKind == "changeIdleSuffix")
+    {
+      getDad().idleSuffix = '-spooky';
+      getDad().danceEvery = 1;
+    }
+  }
+
+  /**
+   * If your stage uses additional assets not specified in the JSON,
+   * make sure to specify them like this, or they won't get cached in the loading screen.
+   */
+  function fetchAssetPaths():Array<String>
+  {
+    var results:Array<String> = super.fetchAssetPaths();
+
+    results.push(Paths.sound("cutscene/stress/weirdAppearsSound"));
+    results.push(Paths.sound("cutscene/stress/cutsceneSongSpook"));
+    results.push(Paths.sound("cutscene/stress/spookyCock"));
+    results.push(Paths.sound("cutscene/stress/360noScope"));
+    results.push(Paths.sound("cutscene/stress/molochIsPISSED"));
+    results.push(Paths.animateAtlas("spooky/cutscene/MolochKillin", "week7"));
+    results.push(Paths.animateAtlas("spooky/redMist", "week7"));
+
+    return results;
+  }
 }

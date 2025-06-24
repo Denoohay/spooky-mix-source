@@ -1,46 +1,50 @@
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
 import funkin.play.cutscene.dialogue.ConversationState;
 import funkin.play.cutscene.dialogue.DialogueBox;
-import funkin.audio.FunkinSound;
 
-class RosesSpookyDialogueBox extends DialogueBox {
-	function new() {
-		super('roses-spooky');
-	}
+class RosesSpookyDialogueBox extends DialogueBox
+{
+  function new()
+  {
+    super('roses-spooky');
+  }
 
-  public function onDialogueLine(event:DialogueScriptEvent):Void {
+  public function onDialogueLine(event:DialogueScriptEvent):Void
+  {
     super.onDialogueLine(event);
 
-    if (getCurrentAnimation() == 'idle') {
+    if (getCurrentAnimation() == 'idle')
+    {
       // click, then speaking
       playAnimation('click');
-    } else if (getCurrentAnimation() == 'click') {
+    }
+    else if (getCurrentAnimation() == 'click')
+    {
       playAnimation('speaking');
     }
   }
 
-  function onAnimationFinished(name:String):Void {
+  function onAnimationFinished(name:String):Void
+  {
     super.onAnimationFinished(name);
 
-    if (name == 'sentenceEnd') {
+    if (name == 'sentenceEnd')
+    {
       playAnimation('idle');
     }
-    if (name == 'click') {
+    if (name == 'click')
+    {
       playAnimation('speaking');
     }
   }
 
-  function onTypingComplete():Void {
+  function onTypingComplete():Void
+  {
     playAnimation('sentenceEnd');
     super.onTypingComplete();
   }
 
-  public function onDialogueStart(event:DialogueScriptEvent):Void {
-    super.onDialogueStart(event);
-  }
-
-  public function onDialogueLine(event:DialogueScriptEvent):Void {
+  public function onDialogueLine(event:DialogueScriptEvent):Void
+  {
     // Override the default box animation behavior by switching the state
     event.conversation.state = ConversationState.Opening;
 
@@ -50,15 +54,12 @@ class RosesSpookyDialogueBox extends DialogueBox {
     super.onDialogueLine(event);
   }
 
-  public function onDialogueEnd(event:DialogueScriptEvent):Void {
+  public function onDialogueEnd(event:DialogueScriptEvent):Void
+  {
     super.onDialogueEnd(event);
     // Play 'enter' in reverse
     this.textDisplay.visible = false;
 
     playAnimation('exit', false);
-  }
-
-  override function onDestroy(event:ScriptEvent) {
-    super.onDestroy(event);
   }
 }

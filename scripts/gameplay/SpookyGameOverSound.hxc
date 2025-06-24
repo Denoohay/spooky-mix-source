@@ -1,63 +1,62 @@
 import funkin.modding.module.Module;
 import flixel.FlxG;
-import funkin.save.Save;
 import funkin.play.GameOverSubState;
 import funkin.audio.FunkinSound;
-import funkin.play.PlayState;
-import flixel.sound.FlxSound;
 import funkin.PlayerSettings;
 import funkin.util.ReflectUtil;
 
 class SpookyGameOverSound extends Module
 {
-    public function new()
+  public function new()
+  {
+    super('SpookyGameOverSound');
+  }
+
+  var canPlaySpookyRetry:Bool = true;
+  var canPressBack:Bool = true;
+
+  var spookyRetry:FunkinSound;
+
+  override function onUpdate(event:UpdateScriptEvent)
+  {
+    if (ReflectUtil.getClassNameOf(FlxG.state.subState) == "funkin.play.GameOverSubState")
     {
-        super('SpookyGameOverSound');
-    }
-    
-    var canPlaySpookyRetry:Bool = true;
-    var canPressBack:Bool = true;
+      if (PlayerSettings.player1.controls.ACCEPT
+        && canPlaySpookyRetry == true
+        && canPressBack == true
+        && GameOverSubState.blueBallSuffix == '-spooky')
+      {
+        spookyRetry = FunkinSound.load(Paths.music('gameplay/gameover/gameOverEnd-spookymod'), true);
+        spookyRetry.volume = 1;
+        spookyRetry.play(false);
 
-	var spookyRetry:FunkinSound;
-    
-     override function onUpdate(event:UpdateScriptEvent)
+        canPlaySpookyRetry = false;
+        canPressBack = false;
+      }
+
+      if (PlayerSettings.player1.controls.BACK && canPressBack == true)
+      {
+        canPlaySpookyRetry = true;
+        canPressBack = false;
+      }
+    }
+  }
+
+  public function onSubStateOpenEnd(event:SubStateScriptEvent)
+  {
+    if (ReflectUtil.getClassNameOf(FlxG.state.subState) == "funkin.play.GameOverSubState")
     {
-        if(ReflectUtil.getClassNameOf(FlxG.state.subState) == "funkin.play.GameOverSubState")
-        {
-            if (PlayerSettings.player1.controls.ACCEPT && canPlaySpookyRetry == true && canPressBack == true && GameOverSubState.blueBallSuffix == '-spooky')
-            {
-		        spookyRetry = FunkinSound.load(Paths.music('gameplay/gameover/gameOverEnd-spookymod'), true);
-		        spookyRetry.volume = 1;
-		        spookyRetry.play(false);
-
-                canPlaySpookyRetry = false;
-                canPressBack = false;
-            }
-
-            if (PlayerSettings.player1.controls.BACK && canPressBack == true)
-            {
-                canPlaySpookyRetry = true;
-                canPressBack = false;
-            }
-        }
+      canPlaySpookyRetry = true;
+      canPressBack = true;
     }
+  }
 
-    public function onSubStateOpenEnd(event:SubStateScriptEvent)
+  public function onSubStateCloseEnd(event:SubStateScriptEvent)
+  {
+    if (ReflectUtil.getClassNameOf(FlxG.state.subState) == "funkin.play.GameOverSubState")
     {
-        if(ReflectUtil.getClassNameOf(FlxG.state.subState) == "funkin.play.GameOverSubState")
-        {
-            canPlaySpookyRetry = true;
-            canPressBack = true;
-        }
+      canPlaySpookyRetry = true;
+      canPressBack = true;
     }
-
-    public function onSubStateCloseEnd(event:SubStateScriptEvent)
-    {
-        if(ReflectUtil.getClassNameOf(FlxG.state.subState) == "funkin.play.GameOverSubState")
-        {
-            canPlaySpookyRetry = true;
-            canPressBack = true;
-        }
-    }
-
+  }
 }

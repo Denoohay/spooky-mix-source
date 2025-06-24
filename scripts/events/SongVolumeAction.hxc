@@ -1,94 +1,59 @@
 import funkin.play.PlayState;
-import funkin.play.PauseSubState;
-import funkin.ui.debug.charting.ChartEditorState;
-import funkin.play.PlayStatePlaylist;
-import funkin.data.song.SongRegistry;
-import funkin.ui.transition.LoadingState;
-import flixel.FlxCamera;
-import flixel.math.FlxMath;
-import flixel.FlxSprite;
-import flixel.math.FlxAngle;
-import flixel.math.FlxPoint;
-import flixel.text.FlxText;
-import flixel.text.FlxTextBorderStyle;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
-import flixel.util.FlxSpriteUtil;
-import flixel.util.FlxTimer;
-import funkin.graphics.adobeanimate.FlxAtlasSprite;
-import funkin.graphics.FunkinSprite;
-import funkin.ui.freeplay.charselect.PlayableCharacter;
-import funkin.ui.MusicBeatSubState;
-import funkin.graphics.shaders.AdjustColorShader;
-import flixel.addons.display.FlxTiledSprite;
-import flixel.addons.display.FlxBackdrop;
-import funkin.PlayerSettings;
 import funkin.modding.module.Module;
-import funkin.modding.events.ScriptEvent;
-import funkin.modding.base.ScriptedMusicBeatSubState;
-import funkin.modding.base.ScriptedFlxRuntimeShader;
-import funkin.modding.base.ScriptedMusicBeatState;
-import funkin.util.ReflectUtil;
 import flixel.FlxG;
-import funkin.audio.FunkinSound;
-import funkin.util.Constants;
-import StringTools;
-import funkin.save.Save;
-import funkin.Preferences;
 
 class SongVolumeAction extends Module
 {
-    //made by Denoohay for FNF: SPOOKY MIX
+  // made by Denoohay for FNF: SPOOKY MIX
+  public function new()
+  {
+    super('SongVolumeAction');
+  }
 
-    public function new()
+  function onSongRetry(event:ScriptEvent)
+  {
+    super.onSongRetry(event);
+
+    PlayState.instance.vocals.playerVolume = 1;
+    PlayState.instance.vocals.opponentVolume = 1;
+    if (FlxG.sound.music != null)
     {
-        super('SongVolumeAction');
+      FlxG.sound.music.volume = 1;
     }
+  }
 
-    function onSongRetry(event:ScriptEvent)
+  function onGameOver(event:ScriptEvent):Void
+  {
+    super.onGameOver(event);
+
+    PlayState.instance.vocals.playerVolume = 1;
+    PlayState.instance.vocals.opponentVolume = 1;
+    if (FlxG.sound.music != null)
     {
-		super.onSongRetry(event);
-        
-        PlayState.instance.vocals.playerVolume = 1;
-        PlayState.instance.vocals.opponentVolume = 1;
-        if (FlxG.sound.music != null)
-        {
-            FlxG.sound.music.volume = 1;
-        }
+      FlxG.sound.music.volume = 1;
     }
+  }
 
-    function onGameOver(event:ScriptEvent):Void
+  public override function onSongEvent(scriptEvent:SongEventScriptEvent)
+  {
+    super.onSongEvent(scriptEvent);
+
+    if (scriptEvent.eventData.eventKind == "songVolume")
     {
-		super.onGameOver(event);
-        
-        PlayState.instance.vocals.playerVolume = 1;
-        PlayState.instance.vocals.opponentVolume = 1;
-        if (FlxG.sound.music != null)
-        {
-            FlxG.sound.music.volume = 1;
-        }
-	}
+      if (scriptEvent.eventData.value.track == 0 || scriptEvent.eventData.value.track == 3)
+      {
+        PlayState.instance.vocals.playerVolume = scriptEvent.eventData.value.volume;
+      }
 
-    public override function onSongEvent(scriptEvent:SongEventScriptEvent)
-    {
-        super.onSongEvent(scriptEvent);
+      if (scriptEvent.eventData.value.track == 1 || scriptEvent.eventData.value.track == 3)
+      {
+        PlayState.instance.vocals.opponentVolume = scriptEvent.eventData.value.volume;
+      }
 
-        if (scriptEvent.eventData.eventKind == "songVolume")
-        {
-            if (scriptEvent.eventData.value.track == 0 || scriptEvent.eventData.value.track == 3)
-            {
-                PlayState.instance.vocals.playerVolume = scriptEvent.eventData.value.volume;
-            }
-
-            if (scriptEvent.eventData.value.track == 1 || scriptEvent.eventData.value.track == 3)
-            {
-                PlayState.instance.vocals.opponentVolume = scriptEvent.eventData.value.volume;
-            }
-
-            if (scriptEvent.eventData.value.track == 2 || scriptEvent.eventData.value.track == 3)
-            {
-                FlxG.sound.music.volume = scriptEvent.eventData.value.volume;
-            }
-        }
+      if (scriptEvent.eventData.value.track == 2 || scriptEvent.eventData.value.track == 3)
+      {
+        FlxG.sound.music.volume = scriptEvent.eventData.value.volume;
+      }
     }
+  }
 }

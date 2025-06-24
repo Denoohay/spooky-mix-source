@@ -9,13 +9,14 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.util.FlxTimer;
 import funkin.save.Save;
-
 import funkin.effects.RetroCameraFade;
 
-class TutorialSong extends Song {
+class TutorialSong extends Song
+{
   var hasPlayedCutscene:Bool;
 
-	public function new() {
-		super('tutorial');
-	}
+  public function new()
+  {
+    super('tutorial');
+  }
 }

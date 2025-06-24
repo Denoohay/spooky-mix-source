@@ -1,45 +1,21 @@
-import funkin.ui.freeplay.FreeplayState;
-import flixel.FlxCamera;
-import flixel.math.FlxMath;
 import flixel.FlxSprite;
-import flixel.math.FlxAngle;
-import flixel.math.FlxPoint;
-import flixel.text.FlxText;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
-import flixel.util.FlxSpriteUtil;
-import flixel.util.FlxTimer;
 import funkin.graphics.adobeanimate.FlxAtlasSprite;
-import funkin.graphics.FunkinSprite;
-import funkin.ui.freeplay.charselect.PlayableCharacter;
-import funkin.ui.MusicBeatSubState;
-import funkin.graphics.shaders.AdjustColorShader;
-import flixel.addons.display.FlxTiledSprite;
 import flixel.addons.display.FlxBackdrop;
 import funkin.PlayerSettings;
 import funkin.modding.module.Module;
-import funkin.modding.events.ScriptEvent;
-import funkin.modding.base.ScriptedMusicBeatSubState;
-import funkin.modding.base.ScriptedFlxRuntimeShader;
-import funkin.modding.base.ScriptedMusicBeatState;
 import funkin.util.ReflectUtil;
 import flixel.FlxG;
 import funkin.Preferences;
 
 class SpookyCard extends Module
 {
-  var spookyCardAdded:Bool = false; //shows if the backing card has been already added in or not
-  var showBackCard:Bool = false; //should the backing card be visible or not
+  var spookyCardAdded:Bool = false; // shows if the backing card has been already added in or not
+  var showBackCard:Bool = false; // should the backing card be visible or not
   var wentBack:Bool = false;
 
   public function new()
   {
     super('SpookyCard');
-  }
-
-  override function onCreate(event):Void
-  {
-    super.onCreate(event);
   }
 
   override function onStateChangeEnd(event)
@@ -67,9 +43,10 @@ class SpookyCard extends Module
 
   override function onUpdate(event:UpdateScriptEvent)
   {
-	super.onUpdate(event);
+    super.onUpdate(event);
 
-    if (ReflectUtil.getClassNameOf(FlxG.state.subState) == "funkin.ui.freeplay.FreeplayState" && FlxG.state.subState.currentCharacterId == 'spookymod')
+    if (ReflectUtil.getClassNameOf(FlxG.state.subState) == "funkin.ui.freeplay.FreeplayState"
+      && FlxG.state.subState.currentCharacterId == 'spookymod')
     {
       if (spookyCardAdded == false)
       {
@@ -85,19 +62,17 @@ class SpookyCard extends Module
         FlxG.state.subState.insert(FlxG.state.subState.members.indexOf(FlxG.state.subState.dj), backLines);
         backLines.cameras = [FlxG.state.subState.funnyCam];
 
-        if (!Preferences.naughtyness)
-            topCandyRow = new FlxBackdrop(Paths.image('freeplay/backingCards/spooky/candyRow1 no naughty'), 0x01, 20);
+        if (!Preferences.naughtyness) topCandyRow = new FlxBackdrop(Paths.image('freeplay/backingCards/spooky/candyRow1 no naughty'), 0x01, 20);
         else
-            topCandyRow = new FlxBackdrop(Paths.image('freeplay/backingCards/spooky/candyRow1'), 0x01, 20);
+          topCandyRow = new FlxBackdrop(Paths.image('freeplay/backingCards/spooky/candyRow1'), 0x01, 20);
         topCandyRow.setPosition(0, 165);
         topCandyRow.velocity.x = -200;
         FlxG.state.subState.insert(FlxG.state.subState.members.indexOf(FlxG.state.subState.dj), topCandyRow);
         topCandyRow.cameras = [FlxG.state.subState.funnyCam];
-        
-        if (!Preferences.naughtyness)
-            lowCandyRow = new FlxBackdrop(Paths.image('freeplay/backingCards/spooky/candyRow2 no naughty'), 0x01, 15);
+
+        if (!Preferences.naughtyness) lowCandyRow = new FlxBackdrop(Paths.image('freeplay/backingCards/spooky/candyRow2 no naughty'), 0x01, 15);
         else
-            lowCandyRow = new FlxBackdrop(Paths.image('freeplay/backingCards/spooky/candyRow2'), 0x01, 15);
+          lowCandyRow = new FlxBackdrop(Paths.image('freeplay/backingCards/spooky/candyRow2'), 0x01, 15);
         lowCandyRow.setPosition(0, 340);
         FlxG.state.subState.insert(FlxG.state.subState.members.indexOf(FlxG.state.subState.dj), lowCandyRow);
         lowCandyRow.velocity.x = 200;
@@ -115,82 +90,84 @@ class SpookyCard extends Module
 
         if (!FlxG.state.subState.fromCharSelect)
         {
-            pinkBack.color = 0xFFFFD4E9;
-            backLines.visible = false;
-            topCandyRow.visible = false;
-            lowCandyRow.visible = false;
-            glow.visible = false;
+          pinkBack.color = 0xFFFFD4E9;
+          backLines.visible = false;
+          topCandyRow.visible = false;
+          lowCandyRow.visible = false;
+          glow.visible = false;
         }
-        
+
         cardGlow = new FlxSprite(-30, -30).loadGraphic(Paths.image('freeplay/cardGlow'));
         cardGlow.blend = 0;
         cardGlow.visible = false;
         FlxG.state.subState.insert(FlxG.state.subState.members.indexOf(FlxG.state.subState.dj), cardGlow);
         cardGlow.cameras = [FlxG.state.subState.funnyCam];
       }
-        if (FlxG.state.subState.dj != null)
+      if (FlxG.state.subState.dj != null)
+      {
+        if (FlxG.state.subState.dj.getCurrentAnimation() == 'Spooky DJ confirm')
         {
-            if (FlxG.state.subState.dj.getCurrentAnimation() == 'Spooky DJ confirm')
-            {
-                showBackCard = false;
-                confirmAtlas.visible = true;
-                confirmAtlas.anim.play("");
-            }
-            
-            if (FlxG.state.subState.fromCharSelect || FlxG.state.subState.dj.getCurrentAnimation() == 'Spooky DJ loss reaction 1' || FlxG.state.subState.dj.getCurrentAnimation() == 'Spooky DJ fist pump')
-            {
-                showBackCard = true;
-            }
-            else
-            {
-                if (FlxG.state.subState.dj.getCurrentAnimation() == 'Spooky DJ' && wentBack == false)
-                {
-                    showBackCard = true;
-                }
-
-                if (FlxG.state.subState.dj.getCurrentAnimation() == 'Spooky dj intro')
-                {
-                    showBackCard = false;
-                }
-            }
-
-            if (showBackCard == true)
-            {
-                pinkBack.color = 0xFF6620AD;
-                backLines.visible = true;
-                topCandyRow.visible = true;
-                lowCandyRow.visible = true;
-                glow.visible = true;
-                cardGlow.visible = true;
-            }
+          showBackCard = false;
+          confirmAtlas.visible = true;
+          confirmAtlas.anim.play("");
         }
 
-        if (FlxG.state.subState.backingCard.pinkBack != null)
+        if (FlxG.state.subState.fromCharSelect
+          || FlxG.state.subState.dj.getCurrentAnimation() == 'Spooky DJ loss reaction 1'
+          || FlxG.state.subState.dj.getCurrentAnimation() == 'Spooky DJ fist pump')
         {
-            pinkBack.x = FlxG.state.subState.backingCard.pinkBack.x;
-            backLines.x = FlxG.state.subState.backingCard.pinkBack.x - 30;
-            cardGlow.x = FlxG.state.subState.backingCard.pinkBack.x - 15;
+          showBackCard = true;
         }
-
-        if (FlxG.state.subState.backingCard.cardGlow != null)
+        else
         {
-            cardGlow.alpha = FlxG.state.subState.backingCard.cardGlow.alpha;
-            cardGlow.scale.x = FlxG.state.subState.backingCard.cardGlow.scale.x;
-            cardGlow.scale.y = FlxG.state.subState.backingCard.cardGlow.scale.y;
-        }
+          if (FlxG.state.subState.dj.getCurrentAnimation() == 'Spooky DJ' && wentBack == false)
+          {
+            showBackCard = true;
+          }
 
-        if (PlayerSettings.player1.controls.BACK && !FlxG.state.subState.busy)
-        {
-            wentBack = true;
+          if (FlxG.state.subState.dj.getCurrentAnimation() == 'Spooky dj intro')
+          {
             showBackCard = false;
-
-            pinkBack.color = 0xFFFFD4E9;
-            backLines.visible = false;
-            topCandyRow.visible = false;
-            lowCandyRow.visible = false;
-            glow.visible = false;
-            cardGlow.visible = true;
+          }
         }
+
+        if (showBackCard == true)
+        {
+          pinkBack.color = 0xFF6620AD;
+          backLines.visible = true;
+          topCandyRow.visible = true;
+          lowCandyRow.visible = true;
+          glow.visible = true;
+          cardGlow.visible = true;
+        }
+      }
+
+      if (FlxG.state.subState.backingCard.pinkBack != null)
+      {
+        pinkBack.x = FlxG.state.subState.backingCard.pinkBack.x;
+        backLines.x = FlxG.state.subState.backingCard.pinkBack.x - 30;
+        cardGlow.x = FlxG.state.subState.backingCard.pinkBack.x - 15;
+      }
+
+      if (FlxG.state.subState.backingCard.cardGlow != null)
+      {
+        cardGlow.alpha = FlxG.state.subState.backingCard.cardGlow.alpha;
+        cardGlow.scale.x = FlxG.state.subState.backingCard.cardGlow.scale.x;
+        cardGlow.scale.y = FlxG.state.subState.backingCard.cardGlow.scale.y;
+      }
+
+      if (PlayerSettings.player1.controls.BACK && !FlxG.state.subState.busy)
+      {
+        wentBack = true;
+        showBackCard = false;
+
+        pinkBack.color = 0xFFFFD4E9;
+        backLines.visible = false;
+        topCandyRow.visible = false;
+        lowCandyRow.visible = false;
+        glow.visible = false;
+        cardGlow.visible = true;
       }
     }
   }
+}

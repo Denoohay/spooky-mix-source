@@ -1,78 +1,43 @@
-import funkin.play.PlayState;
-import funkin.play.PlayStatePlaylist;
-import funkin.data.song.SongRegistry;
-import funkin.ui.transition.LoadingState;
-import flixel.FlxCamera;
-import flixel.math.FlxMath;
-import flixel.FlxSprite;
-import flixel.math.FlxAngle;
-import flixel.math.FlxPoint;
-import flixel.text.FlxText;
-import flixel.text.FlxTextBorderStyle;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
-import flixel.util.FlxSpriteUtil;
-import flixel.util.FlxTimer;
-import funkin.graphics.adobeanimate.FlxAtlasSprite;
-import funkin.graphics.FunkinSprite;
-import funkin.ui.freeplay.charselect.PlayableCharacter;
-import funkin.ui.MusicBeatSubState;
-import funkin.graphics.shaders.AdjustColorShader;
-import flixel.addons.display.FlxTiledSprite;
-import flixel.addons.display.FlxBackdrop;
-import funkin.PlayerSettings;
-import funkin.modding.module.Module;
-import funkin.modding.events.ScriptEvent;
-import funkin.modding.base.ScriptedMusicBeatSubState;
-import funkin.modding.base.ScriptedFlxRuntimeShader;
-import funkin.modding.base.ScriptedMusicBeatState;
-import funkin.util.ReflectUtil;
-import flixel.FlxG;
-import funkin.audio.FunkinSound;
-import funkin.util.Constants;
-import StringTools;
-import funkin.save.Save;
 import funkin.play.event.SongEvent;
 
 class FadeInOutSongEvent extends SongEvent
 {
-	public function new()
-	{
-		super('FadeInOut');
-	}
+  public function new()
+  {
+    super('FadeInOut');
+  }
 
-	public override function handleEvent(data) {}
-	
-	public function getTitle()
-	{
-		return "Fade In/Out";
-	}
+  public override function handleEvent(data) {}
 
-	public function getEventSchema()
-	{
-		return
-		[
-			{
-				name: "inout",
-				title: "Fade",
-				defaultValue: 0,
-				type: "enum",
-				keys: ["In" => 0, "Out" => 1]
-			},
-			{
-				name: "object",
-				title: "Object",
-				defaultValue: 0,
-				type: "enum",
-				keys: ["Black Screen" => 0, "UI" => 1, "Subtitles" => 2]
-			},
-			{
-				name: "seconds",
-				title: "Duration",
-				defaultValue: 0,
-				type: "float",
-				units: 'seconds'
-			}
-		];
-	}
+  public function getTitle()
+  {
+    return "Fade In/Out";
+  }
+
+  public function getEventSchema()
+  {
+    return [
+      {
+        name: "inout",
+        title: "Fade",
+        defaultValue: 0,
+        type: "enum",
+        keys: ["In" => 0, "Out" => 1]
+      },
+      {
+        name: "object",
+        title: "Object",
+        defaultValue: 0,
+        type: "enum",
+        keys: ["Black Screen" => 0, "UI" => 1, "Subtitles" => 2]
+      },
+      {
+        name: "seconds",
+        title: "Duration",
+        defaultValue: 0,
+        type: "float",
+        units: 'seconds'
+      }
+    ];
+  }
 }

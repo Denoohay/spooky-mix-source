@@ -1,64 +1,36 @@
-import funkin.play.PlayState;
-import funkin.play.PlayStatePlaylist;
-import funkin.data.song.SongRegistry;
-import funkin.ui.transition.LoadingState;
-import flixel.FlxCamera;
-import flixel.math.FlxMath;
-import flixel.FlxSprite;
-import flixel.math.FlxAngle;
-import flixel.math.FlxPoint;
-import flixel.text.FlxText;
-import flixel.text.FlxTextBorderStyle;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
-import flixel.util.FlxSpriteUtil;
-import flixel.util.FlxTimer;
-import funkin.graphics.adobeanimate.FlxAtlasSprite;
-import funkin.graphics.FunkinSprite;
-import funkin.ui.freeplay.charselect.PlayableCharacter;
-import funkin.ui.MusicBeatSubState;
-import funkin.graphics.shaders.AdjustColorShader;
-import flixel.addons.display.FlxTiledSprite;
-import flixel.addons.display.FlxBackdrop;
-import funkin.PlayerSettings;
-import funkin.modding.module.Module;
-import funkin.modding.events.ScriptEvent;
-import funkin.modding.base.ScriptedMusicBeatSubState;
-import funkin.modding.base.ScriptedFlxRuntimeShader;
-import funkin.modding.base.ScriptedMusicBeatState;
-import funkin.util.ReflectUtil;
-import flixel.FlxG;
-import funkin.audio.FunkinSound;
-import funkin.util.Constants;
-import StringTools;
-import funkin.save.Save;
 import funkin.play.event.SongEvent;
 
 class BlazinSpookyEventSongEvent extends SongEvent
 {
-	public function new()
-	{
-		super('blazinSpookyEvent');
-	}
+  public function new()
+  {
+    super('blazinSpookyEvent');
+  }
 
-	public override function handleEvent(data) {}
-	
-	public function getTitle()
-	{
-		return "Blazin' (Spooky Mix) Event";
-	}
+  public override function handleEvent(data) {}
 
-	public function getEventSchema()
-	{
-		return
-		[
-			{
-				name: "houseEvent",
-				title: "House Event",
-				defaultValue: 0,
-				type: "enum",
-				keys: ["Move to Next House" => 0, "Open Door" => 1, "Close Door" => 2, "Move Strumline" => 3, "Open Door (No Cheer)" => 4, "Change to Cheer Idle" => 5]
-			}
-		];
-	}
+  public function getTitle()
+  {
+    return "Blazin' (Spooky Mix) Event";
+  }
+
+  public function getEventSchema()
+  {
+    return [
+      {
+        name: "houseEvent",
+        title: "House Event",
+        defaultValue: 0,
+        type: "enum",
+        keys: [
+          "Move to Next House" => 0,
+          "Open Door" => 1,
+          "Close Door" => 2,
+          "Move Strumline" => 3,
+          "Open Door (No Cheer)" => 4,
+          "Change to Cheer Idle" => 5
+        ]
+      }
+    ];
+  }
 }

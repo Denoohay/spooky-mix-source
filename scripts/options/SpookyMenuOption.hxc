@@ -1,488 +1,494 @@
 import funkin.PlayerSettings;
 import funkin.modding.module.Module;
-import funkin.modding.events.ScriptEvent;
-import funkin.modding.base.ScriptedMusicBeatSubState;
-import funkin.modding.base.ScriptedFlxRuntimeShader;
-import funkin.modding.base.ScriptedMusicBeatState;
 import funkin.util.ReflectUtil;
 import flixel.FlxG;
 import funkin.util.Constants;
-import StringTools;
-import funkin.save.Save;
 import funkin.ui.options.OptionsState;
-import funkin.ui.options.PreferencesMenu;
 import funkin.audio.FunkinSound;
-import funkin.ui.options.items.EnumPreferenceItem;
-import funkin.ui.freeplay.FreeplayState;
 import flixel.FlxSprite;
-import funkin.ui.title.TitleState;
-import funkin.ui.mainmenu.MainMenuState;
-import flixel.text.FlxText;
-import flixel.util.FlxTimer;
-import flixel.sound.FlxSoundGroup;
-import funkin.ui.charSelect.CharSelectSubState;
 
 class SpookyMenuOption extends Module
 {
-    var addedTitle:Int = 0;
+  var addedTitle:Int = 0;
 
-    var skidDance:FlxSprite;
-    var pumpDance:FlxSprite;
-    var logoSpooky:FlxSprite;
-    var titleText:FlxSprite;
+  var skidDance:FlxSprite;
+  var pumpDance:FlxSprite;
+  var logoSpooky:FlxSprite;
+  var titleText:FlxSprite;
 
-    var addedTitleMusic:Bool = false;
+  var addedTitleMusic:Bool = false;
 
-    var fadeMusicIn:Bool = false;
+  var fadeMusicIn:Bool = false;
 
-    var dontPlayMusicYet:Bool = false;
-    
-    var playNewMenuMusic:Bool = false;
+  var dontPlayMusicYet:Bool = false;
 
-    var cutbacktoMenu:Bool = false;
+  var playNewMenuMusic:Bool = false;
 
-    var menuMusic:FunkinSound;
+  var cutbacktoMenu:Bool = false;
 
-    var optionNumber:Int = 0;
+  var menuMusic:FunkinSound;
 
-    var openedFreeplay:Bool = false;
+  var optionNumber:Int = 0;
 
-    var menuTheme:String = "gettinFreaky";
-    var previousDefaultPlayer:String = "";
+  var openedFreeplay:Bool = false;
 
-    public function new()
+  var menuTheme:String = "gettinFreaky";
+  var previousDefaultPlayer:String = "";
+
+  public function new()
+  {
+    super('SpookyMenuOption');
+  }
+
+  override function onUpdate(event:UpdateScriptEvent)
+  {
+    super.onUpdate(event);
+
+    if (FlxG.save.data.SpookyMixMenu != 'Always On'
+      && FlxG.save.data.SpookyMixMenu != 'Spooky Kids Selected'
+      && FlxG.save.data.SpookyMixMenu != 'Off') FlxG.save.data.SpookyMixMenu = 'Always On';
+
+    // if (FlxG.save.data.SpookyMixMenu == 'Always On') Constants.MENU_MUSIC = "spookyMenu";
+
+    // TITLE SCREEN
+    if (ReflectUtil.getClassNameOf(FlxG.state) == "funkin.ui.title.TitleState")
     {
-        super('SpookyMenuOption');
+      FlxG.mouse.visible = false;
+
+      if (FlxG.save.data.SpookyMixMenu == 'Always On'
+        || (FlxG.save.data.SpookyMixMenu == 'Spooky Kids Selected' && FlxG.save.data.rememberedStartupCharacter == "spookymod"))
+      {
+        if (addedTitle == 0)
+        {
+          skidDance = new FlxSprite(26 + 34, 283);
+          skidDance.frames = Paths.getSparrowAtlas('skidDanceTitle');
+          // skidDance.animation.addByIndices('danceLeft', 'skidDance instance 1', [0, 1, 2, 3, 4, 5, 6, 7], "", 24, false);
+          // skidDance.animation.addByIndices('danceRight', 'skidDance instance 1', [8, 9, 10, 11, 12, 13, 14, 15], "", 24, false);
+          skidDance.animation.addByPrefix('dance', 'skidDance instance 1', 24, true);
+          skidDance.animation.play('dance');
+          skidDance.shader = FlxG.state.swagShader.shader;
+          skidDance.visible = false;
+          FlxG.state.add(skidDance);
+
+          pumpDance = new FlxSprite(900, 277);
+          pumpDance.frames = Paths.getSparrowAtlas('pumpDanceTitle');
+          // pumpDance.animation.addByIndices('danceLeft', 'pumpDance instance 1', [0, 1, 2, 3, 4, 5, 6, 7], "", 24, false);
+          // pumpDance.animation.addByIndices('danceRight', 'pumpDance instance 1', [8, 9, 10, 11, 12, 13, 14, 15], "", 24, false);
+          pumpDance.animation.addByPrefix('dance', 'pumpDance instance 1', 24, true);
+          pumpDance.animation.play('dance');
+          pumpDance.shader = FlxG.state.swagShader.shader;
+          pumpDance.visible = false;
+          FlxG.state.add(pumpDance);
+
+          logoSpooky = new FlxSprite(0, 9);
+          logoSpooky.frames = Paths.getSparrowAtlas('spookyLogo');
+          logoSpooky.screenCenter(0x01);
+          logoSpooky.animation.addByPrefix('bump', 'logo', 24);
+          logoSpooky.visible = false;
+          FlxG.state.add(logoSpooky);
+
+          titleText = new FlxSprite(126, 605);
+          titleText.frames = Paths.getSparrowAtlas('titleEnterSpooky');
+          titleText.animation.addByPrefix('idle', "Press Enter to Begin", 24);
+          titleText.animation.addByPrefix('press', "ENTER PRESSED", 24);
+          titleText.animation.play('idle');
+          titleText.visible = false;
+          FlxG.state.add(titleText);
+
+          addedTitle = 1;
+        }
+
+        if (FlxG.state.logoBl != null && FlxG.state.gfDance != null && FlxG.state.titleText != null && FlxG.state.skippedIntro && addedTitle == 1)
+        {
+          // second massive block of the same stuff here to prevent lag when the screen flashes to reveal the title screen. would put this all in a function but it still lagged when i did that for some reason so I'm gonna have to deal with it being like this
+          skidDance = new FlxSprite(26 + 34, 283);
+          skidDance.frames = Paths.getSparrowAtlas('skidDanceTitle');
+          // skidDance.animation.addByIndices('danceLeft', 'skidDance instance 1', [0, 1, 2, 3, 4, 5, 6, 7], "", 24, false);
+          // skidDance.animation.addByIndices('danceRight', 'skidDance instance 1', [8, 9, 10, 11, 12, 13, 14, 15], "", 24, false);
+          skidDance.animation.addByPrefix('dance', 'skidDance instance 1', 24, true);
+          skidDance.animation.play('dance');
+          skidDance.shader = FlxG.state.swagShader.shader;
+          skidDance.visible = false;
+          FlxG.state.add(skidDance);
+
+          pumpDance = new FlxSprite(900, 277);
+          pumpDance.frames = Paths.getSparrowAtlas('pumpDanceTitle');
+          // pumpDance.animation.addByIndices('danceLeft', 'pumpDance instance 1', [0, 1, 2, 3, 4, 5, 6, 7], "", 24, false);
+          // pumpDance.animation.addByIndices('danceRight', 'pumpDance instance 1', [8, 9, 10, 11, 12, 13, 14, 15], "", 24, false);
+          pumpDance.animation.addByPrefix('dance', 'pumpDance instance 1', 24, true);
+          pumpDance.animation.play('dance');
+          pumpDance.shader = FlxG.state.swagShader.shader;
+          pumpDance.visible = false;
+          FlxG.state.add(pumpDance);
+
+          FlxG.state.logoBl.frames = Paths.getSparrowAtlas('spookyLogo');
+          FlxG.state.logoBl.y = 9;
+          FlxG.state.logoBl.screenCenter(0x01);
+          FlxG.state.logoBl.animation.addByPrefix('bump', 'logo', 24);
+
+          FlxG.state.titleText.frames = Paths.getSparrowAtlas('titleEnterSpooky');
+          FlxG.state.titleText.animation.addByPrefix('idle', "Press Enter to Begin", 24);
+          FlxG.state.titleText.animation.addByPrefix('press', "ENTER PRESSED", 24);
+          FlxG.state.titleText.animation.play('idle');
+          FlxG.state.titleText.x = 126;
+          FlxG.state.titleText.y = 605;
+
+          skidDance.visible = true;
+          pumpDance.visible = true;
+
+          FlxG.state.gfDance.visible = false;
+
+          addedTitle = 2;
+        }
+      }
     }
-    
-     override function onUpdate(event:UpdateScriptEvent)
+    // MENU BACKGROUND
+    if (ReflectUtil.getClassNameOf(FlxG.state) == "funkin.ui.mainmenu.MainMenuState")
     {
-	    super.onUpdate(event);
-
-        if (FlxG.save.data.SpookyMixMenu != 'Always On' && FlxG.save.data.SpookyMixMenu != 'Spooky Kids Selected' && FlxG.save.data.SpookyMixMenu != 'Off') FlxG.save.data.SpookyMixMenu = 'Always On';
-
-        //if (FlxG.save.data.SpookyMixMenu == 'Always On') Constants.MENU_MUSIC = "spookyMenu";
-        
-        //TITLE SCREEN
-        if (ReflectUtil.getClassNameOf(FlxG.state) == "funkin.ui.title.TitleState")
+      if (FlxG.state.magenta != null)
+      {
+        if (FlxG.save.data.SpookyMixMenu == 'Always On'
+          || (FlxG.save.data.SpookyMixMenu == 'Spooky Kids Selected' && FlxG.save.data.rememberedStartupCharacter == "spookymod"))
         {
-            FlxG.mouse.visible = false;
-            
-            if (FlxG.save.data.SpookyMixMenu == 'Always On' || (FlxG.save.data.SpookyMixMenu == 'Spooky Kids Selected' && FlxG.save.data.rememberedStartupCharacter == "spookymod"))
-            {
-                if (addedTitle == 0)
-                {
-                    skidDance = new FlxSprite(26 + 34, 283);
-                    skidDance.frames = Paths.getSparrowAtlas('skidDanceTitle');
-                    //skidDance.animation.addByIndices('danceLeft', 'skidDance instance 1', [0, 1, 2, 3, 4, 5, 6, 7], "", 24, false);
-                    //skidDance.animation.addByIndices('danceRight', 'skidDance instance 1', [8, 9, 10, 11, 12, 13, 14, 15], "", 24, false);
-                    skidDance.animation.addByPrefix('dance', 'skidDance instance 1', 24, true);
-                    skidDance.animation.play('dance');
-                    skidDance.shader = FlxG.state.swagShader.shader;
-                    skidDance.visible = false;
-                    FlxG.state.add(skidDance);
-            
-                    pumpDance = new FlxSprite(900, 277);
-                    pumpDance.frames = Paths.getSparrowAtlas('pumpDanceTitle');
-                    //pumpDance.animation.addByIndices('danceLeft', 'pumpDance instance 1', [0, 1, 2, 3, 4, 5, 6, 7], "", 24, false);
-                    //pumpDance.animation.addByIndices('danceRight', 'pumpDance instance 1', [8, 9, 10, 11, 12, 13, 14, 15], "", 24, false);
-                    pumpDance.animation.addByPrefix('dance', 'pumpDance instance 1', 24, true);
-                    pumpDance.animation.play('dance');
-                    pumpDance.shader = FlxG.state.swagShader.shader;
-                    pumpDance.visible = false;
-                    FlxG.state.add(pumpDance);
-            
-                    logoSpooky = new FlxSprite(0, 9);
-                    logoSpooky.frames = Paths.getSparrowAtlas('spookyLogo');
-                    logoSpooky.screenCenter(0x01);
-                    logoSpooky.animation.addByPrefix('bump', 'logo', 24);
-                    logoSpooky.visible = false;
-                    FlxG.state.add(logoSpooky);
-                
-                    titleText = new FlxSprite(126, 605);
-                    titleText.frames = Paths.getSparrowAtlas('titleEnterSpooky');
-                    titleText.animation.addByPrefix('idle', "Press Enter to Begin", 24);
-                    titleText.animation.addByPrefix('press', "ENTER PRESSED", 24);
-                    titleText.animation.play('idle');
-                    titleText.visible = false;
-                    FlxG.state.add(titleText);
-
-                    addedTitle = 1;
-                }
-
-                if (FlxG.state.logoBl != null && FlxG.state.gfDance != null && FlxG.state.titleText != null && FlxG.state.skippedIntro && addedTitle == 1)
-                {
-                    //second massive block of the same stuff here to prevent lag when the screen flashes to reveal the title screen. would put this all in a function but it still lagged when i did that for some reason so I'm gonna have to deal with it being like this
-                    skidDance = new FlxSprite(26 + 34, 283);
-                    skidDance.frames = Paths.getSparrowAtlas('skidDanceTitle');
-                    //skidDance.animation.addByIndices('danceLeft', 'skidDance instance 1', [0, 1, 2, 3, 4, 5, 6, 7], "", 24, false);
-                    //skidDance.animation.addByIndices('danceRight', 'skidDance instance 1', [8, 9, 10, 11, 12, 13, 14, 15], "", 24, false);
-                    skidDance.animation.addByPrefix('dance', 'skidDance instance 1', 24, true);
-                    skidDance.animation.play('dance');
-                    skidDance.shader = FlxG.state.swagShader.shader;
-                    skidDance.visible = false;
-                    FlxG.state.add(skidDance);
-            
-                    pumpDance = new FlxSprite(900, 277);
-                    pumpDance.frames = Paths.getSparrowAtlas('pumpDanceTitle');
-                    //pumpDance.animation.addByIndices('danceLeft', 'pumpDance instance 1', [0, 1, 2, 3, 4, 5, 6, 7], "", 24, false);
-                    //pumpDance.animation.addByIndices('danceRight', 'pumpDance instance 1', [8, 9, 10, 11, 12, 13, 14, 15], "", 24, false);
-                    pumpDance.animation.addByPrefix('dance', 'pumpDance instance 1', 24, true);
-                    pumpDance.animation.play('dance');
-                    pumpDance.shader = FlxG.state.swagShader.shader;
-                    pumpDance.visible = false;
-                    FlxG.state.add(pumpDance);
-            
-                    FlxG.state.logoBl.frames = Paths.getSparrowAtlas('spookyLogo');
-                    FlxG.state.logoBl.y = 9;
-                    FlxG.state.logoBl.screenCenter(0x01);
-                    FlxG.state.logoBl.animation.addByPrefix('bump', 'logo', 24);
-                
-                    FlxG.state.titleText.frames = Paths.getSparrowAtlas('titleEnterSpooky');
-                    FlxG.state.titleText.animation.addByPrefix('idle', "Press Enter to Begin", 24);
-                    FlxG.state.titleText.animation.addByPrefix('press', "ENTER PRESSED", 24);
-                    FlxG.state.titleText.animation.play('idle');
-                    FlxG.state.titleText.x = 126;
-                    FlxG.state.titleText.y = 605;
-                    
-
-                    skidDance.visible = true;
-                    pumpDance.visible = true;
-
-                    FlxG.state.gfDance.visible = false;
-
-                    addedTitle = 2;
-                }
-            }
-        }
-        //MENU BACKGROUND
-        if (ReflectUtil.getClassNameOf(FlxG.state) == "funkin.ui.mainmenu.MainMenuState")
-        {
-            if (FlxG.state.magenta != null)
-            {
-                if (FlxG.save.data.SpookyMixMenu == 'Always On' || (FlxG.save.data.SpookyMixMenu == 'Spooky Kids Selected' && FlxG.save.data.rememberedStartupCharacter == "spookymod"))
-                {
-                    FlxG.state.magenta.loadGraphic(Paths.image('SpookyMenuBGMagenta'));
-                    FlxG.state.members[0].loadGraphic(Paths.image('SpookyMenuBG'));
-                }
-                else
-                {
-                    FlxG.state.magenta.loadGraphic(Paths.image('menuBGMagenta'));
-                    FlxG.state.members[0].loadGraphic(Paths.image('menuBG'));
-                }
-            }
-        }
-
-        if (ReflectUtil.getClassNameOf(FlxG.state) == "funkin.ui.options.OptionsState")
-        {
-            if (FlxG.state.members[0] != null)
-            {
-                if (FlxG.save.data.SpookyMixMenu == 'Always On' || (FlxG.save.data.SpookyMixMenu == 'Spooky Kids Selected' && FlxG.save.data.rememberedStartupCharacter == "spookymod"))
-                {
-                    FlxG.state.members[0].loadGraphic(Paths.image('SpookyMenuBG'));
-                }
-                else
-                {
-                    FlxG.state.members[0].loadGraphic(Paths.image('menuBG'));
-                }
-            }
-        }
-        
-        if (ReflectUtil.getClassNameOf(FlxG.state.subState) == "funkin.ui.debug.DebugMenuSubState")
-        {
-            if (FlxG.state.subState.members[3] != null)
-            {
-                if (FlxG.save.data.SpookyMixMenu == 'Always On' || (FlxG.save.data.SpookyMixMenu == 'Spooky Kids Selected' && FlxG.save.data.rememberedStartupCharacter == "spookymod"))
-                {
-                    FlxG.state.subState.members[3].loadGraphic(Paths.image('SpookyMenuDesat'));
-                }
-                else
-                {
-                    FlxG.state.subState.members[3].loadGraphic(Paths.image('menuDesat'));
-                }
-            }
-        }
-
-        if (ReflectUtil.getClassNameOf(FlxG.state) == "funkin.ui.debug.charting.ChartEditorState")
-        {
-            if (FlxG.state.menuBG != null)
-            {
-                if (FlxG.state.selectedVariation == 'spookymod')
-                {
-                    FlxG.state.menuBG.loadGraphic(Paths.image('SpookyMenuDesat'));
-                }
-                else
-                {
-                    FlxG.state.menuBG.loadGraphic(Paths.image('menuDesat'));
-                }
-            }
-        }
-
-        //MUSIC
-
-        if (ReflectUtil.getClassNameOf(FlxG.state) == "funkin.ui.title.TitleState")
-        {
-            if (addedTitleMusic == false)
-            {
-                var musicTimer:Float;
-                if (FlxG.save.data.SpookyMixMenu == 'Always On' || (FlxG.save.data.SpookyMixMenu == 'Spooky Kids Selected' && FlxG.save.data.rememberedStartupCharacter == "spookymod"))
-                {
-                    var fullText:String = Assets.getText(Paths.txt('introTextSpooky'));
-
-                    // Split into lines and remove empty lines
-                    var firstArray:Array<String> = fullText.split('\n').filter(function(s:String) return s != '');
-                    var swagGoodArray:Array<Array<String>> = [];
-
-                    for (i in firstArray)
-                    {
-                      swagGoodArray.push(i.split('--'));
-                    }
-
-                    FlxG.state.curWacky = swagGoodArray[FlxG.random.int(0, swagGoodArray.length - 1)];
-                }
-
-                    addedTitleMusic = true;
-                
-                    new FlxTimer().start(0.75, function(tmr:FlxTimer)
-                    {
-                        if (FlxG.save.data.SpookyMixMenu == 'Always On' || (FlxG.save.data.SpookyMixMenu == 'Spooky Kids Selected' && FlxG.save.data.rememberedStartupCharacter == "spookymod"))
-                            menuTheme = "gettinSpooky";
-                        else
-                            menuTheme = "gettinFreaky";
-
-		                menuMusic = FunkinSound.load(Paths.music(menuTheme + "/" + menuTheme), true);
-		                menuMusic.volume = 0;
-		                menuMusic.looped = true;
-		                menuMusic.persist = true;
-		                menuMusic.fadeIn(4.0, 0.0, 1.0);
-                        addedTitleMusic = true;
-                    });
-            }
-        }
-        else if (addedTitleMusic == true)
-        {
-            if (ReflectUtil.getClassNameOf(FlxG.state.subState) == "funkin.ui.debug.latency.LatencyState")
-                menuMusic.stop();
-
-            if (ReflectUtil.getClassNameOf(FlxG.state.subState) == "funkin.ui.freeplay.FreeplayState")
-            {
-                openedFreeplay = true;
-
-                dontPlayMusicYet = false;
-
-                menuMusic.pause();
-                fadeMusicIn = true;
-            }
-            else if (ReflectUtil.getClassNameOf(FlxG.state) != "funkin.ui.title.TitleState" && ReflectUtil.getClassNameOf(FlxG.state) != "funkin.ui.mainmenu.MainMenuState" && ReflectUtil.getClassNameOf(FlxG.state) != "funkin.ui.story.StoryMenuState" && ReflectUtil.getClassNameOf(FlxG.state) != "funkin.ui.options.OptionsState")
-            {
-                if (ReflectUtil.getClassNameOf(FlxG.state) == "funkin.play.PlayState")
-                {
-                    menuMusic.stop();
-                    dontPlayMusicYet = true;
-                }
-
-                if (fadeMusicIn == false) menuMusic.stop();
-            }
-            else if (ReflectUtil.getClassNameOf(FlxG.state) != "funkin.ui.options.OptionsState")
-            {
-                if (fadeMusicIn == true)
-                {
-		            if (dontPlayMusicYet == false)
-                    {
-                        menuMusic.fadeIn(4.0, 0.0, 1.0);
-
-                        fadeMusicIn = false;
-                    }
-                }
-                else
-                {
-                    if (dontPlayMusicYet == false) menuMusic.play(false);
-                }
-            }
-
-            if (ReflectUtil.getClassNameOf(FlxG.state) == "funkin.ui.story.StoryMenuState")
-            {
-                dontPlayMusicYet = false;
-
-                if (PlayerSettings.player1.controls.ACCEPT && FlxG.state.currentLevel.isUnlocked())
-                {
-                    new FlxTimer().start(0.99, function(tmr:FlxTimer)
-                    {
-                        menuMusic.pause();
-                        menuMusic.time = 0;
-                        menuMusic.volume = 0;
-                    });
-                }
-            }
+          FlxG.state.magenta.loadGraphic(Paths.image('SpookyMenuBGMagenta'));
+          FlxG.state.members[0].loadGraphic(Paths.image('SpookyMenuBG'));
         }
         else
         {
+          FlxG.state.magenta.loadGraphic(Paths.image('menuBGMagenta'));
+          FlxG.state.members[0].loadGraphic(Paths.image('menuBG'));
         }
-        
-        if (ReflectUtil.getClassNameOf(FlxG.state) == "funkin.ui.charSelect.CharSelectSubState")
-        {
-            if (FlxG.save.data.SpookyMixMenu == 'Always On' || (FlxG.save.data.SpookyMixMenu == 'Spooky Kids Selected' && FlxG.state.curChar == "spookymod"))
-                menuTheme = "gettinSpooky";
-            else
-                menuTheme = "gettinFreaky";
-
-            if (menuMusic != null) menuMusic.stop();
-                    
-		    menuMusic = FunkinSound.load(Paths.music(menuTheme + "/" + menuTheme), true);
-		    menuMusic.volume = 1;
-		    menuMusic.looped = true;
-		    menuMusic.persist = true;
-
-            dontPlayMusicYet = true;
-        }
-
-        if (ReflectUtil.getClassNameOf(FlxG.state) == "funkin.ui.options.OptionsState")
-        {
-            if (optionNumber == 0)
-            {
-                for (i in 0...FlxG.state.members[1].members[1].members[0].members.length)
-                {
-                    if (FlxG.state.members[1].members[1].members[0].members[i].label.text == "Default Player")
-                        optionNumber = i;
-                }
-            }
-
-            /*
-            var pausedText:FlxText = new FlxText(0, 10, FlxG.width, FlxG.state.members[1].members[1].members[0].members[optionNumber].label.text);
-            pausedText.setFormat(Paths.font('vcr.ttf'), 60, 0xFFFFFFFF, "left");
-            pausedText.scrollFactor.set(0, 0);
-		    FlxG.state.add(pausedText);
-            */
-
-            if ((PlayerSettings.player1.controls.UI_LEFT_P || PlayerSettings.player1.controls.UI_RIGHT_P) && openedFreeplay == false)
-            {                
-                //FlxG.state.members[1].members[1].members[0].members[optionNumber] = null;
-
-                if ((FlxG.save.data.SpookyMixMenu == 'Spooky Kids Selected' && FlxG.state.members[1].members[1].members[0].members[optionNumber].label.alpha == 1 && FlxG.save.data.defaultStartupCharacter != "remember") && ((menuTheme == "gettinFreaky" && FlxG.save.data.defaultStartupCharacter == "spookymod") || (menuTheme == "gettinSpooky" && FlxG.save.data.defaultStartupCharacter != "spookymod")))
-                {
-                    if (FlxG.save.data.rememberedStartupCharacter == "spookymod")
-                        menuTheme = "gettinSpooky";
-                    else
-                        menuTheme = "gettinFreaky";
-
-                    menuMusic.stop();
-
-		            menuMusic = FunkinSound.load(Paths.music(menuTheme + "/" + menuTheme), true);
-		            menuMusic.volume = 1;
-		            menuMusic.looped = true;
-		            menuMusic.persist = true;
-                    menuMusic.play(false);
-                }
-            }
-            else
-            {
-                previousDefaultPlayer = FlxG.save.data.defaultStartupCharacter;
-            }
-        }
-
-        /*
-        if (ReflectUtil.getClassNameOf(FlxG.state) == "funkin.ui.mainmenu.MainMenuState")
-        {
-            if (FlxG.state.leftWatermarkText != null) FlxG.state.leftWatermarkText.text = FlxG.sound.defaultSoundGroup.sounds;
-                
-            //FlxG.sound.music.volume = 0;
-        }
-        */
-
-        if (FlxG.keys.justPressed.F5)
-        {
-		    addedTitleMusic = false;
-            openedFreeplay = false;
-            
-		    for (i in 0...FlxG.sound.defaultSoundGroup.sounds.length) FlxG.sound.defaultSoundGroup.sounds[i].stop();
-            
-            if (FlxG.save.data.SpookyMixMenu == 'Always On' || (FlxG.save.data.SpookyMixMenu == 'Spooky Kids Selected' && FlxG.save.data.rememberedStartupCharacter == "spookymod"))
-                menuTheme = "gettinSpooky";
-            else
-                menuTheme = "gettinFreaky";
-
-		    menuMusic = FunkinSound.load(Paths.music(menuTheme + "/" + menuTheme), true);
-		    menuMusic.volume = 1;
-		    menuMusic.looped = true;
-		    menuMusic.persist = true;
-
-            addedTitleMusic = true;
-        }
-
-        if (FlxG.keys.justPressed.F4)
-        {
-            cutbacktoMenu = true;
-        }
-
-        if (ReflectUtil.getClassNameOf(FlxG.state) == "funkin.ui.mainmenu.MainMenuState")
-        {
-            if (cutbacktoMenu == true)
-            {
-                fadeMusicIn = false;
-
-		        for (i in 0...FlxG.sound.defaultSoundGroup.sounds.length) FlxG.sound.defaultSoundGroup.sounds[i].stop();
-            
-                if (FlxG.save.data.SpookyMixMenu == 'Always On' || (FlxG.save.data.SpookyMixMenu == 'Spooky Kids Selected' && FlxG.save.data.rememberedStartupCharacter == "spookymod"))
-                    menuTheme = "gettinSpooky";
-                else
-                    menuTheme = "gettinFreaky";
-
-		        menuMusic = FunkinSound.load(Paths.music(menuTheme + "/" + menuTheme), true);
-		        menuMusic.volume = 1;
-		        menuMusic.looped = true;
-		        menuMusic.persist = true;
-                menuMusic.play(false);
-
-                cutbacktoMenu = false;
-            }
-
-            //FlxG.sound.music.volume = 0;
-        }
+      }
     }
 
-    public function onStateChangeEnd(event:StateChangeScriptEvent)
+    if (ReflectUtil.getClassNameOf(FlxG.state) == "funkin.ui.options.OptionsState")
     {
-        addedTitle = 0;
-        
-        if (menuMusic != null) menuMusic.volume = 1;
-
-        if(Std.isOfType(event.targetState, OptionsState))
+      if (FlxG.state.members[0] != null)
+      {
+        if (FlxG.save.data.SpookyMixMenu == 'Always On'
+          || (FlxG.save.data.SpookyMixMenu == 'Spooky Kids Selected' && FlxG.save.data.rememberedStartupCharacter == "spookymod"))
         {
-            if (event.targetState.optionsCodex.pages.get("preferences") != null) 
-            {
-                event.targetState.optionsCodex.pages.get("preferences").createPrefItemEnum('Spooky Menu', "Switch between using Spooky Mix's or FNF's menu themes.", ['Always On' => 'Always On', 'Off' => 'Off', 'Spooky Kids Selected' => 'Spooky Kids Selected'], function(value:String, oValue:String):Void
-                {
-                    if (((FlxG.save.data.SpookyMixMenu == 'Always On' || (FlxG.save.data.SpookyMixMenu == 'Spooky Kids Selected' && FlxG.save.data.rememberedStartupCharacter == "spookymod")) && value == "Off") || ((FlxG.save.data.SpookyMixMenu == 'Off' || (FlxG.save.data.SpookyMixMenu == 'Spooky Kids Selected' && FlxG.save.data.rememberedStartupCharacter != "spookymod")) && value == 'Always On') || (FlxG.save.data.SpookyMixMenu == 'Off' && FlxG.save.data.rememberedStartupCharacter == "spookymod" && value == 'Spooky Kids Selected') || (FlxG.save.data.SpookyMixMenu == 'Always On' && FlxG.save.data.rememberedStartupCharacter != "spookymod" && value == 'Spooky Kids Selected'))
-                        playNewMenuMusic = true;
-                    else
-                        playNewMenuMusic = false;
-
-                    FlxG.save.data.SpookyMixMenu = value;
-                    FlxG.save.data.flush;
-                    
-                    if (FlxG.save.data.SpookyMixMenu == 'Always On' || (FlxG.save.data.SpookyMixMenu == 'Spooky Kids Selected' && FlxG.save.data.rememberedStartupCharacter == "spookymod"))
-                        menuTheme = "gettinSpooky";
-                    else
-                        menuTheme = "gettinFreaky";
-                    
-                    if (playNewMenuMusic == true)
-                    {
-                        menuMusic.stop();
-
-		                menuMusic = FunkinSound.load(Paths.music(menuTheme + "/" + menuTheme), true);
-		                menuMusic.volume = 1;
-		                menuMusic.looped = true;
-		                menuMusic.persist = true;
-                        menuMusic.play(false);
-                    }
-
-                }, FlxG.save.data.SpookyMixMenu);
-            }
+          FlxG.state.members[0].loadGraphic(Paths.image('SpookyMenuBG'));
         }
+        else
+        {
+          FlxG.state.members[0].loadGraphic(Paths.image('menuBG'));
+        }
+      }
     }
 
-    function addTitleGuys()
+    if (ReflectUtil.getClassNameOf(FlxG.state.subState) == "funkin.ui.debug.DebugMenuSubState")
     {
+      if (FlxG.state.subState.members[3] != null)
+      {
+        if (FlxG.save.data.SpookyMixMenu == 'Always On'
+          || (FlxG.save.data.SpookyMixMenu == 'Spooky Kids Selected' && FlxG.save.data.rememberedStartupCharacter == "spookymod"))
+        {
+          FlxG.state.subState.members[3].loadGraphic(Paths.image('SpookyMenuDesat'));
+        }
+        else
+        {
+          FlxG.state.subState.members[3].loadGraphic(Paths.image('menuDesat'));
+        }
+      }
     }
 
+    if (ReflectUtil.getClassNameOf(FlxG.state) == "funkin.ui.debug.charting.ChartEditorState")
+    {
+      if (FlxG.state.menuBG != null)
+      {
+        if (FlxG.state.selectedVariation == 'spookymod')
+        {
+          FlxG.state.menuBG.loadGraphic(Paths.image('SpookyMenuDesat'));
+        }
+        else
+        {
+          FlxG.state.menuBG.loadGraphic(Paths.image('menuDesat'));
+        }
+      }
+    }
+
+    // MUSIC
+
+    if (ReflectUtil.getClassNameOf(FlxG.state) == "funkin.ui.title.TitleState")
+    {
+      if (addedTitleMusic == false)
+      {
+        var musicTimer:Float;
+        if (FlxG.save.data.SpookyMixMenu == 'Always On'
+          || (FlxG.save.data.SpookyMixMenu == 'Spooky Kids Selected' && FlxG.save.data.rememberedStartupCharacter == "spookymod"))
+        {
+          var fullText:String = Assets.getText(Paths.txt('introTextSpooky'));
+
+          // Split into lines and remove empty lines
+          var firstArray:Array<String> = fullText.split('\n').filter(function(s:String) return s != '');
+          var swagGoodArray:Array<Array<String>> = [];
+
+          for (i in firstArray)
+          {
+            swagGoodArray.push(i.split('--'));
+          }
+
+          FlxG.state.curWacky = swagGoodArray[FlxG.random.int(0, swagGoodArray.length - 1)];
+        }
+
+        addedTitleMusic = true;
+
+        new FlxTimer().start(0.75, function(tmr:FlxTimer) {
+          if (FlxG.save.data.SpookyMixMenu == 'Always On'
+            || (FlxG.save.data.SpookyMixMenu == 'Spooky Kids Selected'
+              && FlxG.save.data.rememberedStartupCharacter == "spookymod")) menuTheme = "gettinSpooky";
+          else
+            menuTheme = "gettinFreaky";
+
+          menuMusic = FunkinSound.load(Paths.music(menuTheme + "/" + menuTheme), true);
+          menuMusic.volume = 0;
+          menuMusic.looped = true;
+          menuMusic.persist = true;
+          menuMusic.fadeIn(4.0, 0.0, 1.0);
+          addedTitleMusic = true;
+        });
+      }
+    }
+    else if (addedTitleMusic == true)
+    {
+      if (ReflectUtil.getClassNameOf(FlxG.state.subState) == "funkin.ui.debug.latency.LatencyState") menuMusic.stop();
+
+      if (ReflectUtil.getClassNameOf(FlxG.state.subState) == "funkin.ui.freeplay.FreeplayState")
+      {
+        openedFreeplay = true;
+
+        dontPlayMusicYet = false;
+
+        menuMusic.pause();
+        fadeMusicIn = true;
+      }
+      else if (ReflectUtil.getClassNameOf(FlxG.state) != "funkin.ui.title.TitleState"
+        && ReflectUtil.getClassNameOf(FlxG.state) != "funkin.ui.mainmenu.MainMenuState"
+        && ReflectUtil.getClassNameOf(FlxG.state) != "funkin.ui.story.StoryMenuState"
+        && ReflectUtil.getClassNameOf(FlxG.state) != "funkin.ui.options.OptionsState")
+      {
+        if (ReflectUtil.getClassNameOf(FlxG.state) == "funkin.play.PlayState")
+        {
+          menuMusic.stop();
+          dontPlayMusicYet = true;
+        }
+
+        if (fadeMusicIn == false) menuMusic.stop();
+      }
+      else if (ReflectUtil.getClassNameOf(FlxG.state) != "funkin.ui.options.OptionsState")
+      {
+        if (fadeMusicIn == true)
+        {
+          if (dontPlayMusicYet == false)
+          {
+            menuMusic.fadeIn(4.0, 0.0, 1.0);
+
+            fadeMusicIn = false;
+          }
+        }
+        else
+        {
+          if (dontPlayMusicYet == false) menuMusic.play(false);
+        }
+      }
+
+      if (ReflectUtil.getClassNameOf(FlxG.state) == "funkin.ui.story.StoryMenuState")
+      {
+        dontPlayMusicYet = false;
+
+        if (PlayerSettings.player1.controls.ACCEPT && FlxG.state.currentLevel.isUnlocked())
+        {
+          new FlxTimer().start(0.99, function(tmr:FlxTimer) {
+            menuMusic.pause();
+            menuMusic.time = 0;
+            menuMusic.volume = 0;
+          });
+        }
+      }
+    }
+    else {}
+
+    if (ReflectUtil.getClassNameOf(FlxG.state) == "funkin.ui.charSelect.CharSelectSubState")
+    {
+      if (FlxG.save.data.SpookyMixMenu == 'Always On'
+        || (FlxG.save.data.SpookyMixMenu == 'Spooky Kids Selected' && FlxG.state.curChar == "spookymod")) menuTheme = "gettinSpooky";
+      else
+        menuTheme = "gettinFreaky";
+
+      if (menuMusic != null) menuMusic.stop();
+
+      menuMusic = FunkinSound.load(Paths.music(menuTheme + "/" + menuTheme), true);
+      menuMusic.volume = 1;
+      menuMusic.looped = true;
+      menuMusic.persist = true;
+
+      dontPlayMusicYet = true;
+    }
+
+    if (ReflectUtil.getClassNameOf(FlxG.state) == "funkin.ui.options.OptionsState")
+    {
+      if (optionNumber == 0)
+      {
+        for (i in 0...FlxG.state.members[1].members[1].members[0].members.length)
+        {
+          if (FlxG.state.members[1].members[1].members[0].members[i].label.text == "Default Player") optionNumber = i;
+        }
+      }
+
+      /*
+        var pausedText:FlxText = new FlxText(0, 10, FlxG.width, FlxG.state.members[1].members[1].members[0].members[optionNumber].label.text);
+        pausedText.setFormat(Paths.font('vcr.ttf'), 60, 0xFFFFFFFF, "left");
+        pausedText.scrollFactor.set(0, 0);
+        FlxG.state.add(pausedText);
+       */
+
+      if ((PlayerSettings.player1.controls.UI_LEFT_P || PlayerSettings.player1.controls.UI_RIGHT_P) && openedFreeplay == false)
+      {
+        // FlxG.state.members[1].members[1].members[0].members[optionNumber] = null;
+
+        if ((FlxG.save.data.SpookyMixMenu == 'Spooky Kids Selected'
+          && FlxG.state.members[1].members[1].members[0].members[optionNumber].label.alpha == 1
+          && FlxG.save.data.defaultStartupCharacter != "remember")
+          && ((menuTheme == "gettinFreaky" && FlxG.save.data.defaultStartupCharacter == "spookymod")
+            || (menuTheme == "gettinSpooky" && FlxG.save.data.defaultStartupCharacter != "spookymod")))
+        {
+          if (FlxG.save.data.rememberedStartupCharacter == "spookymod") menuTheme = "gettinSpooky";
+          else
+            menuTheme = "gettinFreaky";
+
+          menuMusic.stop();
+
+          menuMusic = FunkinSound.load(Paths.music(menuTheme + "/" + menuTheme), true);
+          menuMusic.volume = 1;
+          menuMusic.looped = true;
+          menuMusic.persist = true;
+          menuMusic.play(false);
+        }
+      }
+      else
+      {
+        previousDefaultPlayer = FlxG.save.data.defaultStartupCharacter;
+      }
+    }
+
+    /*
+      if (ReflectUtil.getClassNameOf(FlxG.state) == "funkin.ui.mainmenu.MainMenuState")
+      {
+        if (FlxG.state.leftWatermarkText != null) FlxG.state.leftWatermarkText.text = FlxG.sound.defaultSoundGroup.sounds;
+          
+        //FlxG.sound.music.volume = 0;
+      }
+     */
+
+    if (FlxG.keys.justPressed.F5)
+    {
+      addedTitleMusic = false;
+      openedFreeplay = false;
+
+      for (i in 0...FlxG.sound.defaultSoundGroup.sounds.length)
+        FlxG.sound.defaultSoundGroup.sounds[i].stop();
+
+      if (FlxG.save.data.SpookyMixMenu == 'Always On'
+        || (FlxG.save.data.SpookyMixMenu == 'Spooky Kids Selected'
+          && FlxG.save.data.rememberedStartupCharacter == "spookymod")) menuTheme = "gettinSpooky";
+      else
+        menuTheme = "gettinFreaky";
+
+      menuMusic = FunkinSound.load(Paths.music(menuTheme + "/" + menuTheme), true);
+      menuMusic.volume = 1;
+      menuMusic.looped = true;
+      menuMusic.persist = true;
+
+      addedTitleMusic = true;
+    }
+
+    if (FlxG.keys.justPressed.F4)
+    {
+      cutbacktoMenu = true;
+    }
+
+    if (ReflectUtil.getClassNameOf(FlxG.state) == "funkin.ui.mainmenu.MainMenuState")
+    {
+      if (cutbacktoMenu == true)
+      {
+        fadeMusicIn = false;
+
+        for (i in 0...FlxG.sound.defaultSoundGroup.sounds.length)
+          FlxG.sound.defaultSoundGroup.sounds[i].stop();
+
+        if (FlxG.save.data.SpookyMixMenu == 'Always On'
+          || (FlxG.save.data.SpookyMixMenu == 'Spooky Kids Selected'
+            && FlxG.save.data.rememberedStartupCharacter == "spookymod")) menuTheme = "gettinSpooky";
+        else
+          menuTheme = "gettinFreaky";
+
+        menuMusic = FunkinSound.load(Paths.music(menuTheme + "/" + menuTheme), true);
+        menuMusic.volume = 1;
+        menuMusic.looped = true;
+        menuMusic.persist = true;
+        menuMusic.play(false);
+
+        cutbacktoMenu = false;
+      }
+
+      // FlxG.sound.music.volume = 0;
+    }
+  }
+
+  public function onStateChangeEnd(event:StateChangeScriptEvent)
+  {
+    addedTitle = 0;
+
+    if (menuMusic != null) menuMusic.volume = 1;
+
+    if (Std.isOfType(event.targetState, OptionsState))
+    {
+      if (event.targetState.optionsCodex.pages.get("preferences") != null)
+      {
+        event.targetState.optionsCodex.pages.get("preferences").createPrefItemEnum('Spooky Menu', "Switch between using Spooky Mix's or FNF's menu themes.", [
+          'Always On' => 'Always On',
+          'Off' => 'Off',
+          'Spooky Kids Selected' => 'Spooky Kids Selected'
+        ], function(value:String, oValue:String):Void {
+          if (((FlxG.save.data.SpookyMixMenu == 'Always On'
+            || (FlxG.save.data.SpookyMixMenu == 'Spooky Kids Selected' && FlxG.save.data.rememberedStartupCharacter == "spookymod"))
+            && value == "Off")
+            || ((FlxG.save.data.SpookyMixMenu == 'Off'
+              || (FlxG.save.data.SpookyMixMenu == 'Spooky Kids Selected' && FlxG.save.data.rememberedStartupCharacter != "spookymod"))
+              && value == 'Always On')
+            || (FlxG.save.data.SpookyMixMenu == 'Off'
+              && FlxG.save.data.rememberedStartupCharacter == "spookymod"
+              && value == 'Spooky Kids Selected')
+            || (FlxG.save.data.SpookyMixMenu == 'Always On'
+              && FlxG.save.data.rememberedStartupCharacter != "spookymod"
+              && value == 'Spooky Kids Selected')) playNewMenuMusic = true;
+          else
+            playNewMenuMusic = false;
+
+          FlxG.save.data.SpookyMixMenu = value;
+          FlxG.save.data.flush;
+
+          if (FlxG.save.data.SpookyMixMenu == 'Always On'
+            || (FlxG.save.data.SpookyMixMenu == 'Spooky Kids Selected'
+              && FlxG.save.data.rememberedStartupCharacter == "spookymod")) menuTheme = "gettinSpooky";
+          else
+            menuTheme = "gettinFreaky";
+
+          if (playNewMenuMusic == true)
+          {
+            menuMusic.stop();
+
+            menuMusic = FunkinSound.load(Paths.music(menuTheme + "/" + menuTheme), true);
+            menuMusic.volume = 1;
+            menuMusic.looped = true;
+            menuMusic.persist = true;
+            menuMusic.play(false);
+          }
+        }, FlxG.save.data.SpookyMixMenu);
+      }
+    }
+  }
+
+  function addTitleGuys() {}
 }

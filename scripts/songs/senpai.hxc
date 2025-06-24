@@ -9,31 +9,33 @@ import flixel.FlxG;
 import funkin.save.Save;
 import flixel.FlxSprite;
 import flixel.util.FlxTimer;
-
 import funkin.effects.RetroCameraFade;
 
-class SenpaiSong extends Song {
+class SenpaiSong extends Song
+{
   var hasPlayedCutscene:Bool;
 
-	public function new() {
-		super('senpai');
-	}
-	
-	public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool
-    {
-        if (currentVariation == 'spookymod')
-          return !Save.instance.hasBeatenSong(this.id, null, 'spookymod');
+  public function new()
+  {
+    super('senpai');
+  }
 
-        return false;
-	}
+  public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool
+  {
+    if (currentVariation == 'spookymod') return !Save.instance.hasBeatenSong(this.id, null, 'spookymod');
 
-  public override function onCountdownStart(event:CountdownScriptEvent):Void {
-		super.onCountdownStart(event);
+    return false;
+  }
+
+  public override function onCountdownStart(event:CountdownScriptEvent):Void
+  {
+    super.onCountdownStart(event);
 
     // Skip the cutscene on the normal variation if we are in Freeplay.
     if (PlayState.instance.currentVariation == 'default' && !PlayStatePlaylist.isStoryMode) hasPlayedCutscene = true;
 
-    if (!hasPlayedCutscene) {
+    if (!hasPlayedCutscene)
+    {
       trace('Pausing countdown to play cutscene.');
 
       hasPlayedCutscene = true;
@@ -45,9 +47,10 @@ class SenpaiSong extends Song {
 
       transitionToDialogue();
     }
-	}
+  }
 
-  function transitionToDialogue() {
+  function transitionToDialogue()
+  {
     trace('Transitioning to dialogue.');
 
     PlayState.instance.camCutscene.visible = true;
@@ -69,19 +72,22 @@ class SenpaiSong extends Song {
       RetroCameraFade.fadeBlack(PlayState.instance.camGame, 12, 2);
     });
 
-    FlxTween.num(0.0, 1.0, 2.0, {
-      ease: FlxEase.linear,
-      startDelay: 0.25,
-      onComplete: function (input) {
-        startDialogue();
-      }
-    }, tweenFunction);
+    FlxTween.num(0.0, 1.0, 2.0,
+      {
+        ease: FlxEase.linear,
+        startDelay: 0.25,
+        onComplete: function(input) {
+          startDialogue();
+        }
+      }, tweenFunction);
   }
 
-  function startDialogue() {
+  function startDialogue()
+  {
     if (PlayState.instance.currentVariation == "pico") PlayState.instance.startConversation("senpai-pico");
     else if (PlayState.instance.currentVariation == "spookymod") PlayState.instance.startConversation("senpai-spooky");
-    else PlayState.instance.startConversation("senpai");
+    else
+      PlayState.instance.startConversation("senpai");
   }
 
   /**
@@ -104,18 +110,24 @@ class SenpaiSong extends Song {
     hasPlayedCutscene = false;
   }
 
-  public override function onDialogueEnd() {
+  public override function onDialogueEnd()
+  {
     // We may need to wait for the outro to play.
     PlayState.instance.currentStage.resume();
     Countdown.performCountdown();
   }
-    public override function listAltInstrumentalIds(difficultyId:String, variationId:String):Array<String>
-    {
-		var targetDifficulty:Null<SongDifficulty> = getDifficulty(difficultyId, variationId);
 
-		if ((difficultyId == "erect" || difficultyId == "nightmare") && (Save.instance.hasBeatenSong(this.id, ["erect"], "") || Save.instance.hasBeatenSong(this.id, ["nightmare"], ""))) return targetDifficulty?.characters?.altInstrumentals ?? [];
-		else if (variationId == "default" && Save.instance.hasBeatenSong(this.id, null, "")) return targetDifficulty?.characters?.altInstrumentals ?? [];
-		else if (Save.instance.hasBeatenSong(this.id, null, variationId)) return targetDifficulty?.characters?.altInstrumentals ?? [];
-		else return [];
-    }
+  public override function listAltInstrumentalIds(difficultyId:String, variationId:String):Array<String>
+  {
+    var targetDifficulty:Null<SongDifficulty> = getDifficulty(difficultyId, variationId);
+
+    if ((difficultyId == "erect" || difficultyId == "nightmare")
+      && (Save.instance.hasBeatenSong(this.id, ["erect"], "")
+        || Save.instance.hasBeatenSong(this.id, ["nightmare"], ""))) return targetDifficulty?.characters?.altInstrumentals ?? [];
+    else if (variationId == "default"
+      && Save.instance.hasBeatenSong(this.id, null, "")) return targetDifficulty?.characters?.altInstrumentals ?? [];
+    else if (Save.instance.hasBeatenSong(this.id, null, variationId)) return targetDifficulty?.characters?.altInstrumentals ?? [];
+    else
+      return [];
+  }
 }

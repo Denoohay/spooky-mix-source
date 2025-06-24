@@ -1,33 +1,7 @@
-import funkin.play.GameOverSubState;
 import funkin.play.PlayState;
-import flixel.FlxCamera;
-import flixel.math.FlxMath;
-import flixel.FlxSprite;
-import flixel.math.FlxAngle;
-import flixel.math.FlxPoint;
-import flixel.text.FlxText;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
-import flixel.util.FlxSpriteUtil;
-import flixel.util.FlxTimer;
-import funkin.graphics.adobeanimate.FlxAtlasSprite;
-import funkin.graphics.FunkinSprite;
-import funkin.ui.freeplay.charselect.PlayableCharacter;
-import funkin.ui.MusicBeatSubState;
-import funkin.graphics.shaders.AdjustColorShader;
-import flixel.addons.display.FlxTiledSprite;
-import flixel.addons.display.FlxBackdrop;
-import funkin.PlayerSettings;
 import funkin.modding.module.Module;
-import funkin.modding.events.ScriptEvent;
-import funkin.modding.base.ScriptedMusicBeatSubState;
-import funkin.modding.base.ScriptedFlxRuntimeShader;
-import funkin.modding.base.ScriptedMusicBeatState;
 import funkin.util.ReflectUtil;
 import flixel.FlxG;
-import funkin.audio.FunkinSound;
-import funkin.util.Constants;
-import StringTools;
 
 class CenterGameOverCam extends Module
 {
@@ -66,39 +40,42 @@ class CenterGameOverCam extends Module
 
   override function onUpdate(event:UpdateScriptEvent)
   {
-	super.onUpdate(event);
-    
+    super.onUpdate(event);
+
     if (FlxG.keys.justPressed.F5)
     {
-        refreshedGame = true;
+      refreshedGame = true;
     }
 
     if (refreshedGame == false)
     {
-        if (ReflectUtil.getClassNameOf(FlxG.state) == "funkin.play.PlayState" && PlayState.instance.currentSong.id.toLowerCase() != "stress")
+      if (ReflectUtil.getClassNameOf(FlxG.state) == "funkin.play.PlayState" && PlayState.instance.currentSong.id.toLowerCase() != "stress")
+      {
+        if (PlayState.instance.currentStage.getBoyfriend() != null && gotMidPoint == false)
         {
-          if (PlayState.instance.currentStage.getBoyfriend() != null && gotMidPoint == false)
-          {
-            theMidPointX = (PlayState.instance.currentStage.getBoyfriend().x + PlayState.instance.currentStage.getBoyfriend().frameWidth * 0.5 * PlayState.instance.currentStage.getBoyfriend().scale.x);
-            theMidPointY = (PlayState.instance.currentStage.getBoyfriend().y + PlayState.instance.currentStage.getBoyfriend().frameHeight * 0.5 * PlayState.instance.currentStage.getBoyfriend().scale.y);
+          theMidPointX = (PlayState.instance.currentStage.getBoyfriend().x
+            + PlayState.instance.currentStage.getBoyfriend().frameWidth * 0.5 * PlayState.instance.currentStage.getBoyfriend().scale.x);
+          theMidPointY = (PlayState.instance.currentStage.getBoyfriend().y
+            + PlayState.instance.currentStage.getBoyfriend().frameHeight * 0.5 * PlayState.instance.currentStage.getBoyfriend().scale.y);
 
-            gotMidPoint = true;
-          }
+          gotMidPoint = true;
         }
+      }
 
-        if (ReflectUtil.getClassNameOf(FlxG.state.subState) == "funkin.play.GameOverSubState" && PlayState.instance.currentSong.id.toLowerCase() != "stress")
+      if (ReflectUtil.getClassNameOf(FlxG.state.subState) == "funkin.play.GameOverSubState"
+        && PlayState.instance.currentSong.id.toLowerCase() != "stress")
+      {
+        if (addedStuff == false)
         {
-            if (addedStuff == false)
-            {
-                FlxG.state.subState.cameraFollowPoint.x = theMidPointX;
-                FlxG.state.subState.cameraFollowPoint.y = theMidPointY;
-                var offsets:Array<Float> = FlxG.state.subState.boyfriend.getDeathCameraOffsets();
-                FlxG.state.subState.cameraFollowPoint.x += offsets[0];
-                FlxG.state.subState.cameraFollowPoint.y += offsets[1];
+          FlxG.state.subState.cameraFollowPoint.x = theMidPointX;
+          FlxG.state.subState.cameraFollowPoint.y = theMidPointY;
+          var offsets:Array<Float> = FlxG.state.subState.boyfriend.getDeathCameraOffsets();
+          FlxG.state.subState.cameraFollowPoint.x += offsets[0];
+          FlxG.state.subState.cameraFollowPoint.y += offsets[1];
 
-                addedStuff = true;
-            }
+          addedStuff = true;
         }
+      }
     }
   }
 }

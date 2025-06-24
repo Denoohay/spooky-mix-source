@@ -12,90 +12,89 @@ import funkin.modding.base.ScriptedFlxAtlasSprite;
 
 class MallEvilSpookyStage extends Stage
 {
-	function new()
-	{
-		super('mallEvilSpooky');
-	}
+  function new()
+  {
+    super('mallEvilSpooky');
+  }
 
   var colorShaderBf:AdjustColorShader;
   var colorShaderDad:AdjustColorShader;
 
-	public override function onCountdownStart(event:CountdownScriptEvent):Void {
-		super.onCountdownStart(event);
-	}
+  public override function onCountdownStart(event:CountdownScriptEvent):Void
+  {
+    super.onCountdownStart(event);
+  }
 
-	function buildStage()
-	{
-		super.buildStage();
+  function buildStage()
+  {
+    super.buildStage();
 
     colorShaderBf = new AdjustColorShader();
     colorShaderDad = new AdjustColorShader();
-	
-	if (FlxG.save.data.spookyShaders != false)
-	{
-		colorShaderBf.brightness = -48;
-		colorShaderBf.contrast = 28;
-		colorShaderBf.saturation = -18;
-		colorShaderBf.hue = -29;
 
-		colorShaderDad.brightness = -28;
-		colorShaderDad.contrast = -14;
-		colorShaderDad.saturation = -21;
-		colorShaderDad.hue = -22;
+    if (FlxG.save.data.spookyShaders != false)
+    {
+      colorShaderBf.brightness = -48;
+      colorShaderBf.contrast = 28;
+      colorShaderBf.saturation = -18;
+      colorShaderBf.hue = -29;
 
-		getNamedProp('topGlow').blend = 0;
-	}
+      colorShaderDad.brightness = -28;
+      colorShaderDad.contrast = -14;
+      colorShaderDad.saturation = -21;
+      colorShaderDad.hue = -22;
 
-	}
+      getNamedProp('topGlow').blend = 0;
+    }
+  }
 
-	function onUpdate(event:UpdateScriptEvent):Void
-	{
-		super.onUpdate(event);
+  function onUpdate(event:UpdateScriptEvent):Void
+  {
+    super.onUpdate(event);
 
-		if (FlxG.save.data.spookyShaders != false)
-		{
-			if(getBoyfriend() != null && getBoyfriend().shader == null)
-			{
-				getBoyfriend().shader = colorShaderBf;
-				getDad().shader = colorShaderDad;
-			}
-		}
-		else
-		{
-			if(getBoyfriend() != null)
-			{
-				getBoyfriend().color = 0xFFA8B3;
-				getDad().color = 0xFFA8B3;
-			}
-		}
+    if (FlxG.save.data.spookyShaders != false)
+    {
+      if (getBoyfriend() != null && getBoyfriend().shader == null)
+      {
+        getBoyfriend().shader = colorShaderBf;
+        getDad().shader = colorShaderDad;
+      }
+    }
+    else
+    {
+      if (getBoyfriend() != null)
+      {
+        getBoyfriend().color = 0xFFA8B3;
+        getDad().color = 0xFFA8B3;
+      }
+    }
+  }
 
-	}
+  override function onGameOver(event:ScriptEvent):Void
+  {
+    super.onGameOver(event);
 
-	override function onGameOver(event:ScriptEvent):Void {
-		super.onGameOver(event);
-		
-		if (FlxG.save.data.spookyShaders != false)
-			getBoyfriend().shader = null;
-		else
-			getBoyfriend().color = 0xFFFFFF;
-	}
+    if (FlxG.save.data.spookyShaders != false) getBoyfriend().shader = null;
+    else
+      getBoyfriend().color = 0xFFFFFF;
+  }
 
-	override function onSongRetry(event:ScriptEvent):Void {
-		super.onSongRetry(event);
-		
-		if (FlxG.save.data.spookyShaders != false)
-			getBoyfriend().shader = colorShaderBf;
-		else
-			getBoyfriend().color = 0xFFA8B3;
-	}
+  override function onSongRetry(event:ScriptEvent):Void
+  {
+    super.onSongRetry(event);
 
-	function onBeatHit(event:SongTimeScriptEvent):Void
-	{
-		super.onBeatHit(event);
-	}
+    if (FlxG.save.data.spookyShaders != false) getBoyfriend().shader = colorShaderBf;
+    else
+      getBoyfriend().color = 0xFFA8B3;
+  }
+
+  function onBeatHit(event:SongTimeScriptEvent):Void
+  {
+    super.onBeatHit(event);
+  }
 
   function onStepHit(event:SongTimeScriptEvent):Void
-	{
-		super.onStepHit(event);
-	}
+  {
+    super.onStepHit(event);
+  }
 }

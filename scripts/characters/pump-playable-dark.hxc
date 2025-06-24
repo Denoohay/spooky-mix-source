@@ -1,112 +1,106 @@
 import funkin.play.character.MultiSparrowCharacter;
 import flixel.FlxG;
-import flixel.util.FlxTimer;
 import funkin.play.PlayState;
 import funkin.play.PauseSubState;
-import funkin.graphics.FunkinSprite;
-import funkin.play.character.SparrowCharacter;
 import funkin.play.character.CharacterType;
 import funkin.play.character.CharacterDataParser;
 import funkin.play.GameOverSubState;
-import StringTools;
 import funkin.graphics.shaders.AdjustColorShader;
 
 class PumpPlayableDarkCharacter extends MultiSparrowCharacter
 {
-	function new()
-	{
-		super('pump-playable-dark');
-	}
+  function new()
+  {
+    super('pump-playable-dark');
+  }
 
-	var normalChar:BaseCharacter;
-	
-	var colorShaderNormal:AdjustColorShader;
+  var normalChar:BaseCharacter;
 
-	override function set_alpha(val:Float):Float
-	{
-		super.set_alpha(val);
-		if(val != 1)
-			normalChar.alpha = 1;
-		else
-			normalChar.alpha = 0;
+  var colorShaderNormal:AdjustColorShader;
+
+  override function set_alpha(val:Float):Float
+  {
+    super.set_alpha(val);
+    if (val != 1) normalChar.alpha = 1;
+    else
+      normalChar.alpha = 0;
 
     return val;
-	}
+  }
 
-	function onNoteHit(event:HitNoteScriptEvent)
-	{
-		// Override the hit note animation.
+  function onNoteHit(event:HitNoteScriptEvent)
+  {
+    // Override the hit note animation.
 
-		if (event.note.noteData.getMustHitNote() && characterType == CharacterType.BF)
-		{
-			switch (event.note.kind)
-			{
-				case "Cheer":
-					holdTimer = 0;
-					this.playAnimation('cheer', false);
-				case "cheer":
-					holdTimer = 0;
-					this.playAnimation('cheer', false);
-				default:
-					holdTimer = 0;
-					this.playSingAnimation(event.note.noteData.getDirection(), false);
-			}
-		}
-	}
-
-	override function playAnimation(name:String, restart:Bool, ignoreOther:Bool) {
-			super.playAnimation(name, restart, ignoreOther);
-
-      if(normalChar != null){
-        normalChar.playAnimation(name, restart, ignoreOther);
-        normalChar.setPosition(this.x, this.y);
+    if (event.note.noteData.getMustHitNote() && characterType == CharacterType.BF)
+    {
+      switch (event.note.kind)
+      {
+        case "Cheer":
+          holdTimer = 0;
+          this.playAnimation('cheer', false);
+        case "cheer":
+          holdTimer = 0;
+          this.playAnimation('cheer', false);
+        default:
+          holdTimer = 0;
+          this.playSingAnimation(event.note.noteData.getDirection(), false);
       }
-	}
+    }
+  }
 
-	override function onGameOver(event:ScriptEvent):Void {
-		super.onGameOver(event);
-	}
+  override function playAnimation(name:String, restart:Bool, ignoreOther:Bool)
+  {
+    super.playAnimation(name, restart, ignoreOther);
 
-	override function onSongRetry(event:ScriptEvent):Void {
-		super.onSongRetry(event);
+    if (normalChar != null)
+    {
+      normalChar.playAnimation(name, restart, ignoreOther);
+      normalChar.setPosition(this.x, this.y);
+    }
+  }
 
-		// Don't let these pile up.
+  override function onSongRetry(event:ScriptEvent):Void
+  {
+    super.onSongRetry(event);
 
-		// Reset to standard death animation.
-		GameOverSubState.musicSuffix = '-spooky';
-		GameOverSubState.blueBallSuffix = '-spooky';
+    // Don't let these pile up.
 
-		PauseSubState.musicSuffix = '-spooky';
+    // Reset to standard death animation.
+    GameOverSubState.musicSuffix = '-spooky';
+    GameOverSubState.blueBallSuffix = '-spooky';
 
-		this.visible = true;
-	}
-	
-	function onCreate(event:ScriptEvent)
-	{
-		super.onCreate(event);
-		
-		colorShaderNormal = new AdjustColorShader();
-		
-		if (FlxG.save.data.spookyShaders != false)
-		{
-			colorShaderNormal.brightness = -45;
-			colorShaderNormal.contrast = 47;
-			colorShaderNormal.saturation = -43;
-		}
-		
-		normalChar = CharacterDataParser.fetchCharacter('pump-playable');
-		normalChar.zIndex = 199;
-		normalChar.alpha = 0;
-		normalChar.flipX = false;
+    PauseSubState.musicSuffix = '-spooky';
 
-		PlayState.instance.currentStage.add(normalChar);
-		PlayState.instance.currentStage.refresh(); // Apply z-index.
+    this.visible = true;
+  }
 
-		GameOverSubState.musicSuffix = '-spooky';
-		GameOverSubState.blueBallSuffix = '-spooky';
+  function onCreate(event:ScriptEvent)
+  {
+    super.onCreate(event);
 
-		PauseSubState.musicSuffix = '-spooky';
-		
-		normalChar.shader = colorShaderNormal;
-	}
+    colorShaderNormal = new AdjustColorShader();
+
+    if (FlxG.save.data.spookyShaders != false)
+    {
+      colorShaderNormal.brightness = -45;
+      colorShaderNormal.contrast = 47;
+      colorShaderNormal.saturation = -43;
+    }
+
+    normalChar = CharacterDataParser.fetchCharacter('pump-playable');
+    normalChar.zIndex = 199;
+    normalChar.alpha = 0;
+    normalChar.flipX = false;
+
+    PlayState.instance.currentStage.add(normalChar);
+    PlayState.instance.currentStage.refresh(); // Apply z-index.
+
+    GameOverSubState.musicSuffix = '-spooky';
+    GameOverSubState.blueBallSuffix = '-spooky';
+
+    PauseSubState.musicSuffix = '-spooky';
+
+    normalChar.shader = colorShaderNormal;
+  }
 }

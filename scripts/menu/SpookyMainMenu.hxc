@@ -1,40 +1,14 @@
-import funkin.ui.freeplay.FreeplayState;
-import funkin.ui.mainmenu.MainMenuState;
-import funkin.ui.debug.DebugMenuSubState;
-import flixel.FlxCamera;
-import flixel.math.FlxMath;
-import flixel.FlxSprite;
-import flixel.math.FlxAngle;
-import flixel.math.FlxPoint;
-import flixel.text.FlxText;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
-import flixel.util.FlxSpriteUtil;
 import flixel.util.FlxTimer;
-import funkin.util.Constants;
-import funkin.graphics.adobeanimate.FlxAtlasSprite;
-import funkin.graphics.FunkinSprite;
-import funkin.ui.freeplay.charselect.PlayableCharacter;
-import funkin.ui.MusicBeatSubState;
-import funkin.graphics.shaders.AdjustColorShader;
-import flixel.addons.display.FlxTiledSprite;
-import flixel.addons.display.FlxBackdrop;
-import funkin.PlayerSettings;
 import funkin.modding.module.Module;
-import funkin.modding.events.ScriptEvent;
-import funkin.modding.base.ScriptedMusicBeatSubState;
-import funkin.modding.base.ScriptedFlxRuntimeShader;
-import funkin.modding.base.ScriptedMusicBeatState;
 import funkin.util.ReflectUtil;
 import flixel.FlxG;
 import funkin.util.WindowUtil;
 import funkin.Preferences;
-import haxe.Json;
 
 class SpookyMainMenu extends Module
 {
   var openingLink:Bool = false;
-  
+
   public function new()
   {
     super('SpookyMainMenu');
@@ -42,39 +16,39 @@ class SpookyMainMenu extends Module
 
   override function onUpdate(event:UpdateScriptEvent)
   {
-	super.onUpdate(event);
+    super.onUpdate(event);
 
-    if (ReflectUtil.getClassNameOf(FlxG.state) == "funkin.ui.mainmenu.MainMenuState" && ReflectUtil.getClassNameOf(FlxG.state.subState) != "funkin.ui.debug.DebugMenuSubState")
-    {   
-        FlxG.mouse.visible = false;
+    if (ReflectUtil.getClassNameOf(FlxG.state) == "funkin.ui.mainmenu.MainMenuState"
+      && ReflectUtil.getClassNameOf(FlxG.state.subState) != "funkin.ui.debug.DebugMenuSubState")
+    {
+      FlxG.mouse.visible = false;
 
-        if (FlxG.state.rightWatermarkText.text == "") FlxG.state.rightWatermarkText.text = "SPOOKY MIX v2.0.2";
-        //if (FlxG.state.rightWatermarkText.text == "") FlxG.state.rightWatermarkText.text = "SPOOKY MIX v" + Json.parse(Assets.getText("_polymod_meta.json")).mod_version;
-        
-        if (FlxG.save.data.SpookyMixMenu == 'Always On' || (FlxG.save.data.SpookyMixMenu == 'Spooky Kids Selected' && FlxG.save.data.rememberedStartupCharacter == "spookymod"))
+      if (FlxG.state.rightWatermarkText.text == "") FlxG.state.rightWatermarkText.text = "SPOOKY MIX v2.0.2";
+      // if (FlxG.state.rightWatermarkText.text == "") FlxG.state.rightWatermarkText.text = "SPOOKY MIX v" + Json.parse(Assets.getText("_polymod_meta.json")).mod_version;
+
+      if (FlxG.save.data.SpookyMixMenu == 'Always On'
+        || (FlxG.save.data.SpookyMixMenu == 'Spooky Kids Selected' && FlxG.save.data.rememberedStartupCharacter == "spookymod"))
+      {
+        if (PlayerSettings.player1.controls.ACCEPT && FlxG.state.menuItems.selectedIndex == 2)
         {
-            if (PlayerSettings.player1.controls.ACCEPT && FlxG.state.menuItems.selectedIndex == 2)
-            {
-                openingLink = true;
+          openingLink = true;
 
-                WindowUtil.openURL("https://creatorink.com/collections/pelo");
+          WindowUtil.openURL("https://creatorink.com/collections/pelo");
 
-                new FlxTimer().start(2, _ -> {
-                    openingLink = false;
-                });
-            }
-
-            if (openingLink == true)
-            {
-                FlxG.autoPause = false;
-            }
-            else 
-            {
-                FlxG.autoPause = Preferences.autoPause;
-            }
+          new FlxTimer().start(2, _ -> {
+            openingLink = false;
+          });
         }
 
+        if (openingLink == true)
+        {
+          FlxG.autoPause = false;
+        }
+        else
+        {
+          FlxG.autoPause = Preferences.autoPause;
+        }
+      }
     }
-
   }
 }

@@ -8,41 +8,46 @@ import funkin.play.song.Song;
 import flixel.FlxSprite;
 import flixel.util.FlxTimer;
 import funkin.save.Save;
-
 import funkin.effects.RetroCameraFade;
 
-class HighSong extends Song {
+class HighSong extends Song
+{
   var hasPlayedCutscene:Bool;
 
-	public function new() {
-		super('high');
-	}
+  public function new()
+  {
+    super('high');
+  }
 
-	public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool
-    {
-		if (FlxG.save.data.beatenNewHighUpdated != false && FlxG.save.data.beatenNewHighUpdated != true) FlxG.save.data.beatenNewHighUpdated = false;
+  public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool
+  {
+    if (FlxG.save.data.beatenNewHighUpdated != false
+      && FlxG.save.data.beatenNewHighUpdated != true) FlxG.save.data.beatenNewHighUpdated = false;
 
-		if(currentVariation == 'spookymod')
-		  return !FlxG.save.data.beatenNewHighUpdated;
+    if (currentVariation == 'spookymod') return !FlxG.save.data.beatenNewHighUpdated;
 
-        return false;
-	}
-    
-    public override function listAltInstrumentalIds(difficultyId:String, variationId:String):Array<String>
-    {
-		var targetDifficulty:Null<SongDifficulty> = getDifficulty(difficultyId, variationId);
+    return false;
+  }
 
-		if (variationId == "spookymod" && FlxG.save.data.beatenNewHighUpdated != true) return [];
-		else if ((difficultyId == "erect" || difficultyId == "nightmare") && (Save.instance.hasBeatenSong(this.id, ["erect"], "") || Save.instance.hasBeatenSong(this.id, ["nightmare"], ""))) return targetDifficulty?.characters?.altInstrumentals ?? [];
-		else if (variationId == "default" && Save.instance.hasBeatenSong(this.id, null, "")) return targetDifficulty?.characters?.altInstrumentals ?? [];
-		else if (Save.instance.hasBeatenSong(this.id, null, variationId)) return targetDifficulty?.characters?.altInstrumentals ?? [];
-		else return [];
-    }
+  public override function listAltInstrumentalIds(difficultyId:String, variationId:String):Array<String>
+  {
+    var targetDifficulty:Null<SongDifficulty> = getDifficulty(difficultyId, variationId);
 
-	public override function onSongEnd(event:CountdownScriptEvent):Void
-	{
-		super.onSongEnd(event);
+    if (variationId == "spookymod" && FlxG.save.data.beatenNewHighUpdated != true) return [];
+    else if ((difficultyId == "erect" || difficultyId == "nightmare")
+      && (Save.instance.hasBeatenSong(this.id, ["erect"], "")
+        || Save.instance.hasBeatenSong(this.id, ["nightmare"], ""))) return targetDifficulty?.characters?.altInstrumentals ?? [];
+    else if (variationId == "default"
+      && Save.instance.hasBeatenSong(this.id, null, "")) return targetDifficulty?.characters?.altInstrumentals ?? [];
+    else if (Save.instance.hasBeatenSong(this.id, null, variationId)) return targetDifficulty?.characters?.altInstrumentals ?? [];
+    else
+      return [];
+  }
 
-		if (PlayState.instance.currentVariation == 'spookymod') FlxG.save.data.beatenNewHighUpdated = true;
-	}
+  public override function onSongEnd(event:CountdownScriptEvent):Void
+  {
+    super.onSongEnd(event);
+
+    if (PlayState.instance.currentVariation == 'spookymod') FlxG.save.data.beatenNewHighUpdated = true;
+  }
 }

@@ -1,47 +1,50 @@
 import funkin.play.character.MultiSparrowCharacter;
 import funkin.play.character.CharacterType;
 import funkin.play.PlayState;
-import flixel.FlxG;
 
-class TankmanSpookyCharacter extends MultiSparrowCharacter {
-	function new() {
-		super('tankman-spooky');
-	}
+class TankmanSpookyCharacter extends MultiSparrowCharacter
+{
+  function new()
+  {
+    super('tankman-spooky');
+  }
 
   override function playAnimation(name:String, restart:Bool, ignoreOther:Bool)
   {
-	   if (PlayState.instance.iconP2 != null)
-	   {
-			if(PlayState.instance.iconP2.characterId == 'monster')
-			{
-				  this.danceEvery = 2;
-				  this.scale.set(0.8, 0.8);
-				  super.playAnimation(name + '-monster', restart, ignoreOther);
-			}
-			else
-			{
-				  this.danceEvery = 4;
-				  super.playAnimation(name, restart, ignoreOther);
-			}
-		}
-   }
+    if (PlayState.instance.iconP2 != null)
+    {
+      if (PlayState.instance.iconP2.characterId == 'monster')
+      {
+        this.danceEvery = 2;
+        this.scale.set(0.8, 0.8);
+        super.playAnimation(name + '-monster', restart, ignoreOther);
+      }
+      else
+      {
+        this.danceEvery = 4;
+        super.playAnimation(name, restart, ignoreOther);
+      }
+    }
+  }
 
-	function onNoteHit(event:HitNoteScriptEvent)
-	{
-		super.onNoteHit(event);
+  function onNoteHit(event:HitNoteScriptEvent)
+  {
+    super.onNoteHit(event);
 
-		if (!event.note.noteData.getMustHitNote() && characterType == CharacterType.DAD) {
-			// Override the hit note animation.
-			switch(event.note.kind) {
-				case "ugh":
-					holdTimer = 0;
-					this.playAnimation('ugh', true, true);
-					return;
-				case "hehPrettyGood":
-					holdTimer = 0;
-					this.playAnimation('hehPrettyGood', true, true);
-					return;
-			}
-		}
-	}
+    if (!event.note.noteData.getMustHitNote() && characterType == CharacterType.DAD)
+    {
+      // Override the hit note animation.
+      switch (event.note.kind)
+      {
+        case "ugh":
+          holdTimer = 0;
+          this.playAnimation('ugh', true, true);
+          return;
+        case "hehPrettyGood":
+          holdTimer = 0;
+          this.playAnimation('hehPrettyGood', true, true);
+          return;
+      }
+    }
+  }
 }

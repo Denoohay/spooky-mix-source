@@ -1,111 +1,111 @@
-import funkin.PlayerSettings;
 import funkin.modding.module.Module;
-import funkin.modding.events.ScriptEvent;
-import funkin.modding.base.ScriptedMusicBeatSubState;
-import funkin.modding.base.ScriptedFlxRuntimeShader;
-import funkin.modding.base.ScriptedMusicBeatState;
 import funkin.util.ReflectUtil;
 import flixel.FlxG;
-import funkin.util.Constants;
-import StringTools;
 import funkin.save.Save;
 import funkin.ui.options.OptionsState;
-import funkin.audio.FunkinSound;
-import funkin.ui.options.items.EnumPreferenceItem;
 import funkin.ui.freeplay.FreeplayState;
 import funkin.ui.mainmenu.MainMenuState;
 import haxe.Json;
 
 class DefaultCharacterOption extends Module
 {
-    var playableCharacters:Array<String> = ["Boyfriend" => "bf"];
-    var madeCharacterList:Bool = false;
+  var playableCharacters:Array<String> = ["Boyfriend" => "bf"];
+  var madeCharacterList:Bool = false;
 
-    var openedFreeplay:Bool = false;
+  var openedFreeplay:Bool = false;
 
-    var setRememberedCharacter:Bool = false; //has set the remembered character to the default character on startup
+  var setRememberedCharacter:Bool = false; // has set the remembered character to the default character on startup
 
-    public function new()
+  public function new()
+  {
+    super('DefaultCharacterOption');
+  }
+
+  override function onUpdate(event:UpdateScriptEvent)
+  {
+    super.onUpdate(event);
+
+    if (openedFreeplay == false
+      && setRememberedCharacter == false
+      && FlxG.save.data.defaultStartupCharacter != "remember"
+      && FlxG.save.data.defaultStartupCharacter != FlxG.save.data.rememberedStartupCharacter)
     {
-        super('DefaultCharacterOption');
-    }
-    
-     override function onUpdate(event:UpdateScriptEvent)
-    {
-	    super.onUpdate(event);
-
-        if (openedFreeplay == false && setRememberedCharacter == false && FlxG.save.data.defaultStartupCharacter != "remember" && FlxG.save.data.defaultStartupCharacter != FlxG.save.data.rememberedStartupCharacter)
-        {
-            FlxG.save.data.rememberedStartupCharacter = FlxG.save.data.defaultStartupCharacter;
-            setRememberedCharacter = true;
-        }
-        
-        if (FlxG.save.data.defaultStartupCharacter != "bf" && FlxG.save.data.defaultStartupCharacter != "pico" && FlxG.save.data.defaultStartupCharacter != "remember" && !Assets.exists("data/players/" + FlxG.save.data.defaultStartupCharacter + ".json"))
-        {
-            FlxG.save.data.defaultStartupCharacter = 'bf';
-            FlxG.save.data.rememberedStartupCharacter = 'bf';
-            FlxG.save.data.saveStartupCharacterName = 'Boyfriend';
-            FlxG.save.data.flush;
-        }
-
-        if (ReflectUtil.getClassNameOf(FlxG.state) == "funkin.ui.mainmenu.MainMenuState" || ReflectUtil.getClassNameOf(FlxG.state) == "funkin.ui.options.OptionsState")
-        {
-            if (openedFreeplay == false)
-            {
-                FreeplayState.rememberedCharacterId = FlxG.save.data.rememberedStartupCharacter;
-
-                if (FlxG.save.data.defaultStartupCharacter != "remember")
-                {
-                    FreeplayState.rememberedCharacterId = FlxG.save.data.defaultStartupCharacter;
-                    FlxG.save.data.rememberedStartupCharacter = FlxG.save.data.defaultStartupCharacter;
-                }
-            }
-
-            if (madeCharacterList == false) makeOptionsList();
-        }
-
-        if (ReflectUtil.getClassNameOf(FlxG.state.subState) == "funkin.ui.freeplay.FreeplayState")
-        {
-            openedFreeplay = true;
-            FlxG.save.data.rememberedStartupCharacter = FreeplayState.rememberedCharacterId;
-        }
-    
-        if (FlxG.keys.justPressed.F5)
-        {
-            openedFreeplay = false;
-            makeOptionsList();
-        }
+      FlxG.save.data.rememberedStartupCharacter = FlxG.save.data.defaultStartupCharacter;
+      setRememberedCharacter = true;
     }
 
-    public function onStateChangeEnd(event:StateChangeScriptEvent)
+    if (FlxG.save.data.defaultStartupCharacter != "bf"
+      && FlxG.save.data.defaultStartupCharacter != "pico"
+      && FlxG.save.data.defaultStartupCharacter != "remember"
+      && !Assets.exists("data/players/" + FlxG.save.data.defaultStartupCharacter + ".json"))
     {
-        if(Std.isOfType(event.targetState, OptionsState))
-        {
-            if (event.targetState.optionsCodex.pages.get("preferences") != null) 
-            {
-                event.targetState.optionsCodex.pages.get("preferences").createPrefItemEnum('Default Player', "Choose the Playable Character that will be selected by default when first opening Freeplay.", playableCharacters, function(value:String, oValue:String):Void
-                {
-                    FlxG.save.data.defaultStartupCharacter = oValue;
-                    FlxG.save.data.saveStartupCharacterName = value;
-                    FlxG.save.data.flush;
-                }, FlxG.save.data.saveStartupCharacterName);
-            }
-        }
+      FlxG.save.data.defaultStartupCharacter = 'bf';
+      FlxG.save.data.rememberedStartupCharacter = 'bf';
+      FlxG.save.data.saveStartupCharacterName = 'Boyfriend';
+      FlxG.save.data.flush;
     }
 
-    function makeOptionsList()
+    if (ReflectUtil.getClassNameOf(FlxG.state) == "funkin.ui.mainmenu.MainMenuState"
+      || ReflectUtil.getClassNameOf(FlxG.state) == "funkin.ui.options.OptionsState")
     {
-        playableCharacters["Remember Previous"] = "remember";
-        for (i in 0...Save.instance.data.unlocks.charactersSeen.length)
+      if (openedFreeplay == false)
+      {
+        FreeplayState.rememberedCharacterId = FlxG.save.data.rememberedStartupCharacter;
+
+        if (FlxG.save.data.defaultStartupCharacter != "remember")
         {
-            if (Assets.exists("data/players/" + Save.instance.data.unlocks.charactersSeen[i] + ".json"))
-            {
-                playableCharacters[Json.parse(Assets.getText("data/players/" + Save.instance.data.unlocks.charactersSeen[i] + ".json")).name] = Save.instance.data.unlocks.charactersSeen[i];
-            }
+          FreeplayState.rememberedCharacterId = FlxG.save.data.defaultStartupCharacter;
+          FlxG.save.data.rememberedStartupCharacter = FlxG.save.data.defaultStartupCharacter;
         }
-        //list unlockable base game characters here in the reverse order you want them to be listed in
-        if (Save.instance.charactersSeen.contains('pico')) playableCharacters["Pico"] = "pico";
-        madeCharacterList = true;
+      }
+
+      if (madeCharacterList == false) makeOptionsList();
     }
 
+    if (ReflectUtil.getClassNameOf(FlxG.state.subState) == "funkin.ui.freeplay.FreeplayState")
+    {
+      openedFreeplay = true;
+      FlxG.save.data.rememberedStartupCharacter = FreeplayState.rememberedCharacterId;
+    }
+
+    if (FlxG.keys.justPressed.F5)
+    {
+      openedFreeplay = false;
+      makeOptionsList();
+    }
+  }
+
+  public function onStateChangeEnd(event:StateChangeScriptEvent)
+  {
+    if (Std.isOfType(event.targetState, OptionsState))
+    {
+      if (event.targetState.optionsCodex.pages.get("preferences") != null)
+      {
+        event.targetState.optionsCodex.pages.get("preferences")
+          .createPrefItemEnum('Default Player', "Choose the Playable Character that will be selected by default when first opening Freeplay.",
+            playableCharacters, function(value:String, oValue:String):Void {
+              FlxG.save.data.defaultStartupCharacter = oValue;
+              FlxG.save.data.saveStartupCharacterName = value;
+              FlxG.save.data.flush;
+          }, FlxG.save.data.saveStartupCharacterName);
+      }
+    }
+  }
+
+  function makeOptionsList()
+  {
+    playableCharacters["Remember Previous"] = "remember";
+    for (i in 0...Save.instance.data.unlocks.charactersSeen.length)
+    {
+      if (Assets.exists("data/players/" + Save.instance.data.unlocks.charactersSeen[i] + ".json"))
+      {
+        playableCharacters[
+          Json.parse(Assets.getText("data/players/" + Save.instance.data.unlocks.charactersSeen[i] + ".json")).name
+        ] = Save.instance.data.unlocks.charactersSeen[i];
+      }
+    }
+    // list unlockable base game characters here in the reverse order you want them to be listed in
+    if (Save.instance.charactersSeen.contains('pico')) playableCharacters["Pico"] = "pico";
+    madeCharacterList = true;
+  }
 }

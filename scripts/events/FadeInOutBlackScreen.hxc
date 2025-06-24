@@ -1,222 +1,191 @@
 import funkin.play.PlayState;
-import funkin.play.PauseSubState;
-import funkin.ui.debug.charting.ChartEditorState;
-import funkin.play.PlayStatePlaylist;
-import funkin.data.song.SongRegistry;
-import funkin.ui.transition.LoadingState;
-import flixel.FlxCamera;
-import flixel.math.FlxMath;
 import flixel.FlxSprite;
-import flixel.math.FlxAngle;
-import flixel.math.FlxPoint;
-import flixel.text.FlxText;
-import flixel.text.FlxTextBorderStyle;
-import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
-import flixel.util.FlxSpriteUtil;
-import flixel.util.FlxTimer;
-import funkin.graphics.adobeanimate.FlxAtlasSprite;
-import funkin.graphics.FunkinSprite;
-import funkin.ui.freeplay.charselect.PlayableCharacter;
-import funkin.ui.MusicBeatSubState;
-import funkin.graphics.shaders.AdjustColorShader;
-import flixel.addons.display.FlxTiledSprite;
-import flixel.addons.display.FlxBackdrop;
-import funkin.PlayerSettings;
 import funkin.modding.module.Module;
-import funkin.modding.events.ScriptEvent;
-import funkin.modding.base.ScriptedMusicBeatSubState;
-import funkin.modding.base.ScriptedFlxRuntimeShader;
-import funkin.modding.base.ScriptedMusicBeatState;
 import funkin.util.ReflectUtil;
 import flixel.FlxG;
-import funkin.audio.FunkinSound;
-import funkin.util.Constants;
-import StringTools;
-import funkin.save.Save;
-import funkin.Preferences;
 
 class FadeInOutBlackScreen extends Module
 {
-    //made by Denoohay for FNF: SPOOKY MIX
-    
-    var blackScreen:FlxSprite;
+  // made by Denoohay for FNF: SPOOKY MIX
+  var blackScreen:FlxSprite;
 
-    var addedStuff:Bool = false;
+  var addedStuff:Bool = false;
 
-    var fadeTween:FlxTween;
+  var fadeTween:FlxTween;
 
-    public function new()
+  public function new()
+  {
+    super('FadeInOutBlackScreen');
+  }
+
+  override function onStateChangeBegin(event)
+  {
+    super.onStateChangeBegin(event);
+    addedStuff = false;
+  }
+
+  override function onSubStateCloseBegin(event:SubStateScriptEvent)
+  {
+    super.onSubStateCloseBegin(event);
+
+    if (ReflectUtil.getClassNameOf(FlxG.state.subState) != "funkin.play.PauseSubState"
+      && ReflectUtil.getClassNameOf(FlxG.state.subState) == "funkin.play.PlayState"
+      && ReflectUtil.getClassNameOf(FlxG.state) == "funkin.ui.debug.charting.ChartEditorState")
     {
-        super('FadeInOutBlackScreen');
+      addedStuff = false;
+    }
+  }
+
+  function onSongLoaded(event:SongLoadScriptEvent):Void
+  {
+    super.onSongLoaded(event);
+
+    if (fadeTween != null)
+    {
+      fadeTween.cancel();
+      fadeTween.active = true;
     }
 
-    override function onStateChangeBegin(event)
+    if (addedStuff == false)
     {
-        super.onStateChangeBegin(event);
-        addedStuff = false;
+      addedStuff = true;
+
+      blackScreen = new FlxSprite(-100, -100).makeGraphic(FlxG.width * 2, FlxG.height * 2, 0xFF000000);
+      blackScreen.zIndex = 1100;
+      blackScreen.cameras = [PlayState.instance.camCutscene];
+      PlayState.instance.add(blackScreen);
     }
 
-    override function onSubStateCloseBegin(event:SubStateScriptEvent)
+    if (PlayState.instance.currentVariation == 'spookymod'
+      && (PlayState.instance.currentSong.id == 'monster' || PlayState.instance.currentSong.id == 'winter-horrorland'))
     {
-        super.onSubStateCloseBegin(event);
-
-        if (ReflectUtil.getClassNameOf(FlxG.state.subState) != "funkin.play.PauseSubState" && ReflectUtil.getClassNameOf(FlxG.state.subState) == "funkin.play.PlayState" && ReflectUtil.getClassNameOf(FlxG.state) == "funkin.ui.debug.charting.ChartEditorState")
-        {
-            addedStuff = false;
-        }
+      blackScreen.alpha = 1;
+      PlayState.instance.camHUD.alpha = 0;
     }
-
-    function onSongLoaded(event:SongLoadScriptEvent):Void
+    else
     {
-        super.onSongLoaded(event);
-        
-        if (fadeTween != null)
-        {
-            fadeTween.cancel();
-            fadeTween.active = true;
-        }
+      blackScreen.alpha = 0;
+      PlayState.instance.camHUD.alpha = 1;
+    }
+  }
 
-        if (addedStuff == false)
-        {
-            addedStuff = true;
+  function onSongRetry(event:ScriptEvent)
+  {
+    super.onSongRetry(event);
 
-            blackScreen = new FlxSprite(-100, -100).makeGraphic(FlxG.width * 2, FlxG.height * 2, 0xFF000000);
-            blackScreen.zIndex = 1100;
-            blackScreen.cameras = [PlayState.instance.camCutscene];
-            PlayState.instance.add(blackScreen);
-        }
+    if (PlayState.instance.currentVariation == 'spookymod'
+      && (PlayState.instance.currentSong.id == 'monster' || PlayState.instance.currentSong.id == 'winter-horrorland'))
+    {
+      blackScreen.alpha = 1;
+      PlayState.instance.camHUD.alpha = 0;
+    }
+    else
+    {
+      blackScreen.alpha = 0;
+      PlayState.instance.camHUD.alpha = 1;
+    }
+  }
 
-        if (PlayState.instance.currentVariation == 'spookymod' && (PlayState.instance.currentSong.id == 'monster' || PlayState.instance.currentSong.id == 'winter-horrorland'))
+  function onGameOver(event:ScriptEvent):Void
+  {
+    super.onGameOver(event);
+
+    if (PlayState.instance.currentVariation == 'spookymod'
+      && (PlayState.instance.currentSong.id == 'monster' || PlayState.instance.currentSong.id == 'winter-horrorland'))
+    {
+      blackScreen.alpha = 1;
+      PlayState.instance.camHUD.alpha = 0;
+    }
+    else
+    {
+      blackScreen.alpha = 0;
+      PlayState.instance.camHUD.alpha = 1;
+    }
+  }
+
+  public override function onSongEvent(scriptEvent:SongEventScriptEvent)
+  {
+    super.onSongEvent(scriptEvent);
+
+    if (scriptEvent.eventData.eventKind == "FadeInOut")
+    {
+      if (scriptEvent.eventData.value.inout == 1)
+      {
+        if (scriptEvent.eventData.value.object == 1)
         {
-	        blackScreen.alpha = 1;
+          if (scriptEvent.eventData.value.seconds != 0)
+          {
+            fadeTween = FlxTween.tween(PlayState.instance.camHUD, {alpha: 0}, scriptEvent.eventData.value.seconds,
+              {
+                onComplete: function(tween:FlxTween) {
+                  PlayState.instance.isInCutscene = true;
+                }
+              });
+          }
+          else
+          {
             PlayState.instance.camHUD.alpha = 0;
+            PlayState.instance.isInCutscene = true;
+          }
         }
+        else if (scriptEvent.eventData.value.object == 2) {}
         else
         {
-	        blackScreen.alpha = 0;
-            PlayState.instance.camHUD.alpha = 1;
+          if (scriptEvent.eventData.value.seconds != 0)
+          {
+            fadeTween = FlxTween.tween(blackScreen, {alpha: 0}, scriptEvent.eventData.value.seconds,
+              {
+                onComplete: function(tween:FlxTween) {
+                  if (PlayState.instance.camHUD.alpha != 0) PlayState.instance.isInCutscene = false;
+                }
+              });
+          }
+          else
+          {
+            blackScreen.alpha = 0;
+            if (PlayState.instance.camHUD.alpha != 0) PlayState.instance.isInCutscene = false;
+          }
         }
-    }
-
-    function onSongRetry(event:ScriptEvent)
-    {
-		super.onSongRetry(event);
-
-        if (PlayState.instance.currentVariation == 'spookymod' && (PlayState.instance.currentSong.id == 'monster' || PlayState.instance.currentSong.id == 'winter-horrorland'))
+      }
+      else
+      {
+        if (scriptEvent.eventData.value.object == 1)
         {
-	        blackScreen.alpha = 1;
-            PlayState.instance.camHUD.alpha = 0;
+          if (scriptEvent.eventData.value.seconds != 0)
+          {
+            fadeTween = FlxTween.tween(PlayState.instance.camHUD, {alpha: 1}, scriptEvent.eventData.value.seconds,
+              {
+                onComplete: function(tween:FlxTween) {
+                  if (blackScreen.alpha != 1) PlayState.instance.isInCutscene = false;
+                }
+              });
+          }
+          else
+          {
+            PlayState.instance.camHUD.alpha = 1;
+            if (blackScreen.alpha != 1) PlayState.instance.isInCutscene = false;
+          }
         }
+        else if (scriptEvent.eventData.value.object == 2) {}
         else
         {
-	        blackScreen.alpha = 0;
-            PlayState.instance.camHUD.alpha = 1;
+          if (scriptEvent.eventData.value.seconds != 0)
+          {
+            fadeTween = FlxTween.tween(blackScreen, {alpha: 1}, scriptEvent.eventData.value.seconds,
+              {
+                onComplete: function(tween:FlxTween) {
+                  if (PlayState.instance.currentSong.id != 'stress') PlayState.instance.isInCutscene = true;
+                }
+              });
+          }
+          else
+          {
+            blackScreen.alpha = 1;
+            if (PlayState.instance.currentSong.id != 'stress') PlayState.instance.isInCutscene = true;
+          }
         }
+      }
     }
-
-    function onGameOver(event:ScriptEvent):Void
-    {
-		super.onGameOver(event);
-        
-        if (PlayState.instance.currentVariation == 'spookymod' && (PlayState.instance.currentSong.id == 'monster' || PlayState.instance.currentSong.id == 'winter-horrorland'))
-        {
-	        blackScreen.alpha = 1;
-            PlayState.instance.camHUD.alpha = 0;
-        }
-        else
-        {
-	        blackScreen.alpha = 0;
-            PlayState.instance.camHUD.alpha = 1;
-        }
-	}
-
-    public override function onSongEvent(scriptEvent:SongEventScriptEvent)
-    {
-        super.onSongEvent(scriptEvent);
-
-        if (scriptEvent.eventData.eventKind == "FadeInOut")
-        {
-            if (scriptEvent.eventData.value.inout == 1)
-            {
-                if (scriptEvent.eventData.value.object == 1)
-                {
-                    if (scriptEvent.eventData.value.seconds != 0)
-                    {
-                        fadeTween = FlxTween.tween(PlayState.instance.camHUD, {alpha: 0}, scriptEvent.eventData.value.seconds,
-                          {
-                            onComplete: function(tween:FlxTween)
-                            {
-                              PlayState.instance.isInCutscene = true;
-                            }
-                          });
-                    }
-                    else
-                    {
-                        PlayState.instance.camHUD.alpha = 0;
-                        PlayState.instance.isInCutscene = true;
-                    }
-                }
-                else if (scriptEvent.eventData.value.object == 2) {}
-                else
-                {
-                    if (scriptEvent.eventData.value.seconds != 0)
-                    {
-                        fadeTween = FlxTween.tween(blackScreen, {alpha: 0}, scriptEvent.eventData.value.seconds,
-                          {
-                            onComplete: function(tween:FlxTween)
-                            {
-                              if (PlayState.instance.camHUD.alpha != 0) PlayState.instance.isInCutscene = false;
-                            }
-                          });
-                    }
-                    else
-                    {
-                        blackScreen.alpha = 0;
-                        if (PlayState.instance.camHUD.alpha != 0) PlayState.instance.isInCutscene = false;
-                    }
-                }
-            }
-            else
-            {
-                if (scriptEvent.eventData.value.object == 1)
-                {
-                    if (scriptEvent.eventData.value.seconds != 0)
-                    {
-                        fadeTween = FlxTween.tween(PlayState.instance.camHUD, {alpha: 1}, scriptEvent.eventData.value.seconds,
-                          {
-                            onComplete: function(tween:FlxTween)
-                            {
-                              if (blackScreen.alpha != 1) PlayState.instance.isInCutscene = false;
-                            }
-                          });
-                    }
-                    else
-                    {
-                        PlayState.instance.camHUD.alpha = 1;
-                        if (blackScreen.alpha != 1) PlayState.instance.isInCutscene = false;
-                    }
-                }
-                else if (scriptEvent.eventData.value.object == 2) {}
-                else
-                {
-                    if (scriptEvent.eventData.value.seconds != 0)
-                    {
-                        fadeTween = FlxTween.tween(blackScreen, {alpha: 1}, scriptEvent.eventData.value.seconds,
-                          {
-                            onComplete: function(tween:FlxTween)
-                            {
-                              if (PlayState.instance.currentSong.id != 'stress') PlayState.instance.isInCutscene = true;
-                            }
-                          });
-                    }
-                    else
-                    {
-                        blackScreen.alpha = 1;
-                        if (PlayState.instance.currentSong.id != 'stress') PlayState.instance.isInCutscene = true;
-                    }
-                }
-            }
-        }
-    }
+  }
 }

@@ -1,15 +1,15 @@
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
 import funkin.play.cutscene.dialogue.Conversation;
-import funkin.graphics.shaders.AdjustColorShader;
 import funkin.play.PlayState;
 
-class thornsSpookyConversation extends Conversation {
-	function new() {
-		super('thorns-spooky');
-	}
+class thornsSpookyConversation extends Conversation
+{
+  function new()
+  {
+    super('thorns-spooky');
+  }
 
-  override function showCurrentSpeaker():Void {
+  override function showCurrentSpeaker():Void
+  {
     super.showCurrentSpeaker();
 
     if (currentSpeaker.id == 'spirit-spooky')

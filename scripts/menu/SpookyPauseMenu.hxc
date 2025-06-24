@@ -1,32 +1,10 @@
 import funkin.play.PauseSubState;
 import funkin.play.PlayState;
-import flixel.FlxCamera;
-import flixel.math.FlxMath;
-import flixel.FlxSprite;
-import flixel.math.FlxAngle;
-import flixel.math.FlxPoint;
 import flixel.text.FlxText;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
-import flixel.util.FlxSpriteUtil;
-import flixel.util.FlxTimer;
-import funkin.graphics.adobeanimate.FlxAtlasSprite;
-import funkin.graphics.FunkinSprite;
-import funkin.ui.freeplay.charselect.PlayableCharacter;
-import funkin.ui.MusicBeatSubState;
-import funkin.graphics.shaders.AdjustColorShader;
-import flixel.addons.display.FlxTiledSprite;
-import flixel.addons.display.FlxBackdrop;
-import funkin.PlayerSettings;
 import funkin.modding.module.Module;
-import funkin.modding.events.ScriptEvent;
-import funkin.modding.base.ScriptedMusicBeatSubState;
-import funkin.modding.base.ScriptedFlxRuntimeShader;
-import funkin.modding.base.ScriptedMusicBeatState;
 import funkin.util.ReflectUtil;
 import flixel.FlxG;
 import funkin.audio.FunkinSound;
-import funkin.util.Constants;
 import StringTools;
 import funkin.save.Save;
 import haxe.Json;
@@ -34,8 +12,7 @@ import funkin.play.PlayStatePlaylist;
 
 class SpookyPauseMenu extends Module
 {
-  //made by Denoohay for FNF: SPOOKY MIX aha ha
-
+  // made by Denoohay for FNF: SPOOKY MIX aha ha
   var addedStuff:Bool = false;
   var refreshedGame:Bool = false;
 
@@ -67,76 +44,89 @@ class SpookyPauseMenu extends Module
 
   override function onUpdate(event:UpdateScriptEvent)
   {
-	super.onUpdate(event);
-    
+    super.onUpdate(event);
+
     if (FlxG.keys.justPressed.F5)
     {
-        refreshedGame = true;
+      refreshedGame = true;
     }
 
     if (ReflectUtil.getClassNameOf(FlxG.state.subState) == "funkin.play.PauseSubState" && refreshedGame == false)
     {
-        if (addedStuff == false)
+      if (addedStuff == false)
+      {
+        if (StringTools.startsWith(PlayState.instance.currentStage.getBoyfriend().characterId, "spooky")
+          || StringTools.startsWith(PlayState.instance.currentStage.getBoyfriend().characterId, "skid")
+          || StringTools.startsWith(PlayState.instance.currentStage.getBoyfriend().characterId, "pump"))
         {
-            if (StringTools.startsWith(PlayState.instance.currentStage.getBoyfriend().characterId, "spooky") || StringTools.startsWith(PlayState.instance.currentStage.getBoyfriend().characterId, "skid") || StringTools.startsWith(PlayState.instance.currentStage.getBoyfriend().characterId, "pump") )
-            {
-                if (PlayStatePlaylist.campaignId == "week6")
-                    var pauseMusicPath:String = Paths.music('breakfast-pixel-spooky/breakfast-pixel-spooky');
-                else
-                    var pauseMusicPath:String = Paths.music('breakfast-spooky/breakfast-spooky');
-                FlxG.state.subState.pauseMusic.stop();
-                FlxG.state.subState.pauseMusic = FunkinSound.load(pauseMusicPath, true, true);
-                FlxG.state.subState.pauseMusic.play(false);
-                FlxG.state.subState.pauseMusic.fadeIn(5, 0, 0.5);
-            }
-            
-            if (PlayState.instance.currentVariation != 'default' && Assets.exists("data/songs/" + PlayState.instance.currentSong.id + "/" + PlayState.instance.currentSong.id + "-metadata-" + PlayState.instance.currentVariation + ".json")) artwork = Json.parse(Assets.getText("data/songs/" + PlayState.instance.currentSong.id + "/" + PlayState.instance.currentSong.id + "-metadata-" + PlayState.instance.currentVariation + ".json")).modArt;
-            else if (Assets.exists("data/songs/" + PlayState.instance.currentSong.id + "/" + PlayState.instance.currentSong.id + "-metadata.json")) artwork = Json.parse(Assets.getText("data/songs/" + PlayState.instance.currentSong.id + "/" + PlayState.instance.currentSong.id + "-metadata.json")).modArt;
-
-            if (artwork != null)
-            {
-                metadataArtwork = new FlxText(20, FlxG.state.subState.metadataArtist.y + 32, FlxG.width - 40, 'Artwork: Unknown');
-                metadataArtwork.setFormat(Paths.font('vcr.ttf'), 32, 0xFFFFFFFF, "right");
-                metadataArtwork.scrollFactor.set(0, 0);
-                FlxG.state.subState.metadata.add(metadataArtwork);
-
-                metadataCharter = new FlxText(20, metadataArtwork.y + 32, FlxG.width - 40, 'Charter: Unknown');
-                metadataCharter.setFormat(Paths.font('vcr.ttf'), 32, 0xFFFFFFFF, "right");
-                metadataCharter.scrollFactor.set(0, 0);
-                FlxG.state.subState.metadata.add(metadataCharter);
-
-                metadataArtwork.text = 'Artwork: ' + artwork;
-                
-                addedStuff = true;
-            }
+          if (PlayStatePlaylist.campaignId == "week6") var pauseMusicPath:String = Paths.music('breakfast-pixel-spooky/breakfast-pixel-spooky');
+          else
+            var pauseMusicPath:String = Paths.music('breakfast-spooky/breakfast-spooky');
+          FlxG.state.subState.pauseMusic.stop();
+          FlxG.state.subState.pauseMusic = FunkinSound.load(pauseMusicPath, true, true);
+          FlxG.state.subState.pauseMusic.play(false);
+          FlxG.state.subState.pauseMusic.fadeIn(5, 0, 0.5);
         }
-        if (addedStuff == true)
+
+        if (PlayState.instance.currentVariation != 'default'
+          && Assets.exists("data/songs/" + PlayState.instance.currentSong.id + "/" + PlayState.instance.currentSong.id + "-metadata-"
+            + PlayState.instance.currentVariation + ".json")) artwork = Json.parse(Assets.getText("data/songs/" + PlayState.instance.currentSong.id + "/"
+            + PlayState.instance.currentSong.id + "-metadata-" + PlayState.instance.currentVariation + ".json"))
+            .modArt;
+        else if (Assets.exists("data/songs/" + PlayState.instance.currentSong.id + "/" + PlayState.instance.currentSong.id + "-metadata.json"))
+          artwork = Json.parse(Assets.getText("data/songs/"
+          + PlayState.instance.currentSong.id + "/" + PlayState.instance.currentSong.id + "-metadata.json"))
+          .modArt;
+
+        if (artwork != null)
         {
-            metadataCharter.text = 'Charter: ' + PlayState.instance.currentChart.charter;
+          metadataArtwork = new FlxText(20, FlxG.state.subState.metadataArtist.y + 32, FlxG.width - 40, 'Artwork: Unknown');
+          metadataArtwork.setFormat(Paths.font('vcr.ttf'), 32, 0xFFFFFFFF, "right");
+          metadataArtwork.scrollFactor.set(0, 0);
+          FlxG.state.subState.metadata.add(metadataArtwork);
 
-            FlxG.state.subState.metadataArtist.text = 'Composer: ' + PlayState.instance.currentChart.songArtist;
-            FlxG.state.subState.metadataArtist.alpha = 1;
+          metadataCharter = new FlxText(20, metadataArtwork.y + 32, FlxG.width - 40, 'Charter: Unknown');
+          metadataCharter.setFormat(Paths.font('vcr.ttf'), 32, 0xFFFFFFFF, "right");
+          metadataCharter.scrollFactor.set(0, 0);
+          FlxG.state.subState.metadata.add(metadataCharter);
 
-            if ((PlayState.instance.currentSong.id == 'monster' && !Save.instance.hasBeatenSong('monster', null, 'spooky') && PlayState.instance.camHUD.alpha == 0) || (PlayState.instance.currentSong.id == 'winter-horrorland' && !Save.instance.hasBeatenSong('winter-horrorland', null, 'spooky') && PlayState.instance.camHUD.alpha == 0))
-            {
-                FlxG.state.subState.metadata.members[0].text = "???";
-            }
-            else
-            {
-                FlxG.state.subState.metadata.members[0].text = PlayState.instance.currentChart.songName;
-            }
-            
-            metadataArtwork.y = FlxG.state.subState.metadataArtist.y + 32;
-            metadataCharter.y = metadataArtwork.y + 32;
-            FlxG.state.subState.metadata.members[2].y = metadataCharter.y + 32;
-            FlxG.state.subState.metadata.members[3].y = FlxG.state.subState.metadata.members[2].y + 32;
-            FlxG.state.subState.metadata.members[4].y = FlxG.state.subState.metadata.members[3].y + 32;
+          metadataArtwork.text = 'Artwork: ' + artwork;
+
+          addedStuff = true;
         }
-            
-        if (!StringTools.startsWith(PlayState.instance.currentStage.getBoyfriend().characterId, 'bf') && refreshedGame == false)
+      }
+      if (addedStuff == true)
+      {
+        metadataCharter.text = 'Charter: ' + PlayState.instance.currentChart.charter;
+
+        FlxG.state.subState.metadataArtist.text = 'Composer: ' + PlayState.instance.currentChart.songArtist;
+        FlxG.state.subState.metadataArtist.alpha = 1;
+
+        if ((PlayState.instance.currentSong.id == 'monster'
+          && !Save.instance.hasBeatenSong('monster', null, 'spooky')
+          && PlayState.instance.camHUD.alpha == 0)
+          || (PlayState.instance.currentSong.id == 'winter-horrorland'
+            && !Save.instance.hasBeatenSong('winter-horrorland', null, 'spooky')
+            && PlayState.instance.camHUD.alpha == 0))
         {
-            FlxG.state.subState.metadata.members[3].text = PlayState.instance.deathCounter + ' Game Overs';
+          FlxG.state.subState.metadata.members[0].text = "???";
         }
+        else
+        {
+          FlxG.state.subState.metadata.members[0].text = PlayState.instance.currentChart.songName;
+        }
+
+        metadataArtwork.y = FlxG.state.subState.metadataArtist.y + 32;
+        metadataCharter.y = metadataArtwork.y + 32;
+        FlxG.state.subState.metadata.members[2].y = metadataCharter.y + 32;
+        FlxG.state.subState.metadata.members[3].y = FlxG.state.subState.metadata.members[2].y + 32;
+        FlxG.state.subState.metadata.members[4].y = FlxG.state.subState.metadata.members[3].y + 32;
+      }
+
+      if (!StringTools.startsWith(PlayState.instance.currentStage.getBoyfriend().characterId, 'bf') && refreshedGame == false)
+      {
+        FlxG.state.subState.metadata.members[3].text = PlayState.instance.deathCounter + ' Game Overs';
+      }
     }
   }
 }

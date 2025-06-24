@@ -24,28 +24,28 @@ import funkin.play.PlayStatePlaylist;
 
 class OogasHouse extends Stage
 {
-	var lamp:FlxAtlasSprite;
-	var lampLight:FlxAtlasSprite;
+  var lamp:FlxAtlasSprite;
+  var lampLight:FlxAtlasSprite;
 
-	var coverscreen:FlxSprite;
+  var coverscreen:FlxSprite;
 
-	var hasPlayedInGameCutscene:Bool = false;
-	var hasPlayedCutscene:Bool = false;
-	var cutsceneSkipped:Bool = false;
-	var canSkipCutscene:Bool = false;
-	
-	var hasPlayedEndCutscene:Bool = false;
-	var endCutsceneSound:FunkinSound;
+  var hasPlayedInGameCutscene:Bool = false;
+  var hasPlayedCutscene:Bool = false;
+  var cutsceneSkipped:Bool = false;
+  var canSkipCutscene:Bool = false;
 
-	var cutsceneSound:FunkinSound;
-	var oogaBoogaVoice:FunkinSound;
+  var hasPlayedEndCutscene:Bool = false;
+  var endCutsceneSound:FunkinSound;
 
-	function new()
-	{
-		super('oogasHouse');
-	}
+  var cutsceneSound:FunkinSound;
+  var oogaBoogaVoice:FunkinSound;
 
-	/**
+  function new()
+  {
+    super('oogasHouse');
+  }
+
+  /**
    * Replay the cutscene after leaving the song.
    */
   function onCreate(event:ScriptEvent):Void
@@ -53,347 +53,361 @@ class OogasHouse extends Stage
     super.onCreate(event);
 
     hasPlayedInGameCutscene = false;
-	hasPlayedCutscene = false;
-	cutsceneSkipped = false;
-	canSkipCutscene = false;
-	hasPlayedEndCutscene = false;
+    hasPlayedCutscene = false;
+    cutsceneSkipped = false;
+    canSkipCutscene = false;
+    hasPlayedEndCutscene = false;
   }
 
-	public override function onCountdownStart(event:CountdownScriptEvent):Void {
-		super.onCountdownStart(event);
+  public override function onCountdownStart(event:CountdownScriptEvent):Void
+  {
+    super.onCountdownStart(event);
 
-		if(!hasPlayedInGameCutscene && PlayState.instance.currentStage.getBoyfriend().characterId == 'spooky-nogreen' && PlayState.instance.currentStage.getDad().characterId == 'ooga-booga' && PlayStatePlaylist.isStoryMode)
-		{
-		  trace('Pausing countdown to play in game cutscene');
+    if (!hasPlayedInGameCutscene
+      && PlayState.instance.currentStage.getBoyfriend().characterId == 'spooky-nogreen'
+      && PlayState.instance.currentStage.getDad().characterId == 'ooga-booga'
+      && PlayStatePlaylist.isStoryMode)
+    {
+      trace('Pausing countdown to play in game cutscene');
 
-		  hasPlayedInGameCutscene = true;
+      hasPlayedInGameCutscene = true;
 
-		  event.cancel(); // CANCEL THE COUNTDOWN!
+      event.cancel(); // CANCEL THE COUNTDOWN!
 
-		  PlayState.instance.camHUD.visible = false;
-		  introboogaCutscene();
-		}
-		else
-		{
-				hasPlayedInGameCutscene = true;
-				hasPlayedCutscene = true;
-				cutsceneSkipped = true;
-	 	 		canSkipCutscene = true;
+      PlayState.instance.camHUD.visible = false;
+      introboogaCutscene();
+    }
+    else
+    {
+      hasPlayedInGameCutscene = true;
+      hasPlayedCutscene = true;
+      cutsceneSkipped = true;
+      canSkipCutscene = true;
 
-				if (!PlayStatePlaylist.isStoryMode)
-				{
-					FlxG.camera.focusOn(new FlxPoint(PlayState.instance.currentStage.getGirlfriend().cameraFocusPoint.x, PlayState.instance.currentStage.getGirlfriend().cameraFocusPoint.y));
-					PlayState.instance.cameraFollowPoint.setPosition(PlayState.instance.currentStage.getGirlfriend().cameraFocusPoint.x, PlayState.instance.currentStage.getGirlfriend().cameraFocusPoint.y);
-				}
-		}
-	}
+      if (!PlayStatePlaylist.isStoryMode)
+      {
+        FlxG.camera.focusOn(new FlxPoint(PlayState.instance.currentStage.getGirlfriend().cameraFocusPoint.x,
+          PlayState.instance.currentStage.getGirlfriend().cameraFocusPoint.y));
+        PlayState.instance.cameraFollowPoint.setPosition(PlayState.instance.currentStage.getGirlfriend().cameraFocusPoint.x,
+          PlayState.instance.currentStage.getGirlfriend().cameraFocusPoint.y);
+      }
+    }
+  }
 
-	var spookyPlayer:ScriptedFlxAtlasSprite;
-	var boogaOpponent:ScriptedFlxAtlasSprite;
-	var skipText:FlxText;
+  var spookyPlayer:ScriptedFlxAtlasSprite;
+  var boogaOpponent:ScriptedFlxAtlasSprite;
+  var skipText:FlxText;
 
-	var cutsceneConductor:Conductor;
+  var cutsceneConductor:Conductor;
 
-	var cutsceneTimerManager:FlxTimerManager;
+  var cutsceneTimerManager:FlxTimerManager;
 
-	function introboogaCutscene()
-	{
-		PlayState.instance.isInCutscene = true;
+  function introboogaCutscene()
+  {
+    PlayState.instance.isInCutscene = true;
 
-		coverscreen = new FlxSprite(-100, -100).makeGraphic(FlxG.width * 2, FlxG.height * 2, 0xFF000000);
-		coverscreen.visible = true;
-		PlayState.instance.add(coverscreen);
-		coverscreen.cameras = [PlayState.instance.camCutscene];
+    coverscreen = new FlxSprite(-100, -100).makeGraphic(FlxG.width * 2, FlxG.height * 2, 0xFF000000);
+    coverscreen.visible = true;
+    PlayState.instance.add(coverscreen);
+    coverscreen.cameras = [PlayState.instance.camCutscene];
 
-		skipText = new FlxText(936, 618, 0, 'Skip [ ' + PlayState.instance.controls.getDialogueNameFromToken("CUTSCENE_ADVANCE", true) + ' ]', 20);
+    skipText = new FlxText(936, 618, 0, 'Skip [ ' + PlayState.instance.controls.getDialogueNameFromToken("CUTSCENE_ADVANCE", true) + ' ]', 20);
     skipText.setFormat(Paths.font('vcr.ttf'), 40, 0xFFFFFFFF, "right", FlxTextBorderStyle.OUTLINE, 0xFF000000);
     skipText.scrollFactor.set();
-		skipText.borderSize = 2;
-		skipText.alpha = 0;
+    skipText.borderSize = 2;
+    skipText.alpha = 0;
     add(skipText);
 
     skipText.cameras = [PlayState.instance.camCutscene];
 
-		cutsceneTimerManager = new FlxTimerManager();
+    cutsceneTimerManager = new FlxTimerManager();
 
-		cutsceneConductor = new Conductor();
-		var songMusicData:Null<SongMusicData> = SongRegistry.instance.parseMusicData('cutscene');
-		if (songMusicData != null) {
-			cutsceneConductor.mapTimeChanges(songMusicData.timeChanges);
-		}
-		
-		theCutscene = new FlxAtlasSprite(0, 0, Paths.animateAtlas("spookyStages/oogasHouse/cutscene/ending"));
-		theCutscene.zIndex = 10000;
-		theCutscene.alpha = 0;
-		PlayState.instance.currentStage.add(theCutscene);
-		theCutscene.cameras = [PlayState.instance.camHUD];
+    cutsceneConductor = new Conductor();
+    var songMusicData:Null<SongMusicData> = SongRegistry.instance.parseMusicData('cutscene');
+    if (songMusicData != null)
+    {
+      cutsceneConductor.mapTimeChanges(songMusicData.timeChanges);
+    }
 
-		spookyPlayer = new FlxAtlasSprite(PlayState.instance.currentStage.getBoyfriend().x + 3, PlayState.instance.currentStage.getBoyfriend().y + 20, Paths.animateAtlas("spookyStages/oogasHouse/cutscene/spooky"));
-		spookyPlayer.zIndex = PlayState.instance.currentStage.getBoyfriend().zIndex - 1;
-		PlayState.instance.currentStage.add(spookyPlayer);
+    theCutscene = new FlxAtlasSprite(0, 0, Paths.animateAtlas("spookyStages/oogasHouse/cutscene/ending"));
+    theCutscene.zIndex = 10000;
+    theCutscene.alpha = 0;
+    PlayState.instance.currentStage.add(theCutscene);
+    theCutscene.cameras = [PlayState.instance.camHUD];
 
-		boogaOpponent = new FlxAtlasSprite(PlayState.instance.currentStage.getDad().x - 640, PlayState.instance.currentStage.getDad().y - 166, Paths.animateAtlas("spookyStages/oogasHouse/cutscene/booga"));
-		boogaOpponent.zIndex = PlayState.instance.currentStage.getDad().zIndex - 1;
-		PlayState.instance.currentStage.add(boogaOpponent);
+    spookyPlayer = new FlxAtlasSprite(PlayState.instance.currentStage.getBoyfriend().x + 3, PlayState.instance.currentStage.getBoyfriend().y + 20,
+      Paths.animateAtlas("spookyStages/oogasHouse/cutscene/spooky"));
+    spookyPlayer.zIndex = PlayState.instance.currentStage.getBoyfriend().zIndex - 1;
+    PlayState.instance.currentStage.add(spookyPlayer);
 
-		PlayState.instance.currentStage.refresh();
+    boogaOpponent = new FlxAtlasSprite(PlayState.instance.currentStage.getDad().x - 640, PlayState.instance.currentStage.getDad().y - 166,
+      Paths.animateAtlas("spookyStages/oogasHouse/cutscene/booga"));
+    boogaOpponent.zIndex = PlayState.instance.currentStage.getDad().zIndex - 1;
+    PlayState.instance.currentStage.add(boogaOpponent);
 
-		PlayState.instance.currentStage.getBoyfriend().visible = false;
-		PlayState.instance.currentStage.getDad().visible = false;
-		
-		PlayState.instance.resetCamera(false, true);
+    PlayState.instance.currentStage.refresh();
 
-		oogaBoogaVoice = FunkinSound.load(Paths.sound("cutscene/ooga-boogey/yougotspooked"), true);
-		cutsceneSound = FunkinSound.load(Paths.sound("cutscene/ooga-boogey/oogaboogeyintro"), true);
+    PlayState.instance.currentStage.getBoyfriend().visible = false;
+    PlayState.instance.currentStage.getDad().visible = false;
 
-		//tween telports camera to position. follow point needs to be set to stay in place
-		PlayState.instance.currentCameraZoom = 0.8;
-		FlxG.camera.focusOn(new FlxPoint(PlayState.instance.currentStage.getBoyfriend().cameraFocusPoint.x + 1500, PlayState.instance.currentStage.getBoyfriend().cameraFocusPoint.y));
-		PlayState.instance.cameraFollowPoint.setPosition(PlayState.instance.currentStage.getBoyfriend().cameraFocusPoint.x + 1500, PlayState.instance.currentStage.getBoyfriend().cameraFocusPoint.y);
-		
-		if (hasPlayedCutscene != true)
-		{
-			new FlxTimer().start(2, _ -> {
-				if (hasPlayedCutscene != true)
-				{
-					coverscreen.visible = false;
-					PlayState.instance.camCutscene.fade(0xFF000000, 2, true, null, true);
-					PlayState.instance.cameraFollowPoint.setPosition(PlayState.instance.currentStage.getBoyfriend().cameraFocusPoint.x, PlayState.instance.currentStage.getBoyfriend().cameraFocusPoint.y);
-					spookyPlayer.anim.play("");
-					cutsceneSound.play(false);
-				}
-				new FlxTimer().start(3.4, _ -> {
-					if (hasPlayedCutscene != true)
-					{
-						PlayState.instance.cameraFollowPoint.setPosition(PlayState.instance.currentStage.getDad().cameraFocusPoint.x - 500, PlayState.instance.currentStage.getDad().cameraFocusPoint.y -30);
-					}
+    PlayState.instance.resetCamera(false, true);
 
-					new FlxTimer().start(1, _ -> {
-						if (hasPlayedCutscene != true)
-						{
-							PlayState.instance.tweenCameraZoom(2.2, 6, false, FlxEase.quadIn);
-						}
+    oogaBoogaVoice = FunkinSound.load(Paths.sound("cutscene/ooga-boogey/yougotspooked"), true);
+    cutsceneSound = FunkinSound.load(Paths.sound("cutscene/ooga-boogey/oogaboogeyintro"), true);
 
-						new FlxTimer().start(5, _ -> {
-							if (hasPlayedCutscene != true)
-							{
-								boogaOpponent.anim.play("");
-								oogaBoogaVoice.play(false);
-							}
+    // tween telports camera to position. follow point needs to be set to stay in place
+    PlayState.instance.currentCameraZoom = 0.8;
+    FlxG.camera.focusOn(new FlxPoint(PlayState.instance.currentStage.getBoyfriend().cameraFocusPoint.x + 1500,
+      PlayState.instance.currentStage.getBoyfriend().cameraFocusPoint.y));
+    PlayState.instance.cameraFollowPoint.setPosition(PlayState.instance.currentStage.getBoyfriend().cameraFocusPoint.x + 1500,
+      PlayState.instance.currentStage.getBoyfriend().cameraFocusPoint.y);
 
-							new FlxTimer().start(7, _ -> {
-								if (hasPlayedCutscene != true)
-								{
-									PlayState.instance.tweenCameraZoom(1, 1, false, FlxEase.quadInOut);
-									PlayState.instance.cameraFollowPoint.setPosition(PlayState.instance.currentStage.getGirlfriend().cameraFocusPoint.x, PlayState.instance.currentStage.getGirlfriend().cameraFocusPoint.y);
-								}
+    if (hasPlayedCutscene != true)
+    {
+      new FlxTimer().start(2, _ -> {
+        if (hasPlayedCutscene != true)
+        {
+          coverscreen.visible = false;
+          PlayState.instance.camCutscene.fade(0xFF000000, 2, true, null, true);
+          PlayState.instance.cameraFollowPoint.setPosition(PlayState.instance.currentStage.getBoyfriend().cameraFocusPoint.x,
+            PlayState.instance.currentStage.getBoyfriend().cameraFocusPoint.y);
+          spookyPlayer.anim.play("");
+          cutsceneSound.play(false);
+        }
+        new FlxTimer().start(3.4, _ -> {
+          if (hasPlayedCutscene != true)
+          {
+            PlayState.instance.cameraFollowPoint.setPosition(PlayState.instance.currentStage.getDad().cameraFocusPoint.x - 500,
+              PlayState.instance.currentStage.getDad().cameraFocusPoint.y - 30);
+          }
 
-								new FlxTimer().start(1, _ -> {
-									if (hasPlayedCutscene != true)
-									{
-										PlayState.instance.startCountdown();
-										PlayState.instance.isInCutscene = false;
-								
-										FlxTween.tween(skipText, {alpha: 0}, 0.5, {ease: FlxEase.quadOut});
-										spookyPlayer.visible = false;
-										PlayState.instance.currentStage.getBoyfriend().visible = true;
-										boogaOpponent.visible = false;
-										PlayState.instance.currentStage.getDad().visible = true;
+          new FlxTimer().start(1, _ -> {
+            if (hasPlayedCutscene != true)
+            {
+              PlayState.instance.tweenCameraZoom(2.2, 6, false, FlxEase.quadIn);
+            }
 
-										hasPlayedCutscene = true;
-									}
-								});
-							});
-						});
-					});
-				});
-			});
-		}
-	}
+            new FlxTimer().start(5, _ -> {
+              if (hasPlayedCutscene != true)
+              {
+                boogaOpponent.anim.play("");
+                oogaBoogaVoice.play(false);
+              }
 
-	function skipCutscene(){
-		PlayState.instance.isInCutscene = false;
-		cutsceneSkipped = true;
-		hasPlayedCutscene = true;
-		PlayState.instance.camCutscene.fade(0xFF000000, 0.5, false, null, true);
+              new FlxTimer().start(7, _ -> {
+                if (hasPlayedCutscene != true)
+                {
+                  PlayState.instance.tweenCameraZoom(1, 1, false, FlxEase.quadInOut);
+                  PlayState.instance.cameraFollowPoint.setPosition(PlayState.instance.currentStage.getGirlfriend().cameraFocusPoint.x,
+                    PlayState.instance.currentStage.getGirlfriend().cameraFocusPoint.y);
+                }
 
-		new FlxTimer().start(0.5, _ -> {
-			hasPlayedCutscene = true;
-			PlayState.instance.justUnpaused = true;
-			PlayState.instance.camCutscene.fade(0xFF000000, 0.5, true, null, true);
+                new FlxTimer().start(1, _ -> {
+                  if (hasPlayedCutscene != true)
+                  {
+                    PlayState.instance.startCountdown();
+                    PlayState.instance.isInCutscene = false;
 
-			cutsceneTimerManager.clear();
+                    FlxTween.tween(skipText, {alpha: 0}, 0.5, {ease: FlxEase.quadOut});
+                    spookyPlayer.visible = false;
+                    PlayState.instance.currentStage.getBoyfriend().visible = true;
+                    boogaOpponent.visible = false;
+                    PlayState.instance.currentStage.getDad().visible = true;
 
-			coverscreen.visible = false;
-			oogaBoogaVoice.stop();
-			cutsceneSound.stop();
-			
-			PlayState.instance.cancelAllCameraTweens();
-			PlayState.instance.currentCameraZoom = 0.6;
-			FlxG.camera.focusOn(new FlxPoint(PlayState.instance.currentStage.getGirlfriend().cameraFocusPoint.x, PlayState.instance.currentStage.getGirlfriend().cameraFocusPoint.y));
-			PlayState.instance.cameraFollowPoint.setPosition(PlayState.instance.currentStage.getGirlfriend().cameraFocusPoint.x, PlayState.instance.currentStage.getGirlfriend().cameraFocusPoint.y);
+                    hasPlayedCutscene = true;
+                  }
+                });
+              });
+            });
+          });
+        });
+      });
+    }
+  }
 
-			PlayState.instance.startCountdown();
+  function skipCutscene()
+  {
+    PlayState.instance.isInCutscene = false;
+    cutsceneSkipped = true;
+    hasPlayedCutscene = true;
+    PlayState.instance.camCutscene.fade(0xFF000000, 0.5, false, null, true);
 
-			skipText.visible = false;
-			spookyPlayer.visible = false;
-			boogaOpponent.visible = false;
-			PlayState.instance.currentStage.getBoyfriend().visible = true;
-			PlayState.instance.currentStage.getDad().visible = true;
-		});
+    new FlxTimer().start(0.5, _ -> {
+      hasPlayedCutscene = true;
+      PlayState.instance.justUnpaused = true;
+      PlayState.instance.camCutscene.fade(0xFF000000, 0.5, true, null, true);
 
-	}
+      cutsceneTimerManager.clear();
 
-	function buildStage()
-	{
-		super.buildStage();
+      coverscreen.visible = false;
+      oogaBoogaVoice.stop();
+      cutsceneSound.stop();
 
-		lamp = new FlxAtlasSprite(570, -400, Paths.animateAtlas("spookyStages/oogasHouse/lamp"));
-		lamp.anim.play("");
-		lamp.anim.onComplete.add(function() {
-		  lamp.anim.play("");
-		});
-		lamp.scrollFactor.set(1.3, 1.3);
-		lamp.zIndex = 400;
-		PlayState.instance.currentStage.add(lamp);
+      PlayState.instance.cancelAllCameraTweens();
+      PlayState.instance.currentCameraZoom = 0.6;
+      FlxG.camera.focusOn(new FlxPoint(PlayState.instance.currentStage.getGirlfriend().cameraFocusPoint.x,
+        PlayState.instance.currentStage.getGirlfriend().cameraFocusPoint.y));
+      PlayState.instance.cameraFollowPoint.setPosition(PlayState.instance.currentStage.getGirlfriend().cameraFocusPoint.x,
+        PlayState.instance.currentStage.getGirlfriend().cameraFocusPoint.y);
 
-		lampLight = new FlxAtlasSprite(lamp.x, lamp.y, Paths.animateAtlas("spookyStages/oogasHouse/lampLight"));
-		lampLight.anim.play("");
-		lampLight.anim.onComplete.add(function() {
-		  lampLight.anim.play("");
-		});
-		lampLight.scrollFactor.set(1.3, 1.3);
-		lampLight.zIndex = lamp.zIndex - 1;
-		lampLight.alpha = 0.3;
-		PlayState.instance.currentStage.add(lampLight);
+      PlayState.instance.startCountdown();
 
-		PlayState.instance.currentStage.refresh(); // Apply z-index.
+      skipText.visible = false;
+      spookyPlayer.visible = false;
+      boogaOpponent.visible = false;
+      PlayState.instance.currentStage.getBoyfriend().visible = true;
+      PlayState.instance.currentStage.getDad().visible = true;
+    });
+  }
 
-		getNamedProp('topBlack').color = 0xFF000000;
-		getNamedProp('bottomBlack').color = 0xFF000000;
-		getNamedProp('leftBlack').color = 0xFF000000;
-		getNamedProp('rightBlack').color = 0xFF000000;
+  function buildStage()
+  {
+    super.buildStage();
 
-		if (FlxG.save.data.spookyShaders != false)
-		{
-			getNamedProp('bottomBlue').color = 0xFF485D6D;
-			getNamedProp('leftBlue').color = 0xFF485D6D;
-			getNamedProp('rightBlue').color = 0xFF485D6D;
+    lamp = new FlxAtlasSprite(570, -400, Paths.animateAtlas("spookyStages/oogasHouse/lamp"));
+    lamp.anim.play("");
+    lamp.anim.onComplete.add(function() {
+      lamp.anim.play("");
+    });
+    lamp.scrollFactor.set(1.3, 1.3);
+    lamp.zIndex = 400;
+    PlayState.instance.currentStage.add(lamp);
 
-			getNamedProp('bottomBlue').blend = 9;
-			getNamedProp('leftBlue').blend = 9;
-			getNamedProp('rightBlue').blend = 9;
-		}
-		else
-		{
-			getNamedProp('bottomBlue').color = 0xFF14161C;
-			getNamedProp('leftBlue').color = 0xFF14161C;
-			getNamedProp('rightBlue').color = 0xFF14161C;
+    lampLight = new FlxAtlasSprite(lamp.x, lamp.y, Paths.animateAtlas("spookyStages/oogasHouse/lampLight"));
+    lampLight.anim.play("");
+    lampLight.anim.onComplete.add(function() {
+      lampLight.anim.play("");
+    });
+    lampLight.scrollFactor.set(1.3, 1.3);
+    lampLight.zIndex = lamp.zIndex - 1;
+    lampLight.alpha = 0.3;
+    PlayState.instance.currentStage.add(lampLight);
 
-			getNamedProp('bottomBlue').alpha = 0.7;
-			getNamedProp('leftBlue').alpha = 0.7;
-			getNamedProp('rightBlue').alpha = 0.7;
-		}
+    PlayState.instance.currentStage.refresh(); // Apply z-index.
 
-	}
+    getNamedProp('topBlack').color = 0xFF000000;
+    getNamedProp('bottomBlack').color = 0xFF000000;
+    getNamedProp('leftBlack').color = 0xFF000000;
+    getNamedProp('rightBlack').color = 0xFF000000;
 
-	function onUpdate(event:UpdateScriptEvent):Void
-	{
-		super.onUpdate(event);
+    if (FlxG.save.data.spookyShaders != false)
+    {
+      getNamedProp('bottomBlue').color = 0xFF485D6D;
+      getNamedProp('leftBlue').color = 0xFF485D6D;
+      getNamedProp('rightBlue').color = 0xFF485D6D;
 
-		PlayState.instance.currentStage.getGirlfriend().visible = false;
+      getNamedProp('bottomBlue').blend = 9;
+      getNamedProp('leftBlue').blend = 9;
+      getNamedProp('rightBlue').blend = 9;
+    }
+    else
+    {
+      getNamedProp('bottomBlue').color = 0xFF14161C;
+      getNamedProp('leftBlue').color = 0xFF14161C;
+      getNamedProp('rightBlue').color = 0xFF14161C;
 
-		if (PlayState.instance.controls.CUTSCENE_ADVANCE && cutsceneSkipped == false)
-		{
-			if(canSkipCutscene == false)
-			{
-				trace('cant skip yet!');
-				FlxTween.tween(skipText, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
-				new FlxTimer().start(0.5, _ -> {
-					canSkipCutscene = true;
-					trace('can skip!');
-				});
-			}
-		}
+      getNamedProp('bottomBlue').alpha = 0.7;
+      getNamedProp('leftBlue').alpha = 0.7;
+      getNamedProp('rightBlue').alpha = 0.7;
+    }
+  }
 
-		if(PlayState.instance.controls.CUTSCENE_ADVANCE && cutsceneSkipped == false && canSkipCutscene == true)
-		{
-			hasPlayedCutscene = true;
-			skipCutscene();
-			trace('skipped');
-		}
-	}
+  function onUpdate(event:UpdateScriptEvent):Void
+  {
+    super.onUpdate(event);
 
-	public override function onSongEnd(event:CountdownScriptEvent):Void
-	{
-		super.onSongEnd(event);
-   		if (!PlayStatePlaylist.isStoryMode) hasPlayedEndCutscene = true;
-		// only play this on story mode..
+    PlayState.instance.currentStage.getGirlfriend().visible = false;
 
-		if (!hasPlayedEndCutscene && PlayStatePlaylist.isStoryMode)
-		{
-		  hasPlayedEndCutscene = true;
+    if (PlayState.instance.controls.CUTSCENE_ADVANCE && cutsceneSkipped == false)
+    {
+      if (canSkipCutscene == false)
+      {
+        trace('cant skip yet!');
+        FlxTween.tween(skipText, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
+        new FlxTimer().start(0.5, _ -> {
+          canSkipCutscene = true;
+          trace('can skip!');
+        });
+      }
+    }
 
-		  event.cancel();
+    if (PlayState.instance.controls.CUTSCENE_ADVANCE && cutsceneSkipped == false && canSkipCutscene == true)
+    {
+      hasPlayedCutscene = true;
+      skipCutscene();
+      trace('skipped');
+    }
+  }
 
-		  startEndingCutscene();
-		}
-		else
-		{
-			// Make sure the cutscene can play again next time!
-			hasPlayedEndCutscene = false;
-			// DO NOT CANCEL THE EVENT!
-		}
-	}
-	
-	var theCutscene:ScriptedFlxAtlasSprite;
+  public override function onSongEnd(event:CountdownScriptEvent):Void
+  {
+    super.onSongEnd(event);
+    if (!PlayStatePlaylist.isStoryMode) hasPlayedEndCutscene = true;
+    // only play this on story mode..
 
-	function startEndingCutscene()
-	{
-		PlayState.instance.isInCutscene = true;
+    if (!hasPlayedEndCutscene && PlayStatePlaylist.isStoryMode)
+    {
+      hasPlayedEndCutscene = true;
 
-		PlayState.instance.camCutscene.visible = false;
-		PlayState.instance.playerStrumline.visible = false;
-		PlayState.instance.opponentStrumline.visible = false;
-		PlayState.instance.healthBar.visible = false;
-		PlayState.instance.healthBarBG.visible = false;
-		PlayState.instance.iconP1.visible = false;
-		PlayState.instance.iconP2.visible = false;
-		PlayState.instance.scoreText.visible = false;
+      event.cancel();
 
-		theCutscene.alpha = 1;
-		PlayState.instance.currentStage.refresh();
-	
-		PlayState.instance.isInCutscene = true;
-		hasPlayedEndCutscene = true;
-		
-		theCutscene.anim.play("");
-		endCutsceneSound = FunkinSound.load(Paths.sound("cutscene/ooga-boogey/oogaboogeyending"), true);
-		endCutsceneSound.play(false);
+      startEndingCutscene();
+    }
+    else
+    {
+      // Make sure the cutscene can play again next time!
+      hasPlayedEndCutscene = false;
+      // DO NOT CANCEL THE EVENT!
+    }
+  }
 
-		new FlxTimer().start(10.4, function(tmr)
-		{
-			PlayState.instance.endSong(true);
-		});
-	}
+  var theCutscene:ScriptedFlxAtlasSprite;
 
-	override function onGameOver(event:ScriptEvent):Void {
-		super.onGameOver(event);
+  function startEndingCutscene()
+  {
+    PlayState.instance.isInCutscene = true;
 
-	}
+    PlayState.instance.camCutscene.visible = false;
+    PlayState.instance.playerStrumline.visible = false;
+    PlayState.instance.opponentStrumline.visible = false;
+    PlayState.instance.healthBar.visible = false;
+    PlayState.instance.healthBarBG.visible = false;
+    PlayState.instance.iconP1.visible = false;
+    PlayState.instance.iconP2.visible = false;
+    PlayState.instance.scoreText.visible = false;
 
-	override function onSongRetry(event:ScriptEvent):Void {
-		super.onSongRetry(event);
+    theCutscene.alpha = 1;
+    PlayState.instance.currentStage.refresh();
 
-	}
+    PlayState.instance.isInCutscene = true;
+    hasPlayedEndCutscene = true;
 
-	function onBeatHit(event:SongTimeScriptEvent):Void
-	{
-		super.onBeatHit(event);
-	}
+    theCutscene.anim.play("");
+    endCutsceneSound = FunkinSound.load(Paths.sound("cutscene/ooga-boogey/oogaboogeyending"), true);
+    endCutsceneSound.play(false);
+
+    new FlxTimer().start(10.4, function(tmr) {
+      PlayState.instance.endSong(true);
+    });
+  }
+
+  override function onGameOver(event:ScriptEvent):Void
+  {
+    super.onGameOver(event);
+  }
+
+  override function onSongRetry(event:ScriptEvent):Void
+  {
+    super.onSongRetry(event);
+  }
+
+  function onBeatHit(event:SongTimeScriptEvent):Void
+  {
+    super.onBeatHit(event);
+  }
 
   function onStepHit(event:SongTimeScriptEvent):Void
-	{
-		super.onStepHit(event);
-	}
+  {
+    super.onStepHit(event);
+  }
 }

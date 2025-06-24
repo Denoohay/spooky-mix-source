@@ -1,75 +1,62 @@
 import funkin.play.character.MultiSparrowCharacter;
-import flixel.FlxG;
-import flixel.util.FlxTimer;
-import funkin.play.PlayState;
 import funkin.play.PauseSubState;
-import funkin.graphics.FunkinSprite;
-import funkin.play.character.SparrowCharacter;
 import funkin.play.character.CharacterType;
 import funkin.play.GameOverSubState;
-import StringTools;
 
 class SpookyBlazinCharacter extends MultiSparrowCharacter
 {
-	function new()
-	{
-		super('spooky-blazin');
-	}
+  function new()
+  {
+    super('spooky-blazin');
+  }
 
-	function onCreate(event:ScriptEvent)
-	{
-		super.onCreate(event);
-		
-		GameOverSubState.musicSuffix = '-spooky';
-		GameOverSubState.blueBallSuffix = '-spooky';
+  function onCreate(event:ScriptEvent)
+  {
+    super.onCreate(event);
 
-		PauseSubState.musicSuffix = '-spooky';
-	}
+    GameOverSubState.musicSuffix = '-spooky';
+    GameOverSubState.blueBallSuffix = '-spooky';
 
-	function onNoteHit(event:HitNoteScriptEvent)
-	{
-		// Override the hit note animation.
+    PauseSubState.musicSuffix = '-spooky';
+  }
 
-		if (event.note.noteData.getMustHitNote() && characterType == CharacterType.BF)
-		{
-			switch (event.note.kind)
-			{
-				case "Cheer":
-					holdTimer = 0;
-					this.playAnimation('cheer', false);
-				case "cheer":
-					holdTimer = 0;
-					this.playAnimation('cheer', false);
-				case "noAnim":
-					holdTimer = 0;
-				case "noanim":
-					holdTimer = 0;
-				default:
-					holdTimer = 0;
-					this.playSingAnimation(event.note.noteData.getDirection(), false);
-			}
-		}
-	}
+  function onNoteHit(event:HitNoteScriptEvent)
+  {
+    // Override the hit note animation.
 
-	function playAnimation(name:String, restart:Bool, ignoreOther:Bool) {
-		super.playAnimation(name, restart, ignoreOther);
-	}
+    if (event.note.noteData.getMustHitNote() && characterType == CharacterType.BF)
+    {
+      switch (event.note.kind)
+      {
+        case "Cheer":
+          holdTimer = 0;
+          this.playAnimation('cheer', false);
+        case "cheer":
+          holdTimer = 0;
+          this.playAnimation('cheer', false);
+        case "noAnim":
+          holdTimer = 0;
+        case "noanim":
+          holdTimer = 0;
+        default:
+          holdTimer = 0;
+          this.playSingAnimation(event.note.noteData.getDirection(), false);
+      }
+    }
+  }
 
-	override function onGameOver(event:ScriptEvent):Void {
-		super.onGameOver(event);
-	}
+  override function onSongRetry(event:ScriptEvent):Void
+  {
+    super.onSongRetry(event);
 
-	override function onSongRetry(event:ScriptEvent):Void {
-		super.onSongRetry(event);
+    // Don't let these pile up.
 
-		// Don't let these pile up.
+    // Reset to standard death animation.
+    GameOverSubState.musicSuffix = '-spooky';
+    GameOverSubState.blueBallSuffix = '-spooky';
 
-		// Reset to standard death animation.
-		GameOverSubState.musicSuffix = '-spooky';
-		GameOverSubState.blueBallSuffix = '-spooky';
+    PauseSubState.musicSuffix = '-spooky';
 
-		PauseSubState.musicSuffix = '-spooky';
-
-		this.visible = true;
-	}
+    this.visible = true;
+  }
 }

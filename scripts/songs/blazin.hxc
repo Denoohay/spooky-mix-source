@@ -10,120 +10,133 @@ import funkin.save.Save;
 /**
  * Apply middlescroll to the song.
  */
-class BlazinSong extends Song {
-	public function new() {
-		super('blazin');
+class BlazinSong extends Song
+{
+  public function new()
+  {
+    super('blazin');
 
-		this.hasHidden = false;
-		this.hasPlayedCutscene = false;
-	}
-	
-	public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool
+    this.hasHidden = false;
+    this.hasPlayedCutscene = false;
+  }
+
+  public override function isSongNew(currentDifficulty:String, currentVariation:String):Bool
+  {
+    if (currentVariation == 'spookymod') return !Save.instance.hasBeatenSong(this.id, null, 'spookymod');
+
+    return false;
+  }
+
+  function onCreate(event:ScriptEvent):Void
+  {
+    super.onCreate(event);
+
+    this.hasHidden = false;
+    this.hasPlayedCutscene = false;
+  }
+
+  function onDestroy(event:ScriptEvent):Void
+  {
+    super.onDestroy(event);
+
+    this.hasHidden = false;
+  }
+
+  function onNoteHit(event:HitNoteScriptEvent):Void
+  {
+    super.onNoteHit(event);
+  }
+
+  var hasHidden = false;
+  var hasPlayedCutscene:Bool = false;
+
+  function onUpdate(event:ScriptEvent):Void
+  {
+    super.onUpdate(event);
+
+    if (!this.hasHidden)
     {
-        if (currentVariation == 'spookymod')
-          return !Save.instance.hasBeatenSong(this.id, null, 'spookymod');
+      this.hasHidden = true;
+      hideOpponentStrumline();
+      if (PlayState.instance.currentVariation != 'spookymod') centerPlayerStrumline();
+    }
+  }
 
-        return false;
-	}
+  function hideOpponentStrumline()
+  {
+    var opponentStrumline:FlxSprite = PlayState.instance.opponentStrumline;
+    if (opponentStrumline != null)
+    {
+      for (arrow in opponentStrumline.members)
+      {
+        arrow.visible = false;
+      }
+    }
+  }
 
-	function onCreate(event:ScriptEvent):Void {
-		super.onCreate(event);
-
-		this.hasHidden = false;
-		this.hasPlayedCutscene = false;
-	}
-
-	function onDestroy(event:ScriptEvent):Void {
-		super.onDestroy(event);
-
-		this.hasHidden = false;
-	}
-
-	function onNoteHit(event:HitNoteScriptEvent):Void {
-		super.onNoteHit(event);
-	}
-
-	var hasHidden = false;
-	var hasPlayedCutscene:Bool = false;
-
-	function onUpdate(event:ScriptEvent):Void
-	{
-		super.onUpdate(event);
-
-		if (!this.hasHidden)
-		{
-			this.hasHidden = true;
-			hideOpponentStrumline();
-			if (PlayState.instance.currentVariation != 'spookymod') centerPlayerStrumline();
-		}
-	}
-
-	function hideOpponentStrumline()
-	{
-		var opponentStrumline:FlxSprite = PlayState.instance.opponentStrumline;
-		if (opponentStrumline != null)
-		{
-			for (arrow in opponentStrumline.members)
-			{
-				arrow.visible = false;
-			}
-		}
-	}
-
-	function centerPlayerStrumline()
-	{
+  function centerPlayerStrumline()
+  {
     // This is a song gimmick we are never making middlescroll an option.
 
-		var playerStrumline:FlxSprite = PlayState.instance.playerStrumline;
-		if (playerStrumline != null)
-		{
-			playerStrumline.x = FlxG.width / 2 - playerStrumline.width / 2;
-		}
-	}
+    var playerStrumline:FlxSprite = PlayState.instance.playerStrumline;
+    if (playerStrumline != null)
+    {
+      playerStrumline.x = FlxG.width / 2 - playerStrumline.width / 2;
+    }
+  }
 
-  public override function onSongEnd(event:CountdownScriptEvent):Void {
-		super.onSongEnd(event);
+  public override function onSongEnd(event:CountdownScriptEvent):Void
+  {
+    super.onSongEnd(event);
 
-		// Keep the cutscene from playing outside of story mode.
+    // Keep the cutscene from playing outside of story mode.
     if (!PlayStatePlaylist.isStoryMode) hasPlayedCutscene = true;
 
-    if (!hasPlayedCutscene) {
+    if (!hasPlayedCutscene)
+    {
       trace('Pausing ending to play a video cutscene (`blazin`)');
 
       hasPlayedCutscene = true;
 
-			// Add a black background behind the cutscene to fix a transition bug!
-			trace('Adding black background behind cutscene over UI');
-			var bgSprite = new FunkinSprite(-100, -100);
-			bgSprite.makeSolidColor(2000, 2500, 0xFF000000);
-			bgSprite.cameras = [PlayState.instance.camHUD]; // Show over the HUD.
-			bgSprite.zIndex = 1000000;
-			PlayState.instance.add(bgSprite);
-			PlayState.instance.refresh();
+      // Add a black background behind the cutscene to fix a transition bug!
+      trace('Adding black background behind cutscene over UI');
+      var bgSprite = new FunkinSprite(-100, -100);
+      bgSprite.makeSolidColor(2000, 2500, 0xFF000000);
+      bgSprite.cameras = [PlayState.instance.camHUD]; // Show over the HUD.
+      bgSprite.zIndex = 1000000;
+      PlayState.instance.add(bgSprite);
+      PlayState.instance.refresh();
 
       event.cancel(); // CANCEL THE COUNTDOWN!
 
       startVideo();
-    } else {
-			// Make sure the cutscene can play again next time!
-			hasPlayedCutscene = false;
-			// DO NOT CANCEL THE EVENT!
-		}
-	}
-
-  function startVideo() {
-		VideoCutscene.play(Paths.videos('blazinCutscene'), CutsceneType.ENDING);
-		// This will call onSongEnd() again so make sure the flag is set!
-		hasPlayedCutscene = true;
+    }
+    else
+    {
+      // Make sure the cutscene can play again next time!
+      hasPlayedCutscene = false;
+      // DO NOT CANCEL THE EVENT!
+    }
   }
-	public override function listAltInstrumentalIds(difficultyId:String, variationId:String):Array<String>
-	{
-		var targetDifficulty:Null<SongDifficulty> = getDifficulty(difficultyId, variationId);
 
-		if ((difficultyId == "erect" || difficultyId == "nightmare") && (Save.instance.hasBeatenSong(this.id, ["erect"], "") || Save.instance.hasBeatenSong(this.id, ["nightmare"], ""))) return targetDifficulty?.characters?.altInstrumentals ?? [];
-		else if (variationId == "default" && Save.instance.hasBeatenSong(this.id, null, "")) return targetDifficulty?.characters?.altInstrumentals ?? [];
-		else if (Save.instance.hasBeatenSong(this.id, null, variationId)) return targetDifficulty?.characters?.altInstrumentals ?? [];
-		else return [];
-	}
+  function startVideo()
+  {
+    VideoCutscene.play(Paths.videos('blazinCutscene'), CutsceneType.ENDING);
+    // This will call onSongEnd() again so make sure the flag is set!
+    hasPlayedCutscene = true;
+  }
+
+  public override function listAltInstrumentalIds(difficultyId:String, variationId:String):Array<String>
+  {
+    var targetDifficulty:Null<SongDifficulty> = getDifficulty(difficultyId, variationId);
+
+    if ((difficultyId == "erect" || difficultyId == "nightmare")
+      && (Save.instance.hasBeatenSong(this.id, ["erect"], "")
+        || Save.instance.hasBeatenSong(this.id, ["nightmare"], ""))) return targetDifficulty?.characters?.altInstrumentals ?? [];
+    else if (variationId == "default"
+      && Save.instance.hasBeatenSong(this.id, null, "")) return targetDifficulty?.characters?.altInstrumentals ?? [];
+    else if (Save.instance.hasBeatenSong(this.id, null, variationId)) return targetDifficulty?.characters?.altInstrumentals ?? [];
+    else
+      return [];
+  }
 }
-

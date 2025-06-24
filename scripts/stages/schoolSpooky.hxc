@@ -5,47 +5,51 @@ import funkin.save.Save;
 
 class SchoolSpookyStage extends Stage
 {
-	function new()
-	{
-		super('schoolSpooky');
-	}
+  function new()
+  {
+    super('schoolSpooky');
+  }
 
-	function buildStage()
-	{
-		super.buildStage();
+  function buildStage()
+  {
+    super.buildStage();
 
-		if (PlayState.instance.currentSong.id.toLowerCase() == "roses")
-		{
-			getNamedProp('freaks').idleSuffix = '-scared';
-		} else {
-			getNamedProp('freaks').idleSuffix = '';
-		}
+    if (PlayState.instance.currentSong.id.toLowerCase() == "roses")
+    {
+      getNamedProp('freaks').idleSuffix = '-scared';
+    }
+    else
+    {
+      getNamedProp('freaks').idleSuffix = '';
+    }
 
-		if (FlxG.random.int(1, 20) == 1 && Save.instance.hasBeatenSong(PlayState.instance.currentSong.id, null, 'spookymod'))
-			getNamedProp('pumpkinsFG').loadGraphic(Paths.image('weeb/spooky/weirdPumpkins'));
+    if (FlxG.random.int(1, 20) == 1
+      && Save.instance.hasBeatenSong(PlayState.instance.currentSong.id, null,
+        'spookymod')) getNamedProp('pumpkinsFG').loadGraphic(Paths.image('weeb/spooky/weirdPumpkins'));
 
-		PlayState.instance.isInCutscene = true;
-	}
+    PlayState.instance.isInCutscene = true;
+  }
 
-	override function onUpdate(event:UpdateScriptEvent) {
-		super.onUpdate(event);
+  override function onUpdate(event:UpdateScriptEvent)
+  {
+    super.onUpdate(event);
 
-		if (PlayState.instance.isInCutscene && PlayState.instance.currentSong.id.toLowerCase() == "senpai")
-			getNamedProp('freaks').animation.play('still');
-		else if (PlayState.instance.isInCutscene && PlayState.instance.currentSong.id.toLowerCase() == "roses")
-			getNamedProp('freaks').animation.play('still-scared');
-	}
+    if (PlayState.instance.isInCutscene
+      && PlayState.instance.currentSong.id.toLowerCase() == "senpai") getNamedProp('freaks').animation.play('still');
+    else if (PlayState.instance.isInCutscene
+      && PlayState.instance.currentSong.id.toLowerCase() == "roses") getNamedProp('freaks').animation.play('still-scared');
+  }
 
-	/**
-	 * If your stage uses additional assets not specified in the JSON,
-	 * make sure to specify them like this, or they won't get cached in the loading screen.
-	 */
-	function fetchAssetPaths():Array<String>
-	{
-		var results:Array<String> = super.fetchAssetPaths();
-		
-		results.push(Paths.image('weeb/spooky/weirdPumpkins'));
+  /**
+   * If your stage uses additional assets not specified in the JSON,
+   * make sure to specify them like this, or they won't get cached in the loading screen.
+   */
+  function fetchAssetPaths():Array<String>
+  {
+    var results:Array<String> = super.fetchAssetPaths();
 
-		return results;
-	}
+    results.push(Paths.image('weeb/spooky/weirdPumpkins'));
+
+    return results;
+  }
 }
